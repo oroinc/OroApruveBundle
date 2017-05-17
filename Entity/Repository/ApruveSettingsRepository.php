@@ -22,19 +22,15 @@ class ApruveSettingsRepository extends EntityRepository
     }
 
     /**
-     * @param string $type
-     *
      * @return ApruveSettings[]
      */
-    public function getEnabledSettingsByType($type)
+    public function findEnabledSettings()
     {
         $qb = $this->createQueryBuilder('settings');
         $qb
             ->innerJoin('settings.channel', 'channel')
             ->andWhere($qb->expr()->eq('channel.enabled', ':channelEnabled'))
-            ->andWhere($qb->expr()->eq('channel.type', ':type'))
-            ->setParameter('channelEnabled', true)
-            ->setParameter('type', $type);
+            ->setParameter('channelEnabled', true);
 
         return $this->aclHelper->apply($qb)->getResult();
     }
