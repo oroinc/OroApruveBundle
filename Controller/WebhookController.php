@@ -21,7 +21,7 @@ class WebhookController extends Controller
 {
     const INVOICE_CLOSED_EVENT_NAME = 'invoice.closed';
     const PAYMENT_TERM_ACCEPTED_EVENT_NAME = 'payment_term.accepted';
-    const ORDER_APPROVED_EVENT_NAME = 'order.approved';
+    const ORDER_ACCEPTED_EVENT_NAME = 'order.accepted';
     const ORDER_CANCELED_EVENT_NAME = 'order.canceled';
 
     /**
@@ -74,7 +74,7 @@ class WebhookController extends Controller
                 $response = $this->handleInvoiceClosed($paymentMethod, $body);
                 break;
             case self::PAYMENT_TERM_ACCEPTED_EVENT_NAME:
-            case self::ORDER_APPROVED_EVENT_NAME:
+            case self::ORDER_ACCEPTED_EVENT_NAME:
             case self::ORDER_CANCELED_EVENT_NAME:
                 // We don't need handle this events
                 break;
