@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\TranslationBundle\Tests\Behat\Context;
+namespace Oro\Bundle\ApruveBundle\Tests\Behat\Context;
 
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Oro\Bundle\TestFrameworkBundle\Behat\Context\OroFeatureContext;
@@ -28,24 +28,11 @@ class FeatureContext extends OroFeatureContext implements OroPageObjectAware
     }
 
     /**
-     * @Given I'm waiting for the translations to be reset
-     */
-    public function iWaitingForTranslationsReset()
-    {
-        $this->getPage()->fillField('email', 'blabla');
-        $this->oroMainContext->iShouldSeeFlashMessage(
-            'Selected translations were reset to their original values.',
-            'Flash Message',
-            600
-        );
-    }
-
-    /**
      * @Then /^I should see "(?P<path>(.+))" in Webhook Url$/
      *
      * @param $path
      */
-    public function shouldSeeInWebhookUrl($path)
+    public function iShouldSeeInWebhookUrl($path)
     {
         $this->assertSession()->pageTextContains($this->fixStepArgument($this->locatePath($path)));
     }
