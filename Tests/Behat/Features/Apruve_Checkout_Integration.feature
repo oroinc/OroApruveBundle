@@ -28,7 +28,7 @@ Feature: Apruve Checkout Integration
     Then I should see "Apruve Connection is valid" flash message
     And save form
     Then should see "Integration saved" flash message
-    And I should see "/admin/apruve/webhook/notify/" in Webhook Url
+    And I should see "/admin/apruve/webhook/notify/"
     And I go to System/ Payment Rules
     And click "Create Payment Rule"
     And fill "Payment Rule Form" with:
