@@ -1,7 +1,7 @@
 {
-    "name": "oro/apruve",
-    "description": "Oro Apruve Integration",
-    "homepage": "https://github.com/orocommerce/OroApruveBundle.git",
+    "name": "oro/commerce-apruve",
+    "description": "OroCommerce Apruve Integration",
+    "homepage": "",
     "license": "OSL-3.0",
     "keywords": ["Oro", "Apruve", "Integration"],
     "authors": [
@@ -16,7 +16,8 @@
     },
     "require": {
         "php": ">=7.0",
-        "oro/commerce": "1.x-dev"
+        "oro/commerce": "1.x-dev",
+        "guzzlehttp/guzzle": "^6.0.0"
     },
     "extra": {
         "branch-alias": {
