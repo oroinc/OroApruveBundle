@@ -1,6 +1,6 @@
 {
-    "name": "oro/apruve",
-    "description": "Oro Apruve Integration",
+    "name": "oro/commerce-apruve",
+    "description": "OroCommerce Apruve Integration",
     "homepage": "https://github.com/orocommerce/OroApruveBundle.git",
     "license": "OSL-3.0",
     "keywords": ["Oro", "Apruve", "Integration"],
