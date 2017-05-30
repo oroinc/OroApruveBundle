@@ -66,7 +66,7 @@ class PaymentTransactionInvoiceActionTest extends AbstractActionTest
             ->with($authorizationPaymentTransaction->getPaymentMethod())
             ->willReturn($paymentMethod);
 
-        $this->paymentMethodProvidersRegistry
+        $this->paymentMethodProvider
             ->expects(static::atLeastOnce())
             ->method('getPaymentMethodProviders')
             ->willReturn([$paymentMethodProvider]);
@@ -216,7 +216,7 @@ class PaymentTransactionInvoiceActionTest extends AbstractActionTest
     {
         return new PaymentTransactionInvoiceAction(
             $this->contextAccessor,
-            $this->paymentMethodProvidersRegistry,
+            $this->paymentMethodProvider,
             $this->paymentTransactionProvider,
             $this->router
         );
