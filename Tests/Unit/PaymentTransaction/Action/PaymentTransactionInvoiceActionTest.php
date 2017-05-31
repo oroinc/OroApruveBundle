@@ -6,7 +6,6 @@ use Oro\Bundle\ApruveBundle\Method\ApruvePaymentMethod;
 use Oro\Bundle\ApruveBundle\PaymentTransaction\Action\PaymentTransactionInvoiceAction;
 use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 use Oro\Bundle\PaymentBundle\Method\PaymentMethodInterface;
-use Oro\Bundle\PaymentBundle\Method\Provider\PaymentMethodProviderInterface;
 use Oro\Component\Testing\Unit\EntityTrait;
 use Symfony\Component\PropertyAccess\PropertyPath;
 
@@ -52,24 +51,17 @@ class PaymentTransactionInvoiceActionTest extends AbstractActionTest
                 [ApruvePaymentMethod::SHIPMENT, $shipmentPaymentTransaction, $data['shipmentResponse']],
             ]);
 
-        $paymentMethodProvider = $this->createMock(PaymentMethodProviderInterface::class);
-
-        $paymentMethodProvider
+        $this->paymentMethodProvider
             ->expects(static::atLeastOnce())
             ->method('hasPaymentMethod')
             ->with($authorizationPaymentTransaction->getPaymentMethod())
             ->willReturn(true);
 
-        $paymentMethodProvider
+        $this->paymentMethodProvider
             ->expects(static::atLeastOnce())
             ->method('getPaymentMethod')
             ->with($authorizationPaymentTransaction->getPaymentMethod())
             ->willReturn($paymentMethod);
-
-        $this->paymentMethodProvider
-            ->expects(static::atLeastOnce())
-            ->method('getPaymentMethodProviders')
-            ->willReturn([$paymentMethodProvider]);
 
         $this->paymentTransactionProvider
             ->expects(static::atLeastOnce())
