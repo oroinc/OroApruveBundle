@@ -31,7 +31,7 @@ oro_behat_extension:
             type: 'xpath'
             locator: '//div[@id[starts-with(.,"uniform-oro_payment_methods_configs_rule_method")]]'
             element: Payment Method Config Type Field
-    Aprove Login Form:
+    Apruve Login Form:
       selector: 'form.form'
       class: Oro\Bundle\TestFrameworkBundle\Behat\Element\Form
       options:
@@ -39,3 +39,9 @@ oro_behat_extension:
         mapping:
           Email: 'email'
           Password: 'password'
+
+    Cancel:
+      selector: 'form.form a.btn-back'
+      class: Oro\Bundle\TestFrameworkBundle\Behat\Element\Element
+      options:
+        embedded-id: apruveCheckoutIFrame
