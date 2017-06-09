@@ -40,7 +40,7 @@ oro_behat_extension:
           Email: 'email'
           Password: 'password'
 
-    Cancel:
+    Apruve Popup Cancel Button:
       selector: 'form.form a.btn-back'
       class: Oro\Bundle\TestFrameworkBundle\Behat\Element\Element
       options:
