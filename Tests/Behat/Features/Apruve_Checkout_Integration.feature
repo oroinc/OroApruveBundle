@@ -41,7 +41,7 @@ Feature: Apruve Checkout Integration
     Then should see "Payment rule has been saved" flash message
     And click logout in user menu
 
-  Scenario: Check out with Apruve integration
+  Scenario: Check out and cancel with Apruve integration
     Given I proceed as the Admin
     And Currency is set to USD
     And I enable the existing warehouses
@@ -54,12 +54,8 @@ Feature: Apruve Checkout Integration
     And on the "Shipping" checkout step I press Continue
     And on the "Payment" checkout step I press Continue
     And click "Submit Order"
-    When I fill "Aprove Login Form" with:
-      | Email    | apruve-qa+buyer@orocommerce.com |
-      | Password | wyVjpjA2                        |
-    And I press "Sign In" in "Aprove Login Form"
-    And I press "Confirm" in "Aprove Login Form"
-    Then I see the "Thank You" page with "Thank You For Your Purchase!" title
+    When I press "Apruve Popup Cancel Button" in "Apruve Login Form"
+    Then I should see "We were unable to process your payment. Please verify your payment information and try again." flash message
     And click "Sign Out"
 
   Scenario: Check order status in admin panel after order creation
@@ -68,19 +64,55 @@ Feature: Apruve Checkout Integration
     And go to Sales/ Orders
     When click view "Amanda Cole" in grid
     Then I should see order with:
-      | Payment Method | Apruve             |
-      | Payment Status | Payment authorized |
-    And click "Send Invoice" on row "Authorize" in grid "Order Payment Transaction Grid"
-    And click "Yes, Charge"
-    Then should see "Invoice has been sent successfully" flash message
-    And I should see order with:
-      | Payment Status | Invoiced |
+      | Payment Method | Apruve          |
+      | Payment Status | Pending payment |
     And I should see following "Order Payment Transaction Grid" grid:
       | Payment Method | Type      | Successful |
-      | Apruve         | Shipment  | Yes        |
-      | Apruve         | Invoice   | Yes        |
-      | Apruve         | Authorize | Yes        |
+      | Apruve         | Purchase  | No         |
     And click logout in user menu
+
+#  Proper checkout flow. This part might be still needed for BB-10071
+#  Scenario: Check out with Apruve integration
+#    Given I proceed as the Admin
+#    And Currency is set to USD
+#    And I enable the existing warehouses
+#    And AmandaRCole@example.org customer user has Buyer role
+#    And I signed in as AmandaRCole@example.org on the store frontend
+#    When I open page with shopping list List 1
+#    And I press "Create Order"
+#    And I select "Fifth avenue, 10115 Berlin, Germany" on the "Billing Information" checkout step and press Continue
+#    And I select "Fifth avenue, 10115 Berlin, Germany" on the "Shipping Information" checkout step and press Continue
+#    And on the "Shipping" checkout step I press Continue
+#    And on the "Payment" checkout step I press Continue
+#    And click "Submit Order"
+#    When I fill "Apruve Login Form" with:
+#      | Email    | apruve-qa+buyer@orocommerce.com |
+#      | Password | wyVjpjA2                        |
+#    And I press "Sign In" in "Apruve Login Form"
+#    And I press "Confirm" in "Apruve Login Form"
+#    Then I see the "Thank You" page with "Thank You For Your Purchase!" title
+#    And click "Sign Out"
+
+#  This part might be still needed for BB-10071
+#  Scenario: Check order status in admin panel after order creation
+#    Given I proceed as the Admin
+#    And login as administrator
+#    And go to Sales/ Orders
+#    When click view "Amanda Cole" in grid
+#    Then I should see order with:
+#      | Payment Method | Apruve             |
+#      | Payment Status | Payment authorized |
+#    And click "Send Invoice" on row "Authorize" in grid "Order Payment Transaction Grid"
+#    And click "Yes, Charge"
+#    Then should see "Invoice has been sent successfully" flash message
+#    And I should see order with:
+#      | Payment Status | Invoiced |
+#    And I should see following "Order Payment Transaction Grid" grid:
+#      | Payment Method | Type      | Successful |
+#      | Apruve         | Shipment  | Yes        |
+#      | Apruve         | Invoice   | Yes        |
+#      | Apruve         | Authorize | Yes        |
+#    And click logout in user menu
 
 #  This part should implemented only when travis will allow accept web hooks
 #  Scenario: Cofirm order from Apruve
