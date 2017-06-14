@@ -2,7 +2,6 @@
 @fixture-OroPaymentTermBundle:PaymentTermIntegration.yml
 @fixture-Checkout.yml
 @fixture-OroWarehouseBundle:Checkout.yml
-@skip
 Feature: Apruve Checkout Integration
 
   Scenario: Create two session
