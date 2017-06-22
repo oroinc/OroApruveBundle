@@ -20,6 +20,7 @@ define(function(require) {
         apruve: null,
 
         returnUrl: '',
+
         errorUrl: '',
 
         /**
