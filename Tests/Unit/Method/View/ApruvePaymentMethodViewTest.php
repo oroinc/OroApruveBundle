@@ -34,9 +34,7 @@ class ApruveViewTest extends \PHPUnit_Framework_TestCase
         /** @var PaymentContextInterface|\PHPUnit_Framework_MockObject_MockObject $context */
         $context = $this->createMock(PaymentContextInterface::class);
 
-        $this->config->expects($this->once())
-            ->method('isTestMode')
-            ->willReturn(true);
+        $this->config->expects($this->once())->method('isTestMode')->willReturn(true);
 
         $this->assertEquals(
             [
