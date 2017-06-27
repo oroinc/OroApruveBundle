@@ -8,7 +8,7 @@ use Oro\Bundle\ApruveBundle\Method\View\Factory\ApruvePaymentMethodViewFactoryIn
 use Oro\Bundle\ApruveBundle\Method\View\Provider\ApruvePaymentMethodViewProvider;
 use Oro\Bundle\PaymentBundle\Tests\Unit\Method\View\Provider\AbstractMethodViewProviderTest;
 
-class ApruveMethodViewProviderTest extends AbstractMethodViewProviderTest
+class ApruvePaymentMethodViewProviderTest extends AbstractMethodViewProviderTest
 {
     /**
      * @var ApruvePaymentMethodViewFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
