@@ -87,6 +87,6 @@ services:
         class: 'Oro\Bundle\ApruveBundle\Apruve\Factory\Shipment\ApruveShipmentFromPaymentContextFactory'
         arguments:
             - '@oro_apruve.apruve.builder.factory.shipment'
-            - '@oro_shipping.shipping_method.registry'
+            - '@oro_shipping.shipping_method_provider'
         lazy: true
         public: false
