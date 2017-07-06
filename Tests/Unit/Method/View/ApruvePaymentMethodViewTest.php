@@ -6,7 +6,7 @@ use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfig;
 use Oro\Bundle\ApruveBundle\Method\View\ApruvePaymentMethodView;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 
-class ApruveViewTest extends \PHPUnit_Framework_TestCase
+class ApruvePaymentMethodViewTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var ApruvePaymentMethodView
