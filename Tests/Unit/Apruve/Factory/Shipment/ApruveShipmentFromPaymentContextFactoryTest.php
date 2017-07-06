@@ -15,7 +15,7 @@ use Oro\Bundle\CurrencyBundle\Entity\Price;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PaymentBundle\Context\PaymentLineItemInterface;
 use Oro\Bundle\ShippingBundle\Method\ShippingMethodInterface;
-use Oro\Bundle\ShippingBundle\Method\ShippingMethodRegistry;
+use Oro\Bundle\ShippingBundle\Method\ShippingMethodProviderInterface;
 
 class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -46,9 +46,9 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_Tes
     ];
 
     /**
-     * @var ShippingMethodRegistry|\PHPUnit_Framework_MockObject_MockObject
+     * @var ShippingMethodProviderInterface|\PHPUnit_Framework_MockObject_MockObject
      */
-    private $shippingMethodRegistry;
+    private $shippingMethodProvider;
 
     /**
      * @var ApruveShipmentBuilderInterface|\PHPUnit_Framework_MockObject_MockObject
@@ -145,7 +145,7 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_Tes
                 [$lineItemTwo, $this->mockApruveLineItem(self::LINE_ITEMS['sku2'])],
             ]);
 
-        $this->shippingMethodRegistry = $this->createMock(ShippingMethodRegistry::class);
+        $this->shippingMethodProvider = $this->createMock(ShippingMethodProviderInterface::class);
 
         $this->factory = new ApruveShipmentFromPaymentContextFactory(
             $this->mockAmountNormalizer(),
@@ -153,19 +153,19 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_Tes
             $this->shippingAmountProvider,
             $this->taxAmountProvider,
             $this->apruveShipmentBuilderFactory,
-            $this->shippingMethodRegistry
+            $this->shippingMethodProvider
         );
     }
 
     public function testGetResult()
     {
-        $this->shippingMethodRegistry
+        $this->shippingMethodProvider
             ->expects(static::once())
             ->method('hasShippingMethod')
             ->with(self::SHIPPING_METHOD)
             ->willReturn(true);
 
-        $this->shippingMethodRegistry
+        $this->shippingMethodProvider
             ->expects(static::once())
             ->method('getShippingMethod')
             ->with(self::SHIPPING_METHOD)
@@ -183,13 +183,13 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_Tes
 
     public function testGetResultIfNoShippingMethod()
     {
-        $this->shippingMethodRegistry
+        $this->shippingMethodProvider
             ->expects(static::once())
             ->method('hasShippingMethod')
             ->with(self::SHIPPING_METHOD)
             ->willReturn(false);
 
-        $this->shippingMethodRegistry
+        $this->shippingMethodProvider
             ->expects(static::never())
             ->method('getShippingMethod');
 

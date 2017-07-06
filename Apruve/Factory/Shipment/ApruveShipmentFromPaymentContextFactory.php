@@ -9,7 +9,7 @@ use Oro\Bundle\ApruveBundle\Apruve\Helper\AmountNormalizerInterface;
 use Oro\Bundle\ApruveBundle\Provider\ShippingAmountProviderInterface;
 use Oro\Bundle\ApruveBundle\Provider\TaxAmountProviderInterface;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
-use Oro\Bundle\ShippingBundle\Method\ShippingMethodRegistry;
+use Oro\Bundle\ShippingBundle\Method\ShippingMethodProviderInterface;
 
 class ApruveShipmentFromPaymentContextFactory extends AbstractApruveEntityWithLineItemsFactory implements
     ApruveShipmentFromPaymentContextFactoryInterface
@@ -20,9 +20,9 @@ class ApruveShipmentFromPaymentContextFactory extends AbstractApruveEntityWithLi
     private $apruveShipmentBuilderFactory;
 
     /**
-     * @var ShippingMethodRegistry
+     * @var ShippingMethodProviderInterface
      */
-    private $shippingMethodRegistry;
+    private $shippingMethodProvider;
 
     /**
      * @param AmountNormalizerInterface                         $amountNormalizer
@@ -30,7 +30,7 @@ class ApruveShipmentFromPaymentContextFactory extends AbstractApruveEntityWithLi
      * @param ShippingAmountProviderInterface                   $shippingAmountProvider
      * @param TaxAmountProviderInterface                        $taxAmountProvider
      * @param ApruveShipmentBuilderFactoryInterface             $apruveShipmentBuilderFactory
-     * @param ShippingMethodRegistry                            $shippingMethodRegistry
+     * @param ShippingMethodProviderInterface                   $shippingMethodProvider
      */
     public function __construct(
         AmountNormalizerInterface $amountNormalizer,
@@ -38,7 +38,7 @@ class ApruveShipmentFromPaymentContextFactory extends AbstractApruveEntityWithLi
         ShippingAmountProviderInterface $shippingAmountProvider,
         TaxAmountProviderInterface $taxAmountProvider,
         ApruveShipmentBuilderFactoryInterface $apruveShipmentBuilderFactory,
-        ShippingMethodRegistry $shippingMethodRegistry
+        ShippingMethodProviderInterface $shippingMethodProvider
     ) {
         parent::__construct(
             $amountNormalizer,
@@ -48,7 +48,7 @@ class ApruveShipmentFromPaymentContextFactory extends AbstractApruveEntityWithLi
         );
 
         $this->apruveShipmentBuilderFactory = $apruveShipmentBuilderFactory;
-        $this->shippingMethodRegistry = $shippingMethodRegistry;
+        $this->shippingMethodProvider = $shippingMethodProvider;
     }
 
     /**
@@ -69,8 +69,8 @@ class ApruveShipmentFromPaymentContextFactory extends AbstractApruveEntityWithLi
             ->setTaxCents($this->getTaxCents($paymentContext));
 
         $shippingMethodId = $paymentContext->getShippingMethod();
-        if ($this->shippingMethodRegistry->hasShippingMethod($shippingMethodId)) {
-            $shippingMethod = $this->shippingMethodRegistry
+        if ($this->shippingMethodProvider->hasShippingMethod($shippingMethodId)) {
+            $shippingMethod = $this->shippingMethodProvider
                 ->getShippingMethod($shippingMethodId);
 
             $apruveShipmentBuilder->setShipper($shippingMethod->getLabel());
