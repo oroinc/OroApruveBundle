@@ -1,6 +1,6 @@
 @fixture-OroFlatRateShippingBundle:FlatRateIntegration.yml
 @fixture-OroPaymentTermBundle:PaymentTermIntegration.yml
-@fixture-Checkout.yml
+@fixture-OroApruveBundle:Checkout.yml
 @fixture-OroWarehouseBundle:Checkout.yml
 Feature: Apruve Checkout Integration
 
