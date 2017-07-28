@@ -2,7 +2,6 @@ UPGRADE FROM 1.2 to 1.3
 =======================
 
 ApruveBundle
---------------
-- Class `Oro\Bundle\ApruveBundle\Layout\Provider\ApruveJsUriProvider` was removed
-- Interface `Oro\Bundle\ApruveBundle\Layout\Provider\ApruveJsUriProviderInterface` was removed
-- Service `oro_apruve.layout.provider.apruvejs_uri` was removed
+------------
+* The `ApruveShipmentFromPaymentContextFactory::__construct(AmountNormalizerInterface $amountNormalizer, ApruveLineItemFromPaymentLineItemFactoryInterface $apruveLineItemFromPaymentLineItemFactory, ShippingAmountProviderInterface $shippingAmountProvider, TaxAmountProviderInterface $taxAmountProvider, ApruveShipmentBuilderFactoryInterface $apruveShipmentBuilderFactory, ShippingMethodRegistry $shippingMethodRegistry)`<sup>[[?]](https://github.com/orocommerce/OroApruveBundle/tree/1.2.0/Apruve/Factory/Shipment/ApruveShipmentFromPaymentContextFactory.php#L35 "Oro\Bundle\ApruveBundle\Apruve\Factory\Shipment\ApruveShipmentFromPaymentContextFactory")</sup> method was changed to `ApruveShipmentFromPaymentContextFactory::__construct(AmountNormalizerInterface $amountNormalizer, ApruveLineItemFromPaymentLineItemFactoryInterface $apruveLineItemFromPaymentLineItemFactory, ShippingAmountProviderInterface $shippingAmountProvider, TaxAmountProviderInterface $taxAmountProvider, ApruveShipmentBuilderFactoryInterface $apruveShipmentBuilderFactory, ShippingMethodProviderInterface $shippingMethodProvider)`<sup>[[?]](https://github.com/orocommerce/OroApruveBundle/tree/1.3.0/Apruve/Factory/Shipment/ApruveShipmentFromPaymentContextFactory.php#L35 "Oro\Bundle\ApruveBundle\Apruve\Factory\Shipment\ApruveShipmentFromPaymentContextFactory")</sup>
+
