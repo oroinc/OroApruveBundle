@@ -2,6 +2,7 @@
 
 namespace Oro\Bundle\ApruveBundle\Tests\Unit\Method\View;
 
+use Oro\Bundle\ApruveBundle\Method\ApruvePaymentMethod;
 use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfig;
 use Oro\Bundle\ApruveBundle\Method\View\ApruvePaymentMethodView;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
@@ -33,7 +34,17 @@ class ApruvePaymentMethodViewTest extends \PHPUnit_Framework_TestCase
         /** @var PaymentContextInterface|\PHPUnit_Framework_MockObject_MockObject $context */
         $context = $this->createMock(PaymentContextInterface::class);
 
-        $this->assertEquals([], $this->methodView->getOptions($context));
+        $this->config->expects($this->once())->method('isTestMode')->willReturn(true);
+
+        $this->assertEquals(
+            [
+                'componentOptions' => [
+                    'orderIdParamName' => ApruvePaymentMethod::PARAM_ORDER_ID,
+                    'testMode' => true
+                ],
+            ],
+            $this->methodView->getOptions($context)
+        );
     }
 
     public function testGetBlock()

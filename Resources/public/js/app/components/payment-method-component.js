@@ -13,8 +13,12 @@ define(function(require) {
          */
         options: {
             orderIdParamName: '',
-            apruvejsUri: '',
-            paymentMethod: null
+            paymentMethod: null,
+            apruveJsUrls: {
+                test: 'oroapruve/js/lib/apruvejs-test',
+                prod: 'oroapruve/js/lib/apruvejs-prod'
+            },
+            testMode: true
         },
 
         apruve: null,
@@ -29,10 +33,26 @@ define(function(require) {
         initialize: function(options) {
             this.options = _.defaults(options || {}, this.options);
 
-            this._deferredInit();
-            tools.loadModules(this.options.apruvejsUri, this.initializeApruve, this);
-
             mediator.on('checkout:place-order:response', this.handleSubmit, this);
+            mediator.on('checkout:payment:method:changed', this.onPaymentMethodChanged, this);
+
+            this.loadAppruveJsLibrary();
+        },
+
+        /**
+         * @param {Object} eventData
+         */
+        onPaymentMethodChanged: function(eventData) {
+            if (eventData.paymentMethod === this.options.paymentMethod) {
+                this.loadAppruveJsLibrary();
+            }
+        },
+
+        loadAppruveJsLibrary: function() {
+            var appruveJsUrl = this.options.testMode ? this.options.apruveJsUrls.test : this.options.apruveJsUrls.prod;
+
+            this._deferredInit();
+            tools.loadModules(appruveJsUrl, this.initializeApruve, this);
         },
 
         /**
@@ -97,7 +117,7 @@ define(function(require) {
                 return;
             }
 
-            mediator.off('checkout:place-order:response', this.handleSubmit, this);
+            mediator.off(null, null, this);
 
             PaymentMethodComponent.__super__.dispose.call(this);
         }

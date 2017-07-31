@@ -2,6 +2,7 @@
 
 namespace Oro\Bundle\ApruveBundle\Method\View;
 
+use Oro\Bundle\ApruveBundle\Method\ApruvePaymentMethod;
 use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfigInterface;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PaymentBundle\Method\View\PaymentMethodViewInterface;
@@ -26,7 +27,12 @@ class ApruvePaymentMethodView implements PaymentMethodViewInterface
      */
     public function getOptions(PaymentContextInterface $context)
     {
-        return [];
+        return [
+            'componentOptions' => [
+                'orderIdParamName' => ApruvePaymentMethod::PARAM_ORDER_ID,
+                'testMode' => $this->config->isTestMode(),
+            ],
+        ];
     }
 
     /**
