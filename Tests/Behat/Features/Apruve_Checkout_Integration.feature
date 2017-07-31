@@ -1,3 +1,5 @@
+# TODO: remove @skip in scope of BB-11193
+@skip
 @fixture-OroFlatRateShippingBundle:FlatRateIntegration.yml
 @fixture-OroPaymentTermBundle:PaymentTermIntegration.yml
 @fixture-OroApruveBundle:Checkout.yml
