@@ -56,7 +56,7 @@ define(function(require) {
         },
 
         /**
-         * @param {Apruve} apruve
+         * @param {apruve} apruve
          */
         initializeApruve: function(apruve) {
             this.apruve = apruve;
@@ -87,11 +87,16 @@ define(function(require) {
                 this.returnUrl = responseData.returnUrl;
                 this.errorUrl = responseData.errorUrl;
 
-                // Provide order object and secure hash to Apruve.
-                this.apruve.setOrder(responseData.apruveOrder, responseData.apruveOrderSecureHash);
+                var self = this;
+                // Ensure that apruve library is loaded before starting apruve checkout.
+                this.deferredInit.done(function() {
+                    // Provide order object and secure hash to apruve.
+                    self.apruve.setOrder(responseData.apruveOrder, responseData.apruveOrderSecureHash);
 
-                mediator.execute('hideLoading');
-                this.apruve.startCheckout();
+                    self.apruve.startCheckout();
+
+                    mediator.execute('hideLoading');
+                });
             }
         },
 
