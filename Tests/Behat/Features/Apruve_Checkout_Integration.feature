@@ -1,3 +1,4 @@
+@regression
 @fixture-OroFlatRateShippingBundle:FlatRateIntegration.yml
 @fixture-OroPaymentTermBundle:PaymentTermIntegration.yml
 @fixture-OroApruveBundle:Checkout.yml
@@ -56,6 +57,7 @@ Feature: Apruve Checkout Integration
     And on the "Shipping" checkout step I press Continue
     And on the "Payment" checkout step I press Continue
     And click "Submit Order"
+    And I wait for iframe "Apruve Popup Iframe" to load
     When I press "Apruve Popup Cancel Button" in "Apruve Login Form"
     Then I should see "We were unable to process your payment. Please verify your payment information and try again." flash message
     And click "Sign Out"
