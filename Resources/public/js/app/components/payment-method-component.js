@@ -62,6 +62,8 @@ define(function(require) {
             this.apruve = apruve;
 
             this.apruve
+                .registerApruveCallback(this.apruve.APRUVE_LAUNCHED_EVENT, _.bind(this.handleApruveLaunch, this));
+            this.apruve
                 .registerApruveCallback(this.apruve.APRUVE_COMPLETE_EVENT, _.bind(this.handleApruveComplete, this));
             this.apruve
                 .registerApruveCallback(this.apruve.APRUVE_CLOSED_EVENT, _.bind(this.handleApruveClose, this));
@@ -94,10 +96,15 @@ define(function(require) {
                     self.apruve.setOrder(responseData.apruveOrder, responseData.apruveOrderSecureHash);
 
                     self.apruve.startCheckout();
-
-                    mediator.execute('hideLoading');
                 });
             }
+        },
+
+        /**
+         * Hide loading mask only when apruve popup is fully loaded.
+         */
+        handleApruveLaunch: function() {
+            mediator.execute('hideLoading');
         },
 
         /**
