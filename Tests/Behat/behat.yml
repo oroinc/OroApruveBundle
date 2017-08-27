@@ -23,16 +23,6 @@ oro_behat_extension:
           Label: "oro_integration_channel_form[transport][labels][values][default]"
           Short Label: 'oro_integration_channel_form[transport][shortLabels][values][default]'
 
-    Payment Rule Form:
-      selector: "form[id^='oro_payment_methods_configs_rule-uid']"
-      class: Oro\Bundle\TestFrameworkBundle\Behat\Element\Form
-      options:
-        mapping:
-          Method:
-            type: 'xpath'
-            locator: '//div[@id[starts-with(.,"uniform-oro_payment_methods_configs_rule_method")]]'
-            element: Payment Method Config Type Field
-
     Apruve Login Form:
       selector: 'form.form'
       class: Oro\Bundle\TestFrameworkBundle\Behat\Element\Form
