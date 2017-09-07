@@ -1,5 +1,4 @@
-# TODO: remove @skip in scope of BB-11193
-@skip
+# This feature should not be moved to regression, Apruve contains a unique usage of checkout functionality
 @fixture-OroFlatRateShippingBundle:FlatRateIntegration.yml
 @fixture-OroPaymentTermBundle:PaymentTermIntegration.yml
 @fixture-OroApruveBundle:Checkout.yml
