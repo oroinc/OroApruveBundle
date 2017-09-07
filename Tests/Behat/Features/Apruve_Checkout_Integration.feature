@@ -1,4 +1,4 @@
-@regression
+# This feature should not be moved to regression, Apruve contains a unique usage of checkout functionality
 @fixture-OroFlatRateShippingBundle:FlatRateIntegration.yml
 @fixture-OroPaymentTermBundle:PaymentTermIntegration.yml
 @fixture-OroApruveBundle:Checkout.yml
@@ -42,8 +42,6 @@ Feature: Apruve Checkout Integration
     Then should see "Payment rule has been saved" flash message
     And click logout in user menu
 
-  #due to BB-11193
-  @skip
   Scenario: Check out and cancel with Apruve integration
     Given I proceed as the Admin
     And Currency is set to USD
@@ -57,13 +55,10 @@ Feature: Apruve Checkout Integration
     And on the "Shipping" checkout step I press Continue
     And on the "Payment" checkout step I press Continue
     And click "Submit Order"
-    And I wait for iframe "Apruve Popup Iframe" to load
     When I press "Apruve Popup Cancel Button" in "Apruve Login Form"
     Then I should see "We were unable to process your payment. Please verify your payment information and try again." flash message
     And click "Sign Out"
 
-  #due to BB-11193
-  @skip
   Scenario: Check order status in admin panel after order creation
     Given I proceed as the Admin
     And login as administrator
