@@ -58,12 +58,12 @@ class ApruveConfigFactory implements ApruveConfigFactoryInterface
         $params = [];
         $channel = $settings->getChannel();
 
-        $params[ApruveConfig::PAYMENT_METHOD_IDENTIFIER_KEY] =
+        $params[ApruveConfig::FIELD_PAYMENT_METHOD_IDENTIFIER] =
             $this->identifierGenerator->generateIdentifier($channel);
 
-        $params[ApruveConfig::ADMIN_LABEL_KEY] = $channel->getName();
-        $params[ApruveConfig::LABEL_KEY] = $this->getLocalizedValue($settings->getLabels());
-        $params[ApruveConfig::SHORT_LABEL_KEY] = $this->getLocalizedValue($settings->getShortLabels());
+        $params[ApruveConfig::FIELD_ADMIN_LABEL] = $channel->getName();
+        $params[ApruveConfig::FIELD_LABEL] = $this->getLocalizedValue($settings->getLabels());
+        $params[ApruveConfig::FIELD_SHORT_LABEL] = $this->getLocalizedValue($settings->getShortLabels());
 
         $params[ApruveConfig::API_KEY_KEY] = $this->decryptData($settings->getApruveApiKey());
         $params[ApruveConfig::MERCHANT_ID_KEY] = $this->decryptData($settings->getApruveMerchantId());

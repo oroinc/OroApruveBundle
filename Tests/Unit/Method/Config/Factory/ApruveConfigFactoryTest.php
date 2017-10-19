@@ -88,10 +88,10 @@ class ApruveConfigFactoryTest extends \PHPUnit_Framework_TestCase
 
         $expectedSettings = new ApruveConfig(
             [
-                ApruveConfig::ADMIN_LABEL_KEY => self::CHANNEL_NAME,
-                ApruveConfig::LABEL_KEY => self::LABEL,
-                ApruveConfig::SHORT_LABEL_KEY => self::SHORT_LABEL,
-                ApruveConfig::PAYMENT_METHOD_IDENTIFIER_KEY => self::PAYMENT_METHOD_ID,
+                ApruveConfig::FIELD_ADMIN_LABEL => self::CHANNEL_NAME,
+                ApruveConfig::FIELD_LABEL => self::LABEL,
+                ApruveConfig::FIELD_SHORT_LABEL => self::SHORT_LABEL,
+                ApruveConfig::FIELD_PAYMENT_METHOD_IDENTIFIER => self::PAYMENT_METHOD_ID,
                 ApruveConfig::API_KEY_KEY => self::API_KEY_DECRYPTED,
                 ApruveConfig::MERCHANT_ID_KEY => self::MERCHANT_ID_DECRYPTED,
                 ApruveConfig::TEST_MODE_KEY => self::TEST_MODE,
@@ -116,10 +116,10 @@ class ApruveConfigFactoryTest extends \PHPUnit_Framework_TestCase
 
         $expectedSettings = new ApruveConfig(
             [
-                ApruveConfig::ADMIN_LABEL_KEY => self::CHANNEL_NAME,
-                ApruveConfig::LABEL_KEY => self::LABEL,
-                ApruveConfig::SHORT_LABEL_KEY => self::SHORT_LABEL,
-                ApruveConfig::PAYMENT_METHOD_IDENTIFIER_KEY => self::PAYMENT_METHOD_ID,
+                ApruveConfig::FIELD_ADMIN_LABEL => self::CHANNEL_NAME,
+                ApruveConfig::FIELD_LABEL => self::LABEL,
+                ApruveConfig::FIELD_SHORT_LABEL => self::SHORT_LABEL,
+                ApruveConfig::FIELD_PAYMENT_METHOD_IDENTIFIER => self::PAYMENT_METHOD_ID,
                 ApruveConfig::API_KEY_KEY => '',
                 ApruveConfig::MERCHANT_ID_KEY => '',
                 ApruveConfig::TEST_MODE_KEY => self::TEST_MODE,

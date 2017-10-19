@@ -7,14 +7,6 @@ use Oro\Bundle\PaymentBundle\Method\Config\ParameterBag\AbstractParameterBagPaym
 class ApruveConfig extends AbstractParameterBagPaymentConfig implements ApruveConfigInterface
 {
     /**
-     * General parameters keys.
-     */
-    const LABEL_KEY = 'label';
-    const SHORT_LABEL_KEY = 'short_label';
-    const ADMIN_LABEL_KEY = 'admin_label';
-    const PAYMENT_METHOD_IDENTIFIER_KEY = 'payment_method_identifier';
-
-    /**
      * Apruve-specific parameters keys.
      */
     const TEST_MODE_KEY  = 'test_mode';

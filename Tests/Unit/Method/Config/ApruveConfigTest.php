@@ -18,10 +18,10 @@ class ApruveConfigTest extends \PHPUnit_Framework_TestCase
 
         $parameterBag = new ApruveConfig(
             [
-                ApruveConfig::ADMIN_LABEL_KEY => $adminLabel,
-                ApruveConfig::LABEL_KEY => $label,
-                ApruveConfig::SHORT_LABEL_KEY => $shortLabel,
-                ApruveConfig::PAYMENT_METHOD_IDENTIFIER_KEY => $paymentMethodIdentifier,
+                ApruveConfig::FIELD_ADMIN_LABEL => $adminLabel,
+                ApruveConfig::FIELD_LABEL => $label,
+                ApruveConfig::FIELD_SHORT_LABEL => $shortLabel,
+                ApruveConfig::FIELD_PAYMENT_METHOD_IDENTIFIER => $paymentMethodIdentifier,
                 ApruveConfig::API_KEY_KEY => $apiKey,
                 ApruveConfig::MERCHANT_ID_KEY => $merchantId,
                 ApruveConfig::TEST_MODE_KEY => $testMode,
