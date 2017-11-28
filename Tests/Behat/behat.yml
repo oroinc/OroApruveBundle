@@ -11,6 +11,7 @@ oro_behat_extension:
         - OroApplicationBundle::CommerceMainContext
         - OroShoppingListBundle::ShoppingListContext
         - OroApruveBundle::FeatureContext
+        - OroWarehouseBundle::FeatureContext
       paths:
         - '@OroApruveBundle/Tests/Behat/Features'
   elements:
