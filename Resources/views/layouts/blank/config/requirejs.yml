@@ -8,3 +8,7 @@ config:
             exports: 'apruve'
         'oroapruve/js/lib/apruvejs-prod':
             exports: 'apruve'
+
+build:
+    paths:
+        'oroapruve/js/lib/apruvejs-test': 'empty:'
