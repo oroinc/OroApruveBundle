@@ -4,6 +4,7 @@
 @fixture-OroApruveBundle:Checkout.yml
 @fixture-OroWarehouseBundle:Checkout.yml
 Feature: Apruve integration Single Page Checkout
+  ToDo: BAP-16103 Add missing descriptions to the Behat features
 
   Scenario: Create Apruve integration
     Given I login as AmandaRCole@example.org the "Buyer" at "first_session" session

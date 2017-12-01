@@ -4,6 +4,7 @@
 @fixture-OroApruveBundle:Checkout.yml
 @fixture-OroWarehouseBundle:Checkout.yml
 Feature: Apruve Checkout Integration
+  ToDo: BAP-16103 Add missing descriptions to the Behat features
 
   Scenario: Create two session
     Given sessions active:
