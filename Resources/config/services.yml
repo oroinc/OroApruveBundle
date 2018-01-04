@@ -18,7 +18,7 @@ services:
     oro_apruve.provider.tax_amount:
         class: 'Oro\Bundle\ApruveBundle\Provider\TaxAmountProvider'
         arguments:
-            - '@oro_tax.manager.tax_manager'
+            - '@oro_tax.provider.tax_provider_registry'
         calls:
             - ['setLogger', ['@logger']]
         lazy: true

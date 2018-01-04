@@ -2,28 +2,30 @@
 
 namespace Oro\Bundle\ApruveBundle\Provider;
 
-use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
-use Oro\Bundle\TaxBundle\Exception\TaxationDisabledException;
-use Oro\Bundle\TaxBundle\Manager\TaxManager;
-use Oro\Bundle\TaxBundle\Mapper\UnmappableArgumentException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
+
+use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
+use Oro\Bundle\TaxBundle\Exception\TaxationDisabledException;
+use Oro\Bundle\TaxBundle\Mapper\UnmappableArgumentException;
+use Oro\Bundle\TaxBundle\Provider\TaxProviderInterface;
+use Oro\Bundle\TaxBundle\Provider\TaxProviderRegistry;
 
 class TaxAmountProvider implements TaxAmountProviderInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
     /**
-     * @var TaxManager
+     * @var TaxProviderRegistry
      */
-    private $taxManager;
+    private $taxProviderRegistry;
 
     /**.
-     * @param TaxManager $taxManager
+     * @param TaxProviderRegistry $taxProviderRegistry
      */
-    public function __construct(TaxManager $taxManager)
+    public function __construct(TaxProviderRegistry $taxProviderRegistry)
     {
-        $this->taxManager = $taxManager;
+        $this->taxProviderRegistry = $taxProviderRegistry;
     }
 
     /**
@@ -32,7 +34,7 @@ class TaxAmountProvider implements TaxAmountProviderInterface, LoggerAwareInterf
     public function getTaxAmount(PaymentContextInterface $paymentContext)
     {
         try {
-            $result = $this->taxManager->loadTax($paymentContext->getSourceEntity());
+            $result = $this->getProvider()->loadTax($paymentContext->getSourceEntity());
             $taxAmount = $result->getTotal()->getTaxAmount();
         } catch (TaxationDisabledException $e) {
             $taxAmount = 0;
@@ -56,5 +58,13 @@ class TaxAmountProvider implements TaxAmountProviderInterface, LoggerAwareInterf
         }
 
         return (float) $taxAmount;
+    }
+
+    /**
+     * @return TaxProviderInterface
+     */
+    private function getProvider()
+    {
+        return $this->taxProviderRegistry->getEnabledProvider();
     }
 }
