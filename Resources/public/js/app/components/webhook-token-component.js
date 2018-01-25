@@ -12,8 +12,8 @@ define(function(require) {
 
     WebhookTokenComponent = BaseComponent.extend({
         options: {
-            'generateTokenRoute': 'oro_apruve_generate_token',
-            'webhookRoute': 'oro_apruve_webhook_notify'
+            generateTokenRoute: 'oro_apruve_generate_token',
+            webhookRoute: 'oro_apruve_webhook_notify'
         },
 
         /**
@@ -74,7 +74,7 @@ define(function(require) {
          * @returns {String}
          */
         buildWebhookUrl: function(token) {
-            return routing.generate(this.options.webhookRoute, {'token': token}, true);
+            return routing.generate(this.options.webhookRoute, {token: token}, true);
         },
 
         /**
