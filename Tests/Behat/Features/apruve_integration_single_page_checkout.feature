@@ -6,9 +6,14 @@
 Feature: Apruve integration Single Page Checkout
   ToDo: BAP-16103 Add missing descriptions to the Behat features
 
+  Scenario: Create different window session
+    Given sessions active:
+      | Admin          |first_session |
+      | User           |second_session|
+
   Scenario: Create Apruve integration
-    Given I login as AmandaRCole@example.org the "Buyer" at "first_session" session
-    And I login as administrator and use in "second_session" as "Admin"
+    Given I proceed as the Admin
+    And I login as administrator
     And I enable the existing warehouses
     And go to System/ Integrations/ Manage Integrations
     And click "Create Integration"
@@ -41,7 +46,8 @@ Feature: Apruve integration Single Page Checkout
     Then I should see "Workflow activated" flash message
 
   Scenario: Check out and cancel with Apruve integration
-    Given I operate as the Buyer
+    Given I proceed as the User
+    And I signed in as AmandaRCole@example.org on the store frontend
     When I open page with shopping list List 1
     And I click "Create Order"
     And I select "Fifth avenue, 10115 Berlin, Germany" from "Select Billing Address"
@@ -52,7 +58,7 @@ Feature: Apruve integration Single Page Checkout
     Then I should see "We were unable to process your payment. Please verify your payment information and try again." flash message
 
   Scenario: Check order status in admin panel after order creation
-    Given I operate as the Admin
+    Given I proceed as the Admin
     And go to Sales/ Orders
     When click view "Amanda Cole" in grid
     Then I should see order with:
