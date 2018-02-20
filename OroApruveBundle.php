@@ -2,8 +2,8 @@
 
 namespace Oro\Bundle\ApruveBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Oro\Bundle\ApruveBundle\DependencyInjection\OroApruveExtension;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class OroApruveBundle extends Bundle
 {

@@ -3,7 +3,6 @@
 namespace Oro\Bundle\ApruveBundle\Tests\Unit\Method\Config\Factory;
 
 use Doctrine\Common\Collections\Collection;
-
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfig;
 use Oro\Bundle\ApruveBundle\Method\Config\Factory\ApruveConfigFactory;
