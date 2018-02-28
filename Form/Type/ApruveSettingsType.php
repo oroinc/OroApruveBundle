@@ -50,7 +50,7 @@ class ApruveSettingsType extends AbstractType
                 [
                     'label' => 'oro.apruve.settings.labels.label',
                     'required' => true,
-                    'options' => ['constraints' => [new NotBlank()]],
+                    'entry_options' => ['constraints' => [new NotBlank()]],
                 ]
             )
             ->add(
@@ -59,7 +59,7 @@ class ApruveSettingsType extends AbstractType
                 [
                     'label' => 'oro.apruve.settings.short_labels.label',
                     'required' => true,
-                    'options' => ['constraints' => [new NotBlank()]],
+                    'entry_options' => ['constraints' => [new NotBlank()]],
                 ]
             )
             ->add('apruveMerchantId', TextType::class, [
