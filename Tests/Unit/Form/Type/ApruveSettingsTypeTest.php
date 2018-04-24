@@ -92,8 +92,9 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
         return [
             new PreloadedExtension(
                 [
-                    LocalizedFallbackValueCollectionType::NAME => new LocalizedFallbackValueCollectionTypeStub(),
+                    LocalizedFallbackValueCollectionType::class => new LocalizedFallbackValueCollectionTypeStub(),
                     WebhookTokenType::class => new WebhookTokenType($this->tokenGenerator),
+                    ApruveSettingsType::class => $this->formType
                 ],
                 []
             ),
@@ -123,7 +124,7 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
                 [self::DECRYPTED_API_KEY, self::ENCRYPTED_API_KEY],
             ]);
 
-        $form = $this->factory->create($this->formType, $defaultData, []);
+        $form = $this->factory->create(ApruveSettingsType::class, $defaultData, []);
 
         static::assertEquals($defaultData, $form->getData());
 

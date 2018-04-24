@@ -46,7 +46,7 @@ class ApruveSettingsType extends AbstractType
         $builder
             ->add(
                 'labels',
-                LocalizedFallbackValueCollectionType::NAME,
+                LocalizedFallbackValueCollectionType::class,
                 [
                     'label' => 'oro.apruve.settings.labels.label',
                     'required' => true,
@@ -55,7 +55,7 @@ class ApruveSettingsType extends AbstractType
             )
             ->add(
                 'shortLabels',
-                LocalizedFallbackValueCollectionType::NAME,
+                LocalizedFallbackValueCollectionType::class,
                 [
                     'label' => 'oro.apruve.settings.short_labels.label',
                     'required' => true,

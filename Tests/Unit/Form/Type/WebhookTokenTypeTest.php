@@ -5,6 +5,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Form\Type;
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\ApruveBundle\Form\Type\WebhookTokenType;
 use Oro\Bundle\SecurityBundle\Generator\RandomTokenGeneratorInterface;
+use Oro\Component\Testing\Unit\PreloadedExtension;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Test\FormIntegrationTestCase;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -49,6 +50,16 @@ class WebhookTokenTypeTest extends FormIntegrationTestCase
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getExtensions()
+    {
+        return [
+            new PreloadedExtension([$this->formType], [])
+        ];
+    }
+
+    /**
      * @dataProvider submitProvider
      *
      * @param ApruveSettings $defaultData
@@ -57,7 +68,7 @@ class WebhookTokenTypeTest extends FormIntegrationTestCase
      */
     public function testSubmit($defaultData, $submittedData, $expectedData)
     {
-        $form = $this->factory->create($this->formType, $defaultData);
+        $form = $this->factory->create(WebhookTokenType::class, $defaultData);
 
         $form->submit($submittedData);
         $this->assertTrue($form->isValid());

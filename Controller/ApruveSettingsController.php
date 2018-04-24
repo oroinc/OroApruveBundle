@@ -6,6 +6,7 @@ use Oro\Bundle\ApruveBundle\Connection\Validator\Result\ApruveConnectionValidato
 use Oro\Bundle\ApruveBundle\Connection\Validator\Result\Factory\Merchant;
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\IntegrationBundle\Entity\Channel;
+use Oro\Bundle\IntegrationBundle\Form\Type\ChannelType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -50,7 +51,7 @@ class ApruveSettingsController extends Controller
         }
 
         $form = $this->createForm(
-            $this->get('oro_integration.form.type.channel'),
+            ChannelType::class,
             $channel
         );
         $form->handleRequest($request);
