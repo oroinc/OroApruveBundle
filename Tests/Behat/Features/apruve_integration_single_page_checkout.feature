@@ -1,4 +1,4 @@
-# This feature should not be moved to regression, Apruve contains a unique usage of checkout functionality
+@regression
 @fixture-OroFlatRateShippingBundle:FlatRateIntegration.yml
 @fixture-OroPaymentTermBundle:PaymentTermIntegration.yml
 @fixture-OroApruveBundle:Checkout.yml
