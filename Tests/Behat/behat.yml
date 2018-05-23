@@ -24,7 +24,7 @@ oro_behat_extension:
           Short Label: 'oro_integration_channel_form[transport][shortLabels][values][default]'
 
     Apruve Login Form:
-      selector: 'form.form'
+      selector: 'div.modal-content'
       class: Oro\Bundle\TestFrameworkBundle\Behat\Element\Form
       options:
         embedded-id: apruveCheckoutIFrame
@@ -33,7 +33,7 @@ oro_behat_extension:
           Password: 'password'
 
     Apruve Popup Cancel Button:
-      selector: 'form.form a.btn-back'
+      selector: 'div.modal-content button.close'
       class: Oro\Bundle\TestFrameworkBundle\Behat\Element\Element
       options:
         embedded-id: apruveCheckoutIFrame
