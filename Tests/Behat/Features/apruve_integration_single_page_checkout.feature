@@ -48,16 +48,43 @@ Feature: Apruve integration Single Page Checkout
   Scenario: Check out and cancel with Apruve integration
     Given I proceed as the User
     And I signed in as AmandaRCole@example.org on the store frontend
+    When I open page with shopping list List 2
+    And I click "Create Order"
+    And I select "Fifth avenue, 10115 Berlin, Germany" from "Select Billing Address"
+    And I select "Fifth avenue, 10115 Berlin, Germany" from "Select Shipping Address"
+    And I check "Flat Rate" on the checkout page
+    And I click "Submit Order"
+    Then I should see "We were unable to process your payment. Please verify your payment information and try again." flash message
+
+  Scenario: Check order status in admin panel after order creation
+    Given I proceed as the Admin
+    When I go to Sales/ Orders
+    Then there is no "Payment Authorized" in grid
+
+  Scenario: Successful order payment with Apruve integration
+    Given I proceed as the User
     When I open page with shopping list List 1
     And I click "Create Order"
     And I select "Fifth avenue, 10115 Berlin, Germany" from "Select Billing Address"
     And I select "Fifth avenue, 10115 Berlin, Germany" from "Select Shipping Address"
     And I check "Flat Rate" on the checkout page
     And I click "Submit Order"
-    When I press "Apruve Popup Cancel Button" in "Apruve Login Form"
-    Then I should see "We were unable to process your payment. Please verify your payment information and try again." flash message
+    Then I see the "Thank You" page with "Thank You For Your Purchase!" title
 
-  Scenario: Check order status in admin panel after order creation
+  Scenario: Check order status in admin panel after order creation and charge the order
     Given I proceed as the Admin
-    When I go to Sales/ Orders
-    Then there is no "Amanda Cole" in grid
+    And go to Sales/ Orders
+    When click view "Payment authorized" in grid
+    Then I should see order with:
+      | Payment Method | Apruve             |
+      | Payment Status | Payment authorized |
+    And click "Send Invoice" on row "Authorize" in grid "Order Payment Transaction Grid"
+    And click "Yes, Charge"
+    Then should see "Invoice has been sent successfully" flash message
+    And I should see order with:
+      | Payment Status | Invoiced |
+    And I should see following "Order Payment Transaction Grid" grid:
+      | Payment Method | Type      | Successful |
+      | Apruve         | Shipment  | Yes        |
+      | Apruve         | Invoice   | Yes        |
+      | Apruve         | Authorize | Yes        |

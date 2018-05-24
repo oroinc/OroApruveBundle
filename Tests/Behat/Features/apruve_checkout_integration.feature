@@ -9,7 +9,7 @@ Feature: Apruve Checkout Integration
   Scenario: Create two session
     Given sessions active:
       | Admin  | first_session  |
-      | Apruve | second_session |
+      | User   | second_session |
 
   Scenario: Create Apruve integration
     Given I proceed as the Admin
@@ -41,14 +41,29 @@ Feature: Apruve Checkout Integration
       | Method     | [Apruve] |
     When save and close form
     Then should see "Payment rule has been saved" flash message
-    And click logout in user menu
 
-  Scenario: Check out and cancel with Apruve integration
-    Given I proceed as the Admin
+  Scenario: Unsuccessful order payment with Apruve integration
+    Given I proceed as the User
     And Currency is set to USD
     And I enable the existing warehouses
     And AmandaRCole@example.org customer user has Buyer role
     And I signed in as AmandaRCole@example.org on the store frontend
+    When I open page with shopping list List 2
+    And I press "Create Order"
+    And I select "Fifth avenue, 10115 Berlin, Germany" on the "Billing Information" checkout step and press Continue
+    And I select "Fifth avenue, 10115 Berlin, Germany" on the "Shipping Information" checkout step and press Continue
+    And on the "Shipping" checkout step I press Continue
+    And on the "Payment" checkout step I press Continue
+    And click "Submit Order"
+    Then I should see "We were unable to process your payment. Please verify your payment information and try again." flash message
+
+  Scenario: Check order status in admin panel after unsuccessful order creation
+    Given I proceed as the Admin
+    When I go to Sales/ Orders
+    Then there is no "Payment Authorized" in grid
+
+  Scenario: Successful order payment with Apruve integration
+    Given I proceed as the User
     When I open page with shopping list List 1
     And I press "Create Order"
     And I select "Fifth avenue, 10115 Berlin, Germany" on the "Billing Information" checkout step and press Continue
@@ -56,61 +71,27 @@ Feature: Apruve Checkout Integration
     And on the "Shipping" checkout step I press Continue
     And on the "Payment" checkout step I press Continue
     And click "Submit Order"
-    When I press "Apruve Popup Cancel Button" in "Apruve Login Form"
-    Then I should see "We were unable to process your payment. Please verify your payment information and try again." flash message
-    And click "Sign Out"
+    Then I see the "Thank You" page with "Thank You For Your Purchase!" title
 
-  Scenario: Check order status in admin panel after order creation
+  Scenario: Check order status in admin panel after order creation and charge the order
     Given I proceed as the Admin
-    And login as administrator
-    When I go to Sales/ Orders
-    Then there is no "Amanda Cole" in grid
-    And click logout in user menu
+    And go to Sales/ Orders
+    When click view "Payment authorized" in grid
+    Then I should see order with:
+      | Payment Method | Apruve             |
+      | Payment Status | Payment authorized |
+    And click "Send Invoice" on row "Authorize" in grid "Order Payment Transaction Grid"
+    And click "Yes, Charge"
+    Then should see "Invoice has been sent successfully" flash message
+    And I should see order with:
+      | Payment Status | Invoiced |
+    And I should see following "Order Payment Transaction Grid" grid:
+      | Payment Method | Type      | Successful |
+      | Apruve         | Shipment  | Yes        |
+      | Apruve         | Invoice   | Yes        |
+      | Apruve         | Authorize | Yes        |
 
-#  Proper checkout flow. This part might be still needed for BB-10071
-#  Scenario: Check out with Apruve integration
-#    Given I proceed as the Admin
-#    And Currency is set to USD
-#    And I enable the existing warehouses
-#    And AmandaRCole@example.org customer user has Buyer role
-#    And I signed in as AmandaRCole@example.org on the store frontend
-#    When I open page with shopping list List 1
-#    And I press "Create Order"
-#    And I select "Fifth avenue, 10115 Berlin, Germany" on the "Billing Information" checkout step and press Continue
-#    And I select "Fifth avenue, 10115 Berlin, Germany" on the "Shipping Information" checkout step and press Continue
-#    And on the "Shipping" checkout step I press Continue
-#    And on the "Payment" checkout step I press Continue
-#    And click "Submit Order"
-#    When I fill "Apruve Login Form" with:
-#      | Email    | apruve-qa+buyer@orocommerce.com |
-#      | Password | wyVjpjA2                        |
-#    And I press "Sign In" in "Apruve Login Form"
-#    And I press "Confirm" in "Apruve Login Form"
-#    Then I see the "Thank You" page with "Thank You For Your Purchase!" title
-#    And click "Sign Out"
-
-#  This part might be still needed for BB-10071
-#  Scenario: Check order status in admin panel after order creation
-#    Given I proceed as the Admin
-#    And login as administrator
-#    And go to Sales/ Orders
-#    When click view "Amanda Cole" in grid
-#    Then I should see order with:
-#      | Payment Method | Apruve             |
-#      | Payment Status | Payment authorized |
-#    And click "Send Invoice" on row "Authorize" in grid "Order Payment Transaction Grid"
-#    And click "Yes, Charge"
-#    Then should see "Invoice has been sent successfully" flash message
-#    And I should see order with:
-#      | Payment Status | Invoiced |
-#    And I should see following "Order Payment Transaction Grid" grid:
-#      | Payment Method | Type      | Successful |
-#      | Apruve         | Shipment  | Yes        |
-#      | Apruve         | Invoice   | Yes        |
-#      | Apruve         | Authorize | Yes        |
-#    And click logout in user menu
-
-#  This part should implemented only when travis will allow accept web hooks
+#  This part seems impossible to implement without actual requests to apruve servers during behat scenarios
 #  Scenario: Cofirm order from Apruve
 #    Given I switch to the "Apruve" session
 #    And I go to "https://test.apruve.com/"
@@ -124,7 +105,7 @@ Feature: Apruve Checkout Integration
 #    And click "Pay"
 #    And should see "Thank you!"
 #
-#  Scenario: Check order status in admin panel after confirm from Apruve]
+#  Scenario: Check order status in admin panel after confirm from Apruve
 #    Given I proceed as the Admin
 #    And login as administrator
 #    And go to Sales/ Orders
