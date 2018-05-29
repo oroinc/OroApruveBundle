@@ -15,12 +15,15 @@ use Oro\Bundle\ApruveBundle\Provider\TaxAmountProviderInterface;
 use Oro\Bundle\CurrencyBundle\Entity\Price;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PaymentBundle\Context\PaymentLineItemInterface;
+use Oro\Bundle\PricingBundle\SubtotalProcessor\Model\Subtotal;
+use Oro\Bundle\PricingBundle\SubtotalProcessor\TotalProcessorProvider;
 
 class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit_Framework_TestCase
 {
     const MERCHANT_ID = 'sampleMerchantId';
     const AMOUNT = '100.1';
     const TOTAL_AMOUNT_CENTS = 12250;
+    const TOTAL_AMOUNT_USD = 122.50;
     const AMOUNT_CENTS = 11130;
     const SHIPPING_AMOUNT = 10.1;
     const SHIPPING_AMOUNT_CENTS = 1010;
@@ -81,21 +84,21 @@ class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit_Framework_TestCa
     private $factory;
 
     /**
+     * @var TotalProcessorProvider|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $totalProcessorProvider;
+
+    /**
      * {@inheritDoc}
      */
     public function setUp()
     {
-        $price = $this->createMock(Price::class);
-        $price
-            ->expects(static::once())
-            ->method('getValue')
-            ->willReturn(self::AMOUNT);
+        $this->totalProcessorProvider = $this->getMockBuilder(TotalProcessorProvider::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $this->paymentContext = $this->createMock(PaymentContextInterface::class);
-        $this->paymentContext
-            ->expects(static::once())
-            ->method('getSubTotal')
-            ->willReturn($price);
+
         $this->paymentContext
             ->expects(static::once())
             ->method('getCurrency')
@@ -115,14 +118,14 @@ class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit_Framework_TestCa
 
         $this->shippingAmountProvider = $this->createMock(ShippingAmountProviderInterface::class);
         $this->shippingAmountProvider
-            ->expects(static::exactly(2))
+            ->expects(static::exactly(1))
             ->method('getShippingAmount')
             ->with($this->paymentContext)
             ->willReturn(self::SHIPPING_AMOUNT);
 
         $this->taxAmountProvider = $this->createMock(TaxAmountProviderInterface::class);
         $this->taxAmountProvider
-            ->expects(static::exactly(2))
+            ->expects(static::exactly(1))
             ->method('getTaxAmount')
             ->with($this->paymentContext)
             ->willReturn(self::TAX_AMOUNT);
@@ -145,6 +148,7 @@ class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit_Framework_TestCa
             $this->apruveLineItemFromPaymentLineItemFactory,
             $this->shippingAmountProvider,
             $this->taxAmountProvider,
+            $this->totalProcessorProvider,
             $this->apruveOrderBuilderFactory
         );
     }
@@ -196,6 +200,21 @@ class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit_Framework_TestCa
             ->expects(static::once())
             ->method('getResult');
 
+        $someEntity = new \stdClass();
+        $this->paymentContext
+            ->expects($this->once())
+            ->method('getSourceEntity')
+            ->willReturn($someEntity);
+
+        $total = new Subtotal();
+        $total->setAmount(self::TOTAL_AMOUNT_USD);
+
+        $this->totalProcessorProvider
+            ->expects($this->once())
+            ->method('getTotal')
+            ->with($someEntity)
+            ->willReturn($total);
+
         $this->factory->createFromPaymentContext($this->paymentContext, $this->mockApruveConfig());
     }
 
@@ -225,9 +244,10 @@ class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit_Framework_TestCa
         $amountNormalizer
             ->method('normalize')
             ->willReturnMap([
-                [self::AMOUNT, self::AMOUNT_CENTS],
+                [self::TOTAL_AMOUNT_USD, self::TOTAL_AMOUNT_CENTS],
                 [self::SHIPPING_AMOUNT, self::SHIPPING_AMOUNT_CENTS],
                 [self::TAX_AMOUNT, self::TAX_AMOUNT_CENTS],
+
             ]);
         return $amountNormalizer;
     }

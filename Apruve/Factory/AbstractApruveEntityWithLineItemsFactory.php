@@ -8,6 +8,7 @@ use Oro\Bundle\ApruveBundle\Provider\ShippingAmountProviderInterface;
 use Oro\Bundle\ApruveBundle\Provider\TaxAmountProviderInterface;
 use Oro\Bundle\PaymentBundle\Context\LineItem\Collection\PaymentLineItemCollectionInterface;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
+use Oro\Bundle\PricingBundle\SubtotalProcessor\TotalProcessorProvider;
 
 abstract class AbstractApruveEntityWithLineItemsFactory extends AbstractApruveEntityFactory
 {
@@ -27,22 +28,30 @@ abstract class AbstractApruveEntityWithLineItemsFactory extends AbstractApruveEn
     protected $apruveLineItemFromPaymentLineItemFactory;
 
     /**
-     * @param AmountNormalizerInterface                         $amountNormalizer
+     * @var TotalProcessorProvider
+     */
+    protected $totalProcessorProvider;
+
+    /**
+     * @param AmountNormalizerInterface $amountNormalizer
      * @param ApruveLineItemFromPaymentLineItemFactoryInterface $apruveLineItemFromPaymentLineItemFactory
-     * @param ShippingAmountProviderInterface                   $shippingAmountProvider
-     * @param TaxAmountProviderInterface                        $taxAmountProvider
+     * @param ShippingAmountProviderInterface $shippingAmountProvider
+     * @param TaxAmountProviderInterface $taxAmountProvider
+     * @param TotalProcessorProvider $totalProcessorProvider
      */
     public function __construct(
         AmountNormalizerInterface $amountNormalizer,
         ApruveLineItemFromPaymentLineItemFactoryInterface $apruveLineItemFromPaymentLineItemFactory,
         ShippingAmountProviderInterface $shippingAmountProvider,
-        TaxAmountProviderInterface $taxAmountProvider
+        TaxAmountProviderInterface $taxAmountProvider,
+        TotalProcessorProvider $totalProcessorProvider
     ) {
         parent::__construct($amountNormalizer);
 
         $this->apruveLineItemFromPaymentLineItemFactory = $apruveLineItemFromPaymentLineItemFactory;
         $this->shippingAmountProvider = $shippingAmountProvider;
         $this->taxAmountProvider = $taxAmountProvider;
+        $this->totalProcessorProvider = $totalProcessorProvider;
     }
 
     /**
@@ -96,9 +105,8 @@ abstract class AbstractApruveEntityWithLineItemsFactory extends AbstractApruveEn
      */
     protected function getAmountCents(PaymentContextInterface $paymentContext)
     {
-        $amountCents = $this->normalizePrice($paymentContext->getSubtotal());
-        $amountCents += $this->getShippingCents($paymentContext);
-        $amountCents += $this->getTaxCents($paymentContext);
+        $totalAmount = $this->totalProcessorProvider->getTotal($paymentContext->getSourceEntity());
+        $amountCents = $this->normalizePrice($totalAmount->getTotalPrice());
 
         return $amountCents;
     }

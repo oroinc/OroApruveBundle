@@ -9,6 +9,7 @@ use Oro\Bundle\ApruveBundle\Apruve\Helper\AmountNormalizerInterface;
 use Oro\Bundle\ApruveBundle\Provider\ShippingAmountProviderInterface;
 use Oro\Bundle\ApruveBundle\Provider\TaxAmountProviderInterface;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
+use Oro\Bundle\PricingBundle\SubtotalProcessor\TotalProcessorProvider;
 
 class ApruveInvoiceFromPaymentContextFactory extends AbstractApruveEntityWithLineItemsFactory implements
     ApruveInvoiceFromPaymentContextFactoryInterface
@@ -24,24 +25,27 @@ class ApruveInvoiceFromPaymentContextFactory extends AbstractApruveEntityWithLin
     private $apruveInvoiceBuilderFactory;
 
     /**
-     * @param AmountNormalizerInterface                         $amountNormalizer
-     * @param ApruveInvoiceBuilderFactoryInterface              $apruveInvoiceBuilderFactory
+     * @param AmountNormalizerInterface $amountNormalizer
      * @param ApruveLineItemFromPaymentLineItemFactoryInterface $apruveLineItemFromPaymentLineItemFactory
-     * @param ShippingAmountProviderInterface                   $shippingAmountProvider
-     * @param TaxAmountProviderInterface                        $taxAmountProvider
+     * @param ShippingAmountProviderInterface $shippingAmountProvider
+     * @param TaxAmountProviderInterface $taxAmountProvider
+     * @param TotalProcessorProvider $totalProcessorProvider
+     * @param ApruveInvoiceBuilderFactoryInterface $apruveInvoiceBuilderFactory
      */
     public function __construct(
         AmountNormalizerInterface $amountNormalizer,
         ApruveLineItemFromPaymentLineItemFactoryInterface $apruveLineItemFromPaymentLineItemFactory,
         ShippingAmountProviderInterface $shippingAmountProvider,
         TaxAmountProviderInterface $taxAmountProvider,
+        TotalProcessorProvider $totalProcessorProvider,
         ApruveInvoiceBuilderFactoryInterface $apruveInvoiceBuilderFactory
     ) {
         parent::__construct(
             $amountNormalizer,
             $apruveLineItemFromPaymentLineItemFactory,
             $shippingAmountProvider,
-            $taxAmountProvider
+            $taxAmountProvider,
+            $totalProcessorProvider
         );
 
         $this->apruveInvoiceBuilderFactory = $apruveInvoiceBuilderFactory;
