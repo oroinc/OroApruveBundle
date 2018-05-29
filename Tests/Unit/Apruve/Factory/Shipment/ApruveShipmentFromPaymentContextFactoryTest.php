@@ -14,6 +14,8 @@ use Oro\Bundle\ApruveBundle\Provider\TaxAmountProviderInterface;
 use Oro\Bundle\CurrencyBundle\Entity\Price;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PaymentBundle\Context\PaymentLineItemInterface;
+use Oro\Bundle\PricingBundle\SubtotalProcessor\Model\Subtotal;
+use Oro\Bundle\PricingBundle\SubtotalProcessor\TotalProcessorProvider;
 use Oro\Bundle\ShippingBundle\Method\ShippingMethodInterface;
 use Oro\Bundle\ShippingBundle\Method\ShippingMethodProviderInterface;
 
@@ -21,6 +23,7 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_Tes
 {
     const AMOUNT = '100.1';
     const TOTAL_AMOUNT_CENTS = 12250;
+    const TOTAL_AMOUNT_USD = 122.50;
     const AMOUNT_CENTS = 11130;
     const SHIPPING_AMOUNT = 10.1;
     const SHIPPING_AMOUNT_CENTS = 1010;
@@ -86,20 +89,17 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_Tes
     private $factory;
 
     /**
+     * @var TotalProcessorProvider|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $totalProcessorProvider;
+
+    /**
      * {@inheritDoc}
      */
     public function setUp()
     {
-        $price = $this->createMock(Price::class);
-        $price
-            ->method('getValue')
-            ->willReturn(self::AMOUNT);
-
         $this->paymentContext = $this->createMock(PaymentContextInterface::class);
-        $this->paymentContext
-            ->expects(static::once())
-            ->method('getSubTotal')
-            ->willReturn($price);
+
         $this->paymentContext
             ->expects(static::once())
             ->method('getCurrency')
@@ -120,14 +120,14 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_Tes
 
         $this->shippingAmountProvider = $this->createMock(ShippingAmountProviderInterface::class);
         $this->shippingAmountProvider
-            ->expects(static::exactly(2))
+            ->expects(static::exactly(1))
             ->method('getShippingAmount')
             ->with($this->paymentContext)
             ->willReturn(self::SHIPPING_AMOUNT);
 
         $this->taxAmountProvider = $this->createMock(TaxAmountProviderInterface::class);
         $this->taxAmountProvider
-            ->expects(static::exactly(2))
+            ->expects(static::exactly(1))
             ->method('getTaxAmount')
             ->with($this->paymentContext)
             ->willReturn(self::TAX_AMOUNT);
@@ -147,11 +147,16 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_Tes
 
         $this->shippingMethodProvider = $this->createMock(ShippingMethodProviderInterface::class);
 
+        $this->totalProcessorProvider = $this->getMockBuilder(TotalProcessorProvider::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->factory = new ApruveShipmentFromPaymentContextFactory(
             $this->mockAmountNormalizer(),
             $this->apruveLineItemFromPaymentLineItemFactory,
             $this->shippingAmountProvider,
             $this->taxAmountProvider,
+            $this->totalProcessorProvider,
             $this->apruveShipmentBuilderFactory,
             $this->shippingMethodProvider
         );
@@ -178,6 +183,21 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_Tes
             ->method('setShipper')
             ->with(self::SHIPPING_METHOD_LABEL);
 
+        $someEntity = new \stdClass();
+        $this->paymentContext
+            ->expects($this->once())
+            ->method('getSourceEntity')
+            ->willReturn($someEntity);
+
+        $total = new Subtotal();
+        $total->setAmount(self::TOTAL_AMOUNT_USD);
+
+        $this->totalProcessorProvider
+            ->expects($this->once())
+            ->method('getTotal')
+            ->with($someEntity)
+            ->willReturn($total);
+
         $this->factory->createFromPaymentContext($this->paymentContext);
     }
 
@@ -192,6 +212,21 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_Tes
         $this->shippingMethodProvider
             ->expects(static::never())
             ->method('getShippingMethod');
+
+        $someEntity = new \stdClass();
+        $this->paymentContext
+            ->expects($this->once())
+            ->method('getSourceEntity')
+            ->willReturn($someEntity);
+
+        $total = new Subtotal();
+        $total->setAmount(self::TOTAL_AMOUNT_USD);
+
+        $this->totalProcessorProvider
+            ->expects($this->once())
+            ->method('getTotal')
+            ->with($someEntity)
+            ->willReturn($total);
 
         $this->mockApruveShipmentBuilder();
 
@@ -224,7 +259,7 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_Tes
         $amountNormalizer
             ->method('normalize')
             ->willReturnMap([
-                [self::AMOUNT, self::AMOUNT_CENTS],
+                [self::TOTAL_AMOUNT_USD, self::TOTAL_AMOUNT_CENTS],
                 [self::SHIPPING_AMOUNT, self::SHIPPING_AMOUNT_CENTS],
                 [self::TAX_AMOUNT, self::TAX_AMOUNT_CENTS],
             ]);

@@ -46,6 +46,7 @@ services:
             - '@oro_apruve.apruve.factory.line_item'
             - '@oro_apruve.provider.shipping_amount'
             - '@oro_apruve.provider.tax_amount'
+            - '@oro_pricing.subtotal_processor.total_processor_provider'
 
     oro_apruve.apruve.factory.line_item:
         parent: oro_apruve.apruve.factory.abstract_entity

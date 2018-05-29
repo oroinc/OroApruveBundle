@@ -9,6 +9,7 @@ use Oro\Bundle\ApruveBundle\Apruve\Helper\AmountNormalizerInterface;
 use Oro\Bundle\ApruveBundle\Provider\ShippingAmountProviderInterface;
 use Oro\Bundle\ApruveBundle\Provider\TaxAmountProviderInterface;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
+use Oro\Bundle\PricingBundle\SubtotalProcessor\TotalProcessorProvider;
 use Oro\Bundle\ShippingBundle\Method\ShippingMethodProviderInterface;
 
 class ApruveShipmentFromPaymentContextFactory extends AbstractApruveEntityWithLineItemsFactory implements
@@ -25,18 +26,20 @@ class ApruveShipmentFromPaymentContextFactory extends AbstractApruveEntityWithLi
     private $shippingMethodProvider;
 
     /**
-     * @param AmountNormalizerInterface                         $amountNormalizer
+     * @param AmountNormalizerInterface $amountNormalizer
      * @param ApruveLineItemFromPaymentLineItemFactoryInterface $apruveLineItemFromPaymentLineItemFactory
-     * @param ShippingAmountProviderInterface                   $shippingAmountProvider
-     * @param TaxAmountProviderInterface                        $taxAmountProvider
-     * @param ApruveShipmentBuilderFactoryInterface             $apruveShipmentBuilderFactory
-     * @param ShippingMethodProviderInterface                   $shippingMethodProvider
+     * @param ShippingAmountProviderInterface $shippingAmountProvider
+     * @param TaxAmountProviderInterface $taxAmountProvider
+     * @param TotalProcessorProvider $totalProcessorProvider
+     * @param ApruveShipmentBuilderFactoryInterface $apruveShipmentBuilderFactory
+     * @param ShippingMethodProviderInterface $shippingMethodProvider
      */
     public function __construct(
         AmountNormalizerInterface $amountNormalizer,
         ApruveLineItemFromPaymentLineItemFactoryInterface $apruveLineItemFromPaymentLineItemFactory,
         ShippingAmountProviderInterface $shippingAmountProvider,
         TaxAmountProviderInterface $taxAmountProvider,
+        TotalProcessorProvider $totalProcessorProvider,
         ApruveShipmentBuilderFactoryInterface $apruveShipmentBuilderFactory,
         ShippingMethodProviderInterface $shippingMethodProvider
     ) {
@@ -44,7 +47,8 @@ class ApruveShipmentFromPaymentContextFactory extends AbstractApruveEntityWithLi
             $amountNormalizer,
             $apruveLineItemFromPaymentLineItemFactory,
             $shippingAmountProvider,
-            $taxAmountProvider
+            $taxAmountProvider,
+            $totalProcessorProvider
         );
 
         $this->apruveShipmentBuilderFactory = $apruveShipmentBuilderFactory;
