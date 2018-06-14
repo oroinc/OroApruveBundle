@@ -59,11 +59,5 @@ Feature: Apruve integration Single Page Checkout
 
   Scenario: Check order status in admin panel after order creation
     Given I proceed as the Admin
-    And go to Sales/ Orders
-    When click view "Amanda Cole" in grid
-    Then I should see order with:
-      | Payment Method | Apruve          |
-      | Payment Status | Pending payment |
-    And I should see following "Order Payment Transaction Grid" grid:
-      | Payment Method | Type     | Successful |
-      | Apruve         | Purchase | No         |
+    When I go to Sales/ Orders
+    Then there is no "Amanda Cole" in grid

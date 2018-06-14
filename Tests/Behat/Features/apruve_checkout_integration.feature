@@ -63,14 +63,8 @@ Feature: Apruve Checkout Integration
   Scenario: Check order status in admin panel after order creation
     Given I proceed as the Admin
     And login as administrator
-    And go to Sales/ Orders
-    When click view "Amanda Cole" in grid
-    Then I should see order with:
-      | Payment Method | Apruve          |
-      | Payment Status | Pending payment |
-    And I should see following "Order Payment Transaction Grid" grid:
-      | Payment Method | Type      | Successful |
-      | Apruve         | Purchase  | No         |
+    When I go to Sales/ Orders
+    Then there is no "Amanda Cole" in grid
     And click logout in user menu
 
 #  Proper checkout flow. This part might be still needed for BB-10071
