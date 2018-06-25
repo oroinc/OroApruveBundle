@@ -4,7 +4,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Connection\Validator\Result;
 
 use Oro\Bundle\ApruveBundle\Connection\Validator\Result\ApruveConnectionValidatorResult;
 
-class ApruveConnectionValidatorResultTest extends \PHPUnit_Framework_TestCase
+class ApruveConnectionValidatorResultTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var array

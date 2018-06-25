@@ -7,15 +7,15 @@ use Oro\Bundle\ApruveBundle\Method\PaymentAction\Executor\PaymentActionExecutor;
 use Oro\Bundle\ApruveBundle\Method\PaymentAction\PaymentActionInterface;
 use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 
-class PaymentActionExecutorTest extends \PHPUnit_Framework_TestCase
+class PaymentActionExecutorTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var PaymentActionInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var PaymentActionInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $paymentAction;
 
     /**
-     * @var PaymentTransaction|\PHPUnit_Framework_MockObject_MockObject
+     * @var PaymentTransaction|\PHPUnit\Framework\MockObject\MockObject
      */
     private $paymentTransaction;
 
@@ -25,7 +25,7 @@ class PaymentActionExecutorTest extends \PHPUnit_Framework_TestCase
     private $paymentActionExecutor;
 
     /**
-     * @var ApruveConfigInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $config;
 
@@ -50,7 +50,7 @@ class PaymentActionExecutorTest extends \PHPUnit_Framework_TestCase
 
     public function testAddPaymentAction()
     {
-        /** @var PaymentActionInterface|\PHPUnit_Framework_MockObject_MockObject $paymentAction */
+        /** @var PaymentActionInterface|\PHPUnit\Framework\MockObject\MockObject $paymentAction */
         $paymentAction = $this->createMock(PaymentActionInterface::class);
         $paymentAction
             ->expects($this->once())

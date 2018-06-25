@@ -4,7 +4,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Helper;
 
 use Oro\Bundle\ApruveBundle\Apruve\Provider\SupportedCurrenciesProvider;
 
-class SupportedCurrenciesProviderTest extends \PHPUnit_Framework_TestCase
+class SupportedCurrenciesProviderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var SupportedCurrenciesProvider

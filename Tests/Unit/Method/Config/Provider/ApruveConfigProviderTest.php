@@ -12,24 +12,24 @@ use Oro\Bundle\ApruveBundle\Method\Config\Provider\ApruveConfigProvider;
 use Oro\Bundle\ApruveBundle\Method\Config\Provider\ApruveConfigProviderInterface;
 use Psr\Log\LoggerInterface;
 
-class ApruveConfigProviderTest extends \PHPUnit_Framework_TestCase
+class ApruveConfigProviderTest extends \PHPUnit\Framework\TestCase
 {
     const IDENTIFIER1 = 'apruve_1';
     const IDENTIFIER2 = 'apruve_2';
     const WRONG_IDENTIFIER = 'wrongpayment_method';
 
     /**
-     * @var ApruveConfigFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveConfigFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $configFactory;
 
     /**
-     * @var ManagerRegistry|\PHPUnit_Framework_MockObject_MockObject
+     * @var ManagerRegistry|\PHPUnit\Framework\MockObject\MockObject
      */
     private $doctrine;
 
     /**
-     * @var ApruveSettingsRepository|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveSettingsRepository|\PHPUnit\Framework\MockObject\MockObject
      */
     private $settingsRepository;
 
@@ -44,7 +44,7 @@ class ApruveConfigProviderTest extends \PHPUnit_Framework_TestCase
     private $testedProvider;
 
     /**
-     * @var LoggerInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var LoggerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $logger;
 
@@ -106,7 +106,7 @@ class ApruveConfigProviderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return ApruveSettings|\PHPUnit_Framework_MockObject_MockObject
+     * @return ApruveSettings|\PHPUnit\Framework\MockObject\MockObject
      */
     private function createApruveSettingsMock()
     {
@@ -114,7 +114,7 @@ class ApruveConfigProviderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return ApruveConfigInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function createConfigMock()
     {

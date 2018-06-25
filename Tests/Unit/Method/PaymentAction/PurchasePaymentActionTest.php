@@ -13,7 +13,7 @@ use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 use Oro\Bundle\TestFrameworkBundle\Test\Logger\LoggerAwareTraitTestTrait;
 
-class PurchasePaymentActionTest extends \PHPUnit_Framework_TestCase
+class PurchasePaymentActionTest extends \PHPUnit\Framework\TestCase
 {
     use LoggerAwareTraitTestTrait;
 
@@ -46,22 +46,22 @@ class PurchasePaymentActionTest extends \PHPUnit_Framework_TestCase
     ];
 
     /**
-     * @var ApruveOrder|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveOrder|\PHPUnit\Framework\MockObject\MockObject
      */
     private $apruveOrder;
 
     /**
-     * @var PaymentContextInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $paymentContext;
 
     /**
-     * @var ApruveOrderFromPaymentContextFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveOrderFromPaymentContextFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $apruveOrderFromPaymentContextFactory;
 
     /**
-     * @var OrderSecureHashGeneratorInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var OrderSecureHashGeneratorInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $orderSecureHashGenerator;
 
@@ -71,17 +71,17 @@ class PurchasePaymentActionTest extends \PHPUnit_Framework_TestCase
     private $paymentAction;
 
     /**
-     * @var TransactionPaymentContextFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var TransactionPaymentContextFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $paymentContextFactory;
 
     /**
-     * @var PaymentTransaction|\PHPUnit_Framework_MockObject_MockObject
+     * @var PaymentTransaction|\PHPUnit\Framework\MockObject\MockObject
      */
     private $paymentTransaction;
 
     /**
-     * @var ApruveConfigInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $config;
 

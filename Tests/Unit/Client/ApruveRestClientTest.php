@@ -7,13 +7,13 @@ use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequestInterface;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestClientInterface;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestResponseInterface;
 
-class ApruveRestClientTest extends \PHPUnit_Framework_TestCase
+class ApruveRestClientTest extends \PHPUnit\Framework\TestCase
 {
     const SAMPLE_URI = '/sample-uri';
     const SAMPLE_DATA = ['sample_data' => 'foo'];
 
     /**
-     * @var RestClientInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var RestClientInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $restClient;
 
@@ -126,7 +126,7 @@ class ApruveRestClientTest extends \PHPUnit_Framework_TestCase
      * @param string $uri
      * @param array  $data
      *
-     * @return ApruveRequestInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return ApruveRequestInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function createRequest($method, $uri, array $data)
     {

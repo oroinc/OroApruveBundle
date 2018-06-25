@@ -6,10 +6,10 @@ use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveInvoice;
 use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequest;
 use Oro\Bundle\ApruveBundle\Client\Request\Invoice\Factory\BasicCreateInvoiceRequestFactory;
 
-class BasicCreateInvoiceRequestFactoryTest extends \PHPUnit_Framework_TestCase
+class BasicCreateInvoiceRequestFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var ApruveInvoice|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveInvoice|\PHPUnit\Framework\MockObject\MockObject
      */
     private $apruveInvoice;
 

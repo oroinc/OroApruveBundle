@@ -4,7 +4,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Integration;
 
 use Oro\Bundle\ApruveBundle\Integration\ApruveChannelType;
 
-class ApruveChannelTypeTest extends \PHPUnit_Framework_TestCase
+class ApruveChannelTypeTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ApruveChannelType

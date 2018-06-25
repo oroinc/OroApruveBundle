@@ -5,14 +5,14 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Client\Request;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveEntityInterface;
 use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequest;
 
-class ApruveRequestTest extends \PHPUnit_Framework_TestCase
+class ApruveRequestTest extends \PHPUnit\Framework\TestCase
 {
     const METHOD = 'GET';
     const URI = '/sampleUri';
     const DATA = ['sampleData' => ['foo' => 'bar']];
 
     /**
-     * @var ApruveEntityInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveEntityInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $requestData;
 

@@ -4,7 +4,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Helper;
 
 use Oro\Bundle\ApruveBundle\Apruve\Helper\AmountNormalizer;
 
-class AmountNormalizerTest extends \PHPUnit_Framework_TestCase
+class AmountNormalizerTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var AmountNormalizer

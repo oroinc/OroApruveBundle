@@ -8,18 +8,18 @@ use Oro\Bundle\ApruveBundle\Client\Url\Provider\ApruveClientUrlProviderInterface
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestClientFactoryInterface;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestClientInterface;
 
-class BasicApruveRestClientFactoryTest extends \PHPUnit_Framework_TestCase
+class BasicApruveRestClientFactoryTest extends \PHPUnit\Framework\TestCase
 {
     const SAMPLE_URI = '/sample-uri';
     const SAMPLE_API_KEY = 'qwerty12345';
 
     /**
-     * @var ApruveClientUrlProviderInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveClientUrlProviderInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $urlProvider;
 
     /**
-     * @var RestClientFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var RestClientFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $integrationRestClientFactory;
 
@@ -91,7 +91,7 @@ class BasicApruveRestClientFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return RestClientInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return RestClientInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function createIntegrationRestClientMock()
     {

@@ -4,7 +4,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Method\Config;
 
 use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfig;
 
-class ApruveConfigTest extends \PHPUnit_Framework_TestCase
+class ApruveConfigTest extends \PHPUnit\Framework\TestCase
 {
     public function testGetters()
     {

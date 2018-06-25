@@ -7,10 +7,10 @@ use Oro\Bundle\ApruveBundle\Client\Factory\ApruveRestClientFactoryInterface;
 use Oro\Bundle\ApruveBundle\Client\Factory\Config\Basic\ApruveConfigRestClientFactory;
 use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfigInterface;
 
-class ApruveConfigRestClientFactoryTest extends \PHPUnit_Framework_TestCase
+class ApruveConfigRestClientFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var ApruveRestClientFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveRestClientFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $restClientFactory;
 
@@ -71,7 +71,7 @@ class ApruveConfigRestClientFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return ApruveConfigInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function getApruveConfigMock()
     {

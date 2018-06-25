@@ -11,12 +11,12 @@ use Oro\Bundle\PaymentBundle\Tests\Unit\Method\View\Provider\AbstractMethodViewP
 class ApruvePaymentMethodViewProviderTest extends AbstractMethodViewProviderTest
 {
     /**
-     * @var ApruvePaymentMethodViewFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruvePaymentMethodViewFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $factory;
 
     /**
-     * @var ApruveConfigProviderInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveConfigProviderInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $configProvider;
 

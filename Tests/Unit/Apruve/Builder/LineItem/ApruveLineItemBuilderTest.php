@@ -5,7 +5,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Builder\LineItem;
 use Oro\Bundle\ApruveBundle\Apruve\Builder\LineItem\ApruveLineItemBuilder;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveLineItem;
 
-class ApruveLineItemBuilderTest extends \PHPUnit_Framework_TestCase
+class ApruveLineItemBuilderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Mandatory

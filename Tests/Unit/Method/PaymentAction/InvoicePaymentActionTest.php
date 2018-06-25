@@ -19,22 +19,22 @@ class InvoicePaymentActionTest extends AbstractPaymentActionTest
     const RETURN_ERROR = ['successful' => false, 'message' => 'oro.apruve.payment_transaction.invoice.result.error'];
 
     /**
-     * @var CreateInvoiceRequestFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var CreateInvoiceRequestFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $createInvoiceRequestFactory;
 
     /**
-     * @var ApruveInvoiceFromResponseFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveInvoiceFromResponseFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $apruveInvoiceFromResponseFactory;
 
     /**
-     * @var ApruveInvoice|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveInvoice|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $apruveInvoice;
 
     /**
-     * @var ApruveInvoiceFromPaymentContextFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveInvoiceFromPaymentContextFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $apruveEntityFromPaymentContextFactory;
 
@@ -160,7 +160,7 @@ class InvoicePaymentActionTest extends AbstractPaymentActionTest
     }
 
     /**
-     * @param RestResponseInterface|\PHPUnit_Framework_MockObject_MockObject $restResponse
+     * @param RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject $restResponse
      */
     protected function mockApruveRestClient(RestResponseInterface $restResponse)
     {
@@ -196,7 +196,7 @@ class InvoicePaymentActionTest extends AbstractPaymentActionTest
     /**
      * @param string $apruveInvoiceId
      *
-     * @return ApruveInvoice|\PHPUnit_Framework_MockObject_MockObject
+     * @return ApruveInvoice|\PHPUnit\Framework\MockObject\MockObject
      */
     private function mockCreatedApruveInvoice($apruveInvoiceId)
     {

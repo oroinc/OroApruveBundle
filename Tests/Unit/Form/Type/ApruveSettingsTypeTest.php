@@ -34,22 +34,22 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
     const DATA_CLASS = ApruveSettings::class;
 
     /**
-     * @var DataTransformerInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var DataTransformerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $dataTransformer;
 
     /**
-     * @var CryptedDataTransformerFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var CryptedDataTransformerFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $cryptedDataTransformerFactory;
 
     /**
-     * @var RandomTokenGeneratorInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var RandomTokenGeneratorInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $tokenGenerator;
 
     /**
-     * @var TransportInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var TransportInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $transport;
 
@@ -174,7 +174,7 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
 
     public function testConfigureOptions()
     {
-        /** @var OptionsResolver|\PHPUnit_Framework_MockObject_MockObject $resolver */
+        /** @var OptionsResolver|\PHPUnit\Framework\MockObject\MockObject $resolver */
         $resolver = $this->createMock(OptionsResolver::class);
         $resolver->expects(static::once())
             ->method('setDefaults')

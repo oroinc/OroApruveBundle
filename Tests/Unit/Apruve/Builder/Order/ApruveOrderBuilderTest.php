@@ -5,7 +5,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Order;
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Order\ApruveOrderBuilder;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveOrder;
 
-class ApruveOrderBuilderTest extends \PHPUnit_Framework_TestCase
+class ApruveOrderBuilderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Mandatory

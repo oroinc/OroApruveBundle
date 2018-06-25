@@ -4,7 +4,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Model;
 
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveShipment;
 
-class ApruveShipmentTest extends \PHPUnit_Framework_TestCase
+class ApruveShipmentTest extends \PHPUnit\Framework\TestCase
 {
     const ID = 'sampleId';
     const DATA = [

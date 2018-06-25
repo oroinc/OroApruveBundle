@@ -5,7 +5,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Shipment;
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Shipment\ApruveShipmentBuilder;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveShipment;
 
-class ApruveShipmentBuilderTest extends \PHPUnit_Framework_TestCase
+class ApruveShipmentBuilderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Mandatory

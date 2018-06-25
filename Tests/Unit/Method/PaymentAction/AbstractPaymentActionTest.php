@@ -13,7 +13,7 @@ use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 use Oro\Bundle\TestFrameworkBundle\Test\Logger\LoggerAwareTraitTestTrait;
 
-abstract class AbstractPaymentActionTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractPaymentActionTest extends \PHPUnit\Framework\TestCase
 {
     use LoggerAwareTraitTestTrait;
 
@@ -40,32 +40,32 @@ abstract class AbstractPaymentActionTest extends \PHPUnit_Framework_TestCase
     protected $paymentActionName;
 
     /**
-     * @var ApruveRestClientInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveRestClientInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $apruveRestClient;
 
     /**
-     * @var ApruveConfigRestClientFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveConfigRestClientFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $apruveConfigRestClientFactory;
 
     /**
-     * @var PaymentContextInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $paymentContext;
 
     /**
-     * @var TransactionPaymentContextFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var TransactionPaymentContextFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $paymentContextFactory;
 
     /**
-     * @var PaymentTransaction|\PHPUnit_Framework_MockObject_MockObject
+     * @var PaymentTransaction|\PHPUnit\Framework\MockObject\MockObject
      */
     protected $paymentTransaction;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit\Framework\MockObject\MockObject
      */
     protected $apruveEntityFromPaymentContextFactory;
 
@@ -214,7 +214,7 @@ abstract class AbstractPaymentActionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param RestResponseInterface|\PHPUnit_Framework_MockObject_MockObject $restResponse
+     * @param RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject $restResponse
      */
     protected function mockApruveRestClient(RestResponseInterface $restResponse)
     {
@@ -234,7 +234,7 @@ abstract class AbstractPaymentActionTest extends \PHPUnit_Framework_TestCase
      * @param bool  $isSuccessful
      * @param array $responseData
      *
-     * @return RestResponseInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function mockRestResponse($isSuccessful, array $responseData)
     {
@@ -253,7 +253,7 @@ abstract class AbstractPaymentActionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return ApruveConfigInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function mockApruveConfig()
     {

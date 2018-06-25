@@ -41,7 +41,7 @@ class PaymentTransactionInvoiceActionTest extends AbstractActionTest
                 [ApruvePaymentMethod::SHIPMENT, $invoicePaymentTransaction, $shipmentPaymentTransaction],
             ]);
 
-        /** @var PaymentMethodInterface|\PHPUnit_Framework_MockObject_MockObject $paymentMethod */
+        /** @var PaymentMethodInterface|\PHPUnit\Framework\MockObject\MockObject $paymentMethod */
         $paymentMethod = $this->createMock(PaymentMethodInterface::class);
         $paymentMethod
             ->expects(static::atLeastOnce())

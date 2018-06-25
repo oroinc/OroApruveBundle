@@ -18,7 +18,7 @@ use Oro\Bundle\PaymentBundle\Context\PaymentLineItemInterface;
 use Oro\Bundle\PricingBundle\SubtotalProcessor\Model\Subtotal;
 use Oro\Bundle\PricingBundle\SubtotalProcessor\TotalProcessorProvider;
 
-class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit_Framework_TestCase
+class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit\Framework\TestCase
 {
     const MERCHANT_ID = 'sampleMerchantId';
     const AMOUNT = '100.1';
@@ -49,22 +49,22 @@ class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit_Framework_TestCa
     ];
 
     /**
-     * @var ApruveOrderBuilderInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveOrderBuilderInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $apruveOrderBuilder;
 
     /**
-     * @var ApruveLineItemFromPaymentLineItemFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveLineItemFromPaymentLineItemFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $apruveLineItemFromPaymentLineItemFactory;
 
     /**
-     * @var ApruveOrderBuilderFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveOrderBuilderFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $apruveOrderBuilderFactory;
 
     /**
-     * @var PaymentContextInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $paymentContext;
 
@@ -84,7 +84,7 @@ class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit_Framework_TestCa
     private $factory;
 
     /**
-     * @var TotalProcessorProvider|\PHPUnit_Framework_MockObject_MockObject
+     * @var TotalProcessorProvider|\PHPUnit\Framework\MockObject\MockObject
      */
     private $totalProcessorProvider;
 
@@ -221,7 +221,7 @@ class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit_Framework_TestCa
     /**
      * @param array $apruveLineItemData
      *
-     * @return ApruveLineItemBuilderInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return ApruveLineItemBuilderInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function mockApruveLineItem(array $apruveLineItemData)
     {
@@ -236,7 +236,7 @@ class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit_Framework_TestCa
 
 
     /**
-     * @return AmountNormalizerInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return AmountNormalizerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function mockAmountNormalizer()
     {
@@ -253,7 +253,7 @@ class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit_Framework_TestCa
     }
 
     /**
-     * @return ApruveConfigInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function mockApruveConfig()
     {

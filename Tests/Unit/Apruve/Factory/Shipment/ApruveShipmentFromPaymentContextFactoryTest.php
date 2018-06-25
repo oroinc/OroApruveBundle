@@ -19,7 +19,7 @@ use Oro\Bundle\PricingBundle\SubtotalProcessor\TotalProcessorProvider;
 use Oro\Bundle\ShippingBundle\Method\ShippingMethodInterface;
 use Oro\Bundle\ShippingBundle\Method\ShippingMethodProviderInterface;
 
-class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_TestCase
+class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit\Framework\TestCase
 {
     const AMOUNT = '100.1';
     const TOTAL_AMOUNT_CENTS = 12250;
@@ -49,27 +49,27 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_Tes
     ];
 
     /**
-     * @var ShippingMethodProviderInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ShippingMethodProviderInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $shippingMethodProvider;
 
     /**
-     * @var ApruveShipmentBuilderInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveShipmentBuilderInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $apruveShipmentBuilder;
 
     /**
-     * @var ApruveLineItemFromPaymentLineItemFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveLineItemFromPaymentLineItemFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $apruveLineItemFromPaymentLineItemFactory;
 
     /**
-     * @var ApruveShipmentBuilderFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveShipmentBuilderFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $apruveShipmentBuilderFactory;
 
     /**
-     * @var PaymentContextInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $paymentContext;
 
@@ -89,7 +89,7 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_Tes
     private $factory;
 
     /**
-     * @var TotalProcessorProvider|\PHPUnit_Framework_MockObject_MockObject
+     * @var TotalProcessorProvider|\PHPUnit\Framework\MockObject\MockObject
      */
     private $totalProcessorProvider;
 
@@ -236,7 +236,7 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_Tes
     /**
      * @param array $apruveLineItemData
      *
-     * @return ApruveLineItemBuilderInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return ApruveLineItemBuilderInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function mockApruveLineItem(array $apruveLineItemData)
     {
@@ -251,7 +251,7 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_Tes
 
 
     /**
-     * @return AmountNormalizerInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return AmountNormalizerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function mockAmountNormalizer()
     {
@@ -269,7 +269,7 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit_Framework_Tes
     /**
      * @param string $shippingMethodIdentifier
      *
-     * @return ShippingMethodInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return ShippingMethodInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function mockShippingMethod($shippingMethodIdentifier)
     {

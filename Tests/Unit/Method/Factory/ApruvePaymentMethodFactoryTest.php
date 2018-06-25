@@ -9,15 +9,15 @@ use Oro\Bundle\ApruveBundle\Method\Factory\ApruvePaymentMethodFactory;
 use Oro\Bundle\ApruveBundle\Method\Factory\ApruvePaymentMethodFactoryInterface;
 use Oro\Bundle\ApruveBundle\Method\PaymentAction\Executor\PaymentActionExecutor;
 
-class ApruvePaymentMethodFactoryTest extends \PHPUnit_Framework_TestCase
+class ApruvePaymentMethodFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var PaymentActionExecutor|\PHPUnit_Framework_MockObject_MockObject
+     * @var PaymentActionExecutor|\PHPUnit\Framework\MockObject\MockObject
      */
     private $paymentActionExecutor;
 
     /**
-     * @var SupportedCurrenciesProviderInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var SupportedCurrenciesProviderInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $supportedCurrenciesProvider;
 
@@ -41,7 +41,7 @@ class ApruvePaymentMethodFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCreate()
     {
-        /** @var ApruveConfigInterface|\PHPUnit_Framework_MockObject_MockObject $config */
+        /** @var ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject $config */
         $config = $this->createMock(ApruveConfigInterface::class);
 
         $paymentMethod = new ApruvePaymentMethod(

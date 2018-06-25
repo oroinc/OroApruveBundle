@@ -6,7 +6,7 @@ use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\ApruveBundle\Form\Type\ApruveSettingsType;
 use Oro\Bundle\ApruveBundle\Integration\ApruveTransport;
 
-class ApruveTransportTest extends \PHPUnit_Framework_TestCase
+class ApruveTransportTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ApruveTransport

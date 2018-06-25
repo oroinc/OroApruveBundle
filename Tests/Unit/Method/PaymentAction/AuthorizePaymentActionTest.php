@@ -8,7 +8,7 @@ use Oro\Bundle\ApruveBundle\Method\PaymentAction\AuthorizePaymentAction;
 use Oro\Bundle\PaymentBundle\Context\Factory\TransactionPaymentContextFactoryInterface;
 use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 
-class AuthorizePaymentActionTest extends \PHPUnit_Framework_TestCase
+class AuthorizePaymentActionTest extends \PHPUnit\Framework\TestCase
 {
     const APRUVE_ORDER_ID = 'sampleApruveOrderId';
     const RESPONSE = [ApruvePaymentMethod::PARAM_ORDER_ID => self::APRUVE_ORDER_ID];
@@ -19,17 +19,17 @@ class AuthorizePaymentActionTest extends \PHPUnit_Framework_TestCase
     private $paymentAction;
 
     /**
-     * @var TransactionPaymentContextFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var TransactionPaymentContextFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $paymentContextFactory;
 
     /**
-     * @var PaymentTransaction|\PHPUnit_Framework_MockObject_MockObject
+     * @var PaymentTransaction|\PHPUnit\Framework\MockObject\MockObject
      */
     private $paymentTransaction;
 
     /**
-     * @var ApruveConfigInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $config;
 

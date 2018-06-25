@@ -6,10 +6,10 @@ use Oro\Bundle\ApruveBundle\Provider\ApruvePublicKeyProviderInterface;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
 
-class SignatureVerifyingServiceTest extends \PHPUnit_Framework_TestCase
+class SignatureVerifyingServiceTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var ApruvePublicKeyProviderInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruvePublicKeyProviderInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $apruvePublicKeyProvider;
 

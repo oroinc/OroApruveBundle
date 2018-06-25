@@ -5,7 +5,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Invoice;
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Invoice\ApruveInvoiceBuilder;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveInvoice;
 
-class ApruveInvoiceBuilderTest extends \PHPUnit_Framework_TestCase
+class ApruveInvoiceBuilderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * Mandatory

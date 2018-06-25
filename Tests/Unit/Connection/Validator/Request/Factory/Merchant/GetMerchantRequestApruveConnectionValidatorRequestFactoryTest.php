@@ -7,15 +7,15 @@ use Oro\Bundle\ApruveBundle\Client\Request\Merchant\Factory\GetMerchantRequestFa
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\SecurityBundle\Encoder\SymmetricCrypterInterface;
 
-class GetMerchantRequestApruveConnectionValidatorRequestFactoryTest extends \PHPUnit_Framework_TestCase
+class GetMerchantRequestApruveConnectionValidatorRequestFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var GetMerchantRequestFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var GetMerchantRequestFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $merchantRequestFactory;
 
     /**
-     * @var SymmetricCrypterInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var SymmetricCrypterInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $symmetricCrypter;
 
@@ -63,7 +63,7 @@ class GetMerchantRequestApruveConnectionValidatorRequestFactoryTest extends \PHP
     }
 
     /**
-     * @return ApruveSettings|\PHPUnit_Framework_MockObject_MockObject
+     * @return ApruveSettings|\PHPUnit\Framework\MockObject\MockObject
      */
     private function createApruveSettingsMock()
     {

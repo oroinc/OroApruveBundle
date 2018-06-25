@@ -5,7 +5,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Builder\Shipment;
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Shipment\ApruveShipmentBuilder;
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Shipment\ApruveShipmentBuilderFactory;
 
-class ApruveShipmentBuilderFactoryTest extends \PHPUnit_Framework_TestCase
+class ApruveShipmentBuilderFactoryTest extends \PHPUnit\Framework\TestCase
 {
     const AMOUNT_CENTS = 11130;
     const CURRENCY = 'USD';

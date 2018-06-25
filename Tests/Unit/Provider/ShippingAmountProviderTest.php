@@ -7,27 +7,27 @@ use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PaymentBundle\Model\Surcharge;
 use Oro\Bundle\PaymentBundle\Provider\SurchargeProvider;
 
-class ShippingAmountProviderTest extends \PHPUnit_Framework_TestCase
+class ShippingAmountProviderTest extends \PHPUnit\Framework\TestCase
 {
     const AMOUNT = 10.0;
 
     /**
-     * @var \stdClass|\PHPUnit_Framework_MockObject_MockObject
+     * @var \stdClass|\PHPUnit\Framework\MockObject\MockObject
      */
     private $sourceEntity;
 
     /**
-     * @var Surcharge|\PHPUnit_Framework_MockObject_MockObject
+     * @var Surcharge|\PHPUnit\Framework\MockObject\MockObject
      */
     private $surcharge;
 
     /**
-     * @var PaymentContextInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $paymentContext;
 
     /**
-     * @var SurchargeProvider|\PHPUnit_Framework_MockObject_MockObject
+     * @var SurchargeProvider|\PHPUnit\Framework\MockObject\MockObject
      */
     private $surchargeProvider;
 

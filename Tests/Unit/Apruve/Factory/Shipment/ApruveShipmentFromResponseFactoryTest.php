@@ -5,7 +5,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Shipment;
 use Oro\Bundle\ApruveBundle\Apruve\Factory\Shipment\ApruveShipmentFromResponseFactory;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestResponseInterface;
 
-class ApruveShipmentFromResponseFactoryTest extends \PHPUnit_Framework_TestCase
+class ApruveShipmentFromResponseFactoryTest extends \PHPUnit\Framework\TestCase
 {
     const APRUVE_SHIPMENT = [
         'amount_cents' => 1000,
@@ -21,7 +21,7 @@ class ApruveShipmentFromResponseFactoryTest extends \PHPUnit_Framework_TestCase
     ];
 
     /**
-     * @var RestResponseInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $restResponse;
 

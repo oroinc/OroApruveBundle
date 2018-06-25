@@ -11,17 +11,17 @@ use Oro\Bundle\PaymentBundle\Method\Provider\PaymentMethodProviderInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-class PaymentCallbackListenerTest extends \PHPUnit_Framework_TestCase
+class PaymentCallbackListenerTest extends \PHPUnit\Framework\TestCase
 {
     const EVENT_DATA = [ApruvePaymentMethod::PARAM_ORDER_ID => 'sampleApuveOrderId'];
 
     /** @var PaymentCallbackListener */
     protected $listener;
 
-    /** @var PaymentMethodProviderInterface|\PHPUnit_Framework_MockObject_MockObject */
+    /** @var PaymentMethodProviderInterface|\PHPUnit\Framework\MockObject\MockObject */
     protected $paymentMethodProvider;
 
-    /** @var LoggerInterface|\PHPUnit_Framework_MockObject_MockObject */
+    /** @var LoggerInterface|\PHPUnit\Framework\MockObject\MockObject */
     protected $logger;
 
     /**

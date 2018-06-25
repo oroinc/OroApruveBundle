@@ -7,7 +7,7 @@ use Oro\Bundle\ApruveBundle\Connection\Validator\Result\Factory\Merchant;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestResponseInterface;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Exception\RestException;
 
-class GetMerchantRequestApruveConnectionValidatorResultFactoryTest extends \PHPUnit_Framework_TestCase
+class GetMerchantRequestApruveConnectionValidatorResultFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var Merchant\GetMerchantRequestApruveConnectionValidatorResultFactory
@@ -87,7 +87,7 @@ class GetMerchantRequestApruveConnectionValidatorResultFactoryTest extends \PHPU
     }
 
     /**
-     * @return RestResponseInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function createRestResponseMock()
     {

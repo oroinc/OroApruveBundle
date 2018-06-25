@@ -8,15 +8,15 @@ use Oro\Bundle\ApruveBundle\Client\Factory\Settings\Basic\ApruveSettingsRestClie
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\SecurityBundle\Encoder\SymmetricCrypterInterface;
 
-class ApruveSettingsRestClientFactoryTest extends \PHPUnit_Framework_TestCase
+class ApruveSettingsRestClientFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var ApruveRestClientFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveRestClientFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $restClientFactory;
 
     /**
-     * @var SymmetricCrypterInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var SymmetricCrypterInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $crypter;
 
@@ -86,7 +86,7 @@ class ApruveSettingsRestClientFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return ApruveSettings|\PHPUnit_Framework_MockObject_MockObject
+     * @return ApruveSettings|\PHPUnit\Framework\MockObject\MockObject
      */
     private function getApruveSettingsMock()
     {

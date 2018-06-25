@@ -7,7 +7,7 @@ use Oro\Bundle\ApruveBundle\Method\View\ApruvePaymentMethodView;
 use Oro\Bundle\ApruveBundle\Method\View\Factory\ApruvePaymentMethodViewFactory;
 use Oro\Bundle\ApruveBundle\Method\View\Factory\ApruvePaymentMethodViewFactoryInterface;
 
-class ApruvePaymentMethodViewFactoryTest extends \PHPUnit_Framework_TestCase
+class ApruvePaymentMethodViewFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ApruvePaymentMethodViewFactoryInterface
@@ -24,7 +24,7 @@ class ApruvePaymentMethodViewFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCreate()
     {
-        /** @var ApruveConfigInterface|\PHPUnit_Framework_MockObject_MockObject $config */
+        /** @var ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject $config */
         $config = $this->createMock(ApruveConfigInterface::class);
 
         $method = new ApruvePaymentMethodView($config);

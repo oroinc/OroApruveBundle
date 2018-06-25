@@ -7,7 +7,7 @@ use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfig;
 use Oro\Bundle\ApruveBundle\Method\View\ApruvePaymentMethodView;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 
-class ApruvePaymentMethodViewTest extends \PHPUnit_Framework_TestCase
+class ApruvePaymentMethodViewTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ApruvePaymentMethodView
@@ -15,7 +15,7 @@ class ApruvePaymentMethodViewTest extends \PHPUnit_Framework_TestCase
     private $methodView;
 
     /**
-     * @var ApruveConfig|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveConfig|\PHPUnit\Framework\MockObject\MockObject
      */
     private $config;
 
@@ -31,7 +31,7 @@ class ApruvePaymentMethodViewTest extends \PHPUnit_Framework_TestCase
 
     public function testGetOptions()
     {
-        /** @var PaymentContextInterface|\PHPUnit_Framework_MockObject_MockObject $context */
+        /** @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject $context */
         $context = $this->createMock(PaymentContextInterface::class);
 
         $this->config->expects($this->once())->method('isTestMode')->willReturn(true);

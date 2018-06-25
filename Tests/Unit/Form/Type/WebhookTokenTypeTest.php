@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class WebhookTokenTypeTest extends FormIntegrationTestCase
 {
     /**
-     * @var RandomTokenGeneratorInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var RandomTokenGeneratorInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $tokenGenerator;
 

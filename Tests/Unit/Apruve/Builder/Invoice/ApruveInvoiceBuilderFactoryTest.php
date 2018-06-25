@@ -5,7 +5,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Builder\Invoice;
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Invoice\ApruveInvoiceBuilder;
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Invoice\ApruveInvoiceBuilderFactory;
 
-class ApruveInvoiceBuilderFactoryTest extends \PHPUnit_Framework_TestCase
+class ApruveInvoiceBuilderFactoryTest extends \PHPUnit\Framework\TestCase
 {
     const AMOUNT_CENTS = 11130;
     const CURRENCY = 'USD';

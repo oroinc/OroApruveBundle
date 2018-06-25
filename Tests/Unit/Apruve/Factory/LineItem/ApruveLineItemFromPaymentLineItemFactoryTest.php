@@ -12,7 +12,7 @@ use Oro\Bundle\ProductBundle\Entity\Product;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit_Framework_TestCase
+class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit\Framework\TestCase
 {
     const PRODUCT_ID = 1;
     const AMOUNT = 123.4;
@@ -29,22 +29,22 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit_Framework_Te
     const VIEW_PRODUCT_URL = 'http://example.com/product/view/1';
 
     /**
-     * @var ApruveLineItemBuilderInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveLineItemBuilderInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $apruveLineItemBuilder;
 
     /**
-     * @var ApruveLineItemBuilderFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveLineItemBuilderFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $apruveLineItemBuilderFactory;
 
     /**
-     * @var PaymentLineItemInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var PaymentLineItemInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $paymentLineItem;
 
     /**
-     * @var RouterInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var RouterInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $router;
 
@@ -74,7 +74,7 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit_Framework_Te
     /**
      * @dataProvider createFromPaymentLineItemDataProvider
      *
-     * @param Product|\PHPUnit_Framework_MockObject_MockObject $product
+     * @param Product|\PHPUnit\Framework\MockObject\MockObject $product
      * @param string                                           $title
      * @param string                                           $lineItemSku
      * @param string                                           $expectedSku
@@ -178,7 +178,7 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit_Framework_Te
     }
 
     /**
-     * @return Product|\PHPUnit_Framework_MockObject_MockObject
+     * @return Product|\PHPUnit\Framework\MockObject\MockObject
      */
     protected function mockProduct()
     {
@@ -203,7 +203,7 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit_Framework_Te
     }
 
     /**
-     * @return AmountNormalizerInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @return AmountNormalizerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private function mockAmountNormalizer()
     {

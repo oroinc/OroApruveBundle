@@ -7,12 +7,12 @@ use Oro\Bundle\ApruveBundle\Apruve\Generator\OrderSecureHashGeneratorInterface;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveLineItem;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveOrder;
 
-class OrderSecureHashGeneratorTest extends \PHPUnit_Framework_TestCase
+class OrderSecureHashGeneratorTest extends \PHPUnit\Framework\TestCase
 {
     const API_KEY = 'sampleApiKey';
 
     /**
-     * @var ApruveOrder|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveOrder|\PHPUnit\Framework\MockObject\MockObject
      */
     private $apruveOrder;
 

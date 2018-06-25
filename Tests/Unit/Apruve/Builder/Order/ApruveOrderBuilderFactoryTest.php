@@ -5,7 +5,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Builder\Order;
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Order\ApruveOrderBuilder;
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Order\ApruveOrderBuilderFactory;
 
-class ApruveOrderBuilderFactoryTest extends \PHPUnit_Framework_TestCase
+class ApruveOrderBuilderFactoryTest extends \PHPUnit\Framework\TestCase
 {
     const MERCHANT_ID = 'sampleMerchantId';
     const AMOUNT_CENTS = 11130;

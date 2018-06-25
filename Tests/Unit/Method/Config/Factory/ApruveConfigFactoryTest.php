@@ -13,7 +13,7 @@ use Oro\Bundle\LocaleBundle\Helper\LocalizationHelper;
 use Oro\Bundle\SecurityBundle\Encoder\SymmetricCrypterInterface;
 use Psr\Log\LoggerInterface;
 
-class ApruveConfigFactoryTest extends \PHPUnit_Framework_TestCase
+class ApruveConfigFactoryTest extends \PHPUnit\Framework\TestCase
 {
     const CHANNEL_NAME = 'apruve';
     const LABEL = 'Apruve';
@@ -26,17 +26,17 @@ class ApruveConfigFactoryTest extends \PHPUnit_Framework_TestCase
     const TEST_MODE = false;
 
     /**
-     * @var Channel|\PHPUnit_Framework_MockObject_MockObject
+     * @var Channel|\PHPUnit\Framework\MockObject\MockObject
      */
     private $channel;
 
     /**
-     * @var SymmetricCrypterInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var SymmetricCrypterInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $crypter;
 
     /**
-     * @var LoggerInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var LoggerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $logger;
 
@@ -46,12 +46,12 @@ class ApruveConfigFactoryTest extends \PHPUnit_Framework_TestCase
     private $factory;
 
     /**
-     * @var LocalizationHelper|\PHPUnit_Framework_MockObject_MockObject
+     * @var LocalizationHelper|\PHPUnit\Framework\MockObject\MockObject
      */
     private $localizationHelper;
 
     /**
-     * @var IntegrationIdentifierGeneratorInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var IntegrationIdentifierGeneratorInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $integrationIdentifierGenerator;
 
@@ -131,7 +131,7 @@ class ApruveConfigFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return ApruveSettings|\PHPUnit_Framework_MockObject_MockObject
+     * @return ApruveSettings|\PHPUnit\Framework\MockObject\MockObject
      */
     private function createApruveSettingsMock()
     {
@@ -197,7 +197,7 @@ class ApruveConfigFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return Channel|\PHPUnit_Framework_MockObject_MockObject
+     * @return Channel|\PHPUnit\Framework\MockObject\MockObject
      */
     private function createChannelMock()
     {
@@ -205,7 +205,7 @@ class ApruveConfigFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return Collection|\PHPUnit_Framework_MockObject_MockObject
+     * @return Collection|\PHPUnit\Framework\MockObject\MockObject
      */
     private function createLabelsCollectionMock()
     {

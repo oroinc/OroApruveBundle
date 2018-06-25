@@ -5,7 +5,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Builder\LineItem;
 use Oro\Bundle\ApruveBundle\Apruve\Builder\LineItem\ApruveLineItemBuilder;
 use Oro\Bundle\ApruveBundle\Apruve\Builder\LineItem\ApruveLineItemBuilderFactory;
 
-class ApruveLineItemBuilderFactoryTest extends \PHPUnit_Framework_TestCase
+class ApruveLineItemBuilderFactoryTest extends \PHPUnit\Framework\TestCase
 {
     const TITLE = 'Sample name';
     const AMOUNT_CENTS = 12345;

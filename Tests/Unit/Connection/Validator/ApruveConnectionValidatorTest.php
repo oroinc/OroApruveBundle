@@ -14,25 +14,25 @@ use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestResponseInterface;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Exception\RestException;
 use Psr\Log\LoggerInterface;
 
-class ApruveConnectionValidatorTest extends \PHPUnit_Framework_TestCase
+class ApruveConnectionValidatorTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var ApruveConnectionValidatorRequestFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveConnectionValidatorRequestFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $requestFactory;
 
     /**
-     * @var ApruveSettingsRestClientFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveSettingsRestClientFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $clientFactory;
 
     /**
-     * @var ApruveConnectionValidatorResultFactoryInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveConnectionValidatorResultFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $resultFactory;
 
     /**
-     * @var LoggerInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var LoggerInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $logger;
 

@@ -5,7 +5,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Invoice;
 use Oro\Bundle\ApruveBundle\Apruve\Factory\Invoice\ApruveInvoiceFromResponseFactory;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestResponseInterface;
 
-class ApruveInvoiceFromResponseFactoryTest extends \PHPUnit_Framework_TestCase
+class ApruveInvoiceFromResponseFactoryTest extends \PHPUnit\Framework\TestCase
 {
     const APRUVE_INVOICE = [
         'amount_cents' => 1000,
@@ -21,7 +21,7 @@ class ApruveInvoiceFromResponseFactoryTest extends \PHPUnit_Framework_TestCase
     ];
 
     /**
-     * @var RestResponseInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $restResponse;
 

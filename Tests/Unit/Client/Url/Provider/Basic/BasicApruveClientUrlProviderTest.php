@@ -4,7 +4,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Client\Url\Provider\Basic;
 
 use Oro\Bundle\ApruveBundle\Client\Url\Provider\Basic\BasicApruveClientUrlProvider;
 
-class BasicApruveClientUrlProviderTest extends \PHPUnit_Framework_TestCase
+class BasicApruveClientUrlProviderTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var BasicApruveClientUrlProvider

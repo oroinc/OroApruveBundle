@@ -9,7 +9,7 @@ use Oro\Bundle\ApruveBundle\Method\PaymentAction\Executor\PaymentActionExecutor;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 
-class ApruvePaymentMethodTest extends \PHPUnit_Framework_TestCase
+class ApruvePaymentMethodTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ApruvePaymentMethod
@@ -17,17 +17,17 @@ class ApruvePaymentMethodTest extends \PHPUnit_Framework_TestCase
     private $method;
 
     /**
-     * @var SupportedCurrenciesProviderInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var SupportedCurrenciesProviderInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $supportedCurrenciesProvider;
 
     /**
-     * @var PaymentActionExecutor|\PHPUnit_Framework_MockObject_MockObject
+     * @var PaymentActionExecutor|\PHPUnit\Framework\MockObject\MockObject
      */
     private $paymentActionExecutor;
 
     /**
-     * @var ApruveConfigInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $config;
 
@@ -49,7 +49,7 @@ class ApruvePaymentMethodTest extends \PHPUnit_Framework_TestCase
 
     public function testExecute()
     {
-        /** @var PaymentTransaction|\PHPUnit_Framework_MockObject_MockObject $paymentTransaction */
+        /** @var PaymentTransaction|\PHPUnit\Framework\MockObject\MockObject $paymentTransaction */
         $paymentTransaction = $this->createMock(PaymentTransaction::class);
         $action = 'some_action';
 
@@ -120,7 +120,7 @@ class ApruvePaymentMethodTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsApplicable($currency, $isSupported, $expectedResult)
     {
-        /** @var PaymentContextInterface|\PHPUnit_Framework_MockObject_MockObject $context */
+        /** @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject $context */
         $context = $this->createMock(PaymentContextInterface::class);
         $context
             ->method('getCurrency')

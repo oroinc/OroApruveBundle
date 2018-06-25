@@ -5,7 +5,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Client\Request\Invoice;
 use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequest;
 use Oro\Bundle\ApruveBundle\Client\Request\Merchant\Factory\BasicGetMerchantRequestFactory;
 
-class BasicGetMerchantRequestFactoryTest extends \PHPUnit_Framework_TestCase
+class BasicGetMerchantRequestFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var BasicGetMerchantRequestFactory

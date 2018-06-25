@@ -10,7 +10,7 @@ use Oro\Bundle\TaxBundle\Provider\TaxProviderInterface;
 use Oro\Bundle\TaxBundle\Provider\TaxProviderRegistry;
 use Oro\Bundle\TestFrameworkBundle\Test\Logger\LoggerAwareTraitTestTrait;
 
-class TaxAmountProviderTest extends \PHPUnit_Framework_TestCase
+class TaxAmountProviderTest extends \PHPUnit\Framework\TestCase
 {
     use LoggerAwareTraitTestTrait;
 
@@ -18,17 +18,17 @@ class TaxAmountProviderTest extends \PHPUnit_Framework_TestCase
     const AMOUNT_NEGLIGIBLE = 0.000001;
 
     /**
-     * @var \stdClass|\PHPUnit_Framework_MockObject_MockObject
+     * @var \stdClass|\PHPUnit\Framework\MockObject\MockObject
      */
     private $sourceEntity;
 
     /**
-     * @var PaymentContextInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $paymentContext;
 
     /**
-     * @var TaxProviderInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var TaxProviderInterface|\PHPUnit\Framework\MockObject\MockObject
      */
     private $taxProvider;
 

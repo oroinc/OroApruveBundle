@@ -6,10 +6,10 @@ use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveShipment;
 use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequest;
 use Oro\Bundle\ApruveBundle\Client\Request\Shipment\Factory\BasicCreateShipmentRequestFactory;
 
-class BasicCreateShipmentRequestFactoryTest extends \PHPUnit_Framework_TestCase
+class BasicCreateShipmentRequestFactoryTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var ApruveShipment|\PHPUnit_Framework_MockObject_MockObject
+     * @var ApruveShipment|\PHPUnit\Framework\MockObject\MockObject
      */
     private $apruveShipment;
 
