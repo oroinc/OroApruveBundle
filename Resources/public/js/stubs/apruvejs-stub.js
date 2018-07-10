@@ -1,13 +1,22 @@
 (function() {
     'use strict';
     window.apruve = {
-
+        /** @property {Object} */
         eventCallbacks: {},
 
+        /** @property {String} */
         APRUVE_LAUNCHED_EVENT: 'APRUVE_LAUNCHED_EVENT',
+
+        /** @property {String} */
         APRUVE_COMPLETE_EVENT: 'APRUVE_COMPLETE_EVENT',
+
+        /** @property {String} */
         APRUVE_CLOSED_EVENT: 'APRUVE_CLOSED_EVENT',
 
+        /**
+         * @param {String} eventName
+         * @param {Function} callback
+         */
         registerApruveCallback: function(eventName, callback) {
             if (!this.eventCallbacks[eventName]) {
                 this.eventCallbacks[eventName] = [];
@@ -15,6 +24,10 @@
             this.eventCallbacks[eventName].push(callback);
         },
 
+        /**
+         * @param {Integer} order
+         * @param {String} hash
+         */
         setOrder: function(order, hash) {
             if (order && hash) {
                 this.order = order;
