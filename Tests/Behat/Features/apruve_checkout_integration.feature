@@ -50,7 +50,7 @@ Feature: Apruve Checkout Integration
     And AmandaRCole@example.org customer user has Buyer role
     And I signed in as AmandaRCole@example.org on the store frontend
     When I open page with shopping list List 1
-    And I press "Create Order"
+    And I click "Create Order"
     And I select "Fifth avenue, 10115 Berlin, Germany" on the "Billing Information" checkout step and press Continue
     And I select "Fifth avenue, 10115 Berlin, Germany" on the "Shipping Information" checkout step and press Continue
     And on the "Shipping" checkout step I press Continue
@@ -75,7 +75,7 @@ Feature: Apruve Checkout Integration
 #    And AmandaRCole@example.org customer user has Buyer role
 #    And I signed in as AmandaRCole@example.org on the store frontend
 #    When I open page with shopping list List 1
-#    And I press "Create Order"
+#    And I click "Create Order"
 #    And I select "Fifth avenue, 10115 Berlin, Germany" on the "Billing Information" checkout step and press Continue
 #    And I select "Fifth avenue, 10115 Berlin, Germany" on the "Shipping Information" checkout step and press Continue
 #    And on the "Shipping" checkout step I press Continue
