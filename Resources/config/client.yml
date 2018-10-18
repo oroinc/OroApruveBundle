@@ -16,7 +16,7 @@ services:
         class: 'Oro\Bundle\ApruveBundle\Client\Factory\Settings\Basic\ApruveSettingsRestClientFactory'
         arguments:
             - '@oro_apruve.client.factory.basic'
-            - '@oro_security.encoder.mcrypt'
+            - '@oro_security.encoder.default'
         public: false
 
     oro_apruve.client.request.merchant.factory:
