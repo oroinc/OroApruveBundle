@@ -14,7 +14,7 @@ services:
         arguments:
             - '@oro_locale.helper.localization'
             - '@oro_apruve.method.generator.identifier'
-            - '@oro_security.encoder.mcrypt'
+            - '@oro_security.encoder.default'
             - '@logger'
 
     oro_apruve.method.config.provider:

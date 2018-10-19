@@ -97,6 +97,6 @@ class LoadApruveSettingsData extends AbstractFixture implements FixtureInterface
      */
     private function encryptData($data)
     {
-        return $this->container->get('oro_security.encoder.mcrypt')->encryptData($data);
+        return $this->container->get('oro_security.encoder.default')->encryptData($data);
     }
 }
