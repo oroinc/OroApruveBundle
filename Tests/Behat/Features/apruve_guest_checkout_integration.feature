@@ -73,7 +73,7 @@ Feature: Apruve Guest Checkout Integration
     Then I should see "testname"
 
   Scenario: Successful order payment with Apruve
-    Given I click "View Details"
+    Given I click "View Details Link"
     And I click "Create Order"
     And I click "Continue as a Guest"
     And I fill form with:
