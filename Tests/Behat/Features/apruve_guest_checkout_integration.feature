@@ -67,14 +67,13 @@ Feature: Apruve Guest Checkout Integration
     And I type "SKU123" in "search"
     And I click "Search Button"
     And I click "testname"
-    And I click "Add to Shopping List"
-    And I should see "Product has been added to" flash message
-    When I click "Shopping List"
+    When I click "Add to Shopping List"
+    Then I should see "Product has been added to" flash message
+    When I open page with shopping list "Shopping List"
     Then I should see "testname"
 
   Scenario: Successful order payment with Apruve
-    Given I click "View Details Link"
-    And I click "Create Order"
+    Given I click "Create Order"
     And I click "Continue as a Guest"
     And I fill form with:
       | First Name      | Tester1         |
