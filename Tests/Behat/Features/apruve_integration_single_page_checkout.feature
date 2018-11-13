@@ -8,8 +8,9 @@ Feature: Apruve integration Single Page Checkout
 
   Scenario: Create different window session
     Given sessions active:
-      | Admin          |first_session |
-      | User           |second_session|
+      | Admin |first_session  |
+      | User  |second_session |
+    And I activate "Single Page Checkout" workflow
 
   Scenario: Create Apruve integration
     Given I proceed as the Admin
@@ -28,16 +29,7 @@ Feature: Apruve integration Single Page Checkout
       | Status      | Active                           |
     And save form
     Then should see "Integration saved" flash message
-    And I go to System/ Payment Rules
-    And click "Create Payment Rule"
-    And fill "Payment Rule Form" with:
-      | Enable     | true     |
-      | Name       | Apruve   |
-      | Sort Order | 1        |
-      | Currency   | $        |
-      | Method     | [Apruve] |
-    And save and close form
-    Then should see "Payment rule has been saved" flash message
+    And I create payment rule with "Apruve" payment method
 
   Scenario: Enable SinglePage checkout
     Given go to System/Workflows
