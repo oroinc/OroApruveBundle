@@ -31,12 +31,6 @@ Feature: Apruve integration Single Page Checkout
     Then should see "Integration saved" flash message
     And I create payment rule with "Apruve" payment method
 
-  Scenario: Enable SinglePage checkout
-    Given go to System/Workflows
-    When I click "Activate" on row "Single Page Checkout" in grid
-    And I click "Activate"
-    Then I should see "Workflow activated" flash message
-
   Scenario: Check out and cancel with Apruve integration
     Given I proceed as the User
     And I signed in as AmandaRCole@example.org on the store frontend
