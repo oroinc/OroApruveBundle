@@ -68,7 +68,7 @@
                 {% set webhookUrlSelector = '[name="oro_integration_channel_form"] .webhook-token-url' %}
                 <div class="clearfix"><pre class="webhook-token-url"></pre></div>
                 <button type="button"
-                        class="btn btn-mini"
+                        class="btn btn-sm"
                         data-page-component-module="oroapruve/js/app/components/webhook-token-component"
                         data-page-component-options="{{ {
                             'webhookTokenSelector': '#'~form.vars.id,
@@ -78,7 +78,7 @@
                     {{ 'oro.apruve.settings.webhook_url.regenerate.button'|trans }}
                 </button>
                 <button type="button"
-                        class="btn btn-mini"
+                        class="btn btn-sm"
                         data-page-component-module="oroui/js/app/components/element-value-copy-to-clipboard-component"
                         data-page-component-options="{{ {
                             'elementSelector': webhookUrlSelector
