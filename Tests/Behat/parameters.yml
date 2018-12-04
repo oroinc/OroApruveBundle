@@ -1,0 +1,6 @@
+services:
+    oro_apruve.method.view.factory:
+        class: Oro\Bundle\ApruveBundle\Tests\Behat\Mock\Method\View\Factory\ApruvePaymentMethodViewFactoryMock
+
+    oro_apruve.client.factory.basic:
+        class: Oro\Bundle\ApruveBundle\Tests\Behat\Mock\Client\Factory\Basic\ApruveRestClientFactoryMock

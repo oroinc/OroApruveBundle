@@ -77,10 +77,16 @@ Oro\Bundle\ProductBundle\Entity\Product:
         inventoryStatus: '@enumInventoryStatuses'
         status: 'enabled'
         organization: '@organization'
+        attributeFamily: '@defaultProductFamily'
 
 Oro\Bundle\ShoppingListBundle\Entity\ShoppingList:
     shoppinglist:
         label: 'List 1'
+        customerUser: '@amanda'
+        organization: '@organization'
+        website: '@website1'
+    shoppinglist2:
+        label: 'List 2'
         customerUser: '@amanda'
         organization: '@organization'
         website: '@website1'
@@ -93,6 +99,13 @@ Oro\Bundle\ShoppingListBundle\Entity\LineItem:
         customerUser: '@amanda'
         shoppingList: '@shoppinglist'
         organization: '@organization'
+    lineitem2:
+        product: '@product'
+        quantity: '10'
+        unit: '@item'
+        customerUser: '@amanda'
+        shoppingList: '@shoppinglist2'
+        organization: '@organization'
 
 Oro\Bundle\ShoppingListBundle\Entity\ShoppingListTotal:
     shoppingListTotal:
@@ -100,6 +113,12 @@ Oro\Bundle\ShoppingListBundle\Entity\ShoppingListTotal:
         shoppingList: '@shoppinglist'
         currency: 'USD'
         subtotalValue: '10'
+        valid: true
+    shoppingListTotal2:
+        __construct: ['@shoppinglist2','USD']
+        shoppingList: '@shoppinglist2'
+        currency: 'USD'
+        subtotalValue: '20'
         valid: true
 
 Oro\Bundle\CustomerBundle\Entity\CustomerUserAddress:
@@ -142,7 +161,7 @@ Oro\Bundle\PricingBundle\Entity\ProductPrice:
         currency: 'USD'
 
 Oro\Bundle\PricingBundle\Entity\CombinedProductPrice:
-   combinedProductPrice:
+    combinedProductPrice:
         pricelist: '@combinedPriceList'
         product: '@product'
         productSku: 'SKU123'

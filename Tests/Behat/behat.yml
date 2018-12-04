@@ -12,6 +12,7 @@ oro_behat_extension:
         - OroShoppingListBundle::ShoppingListContext
         - OroApruveBundle::FeatureContext
         - OroWarehouseBundle::FeatureContext
+        - OroConfigBundle::FeatureContext
         - OroWorkflowBundle::FeatureContext
         - OroPaymentBundle::FeatureContext
       paths:
@@ -24,21 +25,3 @@ oro_behat_extension:
         mapping:
           Label: "oro_integration_channel_form[transport][labels][values][default]"
           Short Label: 'oro_integration_channel_form[transport][shortLabels][values][default]'
-
-    Apruve Login Form:
-      selector: 'div.modal-content'
-      class: Oro\Bundle\TestFrameworkBundle\Behat\Element\Form
-      options:
-        embedded-id: apruveCheckoutIFrame
-        mapping:
-          Email: 'email'
-          Password: 'password'
-
-    Apruve Popup Cancel Button:
-      selector: 'div.modal-content button.close'
-      class: Oro\Bundle\TestFrameworkBundle\Behat\Element\Element
-      options:
-        embedded-id: apruveCheckoutIFrame
-
-    Apruve Popup Iframe:
-      selector: 'iframe#apruveCheckoutIFrame'
