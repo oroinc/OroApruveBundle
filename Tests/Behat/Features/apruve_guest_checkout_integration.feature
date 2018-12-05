@@ -35,15 +35,7 @@ Feature: Apruve Guest Checkout Integration
     Then I should see "Integration saved" flash message
     And I should see "/admin/apruve/webhook/notify/"
     When I go to System/ Payment Rules
-    And I click "Create Payment Rule"
-    And I fill "Payment Rule Form" with:
-      | Enable     | true     |
-      | Name       | Apruve   |
-      | Sort Order | 1        |
-      | Currency   | $        |
-      | Method     | [Apruve] |
-    And I save and close form
-    Then I should see "Payment rule has been saved" flash message
+    And I create payment rule with "Apruve" payment method
 
   Scenario: Enable guest shopping list setting
     Given I go to System/ Configuration

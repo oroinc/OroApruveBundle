@@ -12,6 +12,7 @@ Feature: Apruve integration Single Page Checkout
     Given sessions active:
       | Admin | first_session  |
       | Buyer | second_session |
+    And I activate "Single Page Checkout" workflow
 
   Scenario: Create Apruve integration
     Given I proceed as the Admin
@@ -34,22 +35,7 @@ Feature: Apruve integration Single Page Checkout
     And I save form
     Then I should see "Integration saved" flash message
     And I should see "/admin/apruve/webhook/notify/"
-    When I go to System/ Payment Rules
-    And I click "Create Payment Rule"
-    And I fill "Payment Rule Form" with:
-      | Enable     | true     |
-      | Name       | Apruve   |
-      | Sort Order | 1        |
-      | Currency   | $        |
-      | Method     | [Apruve] |
-    And I save and close form
-    Then I should see "Payment rule has been saved" flash message
-
-  Scenario: Enable SinglePage checkout
-    Given go to System/Workflows
-    When I click "Activate" on row "Single Page Checkout" in grid
-    And I click "Activate"
-    Then I should see "Workflow activated" flash message
+    And I create payment rule with "Apruve" payment method
 
   Scenario: Check out and cancel with Apruve integration
     Given I proceed as the Buyer
