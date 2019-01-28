@@ -2,7 +2,6 @@
 
 namespace Oro\Bundle\ApruveBundle\Tests\Behat\Mock\Client\Factory\Basic;
 
-use Oro\Bundle\ApruveBundle\Client\ApruveRestClientInterface;
 use Oro\Bundle\ApruveBundle\Client\Factory\ApruveRestClientFactoryInterface;
 use Oro\Bundle\ApruveBundle\Tests\Behat\Mock\Client\ApruveRestClientMock;
 

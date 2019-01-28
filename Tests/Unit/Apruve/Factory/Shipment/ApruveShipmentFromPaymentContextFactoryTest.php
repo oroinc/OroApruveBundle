@@ -11,7 +11,6 @@ use Oro\Bundle\ApruveBundle\Apruve\Helper\AmountNormalizerInterface;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveLineItem;
 use Oro\Bundle\ApruveBundle\Provider\ShippingAmountProviderInterface;
 use Oro\Bundle\ApruveBundle\Provider\TaxAmountProviderInterface;
-use Oro\Bundle\CurrencyBundle\Entity\Price;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PaymentBundle\Context\PaymentLineItemInterface;
 use Oro\Bundle\PricingBundle\SubtotalProcessor\Model\Subtotal;
