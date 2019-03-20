@@ -16,7 +16,7 @@ class ApruveSettingsControllerTest extends WebTestCase
 
     public function testGenerateTokenAction()
     {
-        $this->client->request(
+        $this->ajaxRequest(
             'POST',
             $this->getUrl('oro_apruve_generate_token')
         );
