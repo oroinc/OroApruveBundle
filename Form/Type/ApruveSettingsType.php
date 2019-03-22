@@ -12,6 +12,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/**
+ * Apruve integration settings form type.
+ */
 class ApruveSettingsType extends AbstractType
 {
     const BLOCK_PREFIX = 'oro_apruve_settings';
@@ -65,10 +68,12 @@ class ApruveSettingsType extends AbstractType
             ->add('apruveMerchantId', TextType::class, [
                 'label' => 'oro.apruve.settings.merchant_id.label',
                 'required' => true,
+                'attr' => ['autocomplete' => 'off'],
             ])
             ->add('apruveApiKey', TextType::class, [
                 'label' => 'oro.apruve.settings.api_key.label',
                 'required' => true,
+                'attr' => ['autocomplete' => 'off'],
             ])
             ->add('apruveTestMode', CheckboxType::class, [
                 'label' => 'oro.apruve.settings.test_mode.label',
