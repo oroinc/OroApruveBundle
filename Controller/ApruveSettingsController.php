@@ -7,6 +7,7 @@ use Oro\Bundle\ApruveBundle\Connection\Validator\Result\Factory\Merchant;
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\IntegrationBundle\Entity\Channel;
 use Oro\Bundle\IntegrationBundle\Form\Type\ChannelType;
+use Oro\Bundle\SecurityBundle\Annotation\CsrfProtection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -14,13 +15,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Apruve Settings Controller
+ */
 class ApruveSettingsController extends Controller
 {
     /**
      * @Route("/generate-token", name="oro_apruve_generate_token", options={"expose"=true})
      * @Method("POST")
-     *
-     * @param Request $request
+     * @CsrfProtection()
      *
      * @return JsonResponse
      */
@@ -38,6 +41,7 @@ class ApruveSettingsController extends Controller
      * @Route("/validate-connection/{channelId}/", name="oro_apruve_validate_connection")
      * @ParamConverter("channel", class="OroIntegrationBundle:Channel", options={"id" = "channelId"})
      * @Method("POST")
+     * @CsrfProtection()
      *
      * @param Request      $request
      * @param Channel|null $channel
