@@ -80,9 +80,9 @@
                 </button>
                 <button type="button"
                         class="btn btn-sm"
-                        data-page-component-module="oroui/js/app/components/element-value-copy-to-clipboard-component"
-                        data-page-component-options="{{ {
-                            'elementSelector': webhookUrlSelector
+                        data-page-component-view="{{ {
+                            view: 'oroui/js/app/views/element-value-copy-to-clipboard-view',
+                            elementSelector: webhookUrlSelector
                         }|json_encode }}"
                 >
                     {{ 'oro.apruve.settings.webhook_url.copy_to_clipboard.button'|trans }}
