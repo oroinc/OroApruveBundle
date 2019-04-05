@@ -7,6 +7,8 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Oro\Bundle\IntegrationBundle\Entity\Channel;
 use Oro\Bundle\IntegrationBundle\Generator\IntegrationIdentifierGeneratorInterface;
+use Oro\Bundle\OrderBundle\Entity\Order;
+use Oro\Bundle\OrderBundle\Tests\Functional\DataFixtures\LoadOrders;
 use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 use Oro\Bundle\PaymentBundle\Method\PaymentMethodInterface;
 use Oro\Component\Testing\Unit\EntityTrait;
@@ -43,27 +45,27 @@ class LoadApruvePaymentTransactionData extends AbstractFixture implements
             'amount' => '1000.00',
             'currency' => 'USD',
             'action' => PaymentMethodInterface::INVOICE,
-            'entityIdentifier' => 1,
+            'entityReference' => LoadOrders::ORDER_1,
+            'entityClass' => Order::class,
             'channelReference' => 'apruve:channel_1',
-            'entityClass' => 'SomeClass',
             'reference' => 'invoice_1',
         ],
         self::AUTHORIZE_TRANSACTION_CHANNEL_2 => [
             'amount' => '1000.00',
             'currency' => 'USD',
             'action' => PaymentMethodInterface::INVOICE,
-            'entityIdentifier' => 1,
+            'entityReference' => LoadOrders::ORDER_1,
+            'entityClass' => Order::class,
             'channelReference' => 'apruve:channel_2',
-            'entityClass' => 'SomeClass',
             'reference' => 'invoice_2',
         ],
         self::CAPTURE_TRANSACTION_CHANNEL_2 => [
             'amount' => '1000.00',
             'currency' => 'USD',
             'action' => PaymentMethodInterface::CAPTURE,
-            'entityIdentifier' => 1,
+            'entityReference' => LoadOrders::ORDER_1,
+            'entityClass' => Order::class,
             'channelReference' => 'apruve:channel_2',
-            'entityClass' => 'SomeClass',
             'reference' => 'invoice_2',
         ],
     ];
@@ -73,7 +75,10 @@ class LoadApruvePaymentTransactionData extends AbstractFixture implements
      */
     public function getDependencies()
     {
-        return [LoadApruveChannelData::class];
+        return [
+            LoadApruveChannelData::class,
+            LoadOrders::class
+        ];
     }
 
     /**
@@ -93,6 +98,7 @@ class LoadApruvePaymentTransactionData extends AbstractFixture implements
             $paymentTransaction = new PaymentTransaction();
 
             $this->setPaymentMethod($data);
+            $this->setEntityIdentifier($data);
 
             foreach ($data as $property => $value) {
                 if ($this->isReferenceProperty($property)) {
@@ -123,6 +129,16 @@ class LoadApruvePaymentTransactionData extends AbstractFixture implements
         unset($data['channelReference']);
 
         $data['paymentMethod'] = $this->apruveIdentifierGenerator->generateIdentifier($channel);
+    }
+
+    /**
+     * @param array $data
+     */
+    private function setEntityIdentifier(array &$data): void
+    {
+        $data['entityIdentifier'] = $this->getReference($data['entityReference'])->getId();
+
+        unset($data['entityReference']);
     }
 
     /**
