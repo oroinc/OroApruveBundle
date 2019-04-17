@@ -35,11 +35,8 @@ class ApruveSettingsRepositoryTest extends WebTestCase
     {
         $settingsByEnabledChannel = $this->repository->findEnabledSettings();
 
-        $fixtureSettingsByEnabledChannel = [
-            $this->getReference('apruve:transport_1'),
-            $this->getReference('apruve:transport_2')
-        ];
-        static::assertCount(count($fixtureSettingsByEnabledChannel), $settingsByEnabledChannel);
-        static::assertEquals($fixtureSettingsByEnabledChannel, $settingsByEnabledChannel);
+        static::assertCount(2, $settingsByEnabledChannel);
+        static::assertContains($this->getReference('apruve:transport_1'), $settingsByEnabledChannel);
+        static::assertContains($this->getReference('apruve:transport_2'), $settingsByEnabledChannel);
     }
 }
