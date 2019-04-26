@@ -9,3 +9,4 @@ services:
             - ['setLogger', ['@logger']]
         tags:
             - { name: kernel.event_listener, event: oro_payment.callback.return, method: onReturn }
+            - { name: monolog.logger, channel: oro_apruve }

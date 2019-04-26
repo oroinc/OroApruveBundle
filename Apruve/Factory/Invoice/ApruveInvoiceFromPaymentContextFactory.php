@@ -11,6 +11,9 @@ use Oro\Bundle\ApruveBundle\Provider\TaxAmountProviderInterface;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PricingBundle\SubtotalProcessor\TotalProcessorProvider;
 
+/**
+ * Creates apruve invoice according to payment context using apruve invoice builder
+ */
 class ApruveInvoiceFromPaymentContextFactory extends AbstractApruveEntityWithLineItemsFactory implements
     ApruveInvoiceFromPaymentContextFactoryInterface
 {
@@ -64,8 +67,12 @@ class ApruveInvoiceFromPaymentContextFactory extends AbstractApruveEntityWithLin
             );
 
         $apruveInvoiceBuilder
-            ->setShippingCents($this->getShippingCents($paymentContext))
-            ->setTaxCents($this->getTaxCents($paymentContext));
+            ->setShippingCents($this->getShippingCents($paymentContext));
+
+        $taxCents = $this->getTaxCents($paymentContext);
+        if ($taxCents !== null) {
+            $apruveInvoiceBuilder->setTaxCents($taxCents);
+        }
 
         $apruveInvoiceBuilder
             ->setIssueOnCreate(self::ISSUE_ON_CREATE);

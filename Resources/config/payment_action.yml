@@ -27,6 +27,8 @@ services:
             - [setLogger, ['@logger']]
         public: false
         lazy: true
+        tags:
+            - { name: monolog.logger, channel: oro_apruve }
 
     oro_apruve.method.payment_action.authorize:
         parent: oro_apruve.method.payment_action.abstract
@@ -46,6 +48,8 @@ services:
             - [setLogger, ['@logger']]
         public: false
         lazy: true
+        tags:
+            - { name: monolog.logger, channel: oro_apruve }
 
     oro_apruve.method.payment_action.shipment:
         parent: oro_apruve.method.payment_action.abstract
@@ -59,6 +63,8 @@ services:
             - [setLogger, ['@logger']]
         public: false
         lazy: true
+        tags:
+            - { name: monolog.logger, channel: oro_apruve }
 
     oro_apruve.method.payment_action.capture:
         parent: oro_apruve.method.payment_action.abstract
