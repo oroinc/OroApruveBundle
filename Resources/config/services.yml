@@ -18,11 +18,13 @@ services:
     oro_apruve.provider.tax_amount:
         class: 'Oro\Bundle\ApruveBundle\Provider\TaxAmountProvider'
         arguments:
-            - '@oro_tax.provider.tax_provider_registry'
+            - '@oro_tax.provider.tax_amount'
         calls:
             - ['setLogger', ['@logger']]
         lazy: true
         public: false
+        tags:
+            - { name: monolog.logger, channel: oro_apruve }
 
     oro_apruve.action.invoice_payment_transaction:
         class: 'Oro\Bundle\ApruveBundle\PaymentTransaction\Action\PaymentTransactionInvoiceAction'

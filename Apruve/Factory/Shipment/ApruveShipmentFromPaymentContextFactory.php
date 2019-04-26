@@ -12,6 +12,9 @@ use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PricingBundle\SubtotalProcessor\TotalProcessorProvider;
 use Oro\Bundle\ShippingBundle\Method\ShippingMethodProviderInterface;
 
+/**
+ * Factory creates apruve shipment model based on payment context
+ */
 class ApruveShipmentFromPaymentContextFactory extends AbstractApruveEntityWithLineItemsFactory implements
     ApruveShipmentFromPaymentContextFactoryInterface
 {
@@ -69,8 +72,12 @@ class ApruveShipmentFromPaymentContextFactory extends AbstractApruveEntityWithLi
 
         $apruveShipmentBuilder
             ->setLineItems($this->getLineItems($paymentContext->getLineItems()))
-            ->setShippingCents($this->getShippingCents($paymentContext))
-            ->setTaxCents($this->getTaxCents($paymentContext));
+            ->setShippingCents($this->getShippingCents($paymentContext));
+
+        $taxCents = $this->getTaxCents($paymentContext);
+        if ($taxCents !== null) {
+            $apruveShipmentBuilder->setTaxCents($taxCents);
+        }
 
         $shippingMethodId = $paymentContext->getShippingMethod();
         if ($this->shippingMethodProvider->hasShippingMethod($shippingMethodId)) {

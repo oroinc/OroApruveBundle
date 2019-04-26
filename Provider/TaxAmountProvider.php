@@ -5,65 +5,51 @@ namespace Oro\Bundle\ApruveBundle\Provider;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\TaxBundle\Exception\TaxationDisabledException;
 use Oro\Bundle\TaxBundle\Mapper\UnmappableArgumentException;
-use Oro\Bundle\TaxBundle\Provider\TaxProviderInterface;
-use Oro\Bundle\TaxBundle\Provider\TaxProviderRegistry;
+use Oro\Bundle\TaxBundle\Provider\TaxAmountProvider as BaseTaxAmountProvider;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 
+/**
+ * Provides tax amount for entity.
+ */
 class TaxAmountProvider implements TaxAmountProviderInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
     /**
-     * @var TaxProviderRegistry
+     * @var BaseTaxAmountProvider
      */
-    private $taxProviderRegistry;
+    private $taxAmountProvider;
 
-    /**.
-     * @param TaxProviderRegistry $taxProviderRegistry
+    /**
+     * @param BaseTaxAmountProvider $taxAmountProvider
      */
-    public function __construct(TaxProviderRegistry $taxProviderRegistry)
+    public function __construct(BaseTaxAmountProvider $taxAmountProvider)
     {
-        $this->taxProviderRegistry = $taxProviderRegistry;
+        $this->taxAmountProvider = $taxAmountProvider;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getTaxAmount(PaymentContextInterface $paymentContext)
+    public function getTaxAmount(PaymentContextInterface $paymentContext): ?float
     {
         try {
-            $result = $this->getProvider()->loadTax($paymentContext->getSourceEntity());
-            $taxAmount = $result->getTotal()->getTaxAmount();
+            $taxAmount = $this->taxAmountProvider->getTaxAmount($paymentContext->getSourceEntity());
         } catch (TaxationDisabledException $e) {
-            $taxAmount = 0;
-        } catch (UnmappableArgumentException $e) {
+            // We can not return any tax information in this case
+            // because even 0 means that taxes calculated with 0 value
+            return null;
+        } catch (\InvalidArgumentException|UnmappableArgumentException $e) {
             if ($this->logger) {
-                $this->logger->warning($e->getMessage());
+                $this->logger->error('Can not get tax amount for the required payment context', ['exception' => $e]);
             }
 
-            // There are no tax mapper for given source entity.
-            $taxAmount = 0;
-        } catch (\InvalidArgumentException $e) {
-            if ($this->logger) {
-                $this->logger->warning($e->getMessage());
-            }
-
-            $taxAmount = 0;
+            // We can not return any tax information in this case
+            // because even 0 means that taxes calculated with 0 value
+            return null;
         }
 
-        if (abs((float)$taxAmount) <= 1e-6) {
-            $taxAmount = 0;
-        }
-
-        return (float) $taxAmount;
-    }
-
-    /**
-     * @return TaxProviderInterface
-     */
-    private function getProvider()
-    {
-        return $this->taxProviderRegistry->getEnabledProvider();
+        return $taxAmount;
     }
 }

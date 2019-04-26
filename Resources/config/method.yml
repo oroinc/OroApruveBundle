@@ -16,6 +16,8 @@ services:
             - '@oro_apruve.method.generator.identifier'
             - '@oro_security.encoder.default'
             - '@logger'
+        tags:
+            - { name: monolog.logger, channel: oro_apruve }
 
     oro_apruve.method.config.provider:
         class: 'Oro\Bundle\ApruveBundle\Method\Config\Provider\ApruveConfigProvider'
@@ -24,6 +26,8 @@ services:
             - '@doctrine'
             - '@logger'
             - '@oro_apruve.method.config.factory'
+        tags:
+            - { name: monolog.logger, channel: oro_apruve }
 
     oro_apruve.method.apruve.factory:
         class: 'Oro\Bundle\ApruveBundle\Method\Factory\ApruvePaymentMethodFactory'

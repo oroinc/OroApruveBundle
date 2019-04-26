@@ -12,18 +12,14 @@ use Oro\Bundle\ApruveBundle\Provider\TaxAmountProviderInterface;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PricingBundle\SubtotalProcessor\TotalProcessorProvider;
 
+/**
+ * Factory creates apruve order model based on payment context
+ */
 class ApruveOrderFromPaymentContextFactory extends AbstractApruveEntityWithLineItemsFactory implements
     ApruveOrderFromPaymentContextFactoryInterface
 {
-    /**
-     * @internal
-     */
-    const FINALIZE_ON_CREATE = true;
-
-    /**
-     * @internal
-     */
-    const INVOICE_ON_CREATE = false;
+    private const FINALIZE_ON_CREATE = true;
+    private const INVOICE_ON_CREATE = false;
 
     /**
      * @var ApruveOrderBuilderFactoryInterface
@@ -74,8 +70,12 @@ class ApruveOrderFromPaymentContextFactory extends AbstractApruveEntityWithLineI
 
         $apruveOrderBuilder
             ->setMerchantOrderId($this->getMerchantOrderId($paymentContext))
-            ->setShippingCents($this->getShippingCents($paymentContext))
-            ->setTaxCents($this->getTaxCents($paymentContext));
+            ->setShippingCents($this->getShippingCents($paymentContext));
+
+        $taxCents = $this->getTaxCents($paymentContext);
+        if ($taxCents !== null) {
+            $apruveOrderBuilder->setTaxCents($taxCents);
+        }
 
         $apruveOrderBuilder
             ->setFinalizeOnCreate(self::FINALIZE_ON_CREATE)

@@ -10,6 +10,9 @@ use Oro\Bundle\PaymentBundle\Context\LineItem\Collection\PaymentLineItemCollecti
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PricingBundle\SubtotalProcessor\TotalProcessorProvider;
 
+/**
+ * Factory that has common methods to get tax, shipping information, apruve line items
+ */
 abstract class AbstractApruveEntityWithLineItemsFactory extends AbstractApruveEntityFactory
 {
     /**
@@ -84,13 +87,21 @@ abstract class AbstractApruveEntityWithLineItemsFactory extends AbstractApruveEn
     }
 
     /**
+     * Get tax amount in cents as integer
+     * or null in case of it's impossible to get tax amount
+     *
      * @param PaymentContextInterface $paymentContext
      *
-     * @return int
+     * @return int|null
      */
     protected function getTaxCents(PaymentContextInterface $paymentContext)
     {
         $amount = $this->taxAmountProvider->getTaxAmount($paymentContext);
+
+        if ($amount === null) {
+            // Can not get tax amount according to payment context
+            return null;
+        }
 
         return $this->normalizeAmount($amount);
     }

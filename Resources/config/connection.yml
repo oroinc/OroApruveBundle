@@ -17,3 +17,5 @@ services:
             - '@oro_apruve.connection.validator.request.factory.get_merchant_request'
             - '@oro_apruve.connection.validator.result.factory.get_merchant_request'
             - '@logger'
+        tags:
+            - { name: monolog.logger, channel: oro_apruve }

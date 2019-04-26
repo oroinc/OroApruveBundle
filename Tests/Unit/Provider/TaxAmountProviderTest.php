@@ -1,41 +1,38 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Tests\Unit;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Provider;
 
 use Oro\Bundle\ApruveBundle\Provider\TaxAmountProvider;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\TaxBundle\Exception\TaxationDisabledException;
 use Oro\Bundle\TaxBundle\Mapper\UnmappableArgumentException;
-use Oro\Bundle\TaxBundle\Provider\TaxProviderInterface;
-use Oro\Bundle\TaxBundle\Provider\TaxProviderRegistry;
+use Oro\Bundle\TaxBundle\Provider\TaxAmountProvider as BaseTaxAmountProvider;
 use Oro\Bundle\TestFrameworkBundle\Test\Logger\LoggerAwareTraitTestTrait;
+use PHPUnit\Framework\MockObject\MockObject;
 
 class TaxAmountProviderTest extends \PHPUnit\Framework\TestCase
 {
     use LoggerAwareTraitTestTrait;
 
-    const AMOUNT = 10.0;
-    const AMOUNT_NEGLIGIBLE = 0.000001;
-
     /**
-     * @var \stdClass|\PHPUnit\Framework\MockObject\MockObject
+     * @var \stdClass|MockObject
      */
     private $sourceEntity;
 
     /**
-     * @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var PaymentContextInterface|MockObject
      */
     private $paymentContext;
 
     /**
-     * @var TaxProviderInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $taxProvider;
-
-    /**
      * @var TaxAmountProvider
      */
-    private $provider;
+    private $taxAmountProvider;
+
+    /**
+     * @var BaseTaxAmountProvider|MockObject
+     */
+    private $baseTaxAmountProvider;
 
     /**
      * {@inheritDoc}
@@ -43,109 +40,85 @@ class TaxAmountProviderTest extends \PHPUnit\Framework\TestCase
     protected function setUp()
     {
         $this->sourceEntity = $this->createMock(\stdClass::class);
-
         $this->paymentContext = $this->createMock(PaymentContextInterface::class);
+        $this->baseTaxAmountProvider = $this->createMock(BaseTaxAmountProvider::class);
+
         $this->paymentContext
             ->method('getSourceEntity')
             ->willReturn($this->sourceEntity);
 
-        $this->taxProvider = $this->createMock(TaxProviderInterface::class);
-        $taxProviderRegistry = $this->createMock(TaxProviderRegistry::class);
-        $taxProviderRegistry->expects($this->any())
-            ->method('getEnabledProvider')
-            ->willReturn($this->taxProvider);
+        $this->taxAmountProvider = new TaxAmountProvider($this->baseTaxAmountProvider);
 
-        $this->provider = new TaxAmountProvider($taxProviderRegistry);
+        $this->setUpLoggerMock($this->taxAmountProvider);
+    }
 
-        $this->setUpLoggerMock($this->provider);
+    public function testGetTaxAmount(): void
+    {
+        $this->baseTaxAmountProvider
+            ->expects($this->once())
+            ->method('getTaxAmount')
+            ->with($this->sourceEntity)
+            ->willReturn(5);
+
+        $this->assertSame(5.0, $this->taxAmountProvider->getTaxAmount($this->paymentContext));
+    }
+
+    public function testGetTaxAmountWithTaxationDisabledException(): void
+    {
+        $this->baseTaxAmountProvider
+            ->expects($this->once())
+            ->method('getTaxAmount')
+            ->with($this->sourceEntity)
+            ->willThrowException(new TaxationDisabledException());
+
+        $this->assertLoggerNotCalled();
+
+        $actual = $this->taxAmountProvider->getTaxAmount($this->paymentContext);
+
+        $this->assertNull($actual);
     }
 
     /**
-     * @dataProvider getTaxAmountDataProvider
-     *
-     * @param float $taxAmount
-     * @param float $expectedAmount
+     * @param string $exceptionClass
+     * @dataProvider getTaxAmountWithHandledExceptionDataProvider
      */
-    public function testGetTaxAmount($taxAmount, $expectedAmount)
+    public function testGetTaxAmountWithHandledException($exceptionClass): void
     {
-        // Oro\Bundle\TaxBundle\Model\ResultElement is final and cannot be mocked.
-        $taxResultElement = $this->getMockBuilder(\stdClass::class)
-            ->setMethods(['getTaxAmount'])
-            ->getMock();
-        $taxResultElement
-            ->expects(static::once())
+        $this->baseTaxAmountProvider
+            ->expects($this->once())
             ->method('getTaxAmount')
-            ->willReturn($taxAmount);
-
-        // Oro\Bundle\TaxBundle\Model\Result is final and cannot be mocked.
-        $taxResult = $this->getMockBuilder(\stdClass::class)
-            ->setMethods(['getTotal'])
-            ->getMock();
-
-        $taxResult
-            ->expects(static::once())
-            ->method('getTotal')
-            ->willReturn($taxResultElement);
-
-        $this->taxProvider
-            ->expects(static::once())
-            ->method('loadTax')
             ->with($this->sourceEntity)
-            ->willReturn($taxResult);
+            ->willThrowException(new $exceptionClass);
 
-        $actual = $this->provider->getTaxAmount($this->paymentContext);
+        $this->assertLoggerErrorMethodCalled();
 
-        static::assertSame($expectedAmount, $actual);
+        $actual = $this->taxAmountProvider->getTaxAmount($this->paymentContext);
+
+        $this->assertNull($actual);
     }
 
     /**
      * @return array
      */
-    public function getTaxAmountDataProvider()
+    public function getTaxAmountWithHandledExceptionDataProvider(): array
     {
         return [
-            [self::AMOUNT, self::AMOUNT],
-            [self::AMOUNT_NEGLIGIBLE, 0.0],
+            [UnmappableArgumentException::class],
+            [\InvalidArgumentException::class],
         ];
     }
 
-    public function testGetTaxAmountIfTaxationIsDisabled()
+    /**
+     * @expectedException \Throwable
+     */
+    public function testGetTaxAmountWithUnhandledException(): void
     {
-        $this->taxProvider
-            ->expects(static::once())
-            ->method('loadTax')
+        $this->baseTaxAmountProvider
+            ->expects($this->once())
+            ->method('getTaxAmount')
             ->with($this->sourceEntity)
-            ->willThrowException(new TaxationDisabledException());
+            ->willThrowException(new \Exception());
 
-        $actual = $this->provider->getTaxAmount($this->paymentContext);
-        static::assertSame(0.0, $actual);
-    }
-
-    public function testGetTaxAmountIfIsNotMappable()
-    {
-        $this->taxProvider
-            ->expects(static::once())
-            ->method('loadTax')
-            ->with($this->sourceEntity)
-            ->willThrowException(new UnmappableArgumentException());
-
-        $this->assertLoggerWarningMethodCalled();
-
-        $actual = $this->provider->getTaxAmount($this->paymentContext);
-        static::assertSame(0.0, $actual);
-    }
-
-    public function testGetTaxAmountIfEntityIsInvalid()
-    {
-        $this->taxProvider
-            ->expects(static::once())
-            ->method('loadTax')
-            ->with($this->sourceEntity)
-            ->willThrowException(new \InvalidArgumentException());
-
-        $this->assertLoggerWarningMethodCalled();
-
-        $actual = $this->provider->getTaxAmount($this->paymentContext);
-        static::assertSame(0.0, $actual);
+        $this->taxAmountProvider->getTaxAmount($this->paymentContext);
     }
 }
