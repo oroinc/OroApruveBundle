@@ -131,6 +131,7 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
         $form->submit($submittedData);
 
         static::assertEquals($isValid, $form->isValid());
+        static::assertTrue($form->isSynchronized());
         static::assertEquals($expectedData, $form->getData());
     }
 
