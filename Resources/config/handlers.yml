@@ -4,3 +4,6 @@ services:
         arguments:
             - '@oro_payment.repository.payment_transaction'
             - '@oro_payment.provider.payment_transaction'
+
+    Oro\Bundle\ApruveBundle\Handler\Invoice\InvoiceClosedWebhookEventHandlerInterface:
+        alias: oro_apruve.webhook_notify.event_handler.invoice_closed

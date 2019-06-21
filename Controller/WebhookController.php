@@ -3,21 +3,27 @@
 namespace Oro\Bundle\ApruveBundle\Controller;
 
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
+use Oro\Bundle\ApruveBundle\Entity\Repository\ApruveSettingsRepository;
 use Oro\Bundle\ApruveBundle\Handler\Exceptions\InvalidEventException;
 use Oro\Bundle\ApruveBundle\Handler\Exceptions\SourceTransactionNotFoundException;
 use Oro\Bundle\ApruveBundle\Handler\Exceptions\TransactionAlreadyExistsException;
+use Oro\Bundle\ApruveBundle\Handler\Invoice\InvoiceClosedWebhookEventHandlerInterface;
+use Oro\Bundle\ApruveBundle\Method\Provider\ApruvePaymentMethodProvider;
+use Oro\Bundle\IntegrationBundle\Generator\IntegrationIdentifierGeneratorInterface;
 use Oro\Bundle\PaymentBundle\Method\PaymentMethodInterface;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
+ * Provides webhook action for the apruve integration.
+ *
  * @Route("/webhook")
  */
-class WebhookController extends Controller
+class WebhookController extends AbstractController
 {
     const INVOICE_CLOSED_EVENT_NAME = 'invoice.closed';
     const PAYMENT_TERM_ACCEPTED_EVENT_NAME = 'payment_term.accepted';
@@ -99,7 +105,7 @@ class WebhookController extends Controller
         $response = $this->createResponse();
 
         try {
-            $this->get('oro_apruve.webhook_notify.event_handler.invoice_closed')->handle($paymentMethod, $body);
+            $this->get(InvoiceClosedWebhookEventHandlerInterface::class)->handle($paymentMethod, $body);
         } catch (InvalidEventException $exception) {
             $logger->error($exception->getMessage());
             $response = $this->createResponse('Invalid event body.', Response::HTTP_BAD_REQUEST);
@@ -132,7 +138,7 @@ class WebhookController extends Controller
      */
     private function getApruveSettings($token)
     {
-        return $this->get('oro_apruve.repository.apruve_settings')->findOneBy([
+        return $this->get(ApruveSettingsRepository::class)->findOneBy([
             'apruveWebhookToken' => $token,
         ]);
     }
@@ -180,6 +186,24 @@ class WebhookController extends Controller
      */
     private function getLogger()
     {
-        return $this->get('logger');
+        return $this->get(LoggerInterface::class);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedServices()
+    {
+        return array_merge(
+            parent::getSubscribedServices(),
+            [
+                'oro_apruve.method.generator.identifier' => IntegrationIdentifierGeneratorInterface::class,
+                'oro_apruve.method.apruve.provider' => ApruvePaymentMethodProvider::class,
+                LoggerInterface::class,
+                ApruveSettingsRepository::class,
+                InvoiceClosedWebhookEventHandlerInterface::class,
+
+            ]
+        );
     }
 }

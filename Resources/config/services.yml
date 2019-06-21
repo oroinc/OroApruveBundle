@@ -8,6 +8,9 @@ services:
         calls:
             - [setAclHelper, ['@oro_security.acl_helper']]
 
+    Oro\Bundle\ApruveBundle\Entity\Repository\ApruveSettingsRepository:
+        alias: oro_apruve.repository.apruve_settings
+
     oro_apruve.provider.shipping_amount:
         class: 'Oro\Bundle\ApruveBundle\Provider\ShippingAmountProvider'
         arguments:

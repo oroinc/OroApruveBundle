@@ -19,3 +19,6 @@ services:
             - '@logger'
         tags:
             - { name: monolog.logger, channel: oro_apruve }
+
+    Oro\Bundle\ApruveBundle\Connection\Validator\ApruveConnectionValidatorInterface:
+        alias: oro_apruve.connection.validator

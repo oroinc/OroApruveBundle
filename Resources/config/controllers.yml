@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        public: true
+
+    Oro\Bundle\ApruveBundle\Controller\ApruveSettingsController:
+        calls:
+            - [setContainer, ['@Psr\Container\ContainerInterface']]
+        tags:
+            - { name: container.service_subscriber }
+
+    Oro\Bundle\ApruveBundle\Controller\WebhookController:
+        calls:
+            - [setContainer, ['@Psr\Container\ContainerInterface']]
+        tags:
+            - { name: container.service_subscriber }
+            - { name: container.service_subscriber, id: 'oro_apruve.method.generator.identifier' }
+            - { name: container.service_subscriber, id: 'oro_apruve.method.apruve.provider' }

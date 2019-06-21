@@ -2,23 +2,26 @@
 
 namespace Oro\Bundle\ApruveBundle\Controller;
 
+use Oro\Bundle\ApruveBundle\Connection\Validator\ApruveConnectionValidatorInterface;
 use Oro\Bundle\ApruveBundle\Connection\Validator\Result\ApruveConnectionValidatorResultInterface;
 use Oro\Bundle\ApruveBundle\Connection\Validator\Result\Factory\Merchant;
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\IntegrationBundle\Entity\Channel;
 use Oro\Bundle\IntegrationBundle\Form\Type\ChannelType;
 use Oro\Bundle\SecurityBundle\Annotation\CsrfProtection;
+use Oro\Bundle\SecurityBundle\Generator\RandomTokenGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Apruve Settings Controller
  */
-class ApruveSettingsController extends Controller
+class ApruveSettingsController extends AbstractController
 {
     /**
      * @Route("/generate-token", name="oro_apruve_generate_token", options={"expose"=true})
@@ -29,7 +32,7 @@ class ApruveSettingsController extends Controller
      */
     public function generateTokenAction()
     {
-        $tokenGenerator = $this->get('oro_security.generator.random_token');
+        $tokenGenerator = $this->get(RandomTokenGeneratorInterface::class);
 
         return new JsonResponse([
             'success' => true,
@@ -62,7 +65,7 @@ class ApruveSettingsController extends Controller
 
         /** @var ApruveSettings $transport */
         $transport = $channel->getTransport();
-        $result = $this->get('oro_apruve.connection.validator')->validateConnectionByApruveSettings($transport);
+        $result = $this->get(ApruveConnectionValidatorInterface::class)->validateConnectionByApruveSettings($transport);
 
         if (!$result->getStatus()) {
             return new JsonResponse([
@@ -73,7 +76,8 @@ class ApruveSettingsController extends Controller
 
         return new JsonResponse([
             'success' => true,
-            'message' => $this->get('translator')->trans('oro.apruve.check_connection.result.success.message'),
+            'message' => $this->get(TranslatorInterface::class)
+                ->trans('oro.apruve.check_connection.result.success.message'),
         ]);
     }
 
@@ -96,6 +100,22 @@ class ApruveSettingsController extends Controller
                 $message = 'oro.apruve.check_connection.result.merchant_not_found.message';
                 break;
         }
-        return $this->get('translator')->trans($message, $parameters);
+        return $this->get(TranslatorInterface::class)->trans($message, $parameters);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedServices()
+    {
+        return array_merge(
+            parent::getSubscribedServices(),
+            [
+                TranslatorInterface::class,
+                RandomTokenGeneratorInterface::class,
+                ApruveConnectionValidatorInterface::class,
+
+            ]
+        );
     }
 }
