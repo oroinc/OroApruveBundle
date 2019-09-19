@@ -67,8 +67,8 @@ class PaymentTransactionInvoiceActionTest extends AbstractActionTest
             ->expects(static::atLeastOnce())
             ->method('savePaymentTransaction')
             ->withConsecutive(
-                $invoicePaymentTransaction,
-                $authorizationPaymentTransaction
+                [$invoicePaymentTransaction],
+                [$shipmentPaymentTransaction]
             );
 
         $this->contextAccessor
