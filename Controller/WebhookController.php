@@ -12,11 +12,10 @@ use Oro\Bundle\ApruveBundle\Method\Provider\ApruvePaymentMethodProvider;
 use Oro\Bundle\IntegrationBundle\Generator\IntegrationIdentifierGeneratorInterface;
 use Oro\Bundle\PaymentBundle\Method\PaymentMethodInterface;
 use Psr\Log\LoggerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Provides webhook action for the apruve integration.
@@ -31,8 +30,7 @@ class WebhookController extends AbstractController
     const ORDER_CANCELED_EVENT_NAME = 'order.canceled';
 
     /**
-     * @Route("/notify/{token}", name="oro_apruve_webhook_notify", options={"expose"=true})
-     * @Method("POST")
+     * @Route("/notify/{token}", name="oro_apruve_webhook_notify", options={"expose"=true}, methods={"POST"})
      *
      * @param string  $token
      * @param Request $request
