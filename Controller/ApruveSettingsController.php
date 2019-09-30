@@ -10,12 +10,11 @@ use Oro\Bundle\IntegrationBundle\Entity\Channel;
 use Oro\Bundle\IntegrationBundle\Form\Type\ChannelType;
 use Oro\Bundle\SecurityBundle\Annotation\CsrfProtection;
 use Oro\Bundle\SecurityBundle\Generator\RandomTokenGeneratorInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -24,8 +23,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ApruveSettingsController extends AbstractController
 {
     /**
-     * @Route("/generate-token", name="oro_apruve_generate_token", options={"expose"=true})
-     * @Method("POST")
+     * @Route("/generate-token", name="oro_apruve_generate_token", options={"expose"=true}, methods={"POST"})
      * @CsrfProtection()
      *
      * @return JsonResponse
@@ -41,9 +39,8 @@ class ApruveSettingsController extends AbstractController
     }
 
     /**
-     * @Route("/validate-connection/{channelId}/", name="oro_apruve_validate_connection")
+     * @Route("/validate-connection/{channelId}/", name="oro_apruve_validate_connection", methods={"POST"})
      * @ParamConverter("channel", class="OroIntegrationBundle:Channel", options={"id" = "channelId"})
-     * @Method("POST")
      * @CsrfProtection()
      *
      * @param Request      $request
