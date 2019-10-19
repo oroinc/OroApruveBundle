@@ -1,10 +1,12 @@
+/* global apruve */
 define(function(require) {
     'use strict';
 
     var PaymentMethodComponent;
     var _ = require('underscore');
     var mediator = require('oroui/js/mediator');
-    var tools = require('oroui/js/tools');
+    var scriptjs = require('scriptjs');
+
     var BaseComponent = require('oropayment/js/app/components/payment-method-component');
 
     PaymentMethodComponent = BaseComponent.extend({
@@ -15,8 +17,8 @@ define(function(require) {
             orderIdParamName: '',
             paymentMethod: null,
             apruveJsUrls: {
-                test: 'oroapruve/js/lib/apruvejs-test',
-                prod: 'oroapruve/js/lib/apruvejs-prod'
+                test: '//test.apruve.com/js/v4/apruve.js',
+                prod: '//app.apruve.com/js/v4/apruve.js'
             },
             testMode: true
         },
@@ -59,13 +61,10 @@ define(function(require) {
             var appruveJsUrl = this.options.testMode ? this.options.apruveJsUrls.test : this.options.apruveJsUrls.prod;
 
             this._deferredInit();
-            tools.loadModules(appruveJsUrl, this.initializeApruve, this);
+            scriptjs(appruveJsUrl, this.initializeApruve.bind(this));
         },
 
-        /**
-         * @param {apruve} apruve
-         */
-        initializeApruve: function(apruve) {
+        initializeApruve: function() {
             this.apruve = apruve;
 
             this.apruve

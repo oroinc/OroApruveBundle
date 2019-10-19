@@ -1,0 +1,3 @@
+dynamic-imports:
+    oroapruve:
+        - oroapruve/js/app/components/payment-method-component
