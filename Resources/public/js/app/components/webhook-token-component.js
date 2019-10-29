@@ -1,16 +1,13 @@
 define(function(require) {
     'use strict';
 
-    var $ = require('jquery');
-    var _ = require('underscore');
+    const $ = require('jquery');
+    const _ = require('underscore');
+    const routing = require('routing');
+    const BaseComponent = require('oroui/js/app/components/base/component');
+    const LoadingMaskView = require('oroui/js/app/views/loading-mask-view');
 
-    var WebhookTokenComponent;
-
-    var routing = require('routing');
-    var BaseComponent = require('oroui/js/app/components/base/component');
-    var LoadingMaskView = require('oroui/js/app/views/loading-mask-view');
-
-    WebhookTokenComponent = BaseComponent.extend({
+    const WebhookTokenComponent = BaseComponent.extend({
         options: {
             generateTokenRoute: 'oro_apruve_generate_token',
             webhookRoute: 'oro_apruve_webhook_notify'
@@ -19,8 +16,8 @@ define(function(require) {
         /**
          * @inheritDoc
          */
-        constructor: function WebhookTokenComponent() {
-            WebhookTokenComponent.__super__.constructor.apply(this, arguments);
+        constructor: function WebhookTokenComponent(options) {
+            WebhookTokenComponent.__super__.constructor.call(this, options);
         },
 
         /**
@@ -44,7 +41,7 @@ define(function(require) {
         },
 
         buttonClickHandler: function() {
-            var self = this;
+            const self = this;
 
             this.fetchToken(function(token) {
                 self.setWebhookToken(token);
@@ -56,7 +53,7 @@ define(function(require) {
          * @param {Function} fetchTokenCallback
          */
         fetchToken: function(fetchTokenCallback) {
-            var self = this;
+            const self = this;
 
             $.ajax({
                 url: routing.generate(this.options.generateTokenRoute),
@@ -65,7 +62,7 @@ define(function(require) {
                     self.loadingMaskView.show();
                 },
                 success: function(response) {
-                    var token = response.token || '';
+                    const token = response.token || '';
                     if (token) {
                         fetchTokenCallback(token);
                     }
