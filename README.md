@@ -62,16 +62,17 @@ You have to ask Apruve Support (support@apruve.com) for test merchant and buyer 
 
 Corporate accounts differ. You should have a corporate account associated exactly with the merchant account you are trying to deal with.
 
+Resources
+---------
 
-## Links:
-
- - [Apruve Sandbox][1]
- - [Apruve Docs][2]
- - [Apruve Guides][3]
+  * [OroCommerce Documentation](https://doc.oroinc.com)
+  * [Contributing](https://doc.oroinc.com/community/contribute/)
+  * [Apruve Sandbox][1]
+  * [Apruve Docs][2]
+  * [Apruve Guides][3]
 
 
 [0]: https://www.apruve.com
 [1]: https://test.apruve.com
 [2]: https://docs.apruve.com/reference
 [3]: https://docs.apruve.com/guides
-[4]: https://docs.apruve.com/guides/merchant-integration-tutorial#1b-creating-a-secure-hash
