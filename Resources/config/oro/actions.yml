@@ -50,7 +50,7 @@ operations:
         preconditions:
             '@and':
                 - '@acl_granted': ['CHARGE_AUTHORIZED_PAYMENTS', $.order]
-                - '@equal': [$.data.entity_class, '%oro_order.entity.order.class%']
+                - '@equal': [$.data.entity_class, 'Oro\Bundle\OrderBundle\Entity\Order']
                 - '@equal': [$.data.action, 'authorize']
                 - '@not':
                     - '@payment_transaction_was_charged':
