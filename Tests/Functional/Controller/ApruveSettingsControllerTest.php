@@ -21,12 +21,12 @@ class ApruveSettingsControllerTest extends WebTestCase
             $this->getUrl('oro_apruve_generate_token')
         );
         $response = $this->client->getResponse();
-        static::assertJson($response->getContent());
+        $this->assertJson($response->getContent());
 
         $responseArray = static::getJsonResponseContent($response, 200);
-        static::assertArrayHasKey('success', $responseArray);
-        static::assertArrayHasKey('token', $responseArray);
-        static::assertTrue($responseArray['success']);
-        static::assertInternalType('string', $responseArray['token']);
+        $this->assertArrayHasKey('success', $responseArray);
+        $this->assertArrayHasKey('token', $responseArray);
+        $this->assertTrue($responseArray['success']);
+        $this->assertIsString($responseArray['token']);
     }
 }
