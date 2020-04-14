@@ -64,7 +64,7 @@ class PaymentActionExecutorTest extends \PHPUnit\Framework\TestCase
         $actionsProp->setAccessible(true);
         $actions = $actionsProp->getValue($this->paymentActionExecutor);
 
-        static::assertArraySubset(['purchase' => $paymentAction], $actions);
+        $this->assertSame($paymentAction, $actions['purchase']);
     }
 
     public function testExecuteWithSupportedAction()
