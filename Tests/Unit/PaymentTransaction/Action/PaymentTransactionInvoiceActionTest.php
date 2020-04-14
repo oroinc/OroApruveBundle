@@ -177,12 +177,11 @@ class PaymentTransactionInvoiceActionTest extends AbstractActionTest
     /**
      * @param array $options
      *
-     * @expectedException \Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException
-     *
      * @dataProvider executeWrongOptionsDataProvider
      */
     public function testExecuteWrongOptions($options)
     {
+        $this->expectException(\Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException::class);
         $this->action->initialize($options);
         $this->action->execute([]);
     }

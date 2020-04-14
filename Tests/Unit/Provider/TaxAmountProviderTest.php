@@ -108,11 +108,9 @@ class TaxAmountProviderTest extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    /**
-     * @expectedException \Throwable
-     */
     public function testGetTaxAmountWithUnhandledException(): void
     {
+        $this->expectException(\Throwable::class);
         $this->baseTaxAmountProvider
             ->expects($this->once())
             ->method('getTaxAmount')

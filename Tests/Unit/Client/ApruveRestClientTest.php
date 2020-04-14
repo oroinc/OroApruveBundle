@@ -3,6 +3,7 @@
 namespace Oro\Bundle\ApruveBundle\Tests\Unit\Client;
 
 use Oro\Bundle\ApruveBundle\Client\ApruveRestClient;
+use Oro\Bundle\ApruveBundle\Client\Exception\UnsupportedMethodException;
 use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequestInterface;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestClientInterface;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestResponseInterface;
@@ -91,23 +92,19 @@ class ApruveRestClientTest extends \PHPUnit\Framework\TestCase
         static::assertEquals($response, $this->client->execute($request));
     }
 
-    /**
-     * @expectedException \Oro\Bundle\ApruveBundle\Client\Exception\UnsupportedMethodException
-     * @expectedExceptionMessage Rest client does not support method "UNSUPPORTED"
-     */
     public function testExecuteWithUnsupportedMethod()
     {
+        $this->expectException(UnsupportedMethodException::class);
+        $this->expectExceptionMessage('Rest client does not support method "UNSUPPORTED"');
         $method = 'UNSUPPORTED';
         $request = $this->createRequest($method, self::SAMPLE_URI, self::SAMPLE_DATA);
         $this->client->execute($request);
     }
 
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Any exception
-     */
     public function testExecuteDoesNotCatchAnyException()
     {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Any exception');
         $method = ApruveRestClient::METHOD_GET;
         $uri = self::SAMPLE_URI;
 

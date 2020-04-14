@@ -80,12 +80,11 @@ class PaymentActionExecutorTest extends \PHPUnit\Framework\TestCase
         static::assertSame([], $actual);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Payment action with name "unsupported_action" is not supported
-     */
     public function testExecuteWithUnsupportedAction()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Payment action with name "unsupported_action" is not supported');
+
         $actual = $this->paymentActionExecutor->execute('unsupported_action', $this->config, $this->paymentTransaction);
 
         static::assertSame([], $actual);
