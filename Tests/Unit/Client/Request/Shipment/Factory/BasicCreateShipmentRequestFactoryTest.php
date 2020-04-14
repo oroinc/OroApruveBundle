@@ -21,7 +21,7 @@ class BasicCreateShipmentRequestFactoryTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->apruveShipment = $this->createMock(ApruveShipment::class);
         $this->factory = new BasicCreateShipmentRequestFactory();

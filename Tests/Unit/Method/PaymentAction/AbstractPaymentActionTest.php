@@ -77,7 +77,7 @@ abstract class AbstractPaymentActionTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->paymentTransaction = $this->createMock(PaymentTransaction::class);
 

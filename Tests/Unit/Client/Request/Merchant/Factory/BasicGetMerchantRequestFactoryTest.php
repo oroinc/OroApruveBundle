@@ -15,7 +15,7 @@ class BasicGetMerchantRequestFactoryTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->factory = new BasicGetMerchantRequestFactory();
     }

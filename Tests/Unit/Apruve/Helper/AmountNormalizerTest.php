@@ -11,7 +11,7 @@ class AmountNormalizerTest extends \PHPUnit\Framework\TestCase
      */
     private $amountNormalizer;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->amountNormalizer = new AmountNormalizer();
     }

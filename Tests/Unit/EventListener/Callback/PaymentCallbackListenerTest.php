@@ -27,7 +27,7 @@ class PaymentCallbackListenerTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->paymentMethodProvider = $this->createMock(PaymentMethodProviderInterface::class);
         $this->logger = $this->createMock(LoggerInterface::class);

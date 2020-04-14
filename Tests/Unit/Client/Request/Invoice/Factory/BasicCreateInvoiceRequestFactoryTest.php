@@ -21,7 +21,7 @@ class BasicCreateInvoiceRequestFactoryTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->apruveInvoice = $this->createMock(ApruveInvoice::class);
         $this->factory = new BasicCreateInvoiceRequestFactory();

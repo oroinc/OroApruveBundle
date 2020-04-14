@@ -24,7 +24,7 @@ class GetMerchantRequestApruveConnectionValidatorRequestFactoryTest extends \PHP
      */
     private $factory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->merchantRequestFactory = $this->createMock(GetMerchantRequestFactoryInterface::class);
         $this->symmetricCrypter = $this->createMock(SymmetricCrypterInterface::class);

@@ -33,7 +33,7 @@ class ApruveShipmentFromResponseFactoryTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->restResponse = $this->createMock(RestResponseInterface::class);
 

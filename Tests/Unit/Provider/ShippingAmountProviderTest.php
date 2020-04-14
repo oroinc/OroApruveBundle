@@ -39,7 +39,7 @@ class ShippingAmountProviderTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->sourceEntity = $this->createMock(\stdClass::class);
 

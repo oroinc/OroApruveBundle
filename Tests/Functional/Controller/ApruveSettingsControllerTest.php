@@ -9,7 +9,7 @@ class ApruveSettingsControllerTest extends WebTestCase
     /**
      * {@inheritDoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->initClient([], static::generateBasicAuthHeader());
     }

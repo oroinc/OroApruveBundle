@@ -45,7 +45,7 @@ class ApruveInvoiceBuilderTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->builder = new ApruveInvoiceBuilder(
             self::AMOUNT_CENTS,

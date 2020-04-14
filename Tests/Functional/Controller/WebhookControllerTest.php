@@ -10,7 +10,7 @@ use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
 
 class WebhookControllerTest extends WebTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->initClient();
 

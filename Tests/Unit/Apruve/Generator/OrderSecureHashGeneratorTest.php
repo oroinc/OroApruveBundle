@@ -24,7 +24,7 @@ class OrderSecureHashGeneratorTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->apruveOrder = $this->createMock(ApruveOrder::class);
         $this->generator = new OrderSecureHashGenerator();

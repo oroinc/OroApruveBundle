@@ -18,7 +18,7 @@ class SignatureVerifyingServiceTest extends \PHPUnit\Framework\TestCase
      */
     private $signatureVerifyingService;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->apruvePublicKeyProvider = $this->createMock(ApruvePublicKeyProviderInterface::class);
 

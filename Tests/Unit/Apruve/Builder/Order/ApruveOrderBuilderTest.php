@@ -50,7 +50,7 @@ class ApruveOrderBuilderTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->builder = new ApruveOrderBuilder(
             self::MERCHANT_ID,

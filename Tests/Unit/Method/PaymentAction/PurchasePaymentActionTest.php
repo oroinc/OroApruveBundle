@@ -89,7 +89,7 @@ class PurchasePaymentActionTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->paymentTransaction = $this->createMock(PaymentTransaction::class);
         $this->paymentContext = $this->createMock(PaymentContextInterface::class);

@@ -13,7 +13,7 @@ class ApruvePaymentMethodProviderTest extends AbstractMethodProviderTest
     /**
      * {@inheritDoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->factory = $this->createMock(ApruvePaymentMethodFactoryInterface::class);
         $this->configProvider = $this->createMock(ApruveConfigProviderInterface::class);

@@ -20,7 +20,7 @@ class ApruveOrderTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->apruveOrder = new ApruveOrder(self::DATA);
     }

@@ -95,7 +95,7 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit\Framework\Tes
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->paymentContext = $this->createMock(PaymentContextInterface::class);
 

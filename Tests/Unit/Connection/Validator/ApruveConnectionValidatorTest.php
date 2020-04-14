@@ -41,7 +41,7 @@ class ApruveConnectionValidatorTest extends \PHPUnit\Framework\TestCase
      */
     private $validator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->clientFactory = $this->createMock(ApruveSettingsRestClientFactoryInterface::class);
         $this->requestFactory = $this->createMock(ApruveConnectionValidatorRequestFactoryInterface::class);

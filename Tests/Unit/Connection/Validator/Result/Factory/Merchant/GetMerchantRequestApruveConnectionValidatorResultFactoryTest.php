@@ -14,7 +14,7 @@ class GetMerchantRequestApruveConnectionValidatorResultFactoryTest extends \PHPU
      */
     private $factory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->factory = new Merchant\GetMerchantRequestApruveConnectionValidatorResultFactory();
     }

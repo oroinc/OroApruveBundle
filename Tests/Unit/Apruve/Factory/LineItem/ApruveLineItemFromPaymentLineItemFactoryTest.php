@@ -56,7 +56,7 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit\Framework\Te
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->paymentLineItem = $this->createMock(PaymentLineItemInterface::class);
         $this->apruveLineItemBuilder = $this->createMock(ApruveLineItemBuilderInterface::class);

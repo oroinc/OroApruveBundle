@@ -25,7 +25,7 @@ class WebhookTokenTypeTest extends FormIntegrationTestCase
     /**
      * {@inheritDoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->tokenGenerator = $this->createMock(RandomTokenGeneratorInterface::class);
         $this->tokenGenerator

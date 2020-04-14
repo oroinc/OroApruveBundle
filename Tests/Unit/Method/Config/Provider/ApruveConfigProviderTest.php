@@ -51,7 +51,7 @@ class ApruveConfigProviderTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->configFactory = $this->createMock(ApruveConfigFactoryInterface::class);
         $this->settingsRepository = $this->createMock(ApruveSettingsRepository::class);

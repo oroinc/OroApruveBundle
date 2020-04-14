@@ -90,7 +90,7 @@ class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit\Framework\TestCa
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->totalProcessorProvider = $this->getMockBuilder(TotalProcessorProvider::class)
             ->disableOriginalConstructor()

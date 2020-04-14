@@ -33,7 +33,7 @@ class ApruveOrderBuilderFactoryTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->factory = new ApruveOrderBuilderFactory();
     }

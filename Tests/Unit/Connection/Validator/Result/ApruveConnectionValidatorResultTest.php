@@ -16,7 +16,7 @@ class ApruveConnectionValidatorResultTest extends \PHPUnit\Framework\TestCase
      */
     private $connectionValidationResult;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->parameters = [
             'status' => true,

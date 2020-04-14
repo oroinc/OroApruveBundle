@@ -24,7 +24,7 @@ class ApruveRequestTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->requestData = $this->createMock(ApruveEntityInterface::class);
         $this->request = new ApruveRequest(self::METHOD, self::URI, $this->requestData);

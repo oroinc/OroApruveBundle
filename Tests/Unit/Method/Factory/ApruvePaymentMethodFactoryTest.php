@@ -29,7 +29,7 @@ class ApruvePaymentMethodFactoryTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->supportedCurrenciesProvider = $this->createMock(SupportedCurrenciesProviderInterface::class);
         $this->paymentActionExecutor = $this->createMock(PaymentActionExecutor::class);

@@ -20,7 +20,7 @@ class ApruveLineItemTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->apruveLineItem = new ApruveLineItem(self::DATA);
     }

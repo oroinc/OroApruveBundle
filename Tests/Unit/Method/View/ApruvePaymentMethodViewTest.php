@@ -22,7 +22,7 @@ class ApruvePaymentMethodViewTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->config = $this->createMock(ApruveConfig::class);
 

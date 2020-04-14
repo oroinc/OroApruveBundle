@@ -58,7 +58,7 @@ class ApruveConfigFactoryTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->logger = $this->createMock(LoggerInterface::class);
         $this->crypter = $this->createMock(SymmetricCrypterInterface::class);

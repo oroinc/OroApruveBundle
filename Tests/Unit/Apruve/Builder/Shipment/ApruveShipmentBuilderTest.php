@@ -48,7 +48,7 @@ class ApruveShipmentBuilderTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->builder = new ApruveShipmentBuilder(
             self::AMOUNT_CENTS,

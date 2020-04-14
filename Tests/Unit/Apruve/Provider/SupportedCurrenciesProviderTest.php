@@ -14,7 +14,7 @@ class SupportedCurrenciesProviderTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->provider = new SupportedCurrenciesProvider();
     }

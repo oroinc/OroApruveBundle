@@ -37,7 +37,7 @@ class TaxAmountProviderTest extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->sourceEntity = $this->createMock(\stdClass::class);
         $this->paymentContext = $this->createMock(PaymentContextInterface::class);

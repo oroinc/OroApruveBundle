@@ -61,7 +61,7 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
     /**
      * {@inheritDoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->dataTransformer = $this->createMock(DataTransformerInterface::class);
         $this->cryptedDataTransformerFactory = $this->createMock(CryptedDataTransformerFactoryInterface::class);

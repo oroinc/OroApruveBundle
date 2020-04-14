@@ -31,7 +31,7 @@ class ApruveLineItemBuilderTest extends \PHPUnit\Framework\TestCase
      */
     private $builder;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->builder = new ApruveLineItemBuilder(
             self::TITLE,
