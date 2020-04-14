@@ -58,7 +58,7 @@ class TaxAmountProviderTest extends \PHPUnit\Framework\TestCase
             ->expects($this->once())
             ->method('getTaxAmount')
             ->with($this->sourceEntity)
-            ->willReturn(5);
+            ->willReturn(5.0);
 
         $this->assertSame(5.0, $this->taxAmountProvider->getTaxAmount($this->paymentContext));
     }
