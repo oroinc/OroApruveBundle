@@ -31,17 +31,17 @@ class ApruveTransport implements TransportInterface
         return ApruveSettingsType::class;
     }
 
-     /**
-      * {@inheritDoc}
-      */
+    /**
+     * {@inheritDoc}
+     */
     public function getSettingsEntityFQCN()
     {
         return ApruveSettings::class;
     }
 
-     /**
-      * {@inheritDoc}
-      */
+    /**
+     * {@inheritDoc}
+     */
     public function getLabel()
     {
         return 'oro.apruve.settings.label';
