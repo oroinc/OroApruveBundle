@@ -5,6 +5,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Integration;
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\ApruveBundle\Form\Type\ApruveSettingsType;
 use Oro\Bundle\ApruveBundle\Integration\ApruveTransport;
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 class ApruveTransportTest extends \PHPUnit\Framework\TestCase
 {
@@ -18,14 +19,19 @@ class ApruveTransportTest extends \PHPUnit\Framework\TestCase
      */
     protected function setUp(): void
     {
-        $this->transport = new ApruveTransport();
+        $this->transport = new class() extends ApruveTransport {
+            public function xgetSettings(): ParameterBag
+            {
+                return $this->settings;
+            }
+        };
     }
 
-    public function testInitCompiles()
+    public function testInitCorrectlySetsSettingsFromTransportEntity()
     {
         $settings = new ApruveSettings();
         $this->transport->init($settings);
-//        $this->assertAttributeSame($settings->getSettingsBag(), 'settings', $this->transport);
+        static::assertSame($settings->getSettingsBag(), $this->transport->xgetSettings());
     }
 
     public function testGetSettingsFormType()
