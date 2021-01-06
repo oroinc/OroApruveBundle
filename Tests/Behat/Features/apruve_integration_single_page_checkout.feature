@@ -43,8 +43,8 @@ Feature: Apruve integration Single Page Checkout
     And I signed in as AmandaRCole@example.org on the store frontend
     When I open page with shopping list List 2
     And I click "Create Order"
-    And I select "Fifth avenue, 10115 Berlin, Germany" from "Select Billing Address"
-    And I select "Fifth avenue, 10115 Berlin, Germany" from "Select Shipping Address"
+    And I select "ORO, Fifth avenue, 10115 Berlin, Germany" from "Select Billing Address"
+    And I select "ORO, Fifth avenue, 10115 Berlin, Germany" from "Select Shipping Address"
     And I check "Flat Rate" on the checkout page
     And I click "Submit Order"
     Then I should see "We were unable to process your payment. Please verify your payment information and try again." flash message
@@ -58,8 +58,8 @@ Feature: Apruve integration Single Page Checkout
     Given I proceed as the Buyer
     When I open page with shopping list List 1
     And I click "Create Order"
-    And I select "Fifth avenue, 10115 Berlin, Germany" from "Select Billing Address"
-    And I select "Fifth avenue, 10115 Berlin, Germany" from "Select Shipping Address"
+    And I select "ORO, Fifth avenue, 10115 Berlin, Germany" from "Select Billing Address"
+    And I select "ORO, Fifth avenue, 10115 Berlin, Germany" from "Select Shipping Address"
     And I check "Flat Rate" on the checkout page
     And I click "Submit Order"
     Then I see the "Thank You" page with "Thank You For Your Purchase!" title
