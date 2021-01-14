@@ -2,8 +2,8 @@
 
 namespace Oro\Bundle\ApruveBundle\Tests\Unit\Method\Config\Provider;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ObjectManager;
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\ApruveBundle\Entity\Repository\ApruveSettingsRepository;
 use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfigInterface;

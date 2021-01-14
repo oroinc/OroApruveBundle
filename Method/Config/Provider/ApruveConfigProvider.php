@@ -2,7 +2,7 @@
 
 namespace Oro\Bundle\ApruveBundle\Method\Config\Provider;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfigInterface;
 use Oro\Bundle\ApruveBundle\Method\Config\Factory\ApruveConfigFactoryInterface;
