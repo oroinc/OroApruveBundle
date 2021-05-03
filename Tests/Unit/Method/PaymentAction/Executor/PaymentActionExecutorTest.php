@@ -6,6 +6,7 @@ use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfigInterface;
 use Oro\Bundle\ApruveBundle\Method\PaymentAction\Executor\PaymentActionExecutor;
 use Oro\Bundle\ApruveBundle\Method\PaymentAction\PaymentActionInterface;
 use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
+use Oro\Component\Testing\ReflectionUtil;
 
 class PaymentActionExecutorTest extends \PHPUnit\Framework\TestCase
 {
@@ -60,10 +61,7 @@ class PaymentActionExecutorTest extends \PHPUnit\Framework\TestCase
         $return = $this->paymentActionExecutor->addPaymentAction($paymentAction);
         static::assertSame($return, $this->paymentActionExecutor);
 
-        $actionsProp = new \ReflectionProperty(PaymentActionExecutor::class, 'actions');
-        $actionsProp->setAccessible(true);
-        $actions = $actionsProp->getValue($this->paymentActionExecutor);
-
+        $actions = ReflectionUtil::getPropertyValue($this->paymentActionExecutor, 'actions');
         $this->assertSame($paymentAction, $actions['purchase']);
     }
 

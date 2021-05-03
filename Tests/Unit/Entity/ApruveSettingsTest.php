@@ -5,6 +5,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\LocaleBundle\Entity\LocalizedFallbackValue;
+use Oro\Component\Testing\ReflectionUtil;
 use Oro\Component\Testing\Unit\EntityTestCaseTrait;
 use Oro\Component\Testing\Unit\EntityTrait;
 
@@ -22,12 +23,7 @@ class ApruveSettingsTest extends \PHPUnit\Framework\TestCase
     public function testConstructor($property, $class)
     {
         $settings = new ApruveSettings();
-
-        $reflection = new \ReflectionProperty(ApruveSettings::class, $property);
-        $reflection->setAccessible(true);
-        $value = $reflection->getValue($settings);
-
-        static::assertInstanceOf($class, $value);
+        static::assertInstanceOf($class, ReflectionUtil::getPropertyValue($settings, $property));
     }
 
     /**
