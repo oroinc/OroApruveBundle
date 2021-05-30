@@ -15,56 +15,41 @@ use Psr\Log\LoggerInterface;
 
 class ApruveConfigFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    const CHANNEL_NAME = 'apruve';
-    const LABEL = 'Apruve';
-    const SHORT_LABEL = 'Apruve (short)';
-    const PAYMENT_METHOD_ID = 'apruve_1';
-    const API_KEY = '213a9079914f3b5163c6190f31444528';
-    const MERCHANT_ID = '7b97ea0172e18cbd4d3bf21e2b525b2d';
-    const API_KEY_DECRYPTED = 'apiKeyDecrypted';
-    const MERCHANT_ID_DECRYPTED = 'merchantIdDecrypted';
-    const TEST_MODE = false;
+    private const CHANNEL_NAME = 'apruve';
+    private const LABEL = 'Apruve';
+    private const SHORT_LABEL = 'Apruve (short)';
+    private const PAYMENT_METHOD_ID = 'apruve_1';
+    private const API_KEY = '213a9079914f3b5163c6190f31444528';
+    private const MERCHANT_ID = '7b97ea0172e18cbd4d3bf21e2b525b2d';
+    private const API_KEY_DECRYPTED = 'apiKeyDecrypted';
+    private const MERCHANT_ID_DECRYPTED = 'merchantIdDecrypted';
+    private const TEST_MODE = false;
 
-    /**
-     * @var Channel|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var Channel|\PHPUnit\Framework\MockObject\MockObject */
     private $channel;
 
-    /**
-     * @var SymmetricCrypterInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var SymmetricCrypterInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $crypter;
 
-    /**
-     * @var LoggerInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var LoggerInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $logger;
 
-    /**
-     * @var ApruveConfigFactoryInterface
-     */
-    private $factory;
-
-    /**
-     * @var LocalizationHelper|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var LocalizationHelper|\PHPUnit\Framework\MockObject\MockObject */
     private $localizationHelper;
 
-    /**
-     * @var IntegrationIdentifierGeneratorInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var IntegrationIdentifierGeneratorInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $integrationIdentifierGenerator;
 
-    /**
-     * {@inheritDoc}
-     */
+    /** @var ApruveConfigFactoryInterface */
+    private $factory;
+
     protected function setUp(): void
     {
         $this->logger = $this->createMock(LoggerInterface::class);
         $this->crypter = $this->createMock(SymmetricCrypterInterface::class);
         $this->localizationHelper = $this->createMock(LocalizationHelper::class);
         $this->integrationIdentifierGenerator = $this->createMock(IntegrationIdentifierGeneratorInterface::class);
-        $this->channel = $this->createChannelMock();
+        $this->channel = $this->createMock(Channel::class);
 
         $this->factory = new ApruveConfigFactory(
             $this->localizationHelper,
@@ -76,7 +61,7 @@ class ApruveConfigFactoryTest extends \PHPUnit\Framework\TestCase
 
     public function testCreate()
     {
-        $this->crypter
+        $this->crypter->expects($this->exactly(2))
             ->method('decryptData')
             ->willReturnMap([
                 [self::API_KEY, self::API_KEY_DECRYPTED],
@@ -99,18 +84,18 @@ class ApruveConfigFactoryTest extends \PHPUnit\Framework\TestCase
 
         $actualSettings = $this->factory->create($apruveSettings);
 
-        static::assertEquals($expectedSettings, $actualSettings);
+        self::assertEquals($expectedSettings, $actualSettings);
     }
 
     public function testCreateWithDecryptionFailure()
     {
-        $this->crypter
+        $this->crypter->expects($this->exactly(2))
             ->method('decryptData')
             ->willThrowException(new \Exception());
 
         $apruveSettings = $this->createApruveSettingsMock();
 
-        $this->logger
+        $this->logger->expects($this->exactly(2))
             ->method('error');
 
         $expectedSettings = new ApruveConfig(
@@ -127,7 +112,7 @@ class ApruveConfigFactoryTest extends \PHPUnit\Framework\TestCase
 
         $actualSettings = $this->factory->create($apruveSettings);
 
-        static::assertEquals($expectedSettings, $actualSettings);
+        self::assertEquals($expectedSettings, $actualSettings);
     }
 
     /**
@@ -135,80 +120,43 @@ class ApruveConfigFactoryTest extends \PHPUnit\Framework\TestCase
      */
     private function createApruveSettingsMock()
     {
-        $labelsCollection = $this->createLabelsCollectionMock();
-        $shortLabelsCollection = $this->createLabelsCollectionMock();
+        $labelsCollection = $this->createMock(Collection::class);
+        $shortLabelsCollection = $this->createMock(Collection::class);
 
-        $this->channel
-            ->expects(static::once())
+        $this->channel->expects(self::once())
             ->method('getName')
             ->willReturn(self::CHANNEL_NAME);
 
-        $this->integrationIdentifierGenerator
-            ->expects(static::once())
+        $this->integrationIdentifierGenerator->expects(self::once())
             ->method('generateIdentifier')
             ->with($this->channel)
             ->willReturn(self::PAYMENT_METHOD_ID);
 
-        $this->localizationHelper
-            ->expects(static::at(0))
+        $this->localizationHelper->expects(self::exactly(2))
             ->method('getLocalizedValue')
-            ->with($labelsCollection)
-            ->willReturn(self::LABEL);
-
-        $this->localizationHelper
-            ->expects(static::at(1))
-            ->method('getLocalizedValue')
-            ->with($shortLabelsCollection)
-            ->willReturn(self::SHORT_LABEL);
+            ->withConsecutive([$labelsCollection], [$shortLabelsCollection])
+            ->willReturnOnConsecutiveCalls(self::LABEL, self::SHORT_LABEL);
 
         $apruveSettings = $this->createMock(ApruveSettings::class);
-
-        $apruveSettings
-            ->expects(static::once())
+        $apruveSettings->expects(self::once())
             ->method('getChannel')
             ->willReturn($this->channel);
-
-        $apruveSettings
-            ->expects(static::once())
+        $apruveSettings->expects(self::once())
             ->method('getLabels')
             ->willReturn($labelsCollection);
-
-        $apruveSettings
-            ->expects(static::once())
+        $apruveSettings->expects(self::once())
             ->method('getShortLabels')
             ->willReturn($shortLabelsCollection);
-
-        $apruveSettings
-            ->expects(static::once())
+        $apruveSettings->expects(self::once())
             ->method('getApruveApiKey')
             ->willReturn(self::API_KEY);
-
-        $apruveSettings
-            ->expects(static::once())
+        $apruveSettings->expects(self::once())
             ->method('getApruveMerchantId')
             ->willReturn(self::MERCHANT_ID);
-
-        $apruveSettings
-            ->expects(static::once())
+        $apruveSettings->expects(self::once())
             ->method('getApruveTestMode')
             ->willReturn(self::TEST_MODE);
 
         return $apruveSettings;
-    }
-
-    /**
-     * @return Channel|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function createChannelMock()
-    {
-        return $this->createMock(Channel::class);
-    }
-
-    /**
-     * @return Collection|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function createLabelsCollectionMock()
-    {
-        return $this->createMock(Collection::class);
     }
 }
