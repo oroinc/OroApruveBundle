@@ -68,11 +68,11 @@ define(function(require) {
             this.apruve = apruve;
 
             this.apruve
-                .registerApruveCallback(this.apruve.APRUVE_LAUNCHED_EVENT, _.bind(this.handleApruveLaunch, this));
+                .registerApruveCallback(this.apruve.APRUVE_LAUNCHED_EVENT, this.handleApruveLaunch.bind(this));
             this.apruve
-                .registerApruveCallback(this.apruve.APRUVE_COMPLETE_EVENT, _.bind(this.handleApruveComplete, this));
+                .registerApruveCallback(this.apruve.APRUVE_COMPLETE_EVENT, this.handleApruveComplete.bind(this));
             this.apruve
-                .registerApruveCallback(this.apruve.APRUVE_CLOSED_EVENT, _.bind(this.handleApruveClose, this));
+                .registerApruveCallback(this.apruve.APRUVE_CLOSED_EVENT, this.handleApruveClose.bind(this));
 
             this._resolveDeferredInit();
         },
