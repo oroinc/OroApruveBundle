@@ -14,58 +14,52 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    const PRODUCT_ID = 1;
-    const AMOUNT = 123.4;
-    const QUANTITY = 10;
-    const AMOUNT_CENTS = 12340;
-    const AMOUNT_EA = '12.34';
-    const AMOUNT_EA_CENTS = 1234;
-    const PRODUCT_SKU = 'sku1';
-    const LINE_ITEM_SKU = 'lineItemSku1';
-    const CURRENCY = 'USD';
-    const PRODUCT_NAME = 'Sample name';
-    const PRODUCT_DESCR = ' Sample description with' . PHP_EOL . 'line breaks and <div>tags</div>';
-    const PRODUCT_DESCR_SANITIZED = 'Sample description with line breaks and tags';
-    const VIEW_PRODUCT_URL = 'http://example.com/product/view/1';
+    private const PRODUCT_ID = 1;
+    private const AMOUNT = 123.4;
+    private const QUANTITY = 10;
+    private const AMOUNT_CENTS = 12340;
+    private const AMOUNT_EA = '12.34';
+    private const AMOUNT_EA_CENTS = 1234;
+    private const PRODUCT_SKU = 'sku1';
+    private const LINE_ITEM_SKU = 'lineItemSku1';
+    private const CURRENCY = 'USD';
+    private const PRODUCT_NAME = 'Sample name';
+    private const PRODUCT_DESCR = ' Sample description with' . PHP_EOL . 'line breaks and <div>tags</div>';
+    private const PRODUCT_DESCR_SANITIZED = 'Sample description with line breaks and tags';
+    private const VIEW_PRODUCT_URL = 'http://example.com/product/view/1';
 
-    /**
-     * @var ApruveLineItemBuilderInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveLineItemBuilderInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $apruveLineItemBuilder;
 
-    /**
-     * @var ApruveLineItemBuilderFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveLineItemBuilderFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $apruveLineItemBuilderFactory;
 
-    /**
-     * @var PaymentLineItemInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var PaymentLineItemInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $paymentLineItem;
 
-    /**
-     * @var RouterInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var RouterInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $router;
 
-    /**
-     * @var ApruveLineItemFromPaymentLineItemFactory
-     */
+    /** @var ApruveLineItemFromPaymentLineItemFactory */
     private $factory;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->paymentLineItem = $this->createMock(PaymentLineItemInterface::class);
         $this->apruveLineItemBuilder = $this->createMock(ApruveLineItemBuilderInterface::class);
-        $this->apruveLineItemBuilderFactory = $this
-            ->createMock(ApruveLineItemBuilderFactoryInterface::class);
+        $this->apruveLineItemBuilderFactory = $this->createMock(ApruveLineItemBuilderFactoryInterface::class);
         $this->router = $this->createMock(RouterInterface::class);
 
+        $amountNormalizer = $this->createMock(AmountNormalizerInterface::class);
+        $amountNormalizer->expects(self::any())
+            ->method('normalize')
+            ->willReturnMap([
+                [self::AMOUNT, self::AMOUNT_CENTS],
+                [self::AMOUNT_EA, self::AMOUNT_EA_CENTS],
+            ]);
+
         $this->factory = new ApruveLineItemFromPaymentLineItemFactory(
-            $this->mockAmountNormalizer(),
+            $amountNormalizer,
             $this->apruveLineItemBuilderFactory,
             $this->router
         );
@@ -73,66 +67,56 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit\Framework\Te
 
     /**
      * @dataProvider createFromPaymentLineItemDataProvider
-     *
-     * @param Product|\PHPUnit\Framework\MockObject\MockObject $product
-     * @param string                                           $title
-     * @param string                                           $lineItemSku
-     * @param string                                           $expectedSku
      */
-    public function testCreateFromPaymentLineItem($product, $title, $lineItemSku, $expectedSku)
-    {
+    public function testCreateFromPaymentLineItem(
+        Product $product,
+        string $title,
+        ?string $lineItemSku,
+        string $expectedSku
+    ) {
         $this->mockRouter();
         $this->mockPaymentLineItem($product, $lineItemSku);
 
-        $this->apruveLineItemBuilderFactory
-            ->expects(static::once())
+        $this->apruveLineItemBuilderFactory->expects(self::once())
             ->method('create')
             ->with($title, self::AMOUNT_CENTS, self::QUANTITY, self::CURRENCY)
             ->willReturn($this->apruveLineItemBuilder);
 
-        $this->apruveLineItemBuilder
-            ->expects(static::once())
+        $this->apruveLineItemBuilder->expects(self::once())
             ->method('setEaCents')
             ->with(self::AMOUNT_EA_CENTS)
             ->willReturnSelf();
 
-        $this->apruveLineItemBuilder
-            ->expects(static::once())
+        $this->apruveLineItemBuilder->expects(self::once())
             ->method('setSku')
             ->with($expectedSku);
 
-        $this->apruveLineItemBuilder
-            ->expects(static::once())
+        $this->apruveLineItemBuilder->expects(self::once())
             ->method('setDescription')
             ->with(self::PRODUCT_DESCR_SANITIZED)
             ->willReturnSelf();
 
-        $this->apruveLineItemBuilder
-            ->expects(static::once())
+        $this->apruveLineItemBuilder->expects(self::once())
             ->method('setViewProductUrl')
             ->with(self::VIEW_PRODUCT_URL);
 
-        $this->apruveLineItemBuilder
-            ->expects(static::once())
+        $this->apruveLineItemBuilder->expects(self::once())
             ->method('getResult');
 
         $this->factory->createFromPaymentLineItem($this->paymentLineItem);
     }
 
-    /**
-     * @return array
-     */
-    public function createFromPaymentLineItemDataProvider()
+    public function createFromPaymentLineItemDataProvider(): array
     {
         return [
             'line item sku is not null' => [
-                'product' => $this->mockProduct(),
+                'product' => $this->getProduct(),
                 'title' => self::PRODUCT_NAME,
                 'lineItemSku' => self::LINE_ITEM_SKU,
                 'expectedSku' => self::LINE_ITEM_SKU,
             ],
             'line item sku is null' => [
-                'product' => $this->mockProduct(),
+                'product' => $this->getProduct(),
                 'title' => self::PRODUCT_NAME,
                 'lineItemSku' => null,
                 'expectedSku' => self::PRODUCT_SKU,
@@ -144,113 +128,90 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit\Framework\Te
     {
         $this->mockPaymentLineItem(null, self::LINE_ITEM_SKU);
 
-        $this->apruveLineItemBuilderFactory
-            ->expects(static::once())
+        $this->apruveLineItemBuilderFactory->expects(self::once())
             ->method('create')
             ->with(self::LINE_ITEM_SKU, self::AMOUNT_CENTS, self::QUANTITY, self::CURRENCY)
             ->willReturn($this->apruveLineItemBuilder);
 
-        $this->apruveLineItemBuilder
-            ->expects(static::once())
+        $this->apruveLineItemBuilder->expects(self::once())
             ->method('setEaCents')
             ->with(self::AMOUNT_EA_CENTS)
             ->willReturnSelf();
 
-        $this->apruveLineItemBuilder
-            ->expects(static::once())
+        $this->apruveLineItemBuilder->expects(self::once())
             ->method('setSku')
             ->with(self::LINE_ITEM_SKU);
 
-        $this->apruveLineItemBuilder
-            ->expects(static::never())
+        $this->apruveLineItemBuilder->expects(self::never())
             ->method('setDescription')
             ->willReturnSelf();
 
-        $this->apruveLineItemBuilder
-            ->expects(static::never())
+        $this->apruveLineItemBuilder->expects(self::never())
             ->method('setViewProductUrl');
 
-        $this->apruveLineItemBuilder
-            ->expects(static::once())
+        $this->apruveLineItemBuilder->expects(self::once())
             ->method('getResult');
 
         $this->factory->createFromPaymentLineItem($this->paymentLineItem);
     }
 
-    /**
-     * @return Product|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function mockProduct()
+    private function getProduct(): Product
     {
         $product = $this->getMockBuilder(Product::class)
             ->disableOriginalConstructor()
-            ->setMethods(['getId', 'getName', 'getDescription', 'getSku'])
+            ->onlyMethods(['getId', 'getSku'])
+            ->addMethods(['getName', 'getDescription'])
             ->getMock();
-        $product
+        $product->expects(self::any())
             ->method('getId')
             ->willReturn(self::PRODUCT_ID);
-        $product
+        $product->expects(self::any())
             ->method('getName')
             ->willReturn(self::PRODUCT_NAME);
-        $product
+        $product->expects(self::any())
             ->method('getDescription')
             ->willReturn(self::PRODUCT_DESCR);
-        $product
+        $product->expects(self::any())
             ->method('getSku')
             ->willReturn(self::PRODUCT_SKU);
 
         return $product;
     }
 
-    /**
-     * @return AmountNormalizerInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function mockAmountNormalizer()
-    {
-        $amountNormalizer = $this->createMock(AmountNormalizerInterface::class);
-        $amountNormalizer
-            ->method('normalize')
-            ->willReturnMap([
-                [self::AMOUNT, self::AMOUNT_CENTS],
-                [self::AMOUNT_EA, self::AMOUNT_EA_CENTS],
-            ]);
-        return $amountNormalizer;
-    }
-
     private function mockRouter()
     {
-        $this->router
+        $this->router->expects(self::any())
             ->method('generate')
-            ->with('oro_product_frontend_product_view', ['id' => self::PRODUCT_ID], UrlGeneratorInterface::ABSOLUTE_URL)
+            ->with(
+                'oro_product_frontend_product_view',
+                ['id' => self::PRODUCT_ID],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            )
             ->willReturn(self::VIEW_PRODUCT_URL);
     }
 
-    /**
-     * @param $product
-     * @param $lineItemSku
-     */
-    private function mockPaymentLineItem($product, $lineItemSku)
+    private function mockPaymentLineItem(?Product $product, ?string $lineItemSku)
     {
         $price = $this->createMock(Price::class);
-        $price
+        $price->expects(self::any())
             ->method('getValue')
             ->willReturn(self::AMOUNT_EA);
-        $price
+        $price->expects(self::any())
             ->method('getCurrency')
             ->willReturn(self::CURRENCY);
 
-        $this->paymentLineItem
+        $this->paymentLineItem->expects(self::any())
             ->method('getPrice')
             ->willReturn($price);
-        $this->paymentLineItem
+        $this->paymentLineItem->expects(self::any())
             ->method('getQuantity')
             ->willReturn(self::QUANTITY);
 
-        $this->paymentLineItem
+        $this->paymentLineItem->expects(self::any())
             ->method('getProductSku')
             ->willReturn($lineItemSku);
 
-        $this->paymentLineItem
+        $this->paymentLineItem->expects(self::any())
             ->method('getProduct')
             ->willReturn($product);
     }
