@@ -16,29 +16,19 @@ use Psr\Log\LoggerInterface;
 
 class ApruveConnectionValidatorTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ApruveConnectionValidatorRequestFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveConnectionValidatorRequestFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $requestFactory;
 
-    /**
-     * @var ApruveSettingsRestClientFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveSettingsRestClientFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $clientFactory;
 
-    /**
-     * @var ApruveConnectionValidatorResultFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveConnectionValidatorResultFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $resultFactory;
 
-    /**
-     * @var LoggerInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var LoggerInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $logger;
 
-    /**
-     * @var ApruveConnectionValidator
-     */
+    /** @var ApruveConnectionValidator */
     private $validator;
 
     protected function setUp(): void
@@ -65,25 +55,28 @@ class ApruveConnectionValidatorTest extends \PHPUnit\Framework\TestCase
         $response = $this->createMock(RestResponseInterface::class);
         $result = $this->createMock(ApruveConnectionValidatorResultInterface::class);
 
-        $this->requestFactory->expects(static::once())
+        $this->requestFactory->expects(self::once())
             ->method('createBySettings')
             ->with($transport)
             ->willReturn($request);
 
-        $this->clientFactory->expects(static::once())
+        $this->clientFactory->expects(self::once())
             ->method('create')
             ->willReturn($client);
 
-        $client->expects(static::once())
+        $client->expects(self::once())
             ->method('execute')
             ->with($request)
             ->willReturn($response);
 
-        $this->resultFactory->expects(static::once())
+        $this->resultFactory->expects(self::once())
             ->method('createResultByApruveClientResponse')
             ->willReturn($result);
 
-        static::assertSame($result, $this->validator->validateConnectionByApruveSettings($transport));
+        $this->logger->expects(self::never())
+            ->method(self::anything());
+
+        self::assertSame($result, $this->validator->validateConnectionByApruveSettings($transport));
     }
 
     public function testValidateConnectionByApruveSettingsServerError()
@@ -94,24 +87,28 @@ class ApruveConnectionValidatorTest extends \PHPUnit\Framework\TestCase
         $client = $this->createMock(ApruveRestClientInterface::class);
         $result = $this->createMock(ApruveConnectionValidatorResultInterface::class);
 
-        $this->requestFactory->expects(static::once())
+        $this->requestFactory->expects(self::once())
             ->method('createBySettings')
             ->with($transport)
             ->willReturn($request);
 
-        $this->clientFactory->expects(static::once())
+        $this->clientFactory->expects(self::once())
             ->method('create')
             ->willReturn($client);
 
-        $client->expects(static::once())
+        $client->expects(self::once())
             ->method('execute')
             ->with($request)
-            ->willThrowException(new RestException);
+            ->willThrowException(new RestException('some error'));
 
-        $this->resultFactory->expects(static::once())
+        $this->resultFactory->expects(self::once())
             ->method('createExceptionResult')
             ->willReturn($result);
 
-        static::assertSame($result, $this->validator->validateConnectionByApruveSettings($transport));
+        $this->logger->expects(self::once())
+            ->method('error')
+            ->with('some error', []);
+
+        self::assertSame($result, $this->validator->validateConnectionByApruveSettings($transport));
     }
 }
