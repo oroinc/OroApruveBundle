@@ -19,10 +19,6 @@ class ApruvePaymentMethodFactory implements ApruvePaymentMethodFactoryInterface
      */
     private $supportedCurrenciesProvider;
 
-    /**
-     * @param PaymentActionExecutor $paymentActionExecutor
-     * @param SupportedCurrenciesProviderInterface $supportedCurrenciesProvider
-     */
     public function __construct(
         PaymentActionExecutor $paymentActionExecutor,
         SupportedCurrenciesProviderInterface $supportedCurrenciesProvider

@@ -14,9 +14,6 @@ class ApruvePaymentMethodView implements PaymentMethodViewInterface
      */
     private $config;
 
-    /**
-     * @param ApruveConfigInterface $config
-     */
     public function __construct(ApruveConfigInterface $config)
     {
         $this->config = $config;

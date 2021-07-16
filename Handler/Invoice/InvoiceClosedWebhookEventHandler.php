@@ -27,10 +27,6 @@ class InvoiceClosedWebhookEventHandler implements InvoiceClosedWebhookEventHandl
      */
     private $paymentTransactionProvider;
 
-    /**
-     * @param PaymentTransactionRepository $paymentTransactionRepository
-     * @param PaymentTransactionProvider   $paymentTransactionProvider
-     */
     public function __construct(
         PaymentTransactionRepository $paymentTransactionRepository,
         PaymentTransactionProvider $paymentTransactionProvider
@@ -56,11 +52,6 @@ class InvoiceClosedWebhookEventHandler implements InvoiceClosedWebhookEventHandl
         $this->createInvoiceClosedTransaction($paymentMethod, $sourcePaymentTransaction, $eventBody);
     }
 
-    /**
-     * @param PaymentMethodInterface $paymentMethod
-     * @param PaymentTransaction     $sourcePaymentTransaction
-     * @param array                  $apruveResponse
-     */
     private function createInvoiceClosedTransaction(
         PaymentMethodInterface $paymentMethod,
         PaymentTransaction $sourcePaymentTransaction,
@@ -117,9 +108,6 @@ class InvoiceClosedWebhookEventHandler implements InvoiceClosedWebhookEventHandl
         );
     }
 
-    /**
-     * @param PaymentTransaction $sourcePaymentTransaction
-     */
     private function checkAlreadyExistingTransaction(PaymentTransaction $sourcePaymentTransaction)
     {
         $criteria = [

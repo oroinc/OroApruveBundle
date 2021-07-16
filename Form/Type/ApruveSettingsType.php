@@ -29,10 +29,6 @@ class ApruveSettingsType extends AbstractType
      */
     private $cryptedDataTransformerFactory;
 
-    /**
-     * @param TransportInterface $transport
-     * @param CryptedDataTransformerFactoryInterface $cryptedDataTransformerFactory
-     */
     public function __construct(
         TransportInterface $transport,
         CryptedDataTransformerFactoryInterface $cryptedDataTransformerFactory

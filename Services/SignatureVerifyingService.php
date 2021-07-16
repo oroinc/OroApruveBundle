@@ -19,9 +19,6 @@ class SignatureVerifyingService implements SignatureVerifyingServiceInterface
      */
     private $apruvePublicKeyProvider;
 
-    /**
-     * @param ApruvePublicKeyProviderInterface $apruvePublicKeyProvider
-     */
     public function __construct(ApruvePublicKeyProviderInterface $apruvePublicKeyProvider)
     {
         $this->apruvePublicKeyProvider = $apruvePublicKeyProvider;

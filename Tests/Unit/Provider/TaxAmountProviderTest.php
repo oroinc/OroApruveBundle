@@ -97,9 +97,6 @@ class TaxAmountProviderTest extends \PHPUnit\Framework\TestCase
         $this->assertNull($actual);
     }
 
-    /**
-     * @return array
-     */
     public function getTaxAmountWithHandledExceptionDataProvider(): array
     {
         return [

@@ -14,9 +14,6 @@ class ApruveConfigRestClientFactory implements ApruveConfigRestClientFactoryInte
      */
     private $restClientFactory;
 
-    /**
-     * @param ApruveRestClientFactoryInterface $restClientFactory
-     */
     public function __construct(ApruveRestClientFactoryInterface $restClientFactory)
     {
         $this->restClientFactory = $restClientFactory;

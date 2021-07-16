@@ -286,9 +286,6 @@ abstract class AbstractPaymentActionTest extends \PHPUnit\Framework\TestCase
         return new RestException();
     }
 
-    /**
-     * @param PaymentContextInterface|null $paymentContext
-     */
     protected function mockPaymentContextFactory(PaymentContextInterface $paymentContext = null)
     {
         $this->paymentContextFactory

@@ -30,7 +30,6 @@ class PaymentActionExecutorTest extends \PHPUnit\Framework\TestCase
      */
     private $config;
 
-
     /**
      * {@inheritDoc}
      */

@@ -16,9 +16,6 @@ class WebhookTokenType extends AbstractType
      */
     private $generator;
 
-    /**
-     * @param RandomTokenGeneratorInterface $randomTokenGenerator
-     */
     public function __construct(RandomTokenGeneratorInterface $randomTokenGenerator)
     {
         $this->generator = $randomTokenGenerator;
