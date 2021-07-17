@@ -32,9 +32,6 @@ class OroApruveBundleInstaller implements Installation
         $this->addOroApruveTransLabelForeignKeys($schema);
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function updateOroIntegrationTransportTable(Schema $schema)
     {
         $table = $schema->getTable('oro_integration_transport');
@@ -44,11 +41,8 @@ class OroApruveBundleInstaller implements Installation
         $table->addColumn('apruve_webhook_token', 'string', ['notnull' => false, 'length' => 255]);
     }
 
-
     /**
      * Create oro_apruve_short_label table
-     *
-     * @param Schema $schema
      */
     protected function createOroApruveShortLabelTable(Schema $schema)
     {
@@ -62,8 +56,6 @@ class OroApruveBundleInstaller implements Installation
 
     /**
      * Create oro_apruve_trans_label table
-     *
-     * @param Schema $schema
      */
     protected function createOroApruveTransLabelTable(Schema $schema)
     {
@@ -76,8 +68,6 @@ class OroApruveBundleInstaller implements Installation
 
     /**
      * Add oro_apruve_short_label foreign keys.
-     *
-     * @param Schema $schema
      */
     protected function addOroApruveShortLabelForeignKeys(Schema $schema)
     {
@@ -98,8 +88,6 @@ class OroApruveBundleInstaller implements Installation
 
     /**
      * Add oro_apruve_trans_label foreign keys.
-     *
-     * @param Schema $schema
      */
     protected function addOroApruveTransLabelForeignKeys(Schema $schema)
     {

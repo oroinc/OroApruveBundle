@@ -118,9 +118,6 @@ class LoadApruvePaymentTransactionData extends AbstractFixture implements
         $manager->flush();
     }
 
-    /**
-     * @param array $data
-     */
     private function setPaymentMethod(array &$data)
     {
         /** @var Channel $channel */
@@ -131,9 +128,6 @@ class LoadApruvePaymentTransactionData extends AbstractFixture implements
         $data['paymentMethod'] = $this->apruveIdentifierGenerator->generateIdentifier($channel);
     }
 
-    /**
-     * @param array $data
-     */
     private function setEntityIdentifier(array &$data): void
     {
         $data['entityIdentifier'] = $this->getReference($data['entityReference'])->getId();

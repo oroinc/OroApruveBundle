@@ -27,14 +27,6 @@ class ApruveInvoiceFromPaymentContextFactory extends AbstractApruveEntityWithLin
      */
     private $apruveInvoiceBuilderFactory;
 
-    /**
-     * @param AmountNormalizerInterface $amountNormalizer
-     * @param ApruveLineItemFromPaymentLineItemFactoryInterface $apruveLineItemFromPaymentLineItemFactory
-     * @param ShippingAmountProviderInterface $shippingAmountProvider
-     * @param TaxAmountProviderInterface $taxAmountProvider
-     * @param TotalProcessorProvider $totalProcessorProvider
-     * @param ApruveInvoiceBuilderFactoryInterface $apruveInvoiceBuilderFactory
-     */
     public function __construct(
         AmountNormalizerInterface $amountNormalizer,
         ApruveLineItemFromPaymentLineItemFactoryInterface $apruveLineItemFromPaymentLineItemFactory,

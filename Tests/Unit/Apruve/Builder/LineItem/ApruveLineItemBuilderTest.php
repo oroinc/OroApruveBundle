@@ -41,7 +41,6 @@ class ApruveLineItemBuilderTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-
     public function testGetResult()
     {
         $actual = $this->builder->getResult();

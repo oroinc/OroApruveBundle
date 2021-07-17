@@ -212,7 +212,6 @@ class ApruveInvoiceFromPaymentContextFactoryTest extends \PHPUnit\Framework\Test
         return $apruveLineItem;
     }
 
-
     /**
      * @return AmountNormalizerInterface|\PHPUnit\Framework\MockObject\MockObject
      */

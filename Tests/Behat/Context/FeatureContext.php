@@ -12,9 +12,6 @@ class FeatureContext extends OroFeatureContext implements OroPageObjectAware
     use PageObjectDictionary;
 
     /**
-     * @param string $button
-     * @param string $embeddedForm
-     *
      * @throws ElementNotFoundException
      *
      * @Given /^(?:|I )press "(?P<button>[\w\s]*)" in "(?P<embeddedForm>[\w\s]*)"$/

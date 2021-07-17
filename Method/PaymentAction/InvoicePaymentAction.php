@@ -43,13 +43,6 @@ class InvoicePaymentAction extends AbstractPaymentAction implements LoggerAwareI
      */
     private $apruveInvoiceFromResponseFactory;
 
-    /**
-     * @param TransactionPaymentContextFactoryInterface       $paymentContextFactory
-     * @param ApruveInvoiceFromPaymentContextFactoryInterface $apruveInvoiceFromPaymentContextFactory
-     * @param ApruveInvoiceFromResponseFactoryInterface       $apruveInvoiceFromResponseFactory
-     * @param ApruveConfigRestClientFactoryInterface          $apruveConfigRestClientFactory
-     * @param CreateInvoiceRequestFactoryInterface            $createInvoiceRequestFactory
-     */
     public function __construct(
         TransactionPaymentContextFactoryInterface $paymentContextFactory,
         ApruveInvoiceFromPaymentContextFactoryInterface $apruveInvoiceFromPaymentContextFactory,
