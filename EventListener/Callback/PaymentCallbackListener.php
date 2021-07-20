@@ -16,17 +16,11 @@ class PaymentCallbackListener
      */
     protected $paymentMethodProvider;
 
-    /**
-     * @param PaymentMethodProviderInterface $paymentMethodProvider
-     */
     public function __construct(PaymentMethodProviderInterface $paymentMethodProvider)
     {
         $this->paymentMethodProvider = $paymentMethodProvider;
     }
 
-    /**
-     * @param AbstractCallbackEvent $event
-     */
     public function onReturn(AbstractCallbackEvent $event)
     {
         $paymentTransaction = $event->getPaymentTransaction();

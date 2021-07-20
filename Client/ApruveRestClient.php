@@ -18,9 +18,6 @@ class ApruveRestClient implements ApruveRestClientInterface
      */
     private $restClient;
 
-    /**
-     * @param RestClientInterface $restClient
-     */
     public function __construct(RestClientInterface $restClient)
     {
         $this->restClient = $restClient;

@@ -21,9 +21,6 @@ class TaxAmountProvider implements TaxAmountProviderInterface, LoggerAwareInterf
      */
     private $taxAmountProvider;
 
-    /**
-     * @param BaseTaxAmountProvider $taxAmountProvider
-     */
     public function __construct(BaseTaxAmountProvider $taxAmountProvider)
     {
         $this->taxAmountProvider = $taxAmountProvider;

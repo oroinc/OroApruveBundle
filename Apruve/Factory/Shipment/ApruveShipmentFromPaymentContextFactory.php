@@ -28,15 +28,6 @@ class ApruveShipmentFromPaymentContextFactory extends AbstractApruveEntityWithLi
      */
     private $shippingMethodProvider;
 
-    /**
-     * @param AmountNormalizerInterface $amountNormalizer
-     * @param ApruveLineItemFromPaymentLineItemFactoryInterface $apruveLineItemFromPaymentLineItemFactory
-     * @param ShippingAmountProviderInterface $shippingAmountProvider
-     * @param TaxAmountProviderInterface $taxAmountProvider
-     * @param TotalProcessorProvider $totalProcessorProvider
-     * @param ApruveShipmentBuilderFactoryInterface $apruveShipmentBuilderFactory
-     * @param ShippingMethodProviderInterface $shippingMethodProvider
-     */
     public function __construct(
         AmountNormalizerInterface $amountNormalizer,
         ApruveLineItemFromPaymentLineItemFactoryInterface $apruveLineItemFromPaymentLineItemFactory,

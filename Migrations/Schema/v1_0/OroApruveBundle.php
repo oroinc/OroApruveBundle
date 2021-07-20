@@ -24,9 +24,6 @@ class OroApruveBundle implements Migration
         $this->addOroApruveTransLabelForeignKeys($schema);
     }
 
-    /**
-     * @param Schema $schema
-     */
     public function updateOroIntegrationTransportTable(Schema $schema)
     {
         $table = $schema->getTable('oro_integration_transport');
@@ -38,8 +35,6 @@ class OroApruveBundle implements Migration
 
     /**
      * Create oro_apruve_short_label table
-     *
-     * @param Schema $schema
      */
     protected function createOroApruveShortLabelTable(Schema $schema)
     {
@@ -53,8 +48,6 @@ class OroApruveBundle implements Migration
 
     /**
      * Create oro_apruve_trans_label table
-     *
-     * @param Schema $schema
      */
     protected function createOroApruveTransLabelTable(Schema $schema)
     {
@@ -68,8 +61,6 @@ class OroApruveBundle implements Migration
 
     /**
      * Add oro_apruve_short_label foreign keys.
-     *
-     * @param Schema $schema
      */
     protected function addOroApruveShortLabelForeignKeys(Schema $schema)
     {
@@ -90,8 +81,6 @@ class OroApruveBundle implements Migration
 
     /**
      * Add oro_apruve_trans_label foreign keys.
-     *
-     * @param Schema $schema
      */
     protected function addOroApruveTransLabelForeignKeys(Schema $schema)
     {

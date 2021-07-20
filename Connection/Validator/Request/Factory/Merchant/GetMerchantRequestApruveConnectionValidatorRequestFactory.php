@@ -20,10 +20,6 @@ class GetMerchantRequestApruveConnectionValidatorRequestFactory implements
      */
     private $symmetricCrypter;
 
-    /**
-     * @param GetMerchantRequestFactoryInterface $merchantRequestFactory
-     * @param SymmetricCrypterInterface          $symmetricCrypter
-     */
     public function __construct(
         GetMerchantRequestFactoryInterface $merchantRequestFactory,
         SymmetricCrypterInterface $symmetricCrypter

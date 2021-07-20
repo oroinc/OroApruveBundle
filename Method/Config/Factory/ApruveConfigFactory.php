@@ -32,12 +32,6 @@ class ApruveConfigFactory implements ApruveConfigFactoryInterface
      */
     private $logger;
 
-    /**
-     * @param LocalizationHelper $localizationHelper
-     * @param IntegrationIdentifierGeneratorInterface $identifierGenerator
-     * @param SymmetricCrypterInterface $crypter
-     * @param LoggerInterface $logger
-     */
     public function __construct(
         LocalizationHelper $localizationHelper,
         IntegrationIdentifierGeneratorInterface $identifierGenerator,

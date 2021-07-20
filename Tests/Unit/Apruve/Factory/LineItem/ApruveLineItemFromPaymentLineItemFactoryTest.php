@@ -225,10 +225,6 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit\Framework\Te
             ->willReturn(self::VIEW_PRODUCT_URL);
     }
 
-    /**
-     * @param $product
-     * @param $lineItemSku
-     */
     private function mockPaymentLineItem($product, $lineItemSku)
     {
         $price = $this->createMock(Price::class);

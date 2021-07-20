@@ -19,10 +19,6 @@ class ApruvePaymentMethodProvider extends AbstractPaymentMethodProvider
      */
     private $configProvider;
 
-    /**
-     * @param ApruveConfigProviderInterface $configProvider
-     * @param ApruvePaymentMethodFactoryInterface $factory
-     */
     public function __construct(
         ApruveConfigProviderInterface $configProvider,
         ApruvePaymentMethodFactoryInterface $factory
@@ -44,9 +40,6 @@ class ApruvePaymentMethodProvider extends AbstractPaymentMethodProvider
         }
     }
 
-    /**
-     * @param ApruveConfigInterface $config
-     */
     protected function addPaymentMethod(ApruveConfigInterface $config)
     {
         $this->addMethod(

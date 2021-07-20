@@ -20,10 +20,6 @@ class ApruveSettingsRestClientFactory implements ApruveSettingsRestClientFactory
      */
     private $symmetricCrypter;
 
-    /**
-     * @param ApruveRestClientFactoryInterface $restClientFactory
-     * @param SymmetricCrypterInterface        $symmetricCrypter
-     */
     public function __construct(
         ApruveRestClientFactoryInterface $restClientFactory,
         SymmetricCrypterInterface $symmetricCrypter

@@ -15,9 +15,6 @@ class ApruveTransport implements TransportInterface
      */
     protected $settings;
 
-    /**
-    * @param Transport $transportEntity
-     */
     public function init(Transport $transportEntity)
     {
         $this->settings = $transportEntity->getSettingsBag();

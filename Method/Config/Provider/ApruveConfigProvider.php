@@ -30,11 +30,6 @@ class ApruveConfigProvider implements ApruveConfigProviderInterface
      */
     protected $logger;
 
-    /**
-     * @param ManagerRegistry                  $doctrine
-     * @param LoggerInterface                  $logger
-     * @param ApruveConfigFactoryInterface $configFactory
-     */
     public function __construct(
         ManagerRegistry $doctrine,
         LoggerInterface $logger,
