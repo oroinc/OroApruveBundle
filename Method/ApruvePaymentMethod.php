@@ -30,11 +30,6 @@ class ApruvePaymentMethod implements PaymentMethodInterface
      */
     protected $supportedCurrenciesProvider;
 
-    /**
-     * @param ApruveConfigInterface $config
-     * @param SupportedCurrenciesProviderInterface $supportedCurrenciesProvider
-     * @param PaymentActionExecutor $paymentActionExecutor
-     */
     public function __construct(
         ApruveConfigInterface $config,
         SupportedCurrenciesProviderInterface $supportedCurrenciesProvider,

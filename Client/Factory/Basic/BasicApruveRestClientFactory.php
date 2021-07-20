@@ -25,10 +25,6 @@ class BasicApruveRestClientFactory implements ApruveRestClientFactoryInterface
      */
     private $integrationRestClientFactory;
 
-    /**
-     * @param ApruveClientUrlProviderInterface $urlProvider
-     * @param RestClientFactoryInterface       $integrationRestClientFactory
-     */
     public function __construct(
         ApruveClientUrlProviderInterface $urlProvider,
         RestClientFactoryInterface $integrationRestClientFactory

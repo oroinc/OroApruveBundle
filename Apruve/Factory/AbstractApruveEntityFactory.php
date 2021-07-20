@@ -12,9 +12,6 @@ abstract class AbstractApruveEntityFactory
      */
     protected $amountNormalizer;
 
-    /**
-     * @param AmountNormalizerInterface $amountNormalizer
-     */
     public function __construct(AmountNormalizerInterface $amountNormalizer)
     {
         $this->amountNormalizer = $amountNormalizer;

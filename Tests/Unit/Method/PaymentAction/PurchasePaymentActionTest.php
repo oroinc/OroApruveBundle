@@ -85,7 +85,6 @@ class PurchasePaymentActionTest extends \PHPUnit\Framework\TestCase
      */
     private $config;
 
-
     /**
      * {@inheritDoc}
      */

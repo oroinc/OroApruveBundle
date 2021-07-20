@@ -31,12 +31,6 @@ class ApruveConnectionValidator implements ApruveConnectionValidatorInterface
      */
     private $logger;
 
-    /**
-     * @param ApruveSettingsRestClientFactoryInterface         $clientFactory
-     * @param ApruveConnectionValidatorRequestFactoryInterface $requestFactory
-     * @param ApruveConnectionValidatorResultFactoryInterface  $resultFactory
-     * @param LoggerInterface                                  $logger
-     */
     public function __construct(
         ApruveSettingsRestClientFactoryInterface $clientFactory,
         ApruveConnectionValidatorRequestFactoryInterface $requestFactory,

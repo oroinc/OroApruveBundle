@@ -23,11 +23,6 @@ class ApruveLineItemFromPaymentLineItemFactory extends AbstractApruveEntityFacto
      */
     private $router;
 
-    /**
-     * @param AmountNormalizerInterface             $amountNormalizer
-     * @param ApruveLineItemBuilderFactoryInterface $apruveLineItemBuilderFactory
-     * @param RouterInterface                       $router
-     */
     public function __construct(
         AmountNormalizerInterface $amountNormalizer,
         ApruveLineItemBuilderFactoryInterface $apruveLineItemBuilderFactory,

@@ -28,11 +28,6 @@ class PurchasePaymentAction extends AbstractPaymentAction implements LoggerAware
      */
     private $apruveOrderFromPaymentContextFactory;
 
-    /**
-     * @param TransactionPaymentContextFactoryInterface     $paymentContextFactory
-     * @param ApruveOrderFromPaymentContextFactoryInterface $apruveOrderFromPaymentContextFactory
-     * @param OrderSecureHashGeneratorInterface             $orderSecureHashGenerator
-     */
     public function __construct(
         TransactionPaymentContextFactoryInterface $paymentContextFactory,
         ApruveOrderFromPaymentContextFactoryInterface $apruveOrderFromPaymentContextFactory,

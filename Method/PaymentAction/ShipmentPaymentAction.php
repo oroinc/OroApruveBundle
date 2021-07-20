@@ -49,13 +49,6 @@ class ShipmentPaymentAction extends AbstractPaymentAction implements LoggerAware
      */
     private $apruveConfigRestClientFactory;
 
-    /**
-     * @param TransactionPaymentContextFactoryInterface        $paymentContextFactory
-     * @param ApruveShipmentFromPaymentContextFactoryInterface $apruveShipmentFromPaymentContextFactory
-     * @param ApruveShipmentFromResponseFactoryInterface       $apruveShipmentFromResponseFactory
-     * @param ApruveConfigRestClientFactoryInterface           $apruveConfigRestClientFactory
-     * @param CreateShipmentRequestFactoryInterface            $createShipmentRequestFactory
-     */
     public function __construct(
         TransactionPaymentContextFactoryInterface $paymentContextFactory,
         ApruveShipmentFromPaymentContextFactoryInterface $apruveShipmentFromPaymentContextFactory,

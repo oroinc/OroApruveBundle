@@ -35,13 +35,6 @@ abstract class AbstractApruveEntityWithLineItemsFactory extends AbstractApruveEn
      */
     protected $totalProcessorProvider;
 
-    /**
-     * @param AmountNormalizerInterface $amountNormalizer
-     * @param ApruveLineItemFromPaymentLineItemFactoryInterface $apruveLineItemFromPaymentLineItemFactory
-     * @param ShippingAmountProviderInterface $shippingAmountProvider
-     * @param TaxAmountProviderInterface $taxAmountProvider
-     * @param TotalProcessorProvider $totalProcessorProvider
-     */
     public function __construct(
         AmountNormalizerInterface $amountNormalizer,
         ApruveLineItemFromPaymentLineItemFactoryInterface $apruveLineItemFromPaymentLineItemFactory,

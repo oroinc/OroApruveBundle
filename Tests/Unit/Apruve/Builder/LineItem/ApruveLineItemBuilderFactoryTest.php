@@ -17,7 +17,6 @@ class ApruveLineItemBuilderFactoryTest extends \PHPUnit\Framework\TestCase
      */
     private $factory;
 
-
     /**
      * {@inheritDoc}
      */
