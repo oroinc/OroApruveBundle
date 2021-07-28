@@ -4,18 +4,18 @@ oro_behat_extension:
       contexts:
         - Oro\Bundle\TestFrameworkBundle\Tests\Behat\Context\OroMainContext
         - Oro\Bundle\DataGridBundle\Tests\Behat\Context\GridContext
-        - OroFormBundle::FormContext
-        - OroConfigBundle::FeatureContext
-        - OroCheckoutBundle::FeatureContext
-        - OroShippingBundle::SingleCurrencyContext
-        - OroCustomerBundle::CustomerUserContext
-        - OroApplicationBundle::CommerceMainContext
-        - OroShoppingListBundle::ShoppingListContext
-        - OroShoppingListBundle::FeatureContext
-        - OroApruveBundle::FeatureContext
-        - OroWarehouseBundle::FeatureContext
-        - OroWorkflowBundle::FeatureContext
-        - OroPaymentBundle::FeatureContext
+        - Oro\Bundle\FormBundle\Tests\Behat\Context\FormContext
+        - Oro\Bundle\ConfigBundle\Tests\Behat\Context\FeatureContext
+        - Oro\Bundle\CheckoutBundle\Tests\Behat\Context\FeatureContext
+        - Oro\Bundle\ShippingBundle\Tests\Behat\Context\SingleCurrencyContext
+        - Oro\Bundle\CustomerBundle\Tests\Behat\Context\CustomerUserContext
+        - Oro\Bundle\ApplicationBundle\Tests\Behat\Context\CommerceMainContext
+        - Oro\Bundle\ShoppingListBundle\Tests\Behat\Context\ShoppingListContext
+        - Oro\Bundle\ShoppingListBundle\Tests\Behat\Context\FeatureContext
+        - Oro\Bundle\ApruveBundle\Tests\Behat\Context\FeatureContext
+        - Oro\Bundle\WarehouseBundle\Tests\Behat\Context\FeatureContext
+        - Oro\Bundle\WorkflowBundle\Tests\Behat\Context\FeatureContext
+        - Oro\Bundle\PaymentBundle\Tests\Behat\Context\FeatureContext
       paths:
         - '@OroApruveBundle/Tests/Behat/Features'
   elements:
