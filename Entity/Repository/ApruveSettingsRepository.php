@@ -2,11 +2,14 @@
 
 namespace Oro\Bundle\ApruveBundle\Entity\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\SecurityBundle\ORM\Walker\AclHelper;
 
-class ApruveSettingsRepository extends EntityRepository
+/**
+ * Doctrine repository for ApruveSettings entity
+ */
+class ApruveSettingsRepository extends ServiceEntityRepository
 {
     /**
      * @var AclHelper

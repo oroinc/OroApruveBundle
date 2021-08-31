@@ -1,15 +1,16 @@
 services:
 
     oro_apruve.repository.apruve_settings:
-        class: 'Oro\Bundle\ApruveBundle\Entity\Repository\ApruveSettingsRepository'
+        alias: Oro\Bundle\ApruveBundle\Entity\Repository\ApruveSettingsRepository
+
+    Oro\Bundle\ApruveBundle\Entity\Repository\ApruveSettingsRepository:
         parent: oro_entity.abstract_repository
         arguments:
             - 'Oro\Bundle\ApruveBundle\Entity\ApruveSettings'
         calls:
             - [setAclHelper, ['@oro_security.acl_helper']]
-
-    Oro\Bundle\ApruveBundle\Entity\Repository\ApruveSettingsRepository:
-        alias: oro_apruve.repository.apruve_settings
+        tags:
+            - { name: doctrine.repository_service }
 
     oro_apruve.provider.shipping_amount:
         class: 'Oro\Bundle\ApruveBundle\Provider\ShippingAmountProvider'
