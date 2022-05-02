@@ -9,8 +9,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class OroApruveExtension extends Extension
 {
-    const ALIAS = 'oro_apruve';
-
     /**
      * {@inheritDoc}
      */
@@ -28,13 +26,5 @@ class OroApruveExtension extends Extension
         $loader->load('connection.yml');
         $loader->load('handlers.yml');
         $loader->load('controllers.yml');
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getAlias()
-    {
-        return self::ALIAS;
     }
 }
