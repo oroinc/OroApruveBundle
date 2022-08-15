@@ -11,36 +11,25 @@ use Oro\Bundle\OrderBundle\Entity\Order;
 use Oro\Bundle\OrderBundle\Tests\Functional\DataFixtures\LoadOrders;
 use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 use Oro\Bundle\PaymentBundle\Method\PaymentMethodInterface;
-use Oro\Component\Testing\Unit\EntityTrait;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class LoadApruvePaymentTransactionData extends AbstractFixture implements
     DependentFixtureInterface,
     ContainerAwareInterface
 {
-    use EntityTrait;
+    public const AUTHORIZE_TRANSACTION_CHANNEL_1 = 'authorize_transaction_channel_1';
+    public const AUTHORIZE_TRANSACTION_CHANNEL_2 = 'authorize_transaction_channel_2';
+    public const CAPTURE_TRANSACTION_CHANNEL_2 = 'capture_transaction_channel_2';
 
-    const AUTHORIZE_TRANSACTION_CHANNEL_1 = 'authorize_transaction_channel_1';
-    const AUTHORIZE_TRANSACTION_CHANNEL_2 = 'authorize_transaction_channel_2';
-    const CAPTURE_TRANSACTION_CHANNEL_2 = 'capture_transaction_channel_2';
+    public const PAYMENT_METHOD = 'payment_method';
 
-    const PAYMENT_METHOD = 'payment_method';
+    private IntegrationIdentifierGeneratorInterface $apruveIdentifierGenerator;
 
-    /**
-     * @var array
-     */
-    private $referenceProperties = ['sourcePaymentTransactionReference'];
+    private array $referenceProperties = ['sourcePaymentTransactionReference'];
 
-    /**
-     * @var IntegrationIdentifierGeneratorInterface
-     */
-    private $apruveIdentifierGenerator;
-
-    /**
-     * @var array
-     */
-    protected $data = [
+    protected array $data = [
         self::AUTHORIZE_TRANSACTION_CHANNEL_1 => [
             'amount' => '1000.00',
             'currency' => 'USD',
@@ -73,7 +62,7 @@ class LoadApruvePaymentTransactionData extends AbstractFixture implements
     /**
      * {@inheritDoc}
      */
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             LoadApruveChannelData::class,
@@ -84,7 +73,7 @@ class LoadApruvePaymentTransactionData extends AbstractFixture implements
     /**
      * {@inheritDoc}
      */
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(ContainerInterface $container = null): void
     {
         $this->apruveIdentifierGenerator  = $container->get('oro_apruve.method.generator.identifier');
     }
@@ -92,71 +81,43 @@ class LoadApruvePaymentTransactionData extends AbstractFixture implements
     /**
      * {@inheritDoc}
      */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
+        $propertyAccessor = PropertyAccess::createPropertyAccessor();
         foreach ($this->data as $reference => $data) {
-            $paymentTransaction = new PaymentTransaction();
-
             $this->setPaymentMethod($data);
             $this->setEntityIdentifier($data);
 
+            $paymentTransaction = new PaymentTransaction();
             foreach ($data as $property => $value) {
-                if ($this->isReferenceProperty($property)) {
+                if (\in_array($property, $this->referenceProperties, true)) {
                     continue;
                 }
-
-                $this->setValue($paymentTransaction, $property, $value);
+                $propertyAccessor->setValue($paymentTransaction, $property, $value);
+            }
+            if (\array_key_exists('sourcePaymentTransactionReference', $data)) {
+                $sourcePaymentTransaction = $this->getReference($data['sourcePaymentTransactionReference']);
+                $this->setValue($paymentTransaction, 'sourcePaymentTransaction', $sourcePaymentTransaction);
             }
 
-            $this->handleReferenceProperties($paymentTransaction, $data);
-
             $this->setReference($reference, $paymentTransaction);
-
             $manager->persist($paymentTransaction);
         }
 
         $manager->flush();
     }
 
-    private function setPaymentMethod(array &$data)
+    private function setPaymentMethod(array &$data): void
     {
         /** @var Channel $channel */
         $channel = $this->getReference($data['channelReference']);
-
         unset($data['channelReference']);
-
         $data['paymentMethod'] = $this->apruveIdentifierGenerator->generateIdentifier($channel);
     }
 
     private function setEntityIdentifier(array &$data): void
     {
         $data['entityIdentifier'] = $this->getReference($data['entityReference'])->getId();
-
         unset($data['entityReference']);
-    }
-
-    /**
-     * @param PaymentTransaction $paymentTransaction
-     * @param array              $data
-     *
-     * @return void
-     */
-    private function handleReferenceProperties(PaymentTransaction $paymentTransaction, array $data)
-    {
-        if (array_key_exists('sourcePaymentTransactionReference', $data)) {
-            $sourcePaymentTransaction = $this->getReference($data['sourcePaymentTransactionReference']);
-
-            $this->setValue($paymentTransaction, 'sourcePaymentTransaction', $sourcePaymentTransaction);
-        }
-    }
-
-    /**
-     * @param string $property
-     *
-     * @return bool
-     */
-    private function isReferenceProperty($property)
-    {
-        return in_array($property, $this->referenceProperties, true);
     }
 }
