@@ -61,7 +61,7 @@ Feature: Apruve Guest Checkout Integration
     And I click "Search Button"
     And I click "testname"
     When I click "Add to Shopping List"
-    Then I should see "Product has been added to" flash message
+    Then I should see "Product has been added to" flash message and I close it
     When I open shopping list widget
     And I click "View List"
     Then I should see "testname"
