@@ -6,31 +6,14 @@ use Doctrine\Persistence\ObjectManager;
 use Oro\Bundle\IntegrationBundle\Entity\Channel;
 use Oro\Bundle\PaymentBundle\Entity\PaymentMethodConfig;
 use Oro\Bundle\PaymentBundle\Entity\PaymentMethodsConfigsRule;
-use Oro\Bundle\PaymentBundle\Tests\Functional\Entity\DataFixtures\LoadPaymentMethodsConfigsRuleData
-    as BasicLoadPaymentMethodsConfigsRuleData;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Oro\Bundle\PaymentBundle\Tests\Functional\Entity\DataFixtures\LoadPaymentMethodsConfigsRuleData as BaseFixture;
 
-class LoadPaymentMethodsConfigsRuleData extends BasicLoadPaymentMethodsConfigsRuleData implements
-    ContainerAwareInterface
+class LoadPaymentMethodsConfigsRuleData extends BaseFixture
 {
     /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
      * {@inheritDoc}
      */
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         parent::load($manager);
 
@@ -49,16 +32,12 @@ class LoadPaymentMethodsConfigsRuleData extends BasicLoadPaymentMethodsConfigsRu
     /**
      * {@inheritDoc}
      */
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return array_merge(parent::getDependencies(), [LoadApruveChannelData::class]);
     }
 
-    /**
-     * @param Channel $channel
-     * @return string
-     */
-    protected function getPaymentMethodIdentifier(Channel $channel)
+    private function getPaymentMethodIdentifier(Channel $channel): string
     {
         return $this->container->get('oro_apruve.method.generator.identifier')
             ->generateIdentifier($channel);
