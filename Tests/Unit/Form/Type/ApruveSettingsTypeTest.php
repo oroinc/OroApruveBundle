@@ -20,47 +20,32 @@ use Symfony\Component\Validator\Validation;
 
 class ApruveSettingsTypeTest extends FormIntegrationTestCase
 {
-    const ENCRYPTED_API_KEY = 'encryptedApiKeySample';
-    const DECRYPTED_API_KEY = 'apiKeySample';
+    private const ENCRYPTED_API_KEY = 'encryptedApiKeySample';
+    private const DECRYPTED_API_KEY = 'apiKeySample';
 
-    const ENCRYPTED_MERCHANT_ID = 'encryptedMerchantIdSample';
-    const DECRYPTED_MERCHANT_ID = 'merchantIdSample';
+    private const ENCRYPTED_MERCHANT_ID = 'encryptedMerchantIdSample';
+    private const DECRYPTED_MERCHANT_ID = 'merchantIdSample';
 
-    const LABEL = 'Apruve';
-    const SHORT_LABEL = 'Apruve (short)';
-    const TEST_MODE = true;
-    const WEBHOOK_TOKEN = 'webhookTokenSample';
+    private const LABEL = 'Apruve';
+    private const SHORT_LABEL = 'Apruve (short)';
+    private const TEST_MODE = true;
+    private const WEBHOOK_TOKEN = 'webhookTokenSample';
 
-    const DATA_CLASS = ApruveSettings::class;
-
-    /**
-     * @var DataTransformerInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var DataTransformerInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $dataTransformer;
 
-    /**
-     * @var CryptedDataTransformerFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var CryptedDataTransformerFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $cryptedDataTransformerFactory;
 
-    /**
-     * @var RandomTokenGeneratorInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var RandomTokenGeneratorInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $tokenGenerator;
 
-    /**
-     * @var TransportInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var TransportInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $transport;
 
-    /**
-     * @var ApruveSettingsType
-     */
+    /** @var ApruveSettingsType */
     private $formType;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->dataTransformer = $this->createMock(DataTransformerInterface::class);
@@ -70,9 +55,9 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
             ->willReturn($this->dataTransformer);
 
         $this->transport = $this->createMock(TransportInterface::class);
-        $this->transport->expects(static::any())
+        $this->transport->expects(self::any())
             ->method('getSettingsEntityFQCN')
-            ->willReturn(static::DATA_CLASS);
+            ->willReturn(ApruveSettings::class);
 
         $this->tokenGenerator = $this->createMock(RandomTokenGeneratorInterface::class);
         $this->tokenGenerator
@@ -85,35 +70,27 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
     }
 
     /**
-     * @return array
+     * {@inheritDoc}
      */
-    protected function getExtensions()
+    protected function getExtensions(): array
     {
         return [
-            new PreloadedExtension(
-                [
-                    LocalizedFallbackValueCollectionType::class => new LocalizedFallbackValueCollectionTypeStub(),
-                    WebhookTokenType::class => new WebhookTokenType($this->tokenGenerator),
-                    ApruveSettingsType::class => $this->formType
-                ],
-                []
-            ),
+            new PreloadedExtension([
+                $this->formType,
+                new WebhookTokenType($this->tokenGenerator),
+                LocalizedFallbackValueCollectionType::class => new LocalizedFallbackValueCollectionTypeStub(),
+            ], []),
             new ValidatorExtension(Validation::createValidator())
         ];
     }
 
     /**
      * @dataProvider submitDataProvider
-     *
-     * @param ApruveSettings $defaultData
-     * @param array $submittedData
-     * @param bool $isValid
-     * @param ApruveSettings $expectedData
      */
     public function testSubmit(
         ApruveSettings $defaultData,
         array $submittedData,
-        $isValid,
+        bool $isValid,
         ApruveSettings $expectedData
     ) {
         $this->dataTransformer
@@ -126,19 +103,16 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
 
         $form = $this->factory->create(ApruveSettingsType::class, $defaultData, []);
 
-        static::assertEquals($defaultData, $form->getData());
+        self::assertEquals($defaultData, $form->getData());
 
         $form->submit($submittedData);
 
-        static::assertEquals($isValid, $form->isValid());
-        static::assertTrue($form->isSynchronized());
-        static::assertEquals($expectedData, $form->getData());
+        self::assertEquals($isValid, $form->isValid());
+        self::assertTrue($form->isSynchronized());
+        self::assertEquals($expectedData, $form->getData());
     }
 
-    /**
-     * @return array
-     */
-    public function submitDataProvider()
+    public function submitDataProvider(): array
     {
         $label = (new LocalizedFallbackValue())->setString(self::LABEL);
         $shortLabel = (new LocalizedFallbackValue())->setString(self::SHORT_LABEL);
@@ -175,9 +149,8 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
 
     public function testConfigureOptions()
     {
-        /** @var OptionsResolver|\PHPUnit\Framework\MockObject\MockObject $resolver */
         $resolver = $this->createMock(OptionsResolver::class);
-        $resolver->expects(static::once())
+        $resolver->expects(self::once())
             ->method('setDefaults')
             ->with([
                 'data_class' => $this->transport->getSettingsEntityFQCN(),
@@ -188,6 +161,6 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
 
     public function testGetBlockPrefix()
     {
-        static::assertEquals(ApruveSettingsType::BLOCK_PREFIX, $this->formType->getBlockPrefix());
+        self::assertEquals(ApruveSettingsType::BLOCK_PREFIX, $this->formType->getBlockPrefix());
     }
 }

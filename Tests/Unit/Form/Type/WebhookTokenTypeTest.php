@@ -2,7 +2,6 @@
 
 namespace Oro\Bundle\ApruveBundle\Tests\Unit\Form\Type;
 
-use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\ApruveBundle\Form\Type\WebhookTokenType;
 use Oro\Bundle\SecurityBundle\Generator\RandomTokenGeneratorInterface;
 use Oro\Component\Testing\ReflectionUtil;
@@ -13,23 +12,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class WebhookTokenTypeTest extends FormIntegrationTestCase
 {
-    /**
-     * @var RandomTokenGeneratorInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var RandomTokenGeneratorInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $tokenGenerator;
 
-    /**
-     * @var WebhookTokenType
-     */
+    /** @var WebhookTokenType */
     private $formType;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->tokenGenerator = $this->createMock(RandomTokenGeneratorInterface::class);
-        $this->tokenGenerator
+        $this->tokenGenerator->expects(self::any())
             ->method('generateToken')
             ->with(256)
             ->willReturn('webhookTokenSample');
@@ -46,9 +38,9 @@ class WebhookTokenTypeTest extends FormIntegrationTestCase
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
-    public function getExtensions()
+    protected function getExtensions(): array
     {
         return [
             new PreloadedExtension([$this->formType], [])
@@ -57,12 +49,8 @@ class WebhookTokenTypeTest extends FormIntegrationTestCase
 
     /**
      * @dataProvider submitProvider
-     *
-     * @param ApruveSettings $defaultData
-     * @param array $submittedData
-     * @param ApruveSettings $expectedData
      */
-    public function testSubmit($defaultData, $submittedData, $expectedData)
+    public function testSubmit(?string $defaultData, string $submittedData, string $expectedData)
     {
         $form = $this->factory->create(WebhookTokenType::class, $defaultData);
 
@@ -74,10 +62,7 @@ class WebhookTokenTypeTest extends FormIntegrationTestCase
         $this->assertEquals($expectedData, $actualData);
     }
 
-    /**
-     * @return array
-     */
-    public function submitProvider()
+    public function submitProvider(): array
     {
         return [
             'submit with empty data' => [
