@@ -7,23 +7,16 @@ use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequest;
 
 class ApruveRequestTest extends \PHPUnit\Framework\TestCase
 {
-    const METHOD = 'GET';
-    const URI = '/sampleUri';
-    const DATA = ['sampleData' => ['foo' => 'bar']];
+    private const METHOD = 'GET';
+    private const URI = '/sampleUri';
+    private const DATA = ['sampleData' => ['foo' => 'bar']];
 
-    /**
-     * @var ApruveEntityInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveEntityInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $requestData;
 
-    /**
-     * @var ApruveRequest
-     */
+    /** @var ApruveRequest */
     private $request;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->requestData = $this->createMock(ApruveEntityInterface::class);
@@ -33,33 +26,33 @@ class ApruveRequestTest extends \PHPUnit\Framework\TestCase
     public function testGetMethod()
     {
         $actual = $this->request->getMethod();
-        static::assertSame(self::METHOD, $actual);
+        self::assertSame(self::METHOD, $actual);
     }
 
     public function testGetUri()
     {
         $actual = $this->request->getUri();
-        static::assertSame(self::URI, $actual);
+        self::assertSame(self::URI, $actual);
     }
 
     public function testGetData()
     {
-        $this->requestData
+        $this->requestData->expects(self::any())
             ->method('getData')
             ->willReturn(self::DATA);
         $actual = $this->request->getData();
 
-        static::assertSame(self::DATA, $actual);
+        self::assertSame(self::DATA, $actual);
     }
 
     public function testGetDataIfNoDataProvided()
     {
         $request = new ApruveRequest(self::METHOD, self::URI);
-        $this->requestData
+        $this->requestData->expects(self::any())
             ->method('getData')
             ->willReturn(self::DATA);
         $actual = $request->getData();
 
-        static::assertSame([], $actual);
+        self::assertSame([], $actual);
     }
 }

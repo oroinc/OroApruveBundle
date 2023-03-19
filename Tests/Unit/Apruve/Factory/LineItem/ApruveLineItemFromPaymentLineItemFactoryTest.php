@@ -143,8 +143,7 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit\Framework\Te
             ->with(self::LINE_ITEM_SKU);
 
         $this->apruveLineItemBuilder->expects(self::never())
-            ->method('setDescription')
-            ->willReturnSelf();
+            ->method('setDescription');
 
         $this->apruveLineItemBuilder->expects(self::never())
             ->method('setViewProductUrl');

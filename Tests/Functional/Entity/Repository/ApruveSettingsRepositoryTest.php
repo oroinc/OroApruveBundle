@@ -9,23 +9,17 @@ use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
 
 class ApruveSettingsRepositoryTest extends WebTestCase
 {
-    /**
-     * @var ApruveSettingsRepository
-     */
-    private $repository;
+    private ApruveSettingsRepository $repository;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
-        $this->initClient([], static::generateBasicAuthHeader());
+        $this->initClient([], self::generateBasicAuthHeader());
 
         $this->loadFixtures([
             LoadApruveChannelData::class,
         ]);
 
-        $this->repository = static::getContainer()
+        $this->repository = self::getContainer()
             ->get('doctrine')
             ->getManagerForClass(ApruveSettings::class)
             ->getRepository(ApruveSettings::class);
@@ -35,8 +29,8 @@ class ApruveSettingsRepositoryTest extends WebTestCase
     {
         $settingsByEnabledChannel = $this->repository->findEnabledSettings();
 
-        static::assertCount(2, $settingsByEnabledChannel);
-        static::assertContains($this->getReference('apruve:transport_1'), $settingsByEnabledChannel);
-        static::assertContains($this->getReference('apruve:transport_2'), $settingsByEnabledChannel);
+        self::assertCount(2, $settingsByEnabledChannel);
+        self::assertContains($this->getReference('apruve:transport_1'), $settingsByEnabledChannel);
+        self::assertContains($this->getReference('apruve:transport_2'), $settingsByEnabledChannel);
     }
 }

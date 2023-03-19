@@ -11,29 +11,18 @@ use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 
 class ApruvePaymentMethodTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ApruvePaymentMethod
-     */
+    /** @var ApruvePaymentMethod */
     private $method;
 
-    /**
-     * @var SupportedCurrenciesProviderInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var SupportedCurrenciesProviderInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $supportedCurrenciesProvider;
 
-    /**
-     * @var PaymentActionExecutor|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var PaymentActionExecutor|\PHPUnit\Framework\MockObject\MockObject */
     private $paymentActionExecutor;
 
-    /**
-     * @var ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $config;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->config = $this->createMock(ApruveConfigInterface::class);
@@ -49,42 +38,36 @@ class ApruvePaymentMethodTest extends \PHPUnit\Framework\TestCase
 
     public function testExecute()
     {
-        /** @var PaymentTransaction|\PHPUnit\Framework\MockObject\MockObject $paymentTransaction */
         $paymentTransaction = $this->createMock(PaymentTransaction::class);
         $action = 'some_action';
 
-        $this->paymentActionExecutor
-            ->expects($this->once())
+        $this->paymentActionExecutor->expects(self::once())
             ->method('execute')
             ->with($action, $this->config, $paymentTransaction)
             ->willReturn([]);
 
         $actual = $this->method->execute($action, $paymentTransaction);
 
-        static::assertSame([], $actual);
+        self::assertSame([], $actual);
     }
 
     public function testGetIdentifier()
     {
         $identifier = 'id';
 
-        $this->config->expects(static::once())
+        $this->config->expects(self::once())
             ->method('getPaymentMethodIdentifier')
             ->willReturn($identifier);
 
-        static::assertEquals($identifier, $this->method->getIdentifier());
+        self::assertEquals($identifier, $this->method->getIdentifier());
     }
 
     /**
-     * @param bool $expected
-     * @param string $actionName
-     *
      * @dataProvider supportsDataProvider
      */
-    public function testSupports($expected, $actionName)
+    public function testSupports(bool $expected, string $actionName)
     {
-        $this->paymentActionExecutor
-            ->expects($this->once())
+        $this->paymentActionExecutor->expects(self::once())
             ->method('supports')
             ->willReturnMap([
                 [ApruvePaymentMethod::AUTHORIZE, true],
@@ -94,13 +77,10 @@ class ApruvePaymentMethodTest extends \PHPUnit\Framework\TestCase
                 [ApruvePaymentMethod::CHARGE, false],
             ]);
 
-        static::assertEquals($expected, $this->method->supports($actionName));
+        self::assertEquals($expected, $this->method->supports($actionName));
     }
 
-    /**
-     * @return array
-     */
-    public function supportsDataProvider()
+    public function supportsDataProvider(): array
     {
         return [
             [true, ApruvePaymentMethod::AUTHORIZE],
@@ -113,32 +93,24 @@ class ApruvePaymentMethodTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider isApplicableDataProvider
-     *
-     * @param string $currency
-     * @param bool $isSupported
-     * @param bool $expectedResult
      */
-    public function testIsApplicable($currency, $isSupported, $expectedResult)
+    public function testIsApplicable(string $currency, bool $isSupported, bool $expectedResult)
     {
-        /** @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject $context */
         $context = $this->createMock(PaymentContextInterface::class);
-        $context
+        $context->expects(self::any())
             ->method('getCurrency')
             ->willReturn($currency);
 
-        $this->supportedCurrenciesProvider
+        $this->supportedCurrenciesProvider->expects(self::any())
             ->method('isSupported')
             ->with($currency)
             ->willReturn($isSupported);
 
         $actual = $this->method->isApplicable($context);
-        static::assertSame($expectedResult, $actual);
+        self::assertSame($expectedResult, $actual);
     }
 
-    /**
-     * @return array
-     */
-    public function isApplicableDataProvider()
+    public function isApplicableDataProvider(): array
     {
         return [
             'should be applicable if currency is supported' => ['USD', true, true],

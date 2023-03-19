@@ -7,7 +7,7 @@ use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestResponseInterface;
 
 class ApruveInvoiceFromResponseFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    const APRUVE_INVOICE = [
+    private const APRUVE_INVOICE = [
         'amount_cents' => 1000,
         'currency' => 'USD',
         'invoice_items' => [
@@ -20,19 +20,12 @@ class ApruveInvoiceFromResponseFactoryTest extends \PHPUnit\Framework\TestCase
         ],
     ];
 
-    /**
-     * @var RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $restResponse;
 
-    /**
-     * @var ApruveInvoiceFromResponseFactory
-     */
+    /** @var ApruveInvoiceFromResponseFactory */
     private $factory;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->restResponse = $this->createMock(RestResponseInterface::class);
@@ -42,13 +35,12 @@ class ApruveInvoiceFromResponseFactoryTest extends \PHPUnit\Framework\TestCase
 
     public function testCreateFromResponse()
     {
-        $this->restResponse
-            ->expects(static::once())
+        $this->restResponse->expects(self::once())
             ->method('json')
             ->willReturn(self::APRUVE_INVOICE);
 
         $actual = $this->factory->createFromResponse($this->restResponse);
 
-        static::assertEquals(self::APRUVE_INVOICE, $actual->getData());
+        self::assertEquals(self::APRUVE_INVOICE, $actual->getData());
     }
 }

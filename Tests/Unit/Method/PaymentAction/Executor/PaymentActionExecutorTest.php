@@ -10,29 +10,18 @@ use Oro\Component\Testing\ReflectionUtil;
 
 class PaymentActionExecutorTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var PaymentActionInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var PaymentActionInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $paymentAction;
 
-    /**
-     * @var PaymentTransaction|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var PaymentTransaction|\PHPUnit\Framework\MockObject\MockObject */
     private $paymentTransaction;
 
-    /**
-     * @var PaymentActionExecutor
-     */
+    /** @var PaymentActionExecutor */
     private $paymentActionExecutor;
 
-    /**
-     * @var ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $config;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->paymentActionExecutor = new PaymentActionExecutor();
@@ -40,8 +29,7 @@ class PaymentActionExecutorTest extends \PHPUnit\Framework\TestCase
         $this->config = $this->createMock(ApruveConfigInterface::class);
 
         $this->paymentAction = $this->createMock(PaymentActionInterface::class);
-        $this->paymentAction
-            ->expects($this->once())
+        $this->paymentAction->expects(self::once())
             ->method('getName')
             ->willReturn('supported_action');
 
@@ -50,15 +38,13 @@ class PaymentActionExecutorTest extends \PHPUnit\Framework\TestCase
 
     public function testAddPaymentAction()
     {
-        /** @var PaymentActionInterface|\PHPUnit\Framework\MockObject\MockObject $paymentAction */
         $paymentAction = $this->createMock(PaymentActionInterface::class);
-        $paymentAction
-            ->expects($this->once())
+        $paymentAction->expects(self::once())
             ->method('getName')
             ->willReturn('purchase');
 
         $return = $this->paymentActionExecutor->addPaymentAction($paymentAction);
-        static::assertSame($return, $this->paymentActionExecutor);
+        self::assertSame($return, $this->paymentActionExecutor);
 
         $actions = ReflectionUtil::getPropertyValue($this->paymentActionExecutor, 'actions');
         $this->assertSame($paymentAction, $actions['purchase']);
@@ -66,15 +52,14 @@ class PaymentActionExecutorTest extends \PHPUnit\Framework\TestCase
 
     public function testExecuteWithSupportedAction()
     {
-        $this->paymentAction
-            ->expects($this->once())
+        $this->paymentAction->expects(self::once())
             ->method('execute')
             ->with($this->config, $this->paymentTransaction)
             ->willReturn([]);
 
         $actual = $this->paymentActionExecutor->execute('supported_action', $this->config, $this->paymentTransaction);
 
-        static::assertSame([], $actual);
+        self::assertSame([], $actual);
     }
 
     public function testExecuteWithUnsupportedAction()
@@ -84,25 +69,19 @@ class PaymentActionExecutorTest extends \PHPUnit\Framework\TestCase
 
         $actual = $this->paymentActionExecutor->execute('unsupported_action', $this->config, $this->paymentTransaction);
 
-        static::assertSame([], $actual);
+        self::assertSame([], $actual);
     }
 
     /**
      * @dataProvider supportsDataProvider
-     *
-     * @param string $actionName
-     * @param bool   $expected
      */
-    public function testSupports($actionName, $expected)
+    public function testSupports(string $actionName, bool $expected)
     {
         $actual = $this->paymentActionExecutor->supports($actionName);
-        static::assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
 
-    /**
-     * @return array
-     */
-    public function supportsDataProvider()
+    public function supportsDataProvider(): array
     {
         return [
             ['supported_action', true],

@@ -34,9 +34,6 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
     /** @var DataTransformerInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $dataTransformer;
 
-    /** @var CryptedDataTransformerFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $cryptedDataTransformerFactory;
-
     /** @var RandomTokenGeneratorInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $tokenGenerator;
 
@@ -49,10 +46,6 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
     protected function setUp(): void
     {
         $this->dataTransformer = $this->createMock(DataTransformerInterface::class);
-        $this->cryptedDataTransformerFactory = $this->createMock(CryptedDataTransformerFactoryInterface::class);
-        $this->cryptedDataTransformerFactory
-            ->method('create')
-            ->willReturn($this->dataTransformer);
 
         $this->transport = $this->createMock(TransportInterface::class);
         $this->transport->expects(self::any())
@@ -60,11 +53,16 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
             ->willReturn(ApruveSettings::class);
 
         $this->tokenGenerator = $this->createMock(RandomTokenGeneratorInterface::class);
-        $this->tokenGenerator
+        $this->tokenGenerator->expects(self::any())
             ->method('generateToken')
             ->willReturn('webhookTokenSample');
 
-        $this->formType = new ApruveSettingsType($this->transport, $this->cryptedDataTransformerFactory);
+        $cryptedDataTransformerFactory = $this->createMock(CryptedDataTransformerFactoryInterface::class);
+        $cryptedDataTransformerFactory->expects(self::any())
+            ->method('create')
+            ->willReturn($this->dataTransformer);
+
+        $this->formType = new ApruveSettingsType($this->transport, $cryptedDataTransformerFactory);
 
         parent::setUp();
     }
@@ -93,7 +91,7 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
         bool $isValid,
         ApruveSettings $expectedData
     ) {
-        $this->dataTransformer
+        $this->dataTransformer->expects(self::any())
             ->method('reverseTransform')
             ->willReturnMap([
                 [null, null],

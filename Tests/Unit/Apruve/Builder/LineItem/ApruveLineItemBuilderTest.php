@@ -10,26 +10,23 @@ class ApruveLineItemBuilderTest extends \PHPUnit\Framework\TestCase
     /**
      * Mandatory
      */
-    const TITLE = 'Sample name';
-    const AMOUNT_CENTS = 12345;
-    const CURRENCY = 'USD';
-    const QUANTITY = 10;
+    private const TITLE = 'Sample name';
+    private const AMOUNT_CENTS = 12345;
+    private const CURRENCY = 'USD';
+    private const QUANTITY = 10;
 
     /**
      * Optional
      */
-    const SKU = 'sku1';
-    const DESCRIPTION = 'Sample description';
-    const AMOUNT_EA_CENTS = 1235;
-    const VIEW_PRODUCT_URL = 'http://example.com/product/view/1';
-    const MERCHANT_NOTES = 'Sample note';
-    const VENDOR = 'Sample vendor name';
-    const VARIANT_INFO = 'Sample variant';
+    private const SKU = 'sku1';
+    private const DESCRIPTION = 'Sample description';
+    private const AMOUNT_EA_CENTS = 1235;
+    private const VIEW_PRODUCT_URL = 'http://example.com/product/view/1';
+    private const MERCHANT_NOTES = 'Sample note';
+    private const VENDOR = 'Sample vendor name';
+    private const VARIANT_INFO = 'Sample variant';
 
-    /**
-     * @var ApruveLineItemBuilder
-     */
-    private $builder;
+    private ApruveLineItemBuilder $builder;
 
     protected function setUp(): void
     {
@@ -53,7 +50,7 @@ class ApruveLineItemBuilderTest extends \PHPUnit\Framework\TestCase
             ApruveLineItem::TITLE => self::TITLE,
         ];
 
-        static::assertEquals($expected, $actual->getData());
+        self::assertEquals($expected, $actual->getData());
     }
 
     public function testGetResultWithOptionalParams()
@@ -86,6 +83,6 @@ class ApruveLineItemBuilderTest extends \PHPUnit\Framework\TestCase
             ApruveLineItem::VARIANT_INFO => self::VARIANT_INFO,
         ];
 
-        static::assertEquals($expected, $actual->getData());
+        self::assertEquals($expected, $actual->getData());
     }
 }

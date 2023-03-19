@@ -10,19 +10,12 @@ use Oro\Bundle\PaymentBundle\Tests\Unit\Method\View\Provider\AbstractMethodViewP
 
 class ApruvePaymentMethodViewProviderTest extends AbstractMethodViewProviderTest
 {
-    /**
-     * @var ApruvePaymentMethodViewFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruvePaymentMethodViewFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
     protected $factory;
 
-    /**
-     * @var ApruveConfigProviderInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveConfigProviderInterface|\PHPUnit\Framework\MockObject\MockObject */
     protected $configProvider;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->factory = $this->createMock(ApruvePaymentMethodViewFactoryInterface::class);

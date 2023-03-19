@@ -13,39 +13,29 @@ use Oro\Bundle\PaymentBundle\Method\PaymentMethodInterface;
 
 class InvoicePaymentActionTest extends AbstractPaymentActionTest
 {
-    const APRUVE_ORDER_ID = 'sampleApruveOrderId';
-    const APRUVE_INVOICE_ID = 'sampleApruveInvoiceId';
+    private const APRUVE_ORDER_ID = 'sampleApruveOrderId';
+    private const APRUVE_INVOICE_ID = 'sampleApruveInvoiceId';
 
-    const RETURN_ERROR = ['successful' => false, 'message' => 'oro.apruve.payment_transaction.invoice.result.error'];
+    protected const RETURN_ERROR = [
+        'successful' => false,
+        'message' => 'oro.apruve.payment_transaction.invoice.result.error'
+    ];
 
-    /**
-     * @var CreateInvoiceRequestFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $createInvoiceRequestFactory;
+    /** @var CreateInvoiceRequestFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
+    private $createInvoiceRequestFactory;
 
-    /**
-     * @var ApruveInvoiceFromResponseFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $apruveInvoiceFromResponseFactory;
+    /** @var ApruveInvoiceFromResponseFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
+    private $apruveInvoiceFromResponseFactory;
 
-    /**
-     * @var ApruveInvoice|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $apruveInvoice;
+    /** @var ApruveInvoice|\PHPUnit\Framework\MockObject\MockObject */
+    private $apruveInvoice;
 
-    /**
-     * @var ApruveInvoiceFromPaymentContextFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveInvoiceFromPaymentContextFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
     protected $apruveEntityFromPaymentContextFactory;
 
-    /**
-     * @var InvoicePaymentAction
-     */
+    /** @var InvoicePaymentAction */
     protected $paymentAction;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -53,14 +43,11 @@ class InvoicePaymentActionTest extends AbstractPaymentActionTest
         $this->paymentActionName = InvoicePaymentAction::NAME;
 
         $this->apruveInvoice = $this->createMock(ApruveInvoice::class);
-        $this->apruveEntityFromPaymentContextFactory
-            = $this->createMock(ApruveInvoiceFromPaymentContextFactoryInterface::class);
-
-        $this->apruveInvoiceFromResponseFactory
-            = $this->createMock(ApruveInvoiceFromResponseFactoryInterface::class);
-
-        $this->createInvoiceRequestFactory
-            = $this->createMock(CreateInvoiceRequestFactoryInterface::class);
+        $this->apruveEntityFromPaymentContextFactory= $this->createMock(
+            ApruveInvoiceFromPaymentContextFactoryInterface::class
+        );
+        $this->apruveInvoiceFromResponseFactory = $this->createMock(ApruveInvoiceFromResponseFactoryInterface::class);
+        $this->createInvoiceRequestFactory = $this->createMock(CreateInvoiceRequestFactoryInterface::class);
 
         $this->paymentAction = new InvoicePaymentAction(
             $this->paymentContextFactory,
@@ -83,19 +70,16 @@ class InvoicePaymentActionTest extends AbstractPaymentActionTest
         $this->mockApruveInvoiceRequest(self::REQUEST_DATA, self::APRUVE_ORDER_ID);
         $this->mockApruveRestClient($this->mockRestResponse($isSuccessful, self::RESPONSE_DATA));
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setResponse')
             ->with(self::RESPONSE_DATA)
             ->willReturnSelf();
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setReference')
             ->with(self::APRUVE_INVOICE_ID);
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setRequest')
             ->with(self::REQUEST_DATA)
             ->willReturnSelf();
@@ -104,7 +88,7 @@ class InvoicePaymentActionTest extends AbstractPaymentActionTest
 
         $actual = $this->paymentAction->execute($this->mockApruveConfig(), $this->paymentTransaction);
 
-        static::assertSame(self::RETURN_SUCCESS, $actual);
+        self::assertSame(self::RETURN_SUCCESS, $actual);
     }
 
     public function testExecuteWhenResponseIsNotSuccessful()
@@ -117,19 +101,16 @@ class InvoicePaymentActionTest extends AbstractPaymentActionTest
         $this->mockApruveInvoiceRequest(self::REQUEST_DATA, self::APRUVE_ORDER_ID);
         $this->mockApruveRestClient($this->mockRestResponse($isSuccessful, self::RESPONSE_DATA));
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setResponse')
             ->with(self::RESPONSE_DATA)
             ->willReturnSelf();
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setReference')
             ->with(self::APRUVE_INVOICE_ID);
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setRequest')
             ->with(self::REQUEST_DATA)
             ->willReturnSelf();
@@ -140,7 +121,7 @@ class InvoicePaymentActionTest extends AbstractPaymentActionTest
 
         $actual = $this->paymentAction->execute($this->mockApruveConfig(), $this->paymentTransaction);
 
-        static::assertSame(self::RETURN_ERROR, $actual);
+        self::assertSame(self::RETURN_ERROR, $actual);
     }
 
     public function testExecuteWhenRestException()
@@ -156,53 +137,41 @@ class InvoicePaymentActionTest extends AbstractPaymentActionTest
 
         $actual = $this->paymentAction->execute($this->mockApruveConfig(), $this->paymentTransaction);
 
-        static::assertSame(self::RETURN_ERROR, $actual);
+        self::assertSame(self::RETURN_ERROR, $actual);
     }
 
     /**
-     * @param RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject $restResponse
+     * {@inheritDoc}
      */
-    protected function mockApruveRestClient(RestResponseInterface $restResponse)
-    {
+    protected function mockApruveRestClient(
+        RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject $restResponse
+    ): void {
         parent::mockApruveRestClient($restResponse);
 
-        $this->apruveInvoiceFromResponseFactory
-            ->expects(static::once())
+        $this->apruveInvoiceFromResponseFactory->expects(self::once())
             ->method('createFromResponse')
             ->with($restResponse)
             ->willReturn($this->mockCreatedApruveInvoice(self::APRUVE_INVOICE_ID));
     }
 
-    /**
-     * @param array  $requestData
-     * @param string $apruveOrderId
-     */
-    private function mockApruveInvoiceRequest(array $requestData, $apruveOrderId)
+    private function mockApruveInvoiceRequest(array $requestData, string $apruveOrderId): void
     {
         $apruveInvoiceRequest = $this->createMock(ApruveRequestInterface::class);
 
-        $apruveInvoiceRequest
-            ->expects(static::once())
+        $apruveInvoiceRequest->expects(self::once())
             ->method('toArray')
             ->willReturn($requestData);
 
-        $this->createInvoiceRequestFactory
-            ->expects(static::once())
+        $this->createInvoiceRequestFactory->expects(self::once())
             ->method('create')
             ->with($this->apruveInvoice, $apruveOrderId)
             ->willReturn($apruveInvoiceRequest);
     }
 
-    /**
-     * @param string $apruveInvoiceId
-     *
-     * @return ApruveInvoice|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function mockCreatedApruveInvoice($apruveInvoiceId)
+    private function mockCreatedApruveInvoice(string $apruveInvoiceId): ApruveInvoice
     {
         $apruveInvoice = $this->createMock(ApruveInvoice::class);
-        $apruveInvoice
-            ->expects(static::once())
+        $apruveInvoice->expects(self::once())
             ->method('getId')
             ->willReturn($apruveInvoiceId);
 
@@ -211,8 +180,7 @@ class InvoicePaymentActionTest extends AbstractPaymentActionTest
 
     private function mockApruveInvoiceFactory()
     {
-        $this->apruveEntityFromPaymentContextFactory
-            ->expects(static::once())
+        $this->apruveEntityFromPaymentContextFactory->expects(self::once())
             ->method('createFromPaymentContext')
             ->with($this->paymentContext)
             ->willReturn($this->apruveInvoice);

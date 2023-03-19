@@ -13,20 +13,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PaymentCallbackListenerTest extends \PHPUnit\Framework\TestCase
 {
-    const EVENT_DATA = [ApruvePaymentMethod::PARAM_ORDER_ID => 'sampleApuveOrderId'];
+    private const EVENT_DATA = [ApruvePaymentMethod::PARAM_ORDER_ID => 'sampleApuveOrderId'];
 
     /** @var PaymentCallbackListener */
-    protected $listener;
+    private $listener;
 
     /** @var PaymentMethodProviderInterface|\PHPUnit\Framework\MockObject\MockObject */
-    protected $paymentMethodProvider;
+    private $paymentMethodProvider;
 
     /** @var LoggerInterface|\PHPUnit\Framework\MockObject\MockObject */
-    protected $logger;
+    private $logger;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->paymentMethodProvider = $this->createMock(PaymentMethodProviderInterface::class);
@@ -44,42 +41,39 @@ class PaymentCallbackListenerTest extends \PHPUnit\Framework\TestCase
             ->setPaymentMethod('payment_method');
 
         $paymentMethod = $this->createMock(PaymentMethodInterface::class);
-        $this->paymentMethodProvider
-            ->expects(static::once())
+        $this->paymentMethodProvider->expects(self::once())
             ->method('hasPaymentMethod')
             ->with('payment_method')
             ->willReturn(true);
 
-        $this->paymentMethodProvider
-            ->expects(static::once())
+        $this->paymentMethodProvider->expects(self::once())
             ->method('getPaymentMethod')
             ->with('payment_method')
             ->willReturn($paymentMethod);
 
-        $paymentMethod
-            ->expects(static::once())
+        $paymentMethod->expects(self::once())
             ->method('execute')
             ->with('authorize', $paymentTransaction);
 
         $event = new CallbackNotifyEvent(self::EVENT_DATA);
         $event->setPaymentTransaction($paymentTransaction);
 
-        static::assertEquals(Response::HTTP_FORBIDDEN, $event->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_FORBIDDEN, $event->getResponse()->getStatusCode());
 
         $this->listener->onReturn($event);
 
-        static::assertEquals('action', $paymentTransaction->getAction());
-        static::assertEquals(Response::HTTP_OK, $event->getResponse()->getStatusCode());
-        static::assertEquals(self::EVENT_DATA, $paymentTransaction->getResponse());
+        self::assertEquals('action', $paymentTransaction->getAction());
+        self::assertEquals(Response::HTTP_OK, $event->getResponse()->getStatusCode());
+        self::assertEquals(self::EVENT_DATA, $paymentTransaction->getResponse());
     }
 
     public function testOnReturnWithoutTransaction()
     {
         $event = new CallbackNotifyEvent(self::EVENT_DATA);
 
-        static::assertEquals(Response::HTTP_FORBIDDEN, $event->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_FORBIDDEN, $event->getResponse()->getStatusCode());
         $this->listener->onReturn($event);
-        static::assertEquals(Response::HTTP_FORBIDDEN, $event->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_FORBIDDEN, $event->getResponse()->getStatusCode());
     }
 
     public function testOnReturnWithInvalidPaymentMethod()
@@ -88,16 +82,13 @@ class PaymentCallbackListenerTest extends \PHPUnit\Framework\TestCase
         $paymentTransaction
             ->setPaymentMethod('payment_method');
 
-        $this->paymentMethodProvider
-            ->expects(static::any())
+        $this->paymentMethodProvider->expects(self::any())
             ->method('hasPaymentMethod')
             ->with('payment_method')
             ->willReturn(false);
 
-        $this->paymentMethodProvider
-            ->expects(static::never())
-            ->method('getPaymentMethod')
-            ->with('payment_method');
+        $this->paymentMethodProvider->expects(self::never())
+            ->method('getPaymentMethod');
 
         $event = new CallbackNotifyEvent(self::EVENT_DATA);
         $event->setPaymentTransaction($paymentTransaction);
@@ -115,20 +106,17 @@ class PaymentCallbackListenerTest extends \PHPUnit\Framework\TestCase
 
         $paymentMethod = $this->createMock(PaymentMethodInterface::class);
 
-        $this->paymentMethodProvider
-            ->expects(static::any())
+        $this->paymentMethodProvider->expects(self::any())
             ->method('hasPaymentMethod')
             ->with('payment_method')
             ->willReturn(true);
 
-        $this->paymentMethodProvider
-            ->expects(static::any())
+        $this->paymentMethodProvider->expects(self::any())
             ->method('getPaymentMethod')
             ->with('payment_method')
             ->willReturn($paymentMethod);
 
-        $paymentMethod
-            ->expects(static::never())
+        $paymentMethod->expects(self::never())
             ->method('execute');
 
         $event = new CallbackNotifyEvent([]);
@@ -147,39 +135,32 @@ class PaymentCallbackListenerTest extends \PHPUnit\Framework\TestCase
 
         $paymentMethod = $this->createMock(PaymentMethodInterface::class);
 
-        $this->paymentMethodProvider
-            ->expects(static::any())
+        $this->paymentMethodProvider->expects(self::any())
             ->method('hasPaymentMethod')
             ->with('payment_method')
             ->willReturn(true);
 
-        $this->paymentMethodProvider
-            ->expects(static::any())
+        $this->paymentMethodProvider->expects(self::any())
             ->method('getPaymentMethod')
             ->with('payment_method')
             ->willReturn($paymentMethod);
 
-        $paymentMethod
-            ->expects(static::once())
+        $paymentMethod->expects(self::once())
             ->method('execute')
             ->willThrowException(new \InvalidArgumentException());
 
         $event = new CallbackNotifyEvent(self::EVENT_DATA);
         $event->setPaymentTransaction($paymentTransaction);
 
-        $this->logger
-            ->expects(static::once())
+        $this->logger->expects(self::once())
             ->method('error')
             ->with(
-                static::isType('string'),
-                static::logicalAnd(
-                    static::isType('array'),
-                    static::isEmpty()
-                )
+                self::isType('string'),
+                self::logicalAnd(self::isType('array'), self::isEmpty())
             );
 
         $this->listener->onReturn($event);
 
-        static::assertEquals(Response::HTTP_FORBIDDEN, $event->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_FORBIDDEN, $event->getResponse()->getStatusCode());
     }
 }

@@ -17,11 +17,11 @@ abstract class AbstractPaymentActionTest extends \PHPUnit\Framework\TestCase
 {
     use LoggerAwareTraitTestTrait;
 
-    const RESPONSE_DATA = [
+    protected const RESPONSE_DATA = [
         'id' => 'sampleId',
     ];
 
-    const REQUEST_DATA = [
+    protected const REQUEST_DATA = [
         'method' => 'POST',
         'uri' => 'sampleUri/1',
         'data' => [
@@ -31,52 +31,33 @@ abstract class AbstractPaymentActionTest extends \PHPUnit\Framework\TestCase
         ],
     ];
 
-    const RETURN_SUCCESS = ['successful' => true];
-    const RETURN_ERROR = ['successful' => false];
+    protected const RETURN_SUCCESS = ['successful' => true];
+    protected const RETURN_ERROR = ['successful' => false];
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $paymentActionName;
 
-    /**
-     * @var ApruveRestClientInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveRestClientInterface|\PHPUnit\Framework\MockObject\MockObject */
     protected $apruveRestClient;
 
-    /**
-     * @var ApruveConfigRestClientFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveConfigRestClientFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
     protected $apruveConfigRestClientFactory;
 
-    /**
-     * @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject */
     protected $paymentContext;
 
-    /**
-     * @var TransactionPaymentContextFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var TransactionPaymentContextFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
     protected $paymentContextFactory;
 
-    /**
-     * @var PaymentTransaction|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var PaymentTransaction|\PHPUnit\Framework\MockObject\MockObject */
     protected $paymentTransaction;
 
-    /**
-     * @var \PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var \PHPUnit\Framework\MockObject\MockObject */
     protected $apruveEntityFromPaymentContextFactory;
 
-    /**
-     * @var PaymentActionInterface
-     */
+    /** @var PaymentActionInterface */
     protected $paymentAction;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->paymentTransaction = $this->createMock(PaymentTransaction::class);
@@ -93,22 +74,21 @@ abstract class AbstractPaymentActionTest extends \PHPUnit\Framework\TestCase
     {
         $actual = $this->paymentAction->getName();
 
-        static::assertSame($this->paymentActionName, $actual);
+        self::assertSame($this->paymentActionName, $actual);
     }
 
     public function testExecuteWithoutPaymentContext()
     {
         $this->mockPaymentContextFactory();
 
-        $this->apruveEntityFromPaymentContextFactory
-            ->expects(static::never())
+        $this->apruveEntityFromPaymentContextFactory->expects(self::never())
             ->method('createFromPaymentContext');
 
         $this->assertLoggerErrorMethodCalled();
 
         $actual = $this->paymentAction->execute($this->mockApruveConfig(), $this->paymentTransaction);
 
-        static::assertSame(static::RETURN_ERROR, $actual);
+        self::assertSame(static::RETURN_ERROR, $actual);
     }
 
     public function testExecuteWithoutSourcePaymentTransaction()
@@ -117,25 +97,22 @@ abstract class AbstractPaymentActionTest extends \PHPUnit\Framework\TestCase
 
         $this->mockPaymentContextFactory($this->paymentContext);
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('getId')
             ->willReturn($transactionId);
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('getSourcePaymentTransaction')
             ->willReturn(null);
 
-        $this->apruveEntityFromPaymentContextFactory
-            ->expects(static::never())
+        $this->apruveEntityFromPaymentContextFactory->expects(self::never())
             ->method('createFromPaymentContext');
 
         $this->assertLoggerErrorMethodCalled();
 
         $actual = $this->paymentAction->execute($this->mockApruveConfig(), $this->paymentTransaction);
 
-        static::assertSame(static::RETURN_ERROR, $actual);
+        self::assertSame(static::RETURN_ERROR, $actual);
     }
 
     public function testExecuteWhenInvalidSourcePaymentTransaction()
@@ -144,45 +121,39 @@ abstract class AbstractPaymentActionTest extends \PHPUnit\Framework\TestCase
 
         $this->mockPaymentContextFactory($this->paymentContext);
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('getId')
             ->willReturn($transactionId);
 
         $this->mockSourcePaymentTransaction('invalid_action', null);
 
-        $this->apruveEntityFromPaymentContextFactory
-            ->expects(static::never())
+        $this->apruveEntityFromPaymentContextFactory->expects(self::never())
             ->method('createFromPaymentContext');
 
         $this->assertLoggerErrorMethodCalled();
 
         $actual = $this->paymentAction->execute($this->mockApruveConfig(), $this->paymentTransaction);
 
-        static::assertSame(static::RETURN_ERROR, $actual);
+        self::assertSame(static::RETURN_ERROR, $actual);
     }
 
     protected function prepareExecuteWhenRestException()
     {
         $this->mockPaymentContextFactory($this->paymentContext);
 
-        $this->apruveConfigRestClientFactory
-            ->expects(static::once())
+        $this->apruveConfigRestClientFactory->expects(self::once())
             ->method('create')
             ->with($this->mockApruveConfig())
             ->willReturn($this->apruveRestClient);
 
-        $this->apruveRestClient
-            ->expects(static::once())
+        $this->apruveRestClient->expects(self::once())
             ->method('execute')
             ->willThrowException($this->createRestException());
 
-        $this->paymentTransaction
-            ->expects(static::never())
+        $this->paymentTransaction->expects(self::never())
             ->method('setResponse');
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setRequest')
             ->with(static::REQUEST_DATA)
             ->willReturnSelf();
@@ -190,106 +161,71 @@ abstract class AbstractPaymentActionTest extends \PHPUnit\Framework\TestCase
         $this->assertLoggerErrorMethodCalled();
     }
 
-    /**
-     * @param string      $action
-     * @param string|null $reference
-     */
-    protected function mockSourcePaymentTransaction($action, $reference)
+    protected function mockSourcePaymentTransaction(string $action, ?string $reference): void
     {
         $sourcePaymentTransaction = $this->createMock(PaymentTransaction::class);
-        $sourcePaymentTransaction
-            ->expects(static::once())
+        $sourcePaymentTransaction->expects(self::once())
             ->method('getAction')
             ->willReturn($action);
-
-        $sourcePaymentTransaction
-            ->expects(static::any())
+        $sourcePaymentTransaction->expects(self::any())
             ->method('getReference')
             ->willReturn($reference);
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('getSourcePaymentTransaction')
             ->willReturn($sourcePaymentTransaction);
     }
 
-    /**
-     * @param RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject $restResponse
-     */
-    protected function mockApruveRestClient(RestResponseInterface $restResponse)
-    {
-        $this->apruveConfigRestClientFactory
-            ->expects(static::once())
+    protected function mockApruveRestClient(
+        RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject $restResponse
+    ): void {
+        $this->apruveConfigRestClientFactory->expects(self::once())
             ->method('create')
             ->with($this->mockApruveConfig())
             ->willReturn($this->apruveRestClient);
 
-        $this->apruveRestClient
-            ->expects(static::once())
+        $this->apruveRestClient->expects(self::once())
             ->method('execute')
             ->willReturn($restResponse);
     }
 
-    /**
-     * @param bool  $isSuccessful
-     * @param array $responseData
-     *
-     * @return RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function mockRestResponse($isSuccessful, array $responseData)
+    protected function mockRestResponse(bool $isSuccessful, array $responseData): RestResponseInterface
     {
         $restResponse = $this->createMock(RestResponseInterface::class);
-        $restResponse
-            ->expects(static::once())
+        $restResponse->expects(self::once())
             ->method('isSuccessful')
             ->willReturn($isSuccessful);
-
-        $restResponse
-            ->expects(static::once())
+        $restResponse->expects(self::once())
             ->method('json')
             ->willReturn($responseData);
 
         return $restResponse;
     }
 
-    /**
-     * @return ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected function mockApruveConfig()
+    protected function mockApruveConfig(): ApruveConfigInterface
     {
         return $this->createMock(ApruveConfigInterface::class);
     }
 
-    /**
-     * @param bool $isSuccessful
-     * @param bool $isActive
-     */
-    protected function mockPaymentTransactionResult($isSuccessful, $isActive)
+    protected function mockPaymentTransactionResult(bool $isSuccessful, bool $isActive): void
     {
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setSuccessful')
             ->with($isSuccessful)
             ->willReturnSelf();
-
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setActive')
             ->with($isActive);
     }
 
-    /**
-     * @return RestException
-     */
-    protected function createRestException()
+    protected function createRestException(): RestException
     {
         return new RestException();
     }
 
     protected function mockPaymentContextFactory(PaymentContextInterface $paymentContext = null)
     {
-        $this->paymentContextFactory
-            ->expects(static::once())
+        $this->paymentContextFactory->expects(self::once())
             ->method('create')
             ->with($this->paymentTransaction)
             ->willReturn($paymentContext);

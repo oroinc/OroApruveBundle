@@ -9,14 +9,10 @@ use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfigInterface;
 
 class ApruveConfigRestClientFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ApruveRestClientFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveRestClientFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $restClientFactory;
 
-    /**
-     * @var ApruveConfigRestClientFactory
-     */
+    /** @var ApruveConfigRestClientFactory */
     private $factory;
 
     protected function setUp(): void
@@ -28,37 +24,32 @@ class ApruveConfigRestClientFactoryTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider createDataProvider
-     *
-     * @param bool $isTestMode
      */
-    public function testCreate($isTestMode)
+    public function testCreate(bool $isTestMode)
     {
-        $apruveConfig = $this->getApruveConfigMock();
+        $apruveConfig = $this->createMock(ApruveConfigInterface::class);
 
         $apiKey = 'qwerty12345';
 
-        $apruveConfig->expects(static::once())
+        $apruveConfig->expects(self::once())
             ->method('getApiKey')
             ->willReturn($apiKey);
 
-        $apruveConfig->expects(static::once())
+        $apruveConfig->expects(self::once())
             ->method('isTestMode')
             ->willReturn($isTestMode);
 
         $expectedClient = $this->createMock(ApruveRestClientInterface::class);
 
-        $this->restClientFactory->expects(static::once())
+        $this->restClientFactory->expects(self::once())
             ->method('create')
             ->with($apiKey, $isTestMode)
             ->willReturn($expectedClient);
 
-        static::assertEquals($expectedClient, $this->factory->create($apruveConfig));
+        self::assertEquals($expectedClient, $this->factory->create($apruveConfig));
     }
 
-    /**
-     * @return array
-     */
-    public function createDataProvider()
+    public function createDataProvider(): array
     {
         return [
             'test mode' => [
@@ -68,13 +59,5 @@ class ApruveConfigRestClientFactoryTest extends \PHPUnit\Framework\TestCase
                 'isTestMode' => false,
             ],
         ];
-    }
-
-    /**
-     * @return ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function getApruveConfigMock()
-    {
-        return $this->createMock(ApruveConfigInterface::class);
     }
 }

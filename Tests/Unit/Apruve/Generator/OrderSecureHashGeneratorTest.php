@@ -9,21 +9,14 @@ use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveOrder;
 
 class OrderSecureHashGeneratorTest extends \PHPUnit\Framework\TestCase
 {
-    const API_KEY = 'sampleApiKey';
+    private const API_KEY = 'sampleApiKey';
 
-    /**
-     * @var ApruveOrder|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveOrder|\PHPUnit\Framework\MockObject\MockObject */
     private $apruveOrder;
 
-    /**
-     * @var OrderSecureHashGeneratorInterface
-     */
+    /** @var OrderSecureHashGeneratorInterface */
     private $generator;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->apruveOrder = $this->createMock(ApruveOrder::class);
@@ -32,25 +25,19 @@ class OrderSecureHashGeneratorTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider generateDataProvider
-     *
-     * @param array $data
      */
-    public function testGenerate($data, $expectedHash)
+    public function testGenerate(array $data, string $expectedHash)
     {
-        $this->apruveOrder
-            ->expects(static::once())
+        $this->apruveOrder->expects(self::once())
             ->method('getData')
             ->willReturn($data);
 
         $actual = $this->generator->generate($this->apruveOrder, self::API_KEY);
 
-        static::assertSame($expectedHash, $actual);
+        self::assertSame($expectedHash, $actual);
     }
 
-    /**
-     * @return array
-     */
-    public function generateDataProvider()
+    public function generateDataProvider(): array
     {
         return [
             'properly ordered data array with all possible parameters' => [
@@ -70,8 +57,8 @@ class OrderSecureHashGeneratorTest extends \PHPUnit\Framework\TestCase
                             ApruveLineItem::AMOUNT_CENTS => 10000,
                             ApruveLineItem::PRICE_EA_CENTS => 1000,
                             ApruveLineItem::QUANTITY => 10,
-                            ApruveLineItem::MERCHANT_NOTES => "Merchant" . PHP_EOL . "notes",
-                            ApruveLineItem::DESCRIPTION => "Sample" . PHP_EOL . "description with line break",
+                            ApruveLineItem::MERCHANT_NOTES => 'Merchant' . PHP_EOL . 'notes',
+                            ApruveLineItem::DESCRIPTION => 'Sample' . PHP_EOL . 'description with line break',
                             ApruveLineItem::VARIANT_INFO => 'yellow',
                             ApruveLineItem::SKU => 'sku1',
                             ApruveLineItem::VENDOR => 'ORO',
@@ -98,10 +85,10 @@ class OrderSecureHashGeneratorTest extends \PHPUnit\Framework\TestCase
                             ApruveLineItem::AMOUNT_CENTS => 10000,
                             ApruveLineItem::PRICE_EA_CENTS => 1000,
                             ApruveLineItem::SKU => 'sku1',
-                            ApruveLineItem::DESCRIPTION => "Sample" . PHP_EOL . "description with line break",
+                            ApruveLineItem::DESCRIPTION => 'Sample' . PHP_EOL . 'description with line break',
                             ApruveLineItem::VIEW_PRODUCT_URL => 'http://example.com/product/view/1',
                             ApruveLineItem::TITLE => 'Sample title',
-                            ApruveLineItem::MERCHANT_NOTES => "Merchant" . PHP_EOL . "notes",
+                            ApruveLineItem::MERCHANT_NOTES => 'Merchant' . PHP_EOL . 'notes',
                             ApruveLineItem::VARIANT_INFO => 'yellow',
                             ApruveLineItem::VENDOR => 'ORO',
                         ],
@@ -120,7 +107,7 @@ class OrderSecureHashGeneratorTest extends \PHPUnit\Framework\TestCase
                             ApruveLineItem::TITLE => 'Sample title',
                             ApruveLineItem::AMOUNT_CENTS => 10000,
                             ApruveLineItem::QUANTITY => 10,
-                            ApruveLineItem::DESCRIPTION => "Sample" . PHP_EOL . "description with line break",
+                            ApruveLineItem::DESCRIPTION => 'Sample' . PHP_EOL . 'description with line break',
                             ApruveLineItem::SKU => 'sku1',
                             ApruveLineItem::VIEW_PRODUCT_URL => 'http://example.com/product/view/1',
                         ],
@@ -141,7 +128,7 @@ class OrderSecureHashGeneratorTest extends \PHPUnit\Framework\TestCase
                             ApruveLineItem::SKU => 'sku1',
                             ApruveLineItem::QUANTITY => 10,
                             ApruveLineItem::TITLE => 'Sample title',
-                            ApruveLineItem::DESCRIPTION => "Sample" . PHP_EOL . "description with line break",
+                            ApruveLineItem::DESCRIPTION => 'Sample' . PHP_EOL . 'description with line break',
                         ],
                     ],
                 ],

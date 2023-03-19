@@ -9,19 +9,12 @@ use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 
 class ApruvePaymentMethodViewTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ApruvePaymentMethodView
-     */
+    /** @var ApruvePaymentMethodView */
     private $methodView;
 
-    /**
-     * @var ApruveConfig|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveConfig|\PHPUnit\Framework\MockObject\MockObject */
     private $config;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->config = $this->createMock(ApruveConfig::class);
@@ -31,7 +24,6 @@ class ApruvePaymentMethodViewTest extends \PHPUnit\Framework\TestCase
 
     public function testGetOptions()
     {
-        /** @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject $context */
         $context = $this->createMock(PaymentContextInterface::class);
 
         $this->config->expects($this->once())->method('isTestMode')->willReturn(true);
@@ -56,7 +48,7 @@ class ApruvePaymentMethodViewTest extends \PHPUnit\Framework\TestCase
     {
         $label = 'label';
 
-        $this->config->expects(static::once())
+        $this->config->expects(self::once())
             ->method('getLabel')
             ->willReturn($label);
 
@@ -67,7 +59,7 @@ class ApruvePaymentMethodViewTest extends \PHPUnit\Framework\TestCase
     {
         $label = 'short label';
 
-        $this->config->expects(static::once())
+        $this->config->expects(self::once())
             ->method('getShortLabel')
             ->willReturn($label);
 
@@ -78,7 +70,7 @@ class ApruvePaymentMethodViewTest extends \PHPUnit\Framework\TestCase
     {
         $label = 'admin label';
 
-        $this->config->expects(static::once())
+        $this->config->expects(self::once())
             ->method('getAdminLabel')
             ->willReturn($label);
 
@@ -89,7 +81,7 @@ class ApruvePaymentMethodViewTest extends \PHPUnit\Framework\TestCase
     {
         $identifier = 'apruve_1';
 
-        $this->config->expects(static::once())
+        $this->config->expects(self::once())
             ->method('getPaymentMethodIdentifier')
             ->willReturn($identifier);
 

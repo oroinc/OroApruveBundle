@@ -9,67 +9,41 @@ use Oro\Bundle\PaymentBundle\Provider\SurchargeProvider;
 
 class ShippingAmountProviderTest extends \PHPUnit\Framework\TestCase
 {
-    const AMOUNT = 10.0;
+    private const AMOUNT = 10.0;
 
-    /**
-     * @var \stdClass|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $sourceEntity;
-
-    /**
-     * @var Surcharge|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $surcharge;
-
-    /**
-     * @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $paymentContext;
 
-    /**
-     * @var SurchargeProvider|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $surchargeProvider;
-
-    /**
-     * @var ShippingAmountProvider
-     */
+    /** @var ShippingAmountProvider */
     private $provider;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
-        $this->sourceEntity = $this->createMock(\stdClass::class);
+        $sourceEntity = $this->createMock(\stdClass::class);
 
         $this->paymentContext = $this->createMock(PaymentContextInterface::class);
-        $this->paymentContext
-            ->expects(static::once())
+        $this->paymentContext->expects(self::once())
             ->method('getSourceEntity')
-            ->willReturn($this->sourceEntity);
+            ->willReturn($sourceEntity);
 
-        $this->surcharge = $this->createMock(Surcharge::class);
-        $this->surcharge
-            ->expects(static::once())
+        $surcharge = $this->createMock(Surcharge::class);
+        $surcharge->expects(self::once())
             ->method('getShippingAmount')
             ->willReturn(self::AMOUNT);
 
-        $this->surchargeProvider = $this->createMock(SurchargeProvider::class);
-
-        $this->surchargeProvider
-            ->expects(static::once())
+        $surchargeProvider = $this->createMock(SurchargeProvider::class);
+        $surchargeProvider->expects(self::once())
             ->method('getSurcharges')
-            ->with($this->sourceEntity)
-            ->willReturn($this->surcharge);
+            ->with($sourceEntity)
+            ->willReturn($surcharge);
 
-        $this->provider = new ShippingAmountProvider($this->surchargeProvider);
+        $this->provider = new ShippingAmountProvider($surchargeProvider);
     }
 
     public function testGetShippingAmount()
     {
         $actual = $this->provider->getShippingAmount($this->paymentContext);
 
-        static::assertSame(self::AMOUNT, $actual);
+        self::assertSame(self::AMOUNT, $actual);
     }
 }

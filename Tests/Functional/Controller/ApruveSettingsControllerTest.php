@@ -6,12 +6,9 @@ use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
 
 class ApruveSettingsControllerTest extends WebTestCase
 {
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
-        $this->initClient([], static::generateBasicAuthHeader());
+        $this->initClient([], self::generateBasicAuthHeader());
     }
 
     public function testGenerateTokenAction()
@@ -23,7 +20,7 @@ class ApruveSettingsControllerTest extends WebTestCase
         $response = $this->client->getResponse();
         $this->assertJson($response->getContent());
 
-        $responseArray = static::getJsonResponseContent($response, 200);
+        $responseArray = self::getJsonResponseContent($response, 200);
         $this->assertArrayHasKey('success', $responseArray);
         $this->assertArrayHasKey('token', $responseArray);
         $this->assertTrue($responseArray['success']);

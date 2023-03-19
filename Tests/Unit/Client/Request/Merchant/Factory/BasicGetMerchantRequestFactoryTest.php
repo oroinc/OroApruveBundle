@@ -7,14 +7,8 @@ use Oro\Bundle\ApruveBundle\Client\Request\Merchant\Factory\BasicGetMerchantRequ
 
 class BasicGetMerchantRequestFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var BasicGetMerchantRequestFactory
-     */
-    private $factory;
+    private BasicGetMerchantRequestFactory $factory;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->factory = new BasicGetMerchantRequestFactory();
@@ -28,6 +22,6 @@ class BasicGetMerchantRequestFactoryTest extends \PHPUnit\Framework\TestCase
 
         $actual = $this->factory->createByMerchantId($merchantId);
 
-        static::assertEquals($request, $actual);
+        self::assertEquals($request, $actual);
     }
 }

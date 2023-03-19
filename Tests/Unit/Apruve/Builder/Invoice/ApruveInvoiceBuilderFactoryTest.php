@@ -7,9 +7,9 @@ use Oro\Bundle\ApruveBundle\Apruve\Builder\Invoice\ApruveInvoiceBuilderFactory;
 
 class ApruveInvoiceBuilderFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    const AMOUNT_CENTS = 11130;
-    const CURRENCY = 'USD';
-    const LINE_ITEMS = [
+    private const AMOUNT_CENTS = 11130;
+    private const CURRENCY = 'USD';
+    private const LINE_ITEMS = [
         'sku1' => [
             'sku' => 'sku1',
             'quantity' => 100,
@@ -24,14 +24,8 @@ class ApruveInvoiceBuilderFactoryTest extends \PHPUnit\Framework\TestCase
         ],
     ];
 
-    /**
-     * @var ApruveInvoiceBuilderFactory
-     */
-    private $factory;
+    private ApruveInvoiceBuilderFactory $factory;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->factory = new ApruveInvoiceBuilderFactory();
@@ -51,6 +45,6 @@ class ApruveInvoiceBuilderFactoryTest extends \PHPUnit\Framework\TestCase
             self::LINE_ITEMS
         );
 
-        static::assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 }

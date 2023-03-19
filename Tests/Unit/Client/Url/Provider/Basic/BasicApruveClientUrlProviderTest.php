@@ -6,10 +6,7 @@ use Oro\Bundle\ApruveBundle\Client\Url\Provider\Basic\BasicApruveClientUrlProvid
 
 class BasicApruveClientUrlProviderTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var BasicApruveClientUrlProvider
-     */
-    private $provider;
+    private BasicApruveClientUrlProvider $provider;
 
     protected function setUp(): void
     {
@@ -18,11 +15,11 @@ class BasicApruveClientUrlProviderTest extends \PHPUnit\Framework\TestCase
 
     public function testGetTestModeUrl()
     {
-        static::assertEquals('https://test.apruve.com/api/v4/', $this->provider->getApruveUrl(true));
+        self::assertEquals('https://test.apruve.com/api/v4/', $this->provider->getApruveUrl(true));
     }
 
     public function testGetProdModeUrl()
     {
-        static::assertEquals('https://app.apruve.com/api/v4/', $this->provider->getApruveUrl(false));
+        self::assertEquals('https://app.apruve.com/api/v4/', $this->provider->getApruveUrl(false));
     }
 }

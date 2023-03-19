@@ -9,19 +9,13 @@ use Oro\Bundle\SecurityBundle\Encoder\SymmetricCrypterInterface;
 
 class GetMerchantRequestApruveConnectionValidatorRequestFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var GetMerchantRequestFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var GetMerchantRequestFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $merchantRequestFactory;
 
-    /**
-     * @var SymmetricCrypterInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var SymmetricCrypterInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $symmetricCrypter;
 
-    /**
-     * @var GetMerchantRequestApruveConnectionValidatorRequestFactory
-     */
+    /** @var GetMerchantRequestApruveConnectionValidatorRequestFactory */
     private $factory;
 
     protected function setUp(): void
@@ -37,36 +31,28 @@ class GetMerchantRequestApruveConnectionValidatorRequestFactoryTest extends \PHP
 
     public function testCreateBySettings()
     {
-        $settings = $this->createApruveSettingsMock();
+        $settings = $this->createMock(ApruveSettings::class);
 
-        $encryptedMetchantId = 'encrypted_merchant_id';
+        $encryptedMerchantId = 'encrypted_merchant_id';
 
-        $settings->expects(static::once())
+        $settings->expects(self::once())
             ->method('getApruveMerchantId')
-            ->willReturn($encryptedMetchantId);
+            ->willReturn($encryptedMerchantId);
 
-        $metchantId = 'merchant_id';
+        $merchantId = 'merchant_id';
 
-        $this->symmetricCrypter->expects(static::once())
+        $this->symmetricCrypter->expects(self::once())
             ->method('decryptData')
-            ->with($encryptedMetchantId)
-            ->willReturn($metchantId);
+            ->with($encryptedMerchantId)
+            ->willReturn($merchantId);
 
         $request = $this->createMock(ApruveRequestInterface::class);
 
-        $this->merchantRequestFactory->expects(static::once())
+        $this->merchantRequestFactory->expects(self::once())
             ->method('createByMerchantId')
-            ->with($metchantId)
+            ->with($merchantId)
             ->willReturn($request);
 
-        static::assertEquals($request, $this->factory->createBySettings($settings));
-    }
-
-    /**
-     * @return ApruveSettings|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function createApruveSettingsMock()
-    {
-        return $this->createMock(ApruveSettings::class);
+        self::assertEquals($request, $this->factory->createBySettings($settings));
     }
 }

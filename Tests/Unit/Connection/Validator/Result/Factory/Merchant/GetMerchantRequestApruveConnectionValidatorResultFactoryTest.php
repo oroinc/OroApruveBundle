@@ -9,10 +9,7 @@ use Oro\Bundle\IntegrationBundle\Provider\Rest\Exception\RestException;
 
 class GetMerchantRequestApruveConnectionValidatorResultFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var Merchant\GetMerchantRequestApruveConnectionValidatorResultFactory
-     */
-    private $factory;
+    private Merchant\GetMerchantRequestApruveConnectionValidatorResultFactory $factory;
 
     protected function setUp(): void
     {
@@ -21,7 +18,7 @@ class GetMerchantRequestApruveConnectionValidatorResultFactoryTest extends \PHPU
 
     public function testCreateResultByApruveClientResponse()
     {
-        $response = $this->createRestResponseMock();
+        $response = $this->createMock(RestResponseInterface::class);
 
         $resultParams = [
             ApruveConnectionValidatorResult::STATUS_KEY => true,
@@ -33,16 +30,13 @@ class GetMerchantRequestApruveConnectionValidatorResultFactoryTest extends \PHPU
 
         $actualResult = $this->factory->createResultByApruveClientResponse($response);
 
-        static::assertEquals($expectedResult, $actualResult);
+        self::assertEquals($expectedResult, $actualResult);
     }
 
     /**
      * @dataProvider createExceptionResultDataProvider
-     *
-     * @param int    $responseCode
-     * @param string $errorSeverity
      */
-    public function testCreateExceptionResult($responseCode, $errorSeverity)
+    public function testCreateExceptionResult(int $responseCode, string $errorSeverity)
     {
         $errorMessage = 'error message';
 
@@ -58,13 +52,10 @@ class GetMerchantRequestApruveConnectionValidatorResultFactoryTest extends \PHPU
 
         $actualResult = $this->factory->createExceptionResult($restException);
 
-        static::assertEquals($expectedResult, $actualResult);
+        self::assertEquals($expectedResult, $actualResult);
     }
 
-    /**
-     * @return array
-     */
-    public function createExceptionResultDataProvider()
+    public function createExceptionResultDataProvider(): array
     {
         return [
             'wrong api key' => [
@@ -84,13 +75,5 @@ class GetMerchantRequestApruveConnectionValidatorResultFactoryTest extends \PHPU
                 'errorSeverity' => 'server',
             ],
         ];
-    }
-
-    /**
-     * @return RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function createRestResponseMock()
-    {
-        return $this->createMock(RestResponseInterface::class);
     }
 }

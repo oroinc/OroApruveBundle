@@ -16,20 +16,14 @@ class ApruveSettingsTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider constructorPropertiesDataProvider
-     *
-     * @param string $property
-     * @param string $class
      */
-    public function testConstructor($property, $class)
+    public function testConstructor(string $property, string $class)
     {
         $settings = new ApruveSettings();
-        static::assertInstanceOf($class, ReflectionUtil::getPropertyValue($settings, $property));
+        self::assertInstanceOf($class, ReflectionUtil::getPropertyValue($settings, $property));
     }
 
-    /**
-     * @return array
-     */
-    public function constructorPropertiesDataProvider()
+    public function constructorPropertiesDataProvider(): array
     {
         return [
             ['labels', ArrayCollection::class],
@@ -39,14 +33,14 @@ class ApruveSettingsTest extends \PHPUnit\Framework\TestCase
 
     public function testAccessors()
     {
-        static::assertPropertyAccessors(new ApruveSettings(), [
+        self::assertPropertyAccessors(new ApruveSettings(), [
             ['apruveMerchantId', '7b97ea0172e18cbd4d3bf21e2b525b2d'],
             ['apruveApiKey', '213a9079914f3b5163c6190f31444528'],
             ['apruveTestMode', false],
             ['apruveWebhookToken', '8c02aef5-68df-4458-bad3-e2da636cee90'],
         ]);
 
-        static::assertPropertyCollections(new ApruveSettings(), [
+        self::assertPropertyCollections(new ApruveSettings(), [
             ['labels', new LocalizedFallbackValue()],
             ['shortLabels', new LocalizedFallbackValue()],
         ]);
@@ -57,7 +51,6 @@ class ApruveSettingsTest extends \PHPUnit\Framework\TestCase
         $label = (new LocalizedFallbackValue())->setString('Apruve');
         $shortLabel = (new LocalizedFallbackValue())->setString('Apruve (short)');
 
-        /** @var ApruveSettings $entity */
         $entity = $this->getEntity(
             ApruveSettings::class,
             [
@@ -72,11 +65,11 @@ class ApruveSettingsTest extends \PHPUnit\Framework\TestCase
 
         $settings = $entity->getSettingsBag();
 
-        static::assertEquals('7b97ea0172e18cbd4d3bf21e2b525b2d', $settings->get(ApruveSettings::MERCHANT_ID_KEY));
-        static::assertEquals('213a9079914f3b5163c6190f31444528', $settings->get(ApruveSettings::API_KEY_KEY));
-        static::assertEquals(false, $settings->get(ApruveSettings::TEST_MODE_KEY));
-        static::assertEquals('8c02aef5-68df-4458-bad3-e2da636cee90', $settings->get(ApruveSettings::WEBHOOK_TOKEN_KEY));
-        static::assertEquals([$label], $settings->get('labels'));
-        static::assertEquals([$shortLabel], $settings->get('short_labels'));
+        self::assertEquals('7b97ea0172e18cbd4d3bf21e2b525b2d', $settings->get(ApruveSettings::MERCHANT_ID_KEY));
+        self::assertEquals('213a9079914f3b5163c6190f31444528', $settings->get(ApruveSettings::API_KEY_KEY));
+        self::assertEquals(false, $settings->get(ApruveSettings::TEST_MODE_KEY));
+        self::assertEquals('8c02aef5-68df-4458-bad3-e2da636cee90', $settings->get(ApruveSettings::WEBHOOK_TOKEN_KEY));
+        self::assertEquals([$label], $settings->get('labels'));
+        self::assertEquals([$shortLabel], $settings->get('short_labels'));
     }
 }

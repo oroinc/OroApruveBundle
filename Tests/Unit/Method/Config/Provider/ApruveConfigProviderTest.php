@@ -14,118 +14,78 @@ use Psr\Log\LoggerInterface;
 
 class ApruveConfigProviderTest extends \PHPUnit\Framework\TestCase
 {
-    const IDENTIFIER1 = 'apruve_1';
-    const IDENTIFIER2 = 'apruve_2';
-    const WRONG_IDENTIFIER = 'wrongpayment_method';
+    private const IDENTIFIER1 = 'apruve_1';
+    private const IDENTIFIER2 = 'apruve_2';
+    private const WRONG_IDENTIFIER = 'wrongpayment_method';
 
-    /**
-     * @var ApruveConfigFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $configFactory;
-
-    /**
-     * @var ManagerRegistry|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private $doctrine;
-
-    /**
-     * @var ApruveSettingsRepository|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveSettingsRepository|\PHPUnit\Framework\MockObject\MockObject */
     private $settingsRepository;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     private $configs;
 
-    /**
-     * @var ApruveConfigProviderInterface
-     */
+    /** @var ApruveConfigProviderInterface */
     private $testedProvider;
 
-    /**
-     * @var LoggerInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var LoggerInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $logger;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
-        $this->configFactory = $this->createMock(ApruveConfigFactoryInterface::class);
         $this->settingsRepository = $this->createMock(ApruveSettingsRepository::class);
+        $this->logger = $this->createMock(LoggerInterface::class);
 
-        $settingsOneMock = $this->createApruveSettingsMock();
-        $settingsTwoMock = $this->createApruveSettingsMock();
+        $settingsOneMock = $this->createMock(ApruveSettings::class);
+        $settingsTwoMock = $this->createMock(ApruveSettings::class);
 
-        $configOneMock = $this->createConfigMock();
-        $configTwoMock = $this->createConfigMock();
+        $configOneMock = $this->createMock(ApruveConfigInterface::class);
+        $configTwoMock = $this->createMock(ApruveConfigInterface::class);
 
         $settingsMocks = [$settingsOneMock, $settingsTwoMock];
 
-        $configOneMock
+        $configOneMock->expects(self::any())
             ->method('getPaymentMethodIdentifier')
             ->willReturn(self::IDENTIFIER1);
 
-        $configTwoMock
+        $configTwoMock->expects(self::any())
             ->method('getPaymentMethodIdentifier')
             ->willReturn(self::IDENTIFIER2);
 
-        $this->doctrine = $this->createMock(ManagerRegistry::class);
-
-        $this->settingsRepository = $this->createMock(ApruveSettingsRepository::class);
-        $this->settingsRepository
-            ->expects(static::once())
+        $this->settingsRepository->expects(self::once())
             ->method('findEnabledSettings')
             ->willReturn($settingsMocks);
 
         $objectManager = $this->createMock(ObjectManager::class);
-        $objectManager->expects(static::once())->method('getRepository')->willReturn($this->settingsRepository);
+        $objectManager->expects(self::once())
+            ->method('getRepository')
+            ->willReturn($this->settingsRepository);
 
-        $this->doctrine->expects(static::once())->method('getManagerForClass')->willReturn($objectManager);
+        $doctrine = $this->createMock(ManagerRegistry::class);
+        $doctrine->expects(self::once())
+            ->method('getManagerForClass')
+            ->willReturn($objectManager);
 
-        $this->logger = $this->createMock(LoggerInterface::class);
-
-        $this->configFactory
+        $configFactory = $this->createMock(ApruveConfigFactoryInterface::class);
+        $configFactory->expects(self::any())
             ->method('create')
-            ->will(
-                static::returnValueMap(
-                    [
-                        [$settingsOneMock, $configOneMock],
-                        [$settingsTwoMock, $configTwoMock]
-                    ]
-                )
-            );
+            ->willReturnMap([
+                [$settingsOneMock, $configOneMock],
+                [$settingsTwoMock, $configTwoMock]
+            ]);
+
         $this->configs = [
             self::IDENTIFIER1 => $configOneMock,
             self::IDENTIFIER2 => $configTwoMock
         ];
 
-        $this->testedProvider = new ApruveConfigProvider($this->doctrine, $this->logger, $this->configFactory);
-    }
-
-    /**
-     * @return ApruveSettings|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function createApruveSettingsMock()
-    {
-        return $this->createMock(ApruveSettings::class);
-    }
-
-    /**
-     * @return ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function createConfigMock()
-    {
-        return $this->createMock(ApruveConfigInterface::class);
+        $this->testedProvider = new ApruveConfigProvider($doctrine, $this->logger, $configFactory);
     }
 
     public function testGetPaymentConfigs()
     {
         $actualResult = $this->testedProvider->getPaymentConfigs();
 
-        static::assertSame($this->configs, $actualResult);
+        self::assertSame($this->configs, $actualResult);
     }
 
     public function testGetPaymentConfig()
@@ -133,19 +93,18 @@ class ApruveConfigProviderTest extends \PHPUnit\Framework\TestCase
         $expectedResult = $this->configs[self::IDENTIFIER1];
         $actualResult = $this->testedProvider->getPaymentConfig(self::IDENTIFIER1);
 
-        static::assertSame($expectedResult, $actualResult);
+        self::assertSame($expectedResult, $actualResult);
     }
 
     public function testGetPaymentConfigWhenNoSettings()
     {
-        $this->settingsRepository
-            ->expects(static::once())
+        $this->settingsRepository->expects(self::once())
             ->method('findEnabledSettings')
             ->willReturn([]);
 
         $actualResult = $this->testedProvider->getPaymentConfig(self::WRONG_IDENTIFIER);
 
-        static::assertNull($actualResult);
+        self::assertNull($actualResult);
     }
 
     public function testHasPaymentConfig()
@@ -153,34 +112,31 @@ class ApruveConfigProviderTest extends \PHPUnit\Framework\TestCase
         $expectedResult = true;
         $actualResult = $this->testedProvider->hasPaymentConfig(self::IDENTIFIER1);
 
-        static::assertEquals($expectedResult, $actualResult);
+        self::assertEquals($expectedResult, $actualResult);
     }
 
     public function testHasPaymentConfigWhenNoSettings()
     {
-        $this->settingsRepository
-            ->expects(static::once())
+        $this->settingsRepository->expects(self::once())
             ->method('findEnabledSettings')
             ->willReturn([]);
 
         $actualResult = $this->testedProvider->hasPaymentConfig('somePaymentMethodId');
 
-        static::assertFalse($actualResult);
+        self::assertFalse($actualResult);
     }
 
     public function testHasPaymentConfigWithException()
     {
-        $this->settingsRepository
-            ->expects(static::once())
+        $this->settingsRepository->expects(self::once())
             ->method('findEnabledSettings')
             ->willThrowException(new \UnexpectedValueException());
 
-        $this->logger
-            ->expects(static::once())
+        $this->logger->expects(self::once())
             ->method('error');
 
         $actualResult = $this->testedProvider->hasPaymentConfig('somePaymentMethodId');
 
-        static::assertFalse($actualResult);
+        self::assertFalse($actualResult);
     }
 }

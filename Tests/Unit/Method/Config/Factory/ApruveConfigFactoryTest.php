@@ -115,10 +115,7 @@ class ApruveConfigFactoryTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($expectedSettings, $actualSettings);
     }
 
-    /**
-     * @return ApruveSettings|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function createApruveSettingsMock()
+    private function createApruveSettingsMock(): ApruveSettings
     {
         $labelsCollection = $this->createMock(Collection::class);
         $shortLabelsCollection = $this->createMock(Collection::class);

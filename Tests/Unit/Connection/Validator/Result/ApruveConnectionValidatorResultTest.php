@@ -6,15 +6,8 @@ use Oro\Bundle\ApruveBundle\Connection\Validator\Result\ApruveConnectionValidato
 
 class ApruveConnectionValidatorResultTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var array
-     */
-    private $parameters;
-
-    /**
-     * @var ApruveConnectionValidatorResult
-     */
-    private $connectionValidationResult;
+    private array $parameters;
+    private ApruveConnectionValidatorResult $connectionValidationResult;
 
     protected function setUp(): void
     {
@@ -28,11 +21,11 @@ class ApruveConnectionValidatorResultTest extends \PHPUnit\Framework\TestCase
 
     public function testGetters()
     {
-        static::assertEquals($this->parameters['status'], $this->connectionValidationResult->getStatus());
-        static::assertEquals(
+        self::assertEquals($this->parameters['status'], $this->connectionValidationResult->getStatus());
+        self::assertEquals(
             $this->parameters['error_severity'],
             $this->connectionValidationResult->getErrorSeverity()
         );
-        static::assertEquals($this->parameters['error_message'], $this->connectionValidationResult->getErrorMessage());
+        self::assertEquals($this->parameters['error_message'], $this->connectionValidationResult->getErrorMessage());
     }
 }

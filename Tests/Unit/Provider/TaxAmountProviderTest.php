@@ -8,42 +8,30 @@ use Oro\Bundle\TaxBundle\Exception\TaxationDisabledException;
 use Oro\Bundle\TaxBundle\Mapper\UnmappableArgumentException;
 use Oro\Bundle\TaxBundle\Provider\TaxAmountProvider as BaseTaxAmountProvider;
 use Oro\Bundle\TestFrameworkBundle\Test\Logger\LoggerAwareTraitTestTrait;
-use PHPUnit\Framework\MockObject\MockObject;
 
 class TaxAmountProviderTest extends \PHPUnit\Framework\TestCase
 {
     use LoggerAwareTraitTestTrait;
 
-    /**
-     * @var \stdClass|MockObject
-     */
+    /** @var \stdClass|\PHPUnit\Framework\MockObject\MockObject */
     private $sourceEntity;
 
-    /**
-     * @var PaymentContextInterface|MockObject
-     */
+    /** @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $paymentContext;
 
-    /**
-     * @var TaxAmountProvider
-     */
+    /** @var TaxAmountProvider */
     private $taxAmountProvider;
 
-    /**
-     * @var BaseTaxAmountProvider|MockObject
-     */
+    /** @var BaseTaxAmountProvider|\PHPUnit\Framework\MockObject\MockObject */
     private $baseTaxAmountProvider;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->sourceEntity = $this->createMock(\stdClass::class);
         $this->paymentContext = $this->createMock(PaymentContextInterface::class);
         $this->baseTaxAmountProvider = $this->createMock(BaseTaxAmountProvider::class);
 
-        $this->paymentContext
+        $this->paymentContext->expects(self::any())
             ->method('getSourceEntity')
             ->willReturn($this->sourceEntity);
 
@@ -54,8 +42,7 @@ class TaxAmountProviderTest extends \PHPUnit\Framework\TestCase
 
     public function testGetTaxAmount(): void
     {
-        $this->baseTaxAmountProvider
-            ->expects($this->once())
+        $this->baseTaxAmountProvider->expects(self::once())
             ->method('getTaxAmount')
             ->with($this->sourceEntity)
             ->willReturn(5.0);
@@ -65,8 +52,7 @@ class TaxAmountProviderTest extends \PHPUnit\Framework\TestCase
 
     public function testGetTaxAmountWithTaxationDisabledException(): void
     {
-        $this->baseTaxAmountProvider
-            ->expects($this->once())
+        $this->baseTaxAmountProvider->expects(self::once())
             ->method('getTaxAmount')
             ->with($this->sourceEntity)
             ->willThrowException(new TaxationDisabledException());
@@ -79,13 +65,11 @@ class TaxAmountProviderTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @param string $exceptionClass
      * @dataProvider getTaxAmountWithHandledExceptionDataProvider
      */
-    public function testGetTaxAmountWithHandledException($exceptionClass): void
+    public function testGetTaxAmountWithHandledException(string $exceptionClass): void
     {
-        $this->baseTaxAmountProvider
-            ->expects($this->once())
+        $this->baseTaxAmountProvider->expects(self::once())
             ->method('getTaxAmount')
             ->with($this->sourceEntity)
             ->willThrowException(new $exceptionClass);
@@ -108,8 +92,7 @@ class TaxAmountProviderTest extends \PHPUnit\Framework\TestCase
     public function testGetTaxAmountWithUnhandledException(): void
     {
         $this->expectException(\Throwable::class);
-        $this->baseTaxAmountProvider
-            ->expects($this->once())
+        $this->baseTaxAmountProvider->expects(self::once())
             ->method('getTaxAmount')
             ->with($this->sourceEntity)
             ->willThrowException(new \Exception());

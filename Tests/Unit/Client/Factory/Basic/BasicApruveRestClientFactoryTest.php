@@ -10,31 +10,21 @@ use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestClientInterface;
 
 class BasicApruveRestClientFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    const SAMPLE_URI = '/sample-uri';
-    const SAMPLE_API_KEY = 'qwerty12345';
+    private const SAMPLE_URI = '/sample-uri';
+    private const SAMPLE_API_KEY = 'qwerty12345';
 
-    /**
-     * @var ApruveClientUrlProviderInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveClientUrlProviderInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $urlProvider;
 
-    /**
-     * @var RestClientFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var RestClientFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $integrationRestClientFactory;
 
-    /**
-     * @var BasicApruveRestClientFactory
-     */
+    /** @var BasicApruveRestClientFactory */
     private $factory;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->urlProvider = $this->createMock(ApruveClientUrlProviderInterface::class);
-
         $this->integrationRestClientFactory = $this->createMock(RestClientFactoryInterface::class);
 
         $this->factory = new BasicApruveRestClientFactory($this->urlProvider, $this->integrationRestClientFactory);
@@ -42,10 +32,8 @@ class BasicApruveRestClientFactoryTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider createDataProvider
-     *
-     * @param bool $isTestMode
      */
-    public function testCreate($isTestMode)
+    public function testCreate(bool $isTestMode)
     {
         $apiKey = self::SAMPLE_API_KEY;
         $uri = self::SAMPLE_URI;
@@ -56,14 +44,14 @@ class BasicApruveRestClientFactoryTest extends \PHPUnit\Framework\TestCase
             ]
         ];
 
-        $this->urlProvider->expects(static::once())
+        $this->urlProvider->expects(self::once())
             ->method('getApruveUrl')
             ->with($isTestMode)
             ->willReturn($uri);
 
-        $integrationRestClient = $this->createIntegrationRestClientMock();
+        $integrationRestClient = $this->createMock(RestClientInterface::class);
 
-        $this->integrationRestClientFactory->expects(static::once())
+        $this->integrationRestClientFactory->expects(self::once())
             ->method('createRestClient')
             ->with($uri, $options)
             ->willReturn($integrationRestClient);
@@ -72,13 +60,10 @@ class BasicApruveRestClientFactoryTest extends \PHPUnit\Framework\TestCase
 
         $actual = $this->factory->create($apiKey, $isTestMode);
 
-        static::assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
-    /**
-     * @return array
-     */
-    public function createDataProvider()
+    public function createDataProvider(): array
     {
         return [
             'test mode' => [
@@ -88,13 +73,5 @@ class BasicApruveRestClientFactoryTest extends \PHPUnit\Framework\TestCase
                 'isTestMode' => false,
             ],
         ];
-    }
-
-    /**
-     * @return RestClientInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function createIntegrationRestClientMock()
-    {
-        return $this->createMock(RestClientInterface::class);
     }
 }

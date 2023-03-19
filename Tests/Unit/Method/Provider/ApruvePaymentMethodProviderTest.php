@@ -10,9 +10,6 @@ use Oro\Bundle\PaymentBundle\Tests\Unit\Method\Provider\AbstractMethodProviderTe
 
 class ApruvePaymentMethodProviderTest extends AbstractMethodProviderTest
 {
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->factory = $this->createMock(ApruvePaymentMethodFactoryInterface::class);

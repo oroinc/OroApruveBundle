@@ -7,10 +7,10 @@ use Oro\Bundle\ApruveBundle\Apruve\Builder\Order\ApruveOrderBuilderFactory;
 
 class ApruveOrderBuilderFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    const MERCHANT_ID = 'sampleMerchantId';
-    const AMOUNT_CENTS = 11130;
-    const CURRENCY = 'USD';
-    const LINE_ITEMS = [
+    private const MERCHANT_ID = 'sampleMerchantId';
+    private const AMOUNT_CENTS = 11130;
+    private const CURRENCY = 'USD';
+    private const LINE_ITEMS = [
         'sku1' => [
             'sku' => 'sku1',
             'quantity' => 100,
@@ -25,14 +25,8 @@ class ApruveOrderBuilderFactoryTest extends \PHPUnit\Framework\TestCase
         ],
     ];
 
-    /**
-     * @var ApruveOrderBuilderFactory
-     */
-    private $factory;
+    private ApruveOrderBuilderFactory $factory;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->factory = new ApruveOrderBuilderFactory();
@@ -54,6 +48,6 @@ class ApruveOrderBuilderFactoryTest extends \PHPUnit\Framework\TestCase
             self::LINE_ITEMS
         );
 
-        static::assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 }

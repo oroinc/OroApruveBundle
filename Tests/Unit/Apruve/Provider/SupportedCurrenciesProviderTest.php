@@ -6,14 +6,8 @@ use Oro\Bundle\ApruveBundle\Apruve\Provider\SupportedCurrenciesProvider;
 
 class SupportedCurrenciesProviderTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var SupportedCurrenciesProvider
-     */
-    private $provider;
+    private SupportedCurrenciesProvider $provider;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->provider = new SupportedCurrenciesProvider();
@@ -22,25 +16,18 @@ class SupportedCurrenciesProviderTest extends \PHPUnit\Framework\TestCase
     public function testGetCurrencies()
     {
         $actual = $this->provider->getCurrencies();
-        static::assertSame(['USD'], $actual);
+        self::assertSame(['USD'], $actual);
     }
 
     /**
      * @dataProvider currenciesDataProvider
-     *
-     * @param string $currency
-     * @param string $expected
      */
-    public function testIsSupported($currency, $expected)
+    public function testIsSupported(string $currency, bool $expected)
     {
-        $actual = $this->provider->isSupported($currency);
-        static::assertSame($expected, $actual);
+        self::assertSame($expected, $this->provider->isSupported($currency));
     }
 
-    /**
-     * @return array
-     */
-    public function currenciesDataProvider()
+    public function currenciesDataProvider(): array
     {
         return [
             ['USD', true],

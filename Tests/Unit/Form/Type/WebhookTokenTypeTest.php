@@ -34,7 +34,7 @@ class WebhookTokenTypeTest extends FormIntegrationTestCase
     public function testConstructor()
     {
         $formType = new WebhookTokenType($this->tokenGenerator);
-        static::assertSame($this->tokenGenerator, ReflectionUtil::getPropertyValue($formType, 'generator'));
+        self::assertSame($this->tokenGenerator, ReflectionUtil::getPropertyValue($formType, 'generator'));
     }
 
     /**
@@ -89,11 +89,11 @@ class WebhookTokenTypeTest extends FormIntegrationTestCase
 
     public function testGetBlockPrefix()
     {
-        static::assertEquals(WebhookTokenType::BLOCK_PREFIX, $this->formType->getBlockPrefix());
+        self::assertEquals(WebhookTokenType::BLOCK_PREFIX, $this->formType->getBlockPrefix());
     }
 
     public function testGetParent()
     {
-        static::assertEquals(HiddenType::class, $this->formType->getParent());
+        self::assertEquals(HiddenType::class, $this->formType->getParent());
     }
 }

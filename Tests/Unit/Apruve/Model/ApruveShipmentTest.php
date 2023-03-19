@@ -6,20 +6,14 @@ use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveShipment;
 
 class ApruveShipmentTest extends \PHPUnit\Framework\TestCase
 {
-    const ID = 'sampleId';
-    const DATA = [
+    private const ID = 'sampleId';
+    private const DATA = [
         'id' => self::ID,
         'amount_cents' => 1000,
     ];
 
-    /**
-     * @var ApruveShipment
-     */
-    private $apruveShipment;
+    private ApruveShipment $apruveShipment;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->apruveShipment = new ApruveShipment(self::DATA);
@@ -27,11 +21,11 @@ class ApruveShipmentTest extends \PHPUnit\Framework\TestCase
 
     public function testGetData()
     {
-        static::assertSame(self::DATA, $this->apruveShipment->getData());
+        self::assertSame(self::DATA, $this->apruveShipment->getData());
     }
 
     public function testGetId()
     {
-        static::assertSame(self::ID, $this->apruveShipment->getId());
+        self::assertSame(self::ID, $this->apruveShipment->getId());
     }
 }

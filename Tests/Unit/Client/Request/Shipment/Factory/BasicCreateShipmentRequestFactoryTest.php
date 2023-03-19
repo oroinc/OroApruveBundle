@@ -8,19 +8,12 @@ use Oro\Bundle\ApruveBundle\Client\Request\Shipment\Factory\BasicCreateShipmentR
 
 class BasicCreateShipmentRequestFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ApruveShipment|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveShipment|\PHPUnit\Framework\MockObject\MockObject */
     private $apruveShipment;
 
-    /**
-     * @var BasicCreateShipmentRequestFactory
-     */
+    /** @var BasicCreateShipmentRequestFactory */
     private $factory;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->apruveShipment = $this->createMock(ApruveShipment::class);
@@ -34,6 +27,6 @@ class BasicCreateShipmentRequestFactoryTest extends \PHPUnit\Framework\TestCase
 
         $actual = $this->factory->create($this->apruveShipment, $apruveOrderId);
 
-        static::assertEquals($request, $actual);
+        self::assertEquals($request, $actual);
     }
 }

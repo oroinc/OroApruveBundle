@@ -10,32 +10,21 @@ use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 
 class AuthorizePaymentActionTest extends \PHPUnit\Framework\TestCase
 {
-    const APRUVE_ORDER_ID = 'sampleApruveOrderId';
-    const RESPONSE = [ApruvePaymentMethod::PARAM_ORDER_ID => self::APRUVE_ORDER_ID];
+    private const APRUVE_ORDER_ID = 'sampleApruveOrderId';
+    private const RESPONSE = [ApruvePaymentMethod::PARAM_ORDER_ID => self::APRUVE_ORDER_ID];
 
-    /**
-     * @var AuthorizePaymentAction
-     */
+    /** @var AuthorizePaymentAction */
     private $paymentAction;
 
-    /**
-     * @var TransactionPaymentContextFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var TransactionPaymentContextFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $paymentContextFactory;
 
-    /**
-     * @var PaymentTransaction|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var PaymentTransaction|\PHPUnit\Framework\MockObject\MockObject */
     private $paymentTransaction;
 
-    /**
-     * @var ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $config;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->paymentContextFactory = $this->createMock(TransactionPaymentContextFactoryInterface::class);
@@ -47,40 +36,35 @@ class AuthorizePaymentActionTest extends \PHPUnit\Framework\TestCase
 
     public function testExecute()
     {
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('getResponse')
             ->willReturn(self::RESPONSE);
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setReference')
             ->with(self::APRUVE_ORDER_ID);
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setAction')
             ->with('authorize');
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setSuccessful')
             ->with(true);
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setActive')
             ->with(true);
 
         $actual = $this->paymentAction->execute($this->config, $this->paymentTransaction);
 
-        static::assertSame([], $actual);
+        self::assertSame([], $actual);
     }
 
     public function testGetName()
     {
         $actual = $this->paymentAction->getName();
 
-        static::assertSame(AuthorizePaymentAction::NAME, $actual);
+        self::assertSame(AuthorizePaymentAction::NAME, $actual);
     }
 }

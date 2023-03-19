@@ -10,25 +10,18 @@ use Oro\Bundle\SecurityBundle\Encoder\SymmetricCrypterInterface;
 
 class ApruveSettingsRestClientFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ApruveRestClientFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveRestClientFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $restClientFactory;
 
-    /**
-     * @var SymmetricCrypterInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var SymmetricCrypterInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $crypter;
 
-    /**
-     * @var ApruveSettingsRestClientFactory
-     */
+    /** @var ApruveSettingsRestClientFactory */
     private $factory;
 
     protected function setUp(): void
     {
         $this->restClientFactory = $this->createMock(ApruveRestClientFactoryInterface::class);
-
         $this->crypter = $this->createMock(SymmetricCrypterInterface::class);
 
         $this->factory = new ApruveSettingsRestClientFactory($this->restClientFactory, $this->crypter);
@@ -36,44 +29,39 @@ class ApruveSettingsRestClientFactoryTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider createDataProvider
-     *
-     * @param bool $isTestMode
      */
-    public function testCreate($isTestMode)
+    public function testCreate(bool $isTestMode)
     {
-        $apruveSettings = $this->getApruveSettingsMock();
+        $apruveSettings = $this->createMock(ApruveSettings::class);
 
         $encryptedKey = 'encrypted_api_key';
 
-        $apruveSettings->expects(static::once())
+        $apruveSettings->expects(self::once())
             ->method('getApruveApiKey')
             ->willReturn($encryptedKey);
 
-        $apruveSettings->expects(static::once())
+        $apruveSettings->expects(self::once())
             ->method('getApruveTestMode')
             ->willReturn($isTestMode);
 
         $apiKey = 'qwerty12345';
 
-        $this->crypter->expects(static::once())
+        $this->crypter->expects(self::once())
             ->method('decryptData')
             ->with($encryptedKey)
             ->willReturn($apiKey);
 
         $expectedClient = $this->createMock(ApruveRestClientInterface::class);
 
-        $this->restClientFactory->expects(static::once())
+        $this->restClientFactory->expects(self::once())
             ->method('create')
             ->with($apiKey, $isTestMode)
             ->willReturn($expectedClient);
 
-        static::assertEquals($expectedClient, $this->factory->create($apruveSettings));
+        self::assertEquals($expectedClient, $this->factory->create($apruveSettings));
     }
 
-    /**
-     * @return array
-     */
-    public function createDataProvider()
+    public function createDataProvider(): array
     {
         return [
             'test mode' => [
@@ -83,13 +71,5 @@ class ApruveSettingsRestClientFactoryTest extends \PHPUnit\Framework\TestCase
                 'isTestMode' => false,
             ],
         ];
-    }
-
-    /**
-     * @return ApruveSettings|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function getApruveSettingsMock()
-    {
-        return $this->createMock(ApruveSettings::class);
     }
 }

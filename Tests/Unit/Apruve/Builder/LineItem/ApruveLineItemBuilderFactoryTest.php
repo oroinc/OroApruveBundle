@@ -7,19 +7,13 @@ use Oro\Bundle\ApruveBundle\Apruve\Builder\LineItem\ApruveLineItemBuilderFactory
 
 class ApruveLineItemBuilderFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    const TITLE = 'Sample name';
-    const AMOUNT_CENTS = 12345;
-    const CURRENCY = 'USD';
-    const QUANTITY = 10;
+    private const TITLE = 'Sample name';
+    private const AMOUNT_CENTS = 12345;
+    private const CURRENCY = 'USD';
+    private const QUANTITY = 10;
 
-    /**
-     * @var ApruveLineItemBuilderFactory
-     */
-    private $factory;
+    private ApruveLineItemBuilderFactory $factory;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->factory = new ApruveLineItemBuilderFactory();
@@ -40,6 +34,6 @@ class ApruveLineItemBuilderFactoryTest extends \PHPUnit\Framework\TestCase
             self::QUANTITY
         );
 
-        static::assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 }

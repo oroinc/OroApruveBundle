@@ -10,10 +10,10 @@ class ApruveOrderBuilderTest extends \PHPUnit\Framework\TestCase
     /**
      * Mandatory
      */
-    const MERCHANT_ID = 'sampleMerchantId';
-    const AMOUNT_CENTS = 11130;
-    const CURRENCY = 'USD';
-    const LINE_ITEMS = [
+    private const MERCHANT_ID = 'sampleMerchantId';
+    private const AMOUNT_CENTS = 11130;
+    private const CURRENCY = 'USD';
+    private const LINE_ITEMS = [
         'sku1' => [
             'sku' => 'sku1',
             'quantity' => 100,
@@ -31,25 +31,19 @@ class ApruveOrderBuilderTest extends \PHPUnit\Framework\TestCase
     /**
      * Optional
      */
-    const SHIPPING_AMOUNT_CENTS = 1010;
-    const TAX_AMOUNT_CENTS = 110;
-    const FINALIZE_ON_CREATE = true;
-    const MERCHANT_ORDER_ID = '123';
-    const INVOICE_ON_CREATE = true;
-    const SHOPPER_ID = 'sampleShopperId';
-    const CORPORATE_ACCOUNT_ID = 'sampleAccountId';
-    const PO_NUMBER = '69000';
-    const AUTO_ESCALATE = true;
-    const EXPIRE_AT_STRING = '2027-04-15T10:12:27-05:00';
+    private const SHIPPING_AMOUNT_CENTS = 1010;
+    private const TAX_AMOUNT_CENTS = 110;
+    private const FINALIZE_ON_CREATE = true;
+    private const MERCHANT_ORDER_ID = '123';
+    private const INVOICE_ON_CREATE = true;
+    private const SHOPPER_ID = 'sampleShopperId';
+    private const CORPORATE_ACCOUNT_ID = 'sampleAccountId';
+    private const PO_NUMBER = '69000';
+    private const AUTO_ESCALATE = true;
+    private const EXPIRE_AT_STRING = '2027-04-15T10:12:27-05:00';
 
-    /**
-     * @var ApruveOrderBuilder
-     */
-    private $builder;
+    private ApruveOrderBuilder $builder;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->builder = new ApruveOrderBuilder(
@@ -70,7 +64,7 @@ class ApruveOrderBuilderTest extends \PHPUnit\Framework\TestCase
             ApruveOrder::CURRENCY => self::CURRENCY,
             ApruveOrder::LINE_ITEMS => self::LINE_ITEMS,
         ];
-        static::assertEquals($expected, $actual->getData());
+        self::assertEquals($expected, $actual->getData());
     }
 
     public function testGetResultWithOptionalParams()
@@ -106,6 +100,6 @@ class ApruveOrderBuilderTest extends \PHPUnit\Framework\TestCase
                 ApruveOrder::_CORPORATE_ACCOUNT_ID => self::CORPORATE_ACCOUNT_ID,
             ],
         ];
-        static::assertEquals($expected, $actual->getData());
+        self::assertEquals($expected, $actual->getData());
     }
 }

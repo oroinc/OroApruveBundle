@@ -10,9 +10,9 @@ class ApruveShipmentBuilderTest extends \PHPUnit\Framework\TestCase
     /**
      * Mandatory
      */
-    const AMOUNT_CENTS = 11130;
-    const CURRENCY = 'USD';
-    const LINE_ITEMS = [
+    private const AMOUNT_CENTS = 11130;
+    private const CURRENCY = 'USD';
+    private const LINE_ITEMS = [
         'sku1' => [
             'sku' => 'sku1',
             'quantity' => 100,
@@ -30,24 +30,18 @@ class ApruveShipmentBuilderTest extends \PHPUnit\Framework\TestCase
     /**
      * Optional
      */
-    const SHIPPING_AMOUNT_CENTS = 1010;
-    const TAX_AMOUNT_CENTS = 110;
-    const SHIPPER = 'Sample Shipper Name';
-    const TRACKING_NUMBER = 'sampleTrackingNumber';
-    const STATUS = 'sampleStatus';
-    const MERCHANT_SHIPMENT_ID = '123';
-    const MERCHANT_NOTES = 'Sample merchant notes';
-    const SHIPPED_AT_STRING = '2027-04-15T10:12:27-05:00';
-    const DELIVERED_AT_STRING = '2027-04-15T10:12:27-05:00';
+    private const SHIPPING_AMOUNT_CENTS = 1010;
+    private const TAX_AMOUNT_CENTS = 110;
+    private const SHIPPER = 'Sample Shipper Name';
+    private const TRACKING_NUMBER = 'sampleTrackingNumber';
+    private const STATUS = 'sampleStatus';
+    private const MERCHANT_SHIPMENT_ID = '123';
+    private const MERCHANT_NOTES = 'Sample merchant notes';
+    private const SHIPPED_AT_STRING = '2027-04-15T10:12:27-05:00';
+    private const DELIVERED_AT_STRING = '2027-04-15T10:12:27-05:00';
 
-    /**
-     * @var ApruveShipmentBuilder
-     */
-    private $builder;
+    private ApruveShipmentBuilder $builder;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->builder = new ApruveShipmentBuilder(
@@ -66,7 +60,7 @@ class ApruveShipmentBuilderTest extends \PHPUnit\Framework\TestCase
             ApruveShipment::CURRENCY => self::CURRENCY,
             ApruveShipment::SHIPPED_AT => self::SHIPPED_AT_STRING,
         ];
-        static::assertEquals($expected, $actual->getData());
+        self::assertEquals($expected, $actual->getData());
     }
 
     public function testGetResultWithOptionalParams()
@@ -97,6 +91,6 @@ class ApruveShipmentBuilderTest extends \PHPUnit\Framework\TestCase
             ApruveShipment::MERCHANT_SHIPMENT_ID => self::MERCHANT_SHIPMENT_ID,
             ApruveShipment::MERCHANT_NOTES => self::MERCHANT_NOTES,
         ];
-        static::assertEquals($expected, $actual->getData());
+        self::assertEquals($expected, $actual->getData());
     }
 }

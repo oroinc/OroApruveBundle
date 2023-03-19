@@ -6,20 +6,14 @@ use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveInvoice;
 
 class ApruveInvoiceTest extends \PHPUnit\Framework\TestCase
 {
-    const ID = 'sampleId';
-    const DATA = [
+    private const ID = 'sampleId';
+    private const DATA = [
         'id' => self::ID,
         'amount_cents' => 1000,
     ];
 
-    /**
-     * @var ApruveInvoice
-     */
-    private $apruveInvoice;
+    private ApruveInvoice $apruveInvoice;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->apruveInvoice = new ApruveInvoice(self::DATA);
@@ -27,11 +21,11 @@ class ApruveInvoiceTest extends \PHPUnit\Framework\TestCase
 
     public function testGetData()
     {
-        static::assertSame(self::DATA, $this->apruveInvoice->getData());
+        self::assertSame(self::DATA, $this->apruveInvoice->getData());
     }
 
     public function testGetId()
     {
-        static::assertSame(self::ID, $this->apruveInvoice->getId());
+        self::assertSame(self::ID, $this->apruveInvoice->getId());
     }
 }

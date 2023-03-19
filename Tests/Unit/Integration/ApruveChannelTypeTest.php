@@ -6,14 +6,8 @@ use Oro\Bundle\ApruveBundle\Integration\ApruveChannelType;
 
 class ApruveChannelTypeTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ApruveChannelType
-     */
-    private $channel;
+    private ApruveChannelType $channel;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->channel = new ApruveChannelType();
@@ -21,11 +15,11 @@ class ApruveChannelTypeTest extends \PHPUnit\Framework\TestCase
 
     public function testGetLabelReturnsCorrectString()
     {
-        static::assertSame('oro.apruve.channel_type.label', $this->channel->getLabel());
+        self::assertSame('oro.apruve.channel_type.label', $this->channel->getLabel());
     }
 
     public function testGetIcon()
     {
-        static::assertSame('bundles/oroapruve/img/apruve-logo.png', $this->channel->getIcon());
+        self::assertSame('bundles/oroapruve/img/apruve-logo.png', $this->channel->getIcon());
     }
 }

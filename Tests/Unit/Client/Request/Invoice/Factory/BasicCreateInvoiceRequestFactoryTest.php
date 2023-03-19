@@ -8,19 +8,12 @@ use Oro\Bundle\ApruveBundle\Client\Request\Invoice\Factory\BasicCreateInvoiceReq
 
 class BasicCreateInvoiceRequestFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var ApruveInvoice|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveInvoice|\PHPUnit\Framework\MockObject\MockObject */
     private $apruveInvoice;
 
-    /**
-     * @var BasicCreateInvoiceRequestFactory
-     */
+    /** @var BasicCreateInvoiceRequestFactory */
     private $factory;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->apruveInvoice = $this->createMock(ApruveInvoice::class);
@@ -34,6 +27,6 @@ class BasicCreateInvoiceRequestFactoryTest extends \PHPUnit\Framework\TestCase
 
         $actual = $this->factory->create($this->apruveInvoice, $apruveOrderId);
 
-        static::assertEquals($request, $actual);
+        self::assertEquals($request, $actual);
     }
 }

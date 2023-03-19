@@ -16,39 +16,29 @@ use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestResponseInterface;
  */
 class ShipmentPaymentActionTest extends AbstractPaymentActionTest
 {
-    const APRUVE_INVOICE_ID = 'sampleApruveOrderId';
-    const APRUVE_SHIPMENT_ID = 'sampleApruveShipmentId';
+    private const APRUVE_INVOICE_ID = 'sampleApruveOrderId';
+    private const APRUVE_SHIPMENT_ID = 'sampleApruveShipmentId';
 
-    const RETURN_ERROR = ['successful' => false, 'message' => 'oro.apruve.payment_transaction.shipment.result.error'];
+    protected const RETURN_ERROR = [
+        'successful' => false,
+        'message' => 'oro.apruve.payment_transaction.shipment.result.error'
+    ];
 
-    /**
-     * @var ApruveShipmentFromResponseFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $apruveShipmentFromResponseFactory;
+    /** @var ApruveShipmentFromResponseFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
+    private $apruveShipmentFromResponseFactory;
 
-    /**
-     * @var CreateShipmentRequestFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $createShipmentRequestFactory;
+    /** @var CreateShipmentRequestFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
+    private $createShipmentRequestFactory;
 
-    /**
-     * @var ApruveShipment|\PHPUnit\Framework\MockObject\MockObject
-     */
-    protected $apruveShipment;
+    /** @var ApruveShipment|\PHPUnit\Framework\MockObject\MockObject */
+    private $apruveShipment;
 
-    /**
-     * @var ApruveShipmentFromPaymentContextFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var ApruveShipmentFromPaymentContextFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
     protected $apruveEntityFromPaymentContextFactory;
 
-    /**
-     * @var ShipmentPaymentAction
-     */
+    /** @var ShipmentPaymentAction */
     protected $paymentAction;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -86,19 +76,16 @@ class ShipmentPaymentActionTest extends AbstractPaymentActionTest
         $this->mockApruveShipmentRequest(self::REQUEST_DATA, self::APRUVE_INVOICE_ID);
         $this->mockApruveRestClient($this->mockRestResponse($isSuccessful, self::RESPONSE_DATA));
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setResponse')
             ->with(self::RESPONSE_DATA)
             ->willReturnSelf();
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setReference')
             ->with(self::APRUVE_SHIPMENT_ID);
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setRequest')
             ->with(self::REQUEST_DATA)
             ->willReturnSelf();
@@ -107,7 +94,7 @@ class ShipmentPaymentActionTest extends AbstractPaymentActionTest
 
         $actual = $this->paymentAction->execute($this->mockApruveConfig(), $this->paymentTransaction);
 
-        static::assertSame(self::RETURN_SUCCESS, $actual);
+        self::assertSame(self::RETURN_SUCCESS, $actual);
     }
 
     public function testExecuteWhenResponseIsNotSuccessful()
@@ -120,19 +107,16 @@ class ShipmentPaymentActionTest extends AbstractPaymentActionTest
         $this->mockApruveShipmentRequest(self::REQUEST_DATA, self::APRUVE_INVOICE_ID);
         $this->mockApruveRestClient($this->mockRestResponse($isSuccessful, self::RESPONSE_DATA));
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setResponse')
             ->with(self::RESPONSE_DATA)
             ->willReturnSelf();
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setReference')
             ->with(self::APRUVE_SHIPMENT_ID);
 
-        $this->paymentTransaction
-            ->expects(static::once())
+        $this->paymentTransaction->expects(self::once())
             ->method('setRequest')
             ->with(self::REQUEST_DATA)
             ->willReturnSelf();
@@ -143,7 +127,7 @@ class ShipmentPaymentActionTest extends AbstractPaymentActionTest
 
         $actual = $this->paymentAction->execute($this->mockApruveConfig(), $this->paymentTransaction);
 
-        static::assertSame(self::RETURN_ERROR, $actual);
+        self::assertSame(self::RETURN_ERROR, $actual);
     }
 
     public function testExecuteWhenRestException()
@@ -158,53 +142,40 @@ class ShipmentPaymentActionTest extends AbstractPaymentActionTest
 
         $actual = $this->paymentAction->execute($this->mockApruveConfig(), $this->paymentTransaction);
 
-        static::assertSame(self::RETURN_ERROR, $actual);
+        self::assertSame(self::RETURN_ERROR, $actual);
     }
 
     /**
-     * @param RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject $restResponse
+     * {@inheritDoc}
      */
-    protected function mockApruveRestClient(RestResponseInterface $restResponse)
-    {
+    protected function mockApruveRestClient(
+        RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject $restResponse
+    ): void {
         parent::mockApruveRestClient($restResponse);
 
-        $this->apruveShipmentFromResponseFactory
-            ->expects(static::once())
+        $this->apruveShipmentFromResponseFactory->expects(self::once())
             ->method('createFromResponse')
             ->with($restResponse)
             ->willReturn($this->mockCreatedApruveShipment(self::APRUVE_SHIPMENT_ID));
     }
 
-    /**
-     * @param array  $requestData
-     * @param string $apruveInvoiceId
-     */
-    private function mockApruveShipmentRequest(array $requestData, $apruveInvoiceId)
+    private function mockApruveShipmentRequest(array $requestData, string $apruveInvoiceId): void
     {
         $apruveShipmentRequest = $this->createMock(ApruveRequestInterface::class);
-
-        $apruveShipmentRequest
-            ->expects(static::once())
+        $apruveShipmentRequest->expects(self::once())
             ->method('toArray')
             ->willReturn($requestData);
 
-        $this->createShipmentRequestFactory
-            ->expects(static::once())
+        $this->createShipmentRequestFactory->expects(self::once())
             ->method('create')
             ->with($this->apruveShipment, $apruveInvoiceId)
             ->willReturn($apruveShipmentRequest);
     }
 
-    /**
-     * @param string $apruveShipmentId
-     *
-     * @return ApruveShipment|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function mockCreatedApruveShipment($apruveShipmentId)
+    private function mockCreatedApruveShipment(string $apruveShipmentId): ApruveShipment
     {
         $apruveShipment = $this->createMock(ApruveShipment::class);
-        $apruveShipment
-            ->expects(static::once())
+        $apruveShipment->expects(self::once())
             ->method('getId')
             ->willReturn($apruveShipmentId);
 
@@ -213,8 +184,7 @@ class ShipmentPaymentActionTest extends AbstractPaymentActionTest
 
     private function mockApruveShipmentFactory()
     {
-        $this->apruveEntityFromPaymentContextFactory
-            ->expects(static::once())
+        $this->apruveEntityFromPaymentContextFactory->expects(self::once())
             ->method('createFromPaymentContext')
             ->with($this->paymentContext)
             ->willReturn($this->apruveShipment);

@@ -29,8 +29,8 @@ class WebhookControllerTest extends WebTestCase
             ])
         );
         $response = $this->client->getResponse();
-        static::assertEquals('Access denied.', $response->getContent());
-        static::assertHtmlResponseStatusCodeEquals($response, 403);
+        self::assertEquals('Access denied.', $response->getContent());
+        self::assertHtmlResponseStatusCodeEquals($response, 403);
     }
 
     public function testNotifyMethodDisabled()
@@ -42,8 +42,8 @@ class WebhookControllerTest extends WebTestCase
             ])
         );
         $response = $this->client->getResponse();
-        static::assertEquals('Payment method is disabled.', $response->getContent());
-        static::assertHtmlResponseStatusCodeEquals($response, 404);
+        self::assertEquals('Payment method is disabled.', $response->getContent());
+        self::assertHtmlResponseStatusCodeEquals($response, 404);
     }
 
     public function testNotifyBadBody()
@@ -55,8 +55,8 @@ class WebhookControllerTest extends WebTestCase
             ])
         );
         $response = $this->client->getResponse();
-        static::assertEquals('Request body can\'t be decoded.', $response->getContent());
-        static::assertHtmlResponseStatusCodeEquals($response, 400);
+        self::assertEquals('Request body can\'t be decoded.', $response->getContent());
+        self::assertHtmlResponseStatusCodeEquals($response, 400);
     }
 
     public function testNotifyInvoiceClosedInvalidEventBody()
@@ -73,11 +73,11 @@ class WebhookControllerTest extends WebTestCase
             [],
             [],
             [],
-            $this->createContent($event)
+            json_encode($event, JSON_THROW_ON_ERROR)
         );
         $response = $this->client->getResponse();
-        static::assertEquals('Invalid event body.', $response->getContent());
-        static::assertHtmlResponseStatusCodeEquals($response, 400);
+        self::assertEquals('Invalid event body.', $response->getContent());
+        self::assertHtmlResponseStatusCodeEquals($response, 400);
     }
 
     public function testNotifyInvoiceClosedInvoiceNotFound()
@@ -97,11 +97,11 @@ class WebhookControllerTest extends WebTestCase
             [],
             [],
             [],
-            $this->createContent($event)
+            json_encode($event, JSON_THROW_ON_ERROR)
         );
         $response = $this->client->getResponse();
-        static::assertEquals('Invoice was not found.', $response->getContent());
-        static::assertHtmlResponseStatusCodeEquals($response, 404);
+        self::assertEquals('Invoice was not found.', $response->getContent());
+        self::assertHtmlResponseStatusCodeEquals($response, 404);
     }
 
     public function testNotifyInvoiceClosedEventAlreadyHandled()
@@ -121,11 +121,11 @@ class WebhookControllerTest extends WebTestCase
             [],
             [],
             [],
-            $this->createContent($event)
+            json_encode($event, JSON_THROW_ON_ERROR)
         );
         $response = $this->client->getResponse();
-        static::assertEquals('This event already handled.', $response->getContent());
-        static::assertHtmlResponseStatusCodeEquals($response, 409);
+        self::assertEquals('This event already handled.', $response->getContent());
+        self::assertHtmlResponseStatusCodeEquals($response, 409);
     }
 
     public function testNotifyInvoiceClosedSuccess()
@@ -145,26 +145,24 @@ class WebhookControllerTest extends WebTestCase
             [],
             [],
             [],
-            $this->createContent($event)
+            json_encode($event, JSON_THROW_ON_ERROR)
         );
         $response = $this->client->getResponse();
-        static::assertEquals('', $response->getContent());
-        static::assertHtmlResponseStatusCodeEquals($response, 200);
+        self::assertEquals('', $response->getContent());
+        self::assertHtmlResponseStatusCodeEquals($response, 200);
 
         $paymentTransactions = $this->getContainer()->get('oro_payment.repository.payment_transaction')->findBy([
             'action' => PaymentMethodInterface::CAPTURE,
             'reference' => 'invoice_1',
         ]);
 
-        static::assertCount(1, $paymentTransactions);
+        self::assertCount(1, $paymentTransactions);
     }
 
     /**
      * @dataProvider notifyIgnoredEventsDataProvider
-     *
-     * @param string $eventName
      */
-    public function testNotifyIgnoredEvents($eventName)
+    public function testNotifyIgnoredEvents(string $eventName)
     {
         $event = [
             'event' => $eventName,
@@ -178,32 +176,19 @@ class WebhookControllerTest extends WebTestCase
             [],
             [],
             [],
-            $this->createContent($event)
+            json_encode($event, JSON_THROW_ON_ERROR)
         );
         $response = $this->client->getResponse();
-        static::assertEquals('', $response->getContent());
-        static::assertHtmlResponseStatusCodeEquals($response, 200);
+        self::assertEquals('', $response->getContent());
+        self::assertHtmlResponseStatusCodeEquals($response, 200);
     }
 
-    /**
-     * @return array
-     */
-    public function notifyIgnoredEventsDataProvider()
+    public function notifyIgnoredEventsDataProvider(): array
     {
         return [
             ['eventName' => 'order.approved'],
             ['eventName' => 'order.cancled'],
             ['eventName' => 'payment_term.approved'],
         ];
-    }
-
-    /**
-     * @param array $body
-     *
-     * @return string
-     */
-    private function createContent(array $body)
-    {
-        return json_encode($body);
     }
 }

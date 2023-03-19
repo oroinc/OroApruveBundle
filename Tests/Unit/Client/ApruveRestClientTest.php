@@ -10,22 +10,15 @@ use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestResponseInterface;
 
 class ApruveRestClientTest extends \PHPUnit\Framework\TestCase
 {
-    const SAMPLE_URI = '/sample-uri';
-    const SAMPLE_DATA = ['sample_data' => 'foo'];
+    private const SAMPLE_URI = '/sample-uri';
+    private const SAMPLE_DATA = ['sample_data' => 'foo'];
 
-    /**
-     * @var RestClientInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
+    /** @var RestClientInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $restClient;
 
-    /**
-     * @var ApruveRestClient
-     */
+    /** @var ApruveRestClient */
     private $client;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->restClient = $this->createMock(RestClientInterface::class);
@@ -35,31 +28,25 @@ class ApruveRestClientTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @dataProvider executeDataProvider
-     *
-     * @param string $method
      */
-    public function testExecute($method)
+    public function testExecute(string $method)
     {
         $response = $this->createMock(RestResponseInterface::class);
 
         $uri = self::SAMPLE_URI;
         $data = self::SAMPLE_DATA;
 
-        $this->restClient
-            ->expects(static::once())
+        $this->restClient->expects(self::once())
             ->method($method)
             ->with($uri, $data)
             ->willReturn($response);
 
         $request = $this->createRequest($method, $uri, $data);
 
-        static::assertEquals($response, $this->client->execute($request));
+        self::assertEquals($response, $this->client->execute($request));
     }
 
-    /**
-     * @return array
-     */
-    public function executeDataProvider()
+    public function executeDataProvider(): array
     {
         return [
             'GET' => [
@@ -81,15 +68,14 @@ class ApruveRestClientTest extends \PHPUnit\Framework\TestCase
         $method = ApruveRestClient::METHOD_DELETE;
         $uri = self::SAMPLE_URI;
 
-        $this->restClient
-            ->expects(static::once())
+        $this->restClient->expects(self::once())
             ->method($method)
             ->with($uri)
             ->willReturn($response);
 
         $request = $this->createRequest($method, $uri, []);
 
-        static::assertEquals($response, $this->client->execute($request));
+        self::assertEquals($response, $this->client->execute($request));
     }
 
     public function testExecuteWithUnsupportedMethod()
@@ -108,8 +94,7 @@ class ApruveRestClientTest extends \PHPUnit\Framework\TestCase
         $method = ApruveRestClient::METHOD_GET;
         $uri = self::SAMPLE_URI;
 
-        $this->restClient
-            ->expects(static::once())
+        $this->restClient->expects(self::once())
             ->method($method)
             ->with($uri)
             ->willThrowException(new \Exception('Any exception'));
@@ -118,23 +103,16 @@ class ApruveRestClientTest extends \PHPUnit\Framework\TestCase
         $this->client->execute($request);
     }
 
-    /**
-     * @param string $method
-     * @param string $uri
-     * @param array  $data
-     *
-     * @return ApruveRequestInterface|\PHPUnit\Framework\MockObject\MockObject
-     */
-    private function createRequest($method, $uri, array $data)
+    private function createRequest(string $method, string $uri, array $data): ApruveRequestInterface
     {
         $request = $this->createMock(ApruveRequestInterface::class);
-        $request
+        $request->expects(self::any())
             ->method('getMethod')
             ->willReturn($method);
-        $request
+        $request->expects(self::any())
             ->method('getUri')
             ->willReturn($uri);
-        $request
+        $request->expects(self::any())
             ->method('getData')
             ->willReturn($data);
 

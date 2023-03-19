@@ -7,18 +7,12 @@ use Oro\Bundle\ApruveBundle\Apruve\Builder\Shipment\ApruveShipmentBuilderFactory
 
 class ApruveShipmentBuilderFactoryTest extends \PHPUnit\Framework\TestCase
 {
-    const AMOUNT_CENTS = 11130;
-    const CURRENCY = 'USD';
-    const SHIPPED_AT_STRING = '2027-04-15T10:12:27-05:00';
+    private const AMOUNT_CENTS = 11130;
+    private const CURRENCY = 'USD';
+    private const SHIPPED_AT_STRING = '2027-04-15T10:12:27-05:00';
 
-    /**
-     * @var ApruveShipmentBuilderFactory
-     */
-    private $factory;
+    private ApruveShipmentBuilderFactory $factory;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->factory = new ApruveShipmentBuilderFactory();
@@ -38,6 +32,6 @@ class ApruveShipmentBuilderFactoryTest extends \PHPUnit\Framework\TestCase
             self::SHIPPED_AT_STRING
         );
 
-        static::assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 }

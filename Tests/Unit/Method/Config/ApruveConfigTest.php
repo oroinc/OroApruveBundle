@@ -28,12 +28,12 @@ class ApruveConfigTest extends \PHPUnit\Framework\TestCase
             ]
         );
 
-        static::assertEquals($adminLabel, $parameterBag->getAdminLabel());
-        static::assertEquals($label, $parameterBag->getLabel());
-        static::assertEquals($shortLabel, $parameterBag->getShortLabel());
-        static::assertEquals($paymentMethodIdentifier, $parameterBag->getPaymentMethodIdentifier());
-        static::assertEquals($apiKey, $parameterBag->getApiKey());
-        static::assertEquals($merchantId, $parameterBag->getMerchantId());
-        static::assertEquals($testMode, $parameterBag->isTestMode());
+        self::assertEquals($adminLabel, $parameterBag->getAdminLabel());
+        self::assertEquals($label, $parameterBag->getLabel());
+        self::assertEquals($shortLabel, $parameterBag->getShortLabel());
+        self::assertEquals($paymentMethodIdentifier, $parameterBag->getPaymentMethodIdentifier());
+        self::assertEquals($apiKey, $parameterBag->getApiKey());
+        self::assertEquals($merchantId, $parameterBag->getMerchantId());
+        self::assertEquals($testMode, $parameterBag->isTestMode());
     }
 }

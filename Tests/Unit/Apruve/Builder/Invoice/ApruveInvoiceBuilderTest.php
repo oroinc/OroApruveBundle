@@ -10,9 +10,9 @@ class ApruveInvoiceBuilderTest extends \PHPUnit\Framework\TestCase
     /**
      * Mandatory
      */
-    const AMOUNT_CENTS = 11130;
-    const CURRENCY = 'USD';
-    const LINE_ITEMS = [
+    private const AMOUNT_CENTS = 11130;
+    private const CURRENCY = 'USD';
+    private const LINE_ITEMS = [
         'sku1' => [
             'sku' => 'sku1',
             'quantity' => 100,
@@ -30,21 +30,15 @@ class ApruveInvoiceBuilderTest extends \PHPUnit\Framework\TestCase
     /**
      * Optional
      */
-    const SHIPPING_AMOUNT_CENTS = 1010;
-    const TAX_AMOUNT_CENTS = 110;
-    const ISSUE_ON_CREATE = true;
-    const MERCHANT_INVOICE_ID = '123';
-    const MERCHANT_NOTES = 'Sample merchant notes';
-    const DUE_AT_STRING = '2027-04-15T10:12:27-05:00';
+    private const SHIPPING_AMOUNT_CENTS = 1010;
+    private const TAX_AMOUNT_CENTS = 110;
+    private const ISSUE_ON_CREATE = true;
+    private const MERCHANT_INVOICE_ID = '123';
+    private const MERCHANT_NOTES = 'Sample merchant notes';
+    private const DUE_AT_STRING = '2027-04-15T10:12:27-05:00';
 
-    /**
-     * @var ApruveInvoiceBuilder
-     */
-    private $builder;
+    private ApruveInvoiceBuilder $builder;
 
-    /**
-     * {@inheritDoc}
-     */
     protected function setUp(): void
     {
         $this->builder = new ApruveInvoiceBuilder(
@@ -63,7 +57,7 @@ class ApruveInvoiceBuilderTest extends \PHPUnit\Framework\TestCase
             ApruveInvoice::CURRENCY => self::CURRENCY,
             ApruveInvoice::LINE_ITEMS => self::LINE_ITEMS,
         ];
-        static::assertEquals($expected, $actual->getData());
+        self::assertEquals($expected, $actual->getData());
     }
 
     public function testGetResultWithOptionalParams()
@@ -88,6 +82,6 @@ class ApruveInvoiceBuilderTest extends \PHPUnit\Framework\TestCase
             ApruveInvoice::DUE_AT => self::DUE_AT_STRING,
             ApruveInvoice::MERCHANT_NOTES => self::MERCHANT_NOTES,
         ];
-        static::assertEquals($expected, $actual->getData());
+        self::assertEquals($expected, $actual->getData());
     }
 }
