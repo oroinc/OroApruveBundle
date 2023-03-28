@@ -5,6 +5,7 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Form\Type;
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\ApruveBundle\Form\Type\ApruveSettingsType;
 use Oro\Bundle\ApruveBundle\Form\Type\WebhookTokenType;
+use Oro\Bundle\FormBundle\Tests\Unit\Stub\TooltipFormExtensionStub;
 use Oro\Bundle\IntegrationBundle\Provider\TransportInterface;
 use Oro\Bundle\LocaleBundle\Entity\LocalizedFallbackValue;
 use Oro\Bundle\LocaleBundle\Form\Type\LocalizedFallbackValueCollectionType;
@@ -13,6 +14,7 @@ use Oro\Bundle\SecurityBundle\Form\DataTransformer\Factory\CryptedDataTransforme
 use Oro\Bundle\SecurityBundle\Generator\RandomTokenGeneratorInterface;
 use Oro\Component\Testing\Unit\PreloadedExtension;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
 use Symfony\Component\Form\Test\FormIntegrationTestCase;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -90,14 +92,13 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
     protected function getExtensions()
     {
         return [
-            new PreloadedExtension(
-                [
-                    LocalizedFallbackValueCollectionType::class => new LocalizedFallbackValueCollectionTypeStub(),
-                    WebhookTokenType::class => new WebhookTokenType($this->tokenGenerator),
-                    ApruveSettingsType::class => $this->formType
-                ],
-                []
-            ),
+            new PreloadedExtension([
+                LocalizedFallbackValueCollectionType::class => new LocalizedFallbackValueCollectionTypeStub(),
+                WebhookTokenType::class => new WebhookTokenType($this->tokenGenerator),
+                ApruveSettingsType::class => $this->formType
+            ], [
+                FormType::class => [new TooltipFormExtensionStub($this)],
+            ]),
             new ValidatorExtension(Validation::createValidator())
         ];
     }
