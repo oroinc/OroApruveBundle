@@ -48,6 +48,8 @@ class ApruveSettingsType extends AbstractType
                 LocalizedFallbackValueCollectionType::class,
                 [
                     'label' => 'oro.apruve.settings.labels.label',
+                    'tooltip' => 'oro.apruve.settings.labels.tooltip',
+                    'tooltip_placement' => 'right',
                     'required' => true,
                     'entry_options' => ['constraints' => [new NotBlank()]],
                 ]
@@ -57,6 +59,8 @@ class ApruveSettingsType extends AbstractType
                 LocalizedFallbackValueCollectionType::class,
                 [
                     'label' => 'oro.apruve.settings.short_labels.label',
+                    'tooltip' => 'oro.apruve.settings.short_labels.tooltip',
+                    'tooltip_placement' => 'right',
                     'required' => true,
                     'entry_options' => ['constraints' => [new NotBlank()]],
                 ]
@@ -77,6 +81,8 @@ class ApruveSettingsType extends AbstractType
             ])
             ->add('apruveWebhookToken', WebhookTokenType::class, [
                 'label' => 'oro.apruve.settings.webhook_url.label',
+                'tooltip' => 'oro.apruve.settings.webhook_url.tooltip',
+                'tooltip_placement' => 'right',
                 'required' => false,
             ]);
 
