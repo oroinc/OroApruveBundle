@@ -5,6 +5,7 @@
 @fixture-OroCheckoutBundle:Shipping.yml
 @fixture-OroApruveBundle:Checkout.yml
 @fixture-OroWarehouseBundle:Checkout.yml
+@behat-test-env
 Feature: Apruve Guest Checkout Integration
   In order to be able to purchase products using Apruve payment system
   As a Guest
