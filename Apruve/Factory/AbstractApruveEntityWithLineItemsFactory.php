@@ -2,12 +2,13 @@
 
 namespace Oro\Bundle\ApruveBundle\Apruve\Factory;
 
+use Doctrine\Common\Collections\Collection;
 use Oro\Bundle\ApruveBundle\Apruve\Factory\LineItem\ApruveLineItemFromPaymentLineItemFactoryInterface;
 use Oro\Bundle\ApruveBundle\Apruve\Helper\AmountNormalizerInterface;
 use Oro\Bundle\ApruveBundle\Provider\ShippingAmountProviderInterface;
 use Oro\Bundle\ApruveBundle\Provider\TaxAmountProviderInterface;
-use Oro\Bundle\PaymentBundle\Context\LineItem\Collection\PaymentLineItemCollectionInterface;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
+use Oro\Bundle\PaymentBundle\Context\PaymentLineItem;
 use Oro\Bundle\PricingBundle\SubtotalProcessor\TotalProcessorProvider;
 
 /**
@@ -51,7 +52,7 @@ abstract class AbstractApruveEntityWithLineItemsFactory extends AbstractApruveEn
     }
 
     /**
-     * @param PaymentLineItemCollectionInterface $lineItems
+     * @param Collection<PaymentLineItem> $lineItems
      *
      * @return array
      */

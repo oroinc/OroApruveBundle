@@ -11,13 +11,15 @@ use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveLineItem;
 use Oro\Bundle\ApruveBundle\Provider\ShippingAmountProviderInterface;
 use Oro\Bundle\ApruveBundle\Provider\TaxAmountProviderInterface;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
-use Oro\Bundle\PaymentBundle\Context\PaymentLineItemInterface;
+use Oro\Bundle\PaymentBundle\Context\PaymentLineItem;
 use Oro\Bundle\PricingBundle\SubtotalProcessor\Model\Subtotal;
 use Oro\Bundle\PricingBundle\SubtotalProcessor\TotalProcessorProvider;
 use Oro\Bundle\ShippingBundle\Method\ShippingMethodInterface;
 use Oro\Bundle\ShippingBundle\Method\ShippingMethodProviderInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
-class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit\Framework\TestCase
+class ApruveShipmentFromPaymentContextFactoryTest extends TestCase
 {
     private const TOTAL_AMOUNT_CENTS = 12250;
     private const TOTAL_AMOUNT_USD = 122.50;
@@ -43,23 +45,17 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit\Framework\Tes
         ],
     ];
 
-    /** @var ShippingMethodProviderInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $shippingMethodProvider;
+    private ShippingMethodProviderInterface|MockObject $shippingMethodProvider;
 
-    /** @var ApruveShipmentBuilderInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $apruveShipmentBuilder;
+    private ApruveShipmentBuilderInterface|MockObject $apruveShipmentBuilder;
 
-    /** @var ApruveShipmentBuilderFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $apruveShipmentBuilderFactory;
+    private ApruveShipmentBuilderFactoryInterface|MockObject $apruveShipmentBuilderFactory;
 
-    /** @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $paymentContext;
+    private PaymentContextInterface|MockObject $paymentContext;
 
-    /** @var ApruveShipmentFromPaymentContextFactory */
-    private $factory;
+    private ApruveShipmentFromPaymentContextFactory $factory;
 
-    /** @var TotalProcessorProvider|\PHPUnit\Framework\MockObject\MockObject */
-    private $totalProcessorProvider;
+    private TotalProcessorProvider|MockObject $totalProcessorProvider;
 
     protected function setUp(): void
     {
@@ -69,8 +65,8 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit\Framework\Tes
         $this->shippingMethodProvider = $this->createMock(ShippingMethodProviderInterface::class);
         $this->totalProcessorProvider = $this->createMock(TotalProcessorProvider::class);
 
-        $lineItemOne = $this->createMock(PaymentLineItemInterface::class);
-        $lineItemTwo = $this->createMock(PaymentLineItemInterface::class);
+        $lineItemOne = $this->createMock(PaymentLineItem::class);
+        $lineItemTwo = $this->createMock(PaymentLineItem::class);
 
         $this->paymentContext->expects(self::once())
             ->method('getCurrency')
@@ -115,7 +111,7 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit\Framework\Tes
         );
     }
 
-    public function testGetResult()
+    public function testGetResult(): void
     {
         $this->shippingMethodProvider->expects(self::once())
             ->method('hasShippingMethod')
@@ -149,7 +145,7 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit\Framework\Tes
         $this->factory->createFromPaymentContext($this->paymentContext);
     }
 
-    public function testGetResultIfNoShippingMethod()
+    public function testGetResultIfNoShippingMethod(): void
     {
         $this->shippingMethodProvider->expects(self::once())
             ->method('hasShippingMethod')
@@ -211,7 +207,7 @@ class ApruveShipmentFromPaymentContextFactoryTest extends \PHPUnit\Framework\Tes
         return $shippingMethod;
     }
 
-    private function mockApruveShipmentBuilder()
+    private function mockApruveShipmentBuilder(): void
     {
         $this->apruveShipmentBuilderFactory->expects(self::once())
             ->method('create')

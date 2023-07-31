@@ -11,11 +11,13 @@ use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveLineItem;
 use Oro\Bundle\ApruveBundle\Provider\ShippingAmountProviderInterface;
 use Oro\Bundle\ApruveBundle\Provider\TaxAmountProviderInterface;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
-use Oro\Bundle\PaymentBundle\Context\PaymentLineItemInterface;
+use Oro\Bundle\PaymentBundle\Context\PaymentLineItem;
 use Oro\Bundle\PricingBundle\SubtotalProcessor\Model\Subtotal;
 use Oro\Bundle\PricingBundle\SubtotalProcessor\TotalProcessorProvider;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
-class ApruveInvoiceFromPaymentContextFactoryTest extends \PHPUnit\Framework\TestCase
+class ApruveInvoiceFromPaymentContextFactoryTest extends TestCase
 {
     private const TOTAL_AMOUNT_CENTS = 12250;
     private const TOTAL_AMOUNT_USD = 122.50;
@@ -40,20 +42,15 @@ class ApruveInvoiceFromPaymentContextFactoryTest extends \PHPUnit\Framework\Test
         ],
     ];
 
-    /** @var ApruveInvoiceBuilderInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $apruveInvoiceBuilder;
+    private ApruveInvoiceBuilderInterface|MockObject $apruveInvoiceBuilder;
 
-    /** @var ApruveInvoiceBuilderFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $apruveInvoiceBuilderFactory;
+    private ApruveInvoiceBuilderFactoryInterface|MockObject $apruveInvoiceBuilderFactory;
 
-    /** @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $paymentContext;
+    private PaymentContextInterface|MockObject $paymentContext;
 
-    /** @var ApruveInvoiceFromPaymentContextFactory */
-    private $factory;
+    private ApruveInvoiceFromPaymentContextFactory $factory;
 
-    /** @var TotalProcessorProvider|\PHPUnit\Framework\MockObject\MockObject */
-    private $totalProcessorProvider;
+    private TotalProcessorProvider|MockObject $totalProcessorProvider;
 
     protected function setUp(): void
     {
@@ -62,8 +59,8 @@ class ApruveInvoiceFromPaymentContextFactoryTest extends \PHPUnit\Framework\Test
         $this->apruveInvoiceBuilderFactory = $this->createMock(ApruveInvoiceBuilderFactoryInterface::class);
         $this->totalProcessorProvider = $this->createMock(TotalProcessorProvider::class);
 
-        $lineItemOne = $this->createMock(PaymentLineItemInterface::class);
-        $lineItemTwo = $this->createMock(PaymentLineItemInterface::class);
+        $lineItemOne = $this->createMock(PaymentLineItem::class);
+        $lineItemTwo = $this->createMock(PaymentLineItem::class);
 
         $this->paymentContext->expects(self::once())
             ->method('getCurrency')
@@ -104,7 +101,7 @@ class ApruveInvoiceFromPaymentContextFactoryTest extends \PHPUnit\Framework\Test
         );
     }
 
-    public function testGetResult()
+    public function testGetResult(): void
     {
         $this->apruveInvoiceBuilderFactory->expects(self::once())
             ->method('create')
