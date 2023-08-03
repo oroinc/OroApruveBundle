@@ -14,7 +14,10 @@ The current file describes significant changes in the code that may affect the u
 - [1.3.0](#130-2017-07-28)
 - [1.2.2](#122-2017-06-26)
 
+## UNRELEASED
 
+### Changed
+* Changed `\Oro\Bundle\ApruveBundle\Apruve\Factory\LineItem\ApruveLineItemFromPaymentLineItemFactoryInterface::createFromPaymentLineItem` so it expects `\Oro\Bundle\PaymentBundle\Context\PaymentLineItem` argument instead of the removed `\Oro\Bundle\PaymentBundle\Context\PaymentLineItemInterface`.
 
 ## 5.1.0 (2023-03-31)
 [Show detailed list of changes](incompatibilities-5-1.md)
