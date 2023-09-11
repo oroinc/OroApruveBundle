@@ -36,7 +36,7 @@ class WebhookTokenType extends AbstractType
     /**
      * {@inheritDoc}
      */
-    public function getBlockPrefix()
+    public function getBlockPrefix(): string
     {
         return self::BLOCK_PREFIX;
     }
@@ -44,7 +44,7 @@ class WebhookTokenType extends AbstractType
     /**
      * {@inheritDoc}
      */
-    public function getParent()
+    public function getParent(): ?string
     {
         return HiddenType::class;
     }
