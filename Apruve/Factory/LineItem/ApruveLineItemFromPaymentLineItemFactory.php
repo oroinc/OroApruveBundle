@@ -5,23 +5,22 @@ namespace Oro\Bundle\ApruveBundle\Apruve\Factory\LineItem;
 use Oro\Bundle\ApruveBundle\Apruve\Builder\LineItem\ApruveLineItemBuilderFactoryInterface;
 use Oro\Bundle\ApruveBundle\Apruve\Factory\AbstractApruveEntityFactory;
 use Oro\Bundle\ApruveBundle\Apruve\Helper\AmountNormalizerInterface;
+use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveLineItem;
+use Oro\Bundle\PaymentBundle\Context\PaymentLineItem;
 use Oro\Bundle\PaymentBundle\Context\PaymentLineItemInterface;
 use Oro\Bundle\ProductBundle\Entity\Product;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
+/**
+ * Creates {@see ApruveLineItem} from {@see PaymentLineItem}
+ */
 class ApruveLineItemFromPaymentLineItemFactory extends AbstractApruveEntityFactory implements
     ApruveLineItemFromPaymentLineItemFactoryInterface
 {
-    /**
-     * @var ApruveLineItemBuilderFactoryInterface
-     */
-    private $apruveLineItemBuilderFactory;
+    private ApruveLineItemBuilderFactoryInterface $apruveLineItemBuilderFactory;
 
-    /**
-     * @var RouterInterface
-     */
-    private $router;
+    private RouterInterface $router;
 
     public function __construct(
         AmountNormalizerInterface $amountNormalizer,
@@ -34,9 +33,6 @@ class ApruveLineItemFromPaymentLineItemFactory extends AbstractApruveEntityFacto
         $this->router = $router;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function createFromPaymentLineItem(PaymentLineItemInterface $paymentLineItem)
     {
         $apruveLineItemBuilder = $this->apruveLineItemBuilderFactory
@@ -61,12 +57,7 @@ class ApruveLineItemFromPaymentLineItemFactory extends AbstractApruveEntityFacto
         return $apruveLineItemBuilder->getResult();
     }
 
-    /**
-     * @param PaymentLineItemInterface $lineItem
-     *
-     * @return string
-     */
-    private function getTitle(PaymentLineItemInterface $lineItem)
+    private function getTitle(PaymentLineItemInterface $lineItem): string
     {
         $product = $lineItem->getProduct();
         // Product is optional PaymentLineItemBuilderInterface.
@@ -80,12 +71,7 @@ class ApruveLineItemFromPaymentLineItemFactory extends AbstractApruveEntityFacto
         return $this->sanitizeText($title);
     }
 
-    /**
-     * @param PaymentLineItemInterface $lineItem
-     *
-     * @return int
-     */
-    private function getAmountCents(PaymentLineItemInterface $lineItem)
+    private function getAmountCents(PaymentLineItemInterface $lineItem): int
     {
         $amount = (float)$lineItem->getPrice()->getValue();
         $quantity = $lineItem->getQuantity();
@@ -93,12 +79,7 @@ class ApruveLineItemFromPaymentLineItemFactory extends AbstractApruveEntityFacto
         return $this->normalizeAmount($amount * $quantity);
     }
 
-    /**
-     * @param PaymentLineItemInterface $lineItem
-     *
-     * @return string
-     */
-    private function getSku(PaymentLineItemInterface $lineItem)
+    private function getSku(PaymentLineItemInterface $lineItem): string
     {
         $sku = $lineItem->getProductSku();
 
@@ -115,12 +96,7 @@ class ApruveLineItemFromPaymentLineItemFactory extends AbstractApruveEntityFacto
         return (string)$sku;
     }
 
-    /**
-     * @param Product $product
-     *
-     * @return string
-     */
-    private function getDescription(Product $product)
+    private function getDescription(Product $product): string
     {
         $description = (string)$product->getDescription();
 
@@ -142,19 +118,14 @@ class ApruveLineItemFromPaymentLineItemFactory extends AbstractApruveEntityFacto
      *
      * @return string
      */
-    private function sanitizeText($description)
+    private function sanitizeText(string $description): string
     {
         $description = strip_tags($description);
 
         return trim(str_replace(PHP_EOL, ' ', $description));
     }
 
-    /**
-     * @param Product $product
-     *
-     * @return string
-     */
-    private function getViewProductUrl(Product $product)
+    private function getViewProductUrl(Product $product): string
     {
         return $this->router->generate(
             'oro_product_frontend_product_view',

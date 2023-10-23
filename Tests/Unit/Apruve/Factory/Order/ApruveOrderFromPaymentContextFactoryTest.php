@@ -15,8 +15,10 @@ use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PaymentBundle\Context\PaymentLineItemInterface;
 use Oro\Bundle\PricingBundle\SubtotalProcessor\Model\Subtotal;
 use Oro\Bundle\PricingBundle\SubtotalProcessor\TotalProcessorProvider;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
-class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit\Framework\TestCase
+class ApruveOrderFromPaymentContextFactoryTest extends TestCase
 {
     private const MERCHANT_ID = 'sampleMerchantId';
     private const TOTAL_AMOUNT_CENTS = 12250;
@@ -44,20 +46,15 @@ class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit\Framework\TestCa
         ],
     ];
 
-    /** @var ApruveOrderBuilderInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $apruveOrderBuilder;
+    private ApruveOrderBuilderInterface|MockObject $apruveOrderBuilder;
 
-    /** @var ApruveOrderBuilderFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $apruveOrderBuilderFactory;
+    private ApruveOrderBuilderFactoryInterface|MockObject $apruveOrderBuilderFactory;
 
-    /** @var PaymentContextInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $paymentContext;
+    private PaymentContextInterface|MockObject $paymentContext;
 
-    /** @var ApruveOrderFromPaymentContextFactory */
-    private $factory;
+    private ApruveOrderFromPaymentContextFactory $factory;
 
-    /** @var TotalProcessorProvider|\PHPUnit\Framework\MockObject\MockObject */
-    private $totalProcessorProvider;
+    private TotalProcessorProvider|MockObject $totalProcessorProvider;
 
     protected function setUp(): void
     {
@@ -111,7 +108,7 @@ class ApruveOrderFromPaymentContextFactoryTest extends \PHPUnit\Framework\TestCa
         );
     }
 
-    public function testGetResult()
+    public function testGetResult(): void
     {
         $this->apruveOrderBuilderFactory->expects(self::once())
             ->method('create')

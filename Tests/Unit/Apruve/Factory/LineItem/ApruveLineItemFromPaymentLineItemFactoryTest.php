@@ -6,13 +6,16 @@ use Oro\Bundle\ApruveBundle\Apruve\Builder\LineItem\ApruveLineItemBuilderFactory
 use Oro\Bundle\ApruveBundle\Apruve\Builder\LineItem\ApruveLineItemBuilderInterface;
 use Oro\Bundle\ApruveBundle\Apruve\Factory\LineItem\ApruveLineItemFromPaymentLineItemFactory;
 use Oro\Bundle\ApruveBundle\Apruve\Helper\AmountNormalizerInterface;
+use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveLineItem;
 use Oro\Bundle\CurrencyBundle\Entity\Price;
 use Oro\Bundle\PaymentBundle\Context\PaymentLineItemInterface;
 use Oro\Bundle\ProductBundle\Entity\Product;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit\Framework\TestCase
+class ApruveLineItemFromPaymentLineItemFactoryTest extends TestCase
 {
     private const PRODUCT_ID = 1;
     private const AMOUNT = 123.4;
@@ -28,20 +31,15 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit\Framework\Te
     private const PRODUCT_DESCR_SANITIZED = 'Sample description with line breaks and tags';
     private const VIEW_PRODUCT_URL = 'http://example.com/product/view/1';
 
-    /** @var ApruveLineItemBuilderInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $apruveLineItemBuilder;
+    private ApruveLineItemBuilderInterface|MockObject $apruveLineItemBuilder;
 
-    /** @var ApruveLineItemBuilderFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $apruveLineItemBuilderFactory;
+    private ApruveLineItemBuilderFactoryInterface|MockObject $apruveLineItemBuilderFactory;
 
-    /** @var PaymentLineItemInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $paymentLineItem;
+    private PaymentLineItemInterface|MockObject $paymentLineItem;
 
-    /** @var RouterInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $router;
+    private RouterInterface|MockObject $router;
 
-    /** @var ApruveLineItemFromPaymentLineItemFactory */
-    private $factory;
+    private ApruveLineItemFromPaymentLineItemFactory $factory;
 
     protected function setUp(): void
     {
@@ -73,7 +71,7 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit\Framework\Te
         string $title,
         ?string $lineItemSku,
         string $expectedSku
-    ) {
+    ): void {
         $this->mockRouter();
         $this->mockPaymentLineItem($product, $lineItemSku);
 
@@ -100,10 +98,15 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit\Framework\Te
             ->method('setViewProductUrl')
             ->with(self::VIEW_PRODUCT_URL);
 
+        $apruveLineItem = new ApruveLineItem([]);
         $this->apruveLineItemBuilder->expects(self::once())
-            ->method('getResult');
+            ->method('getResult')
+            ->willReturn($apruveLineItem);
 
-        $this->factory->createFromPaymentLineItem($this->paymentLineItem);
+        self::assertSame(
+            $apruveLineItem,
+            $this->factory->createFromPaymentLineItem($this->paymentLineItem)
+        );
     }
 
     public function createFromPaymentLineItemDataProvider(): array
@@ -124,7 +127,7 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit\Framework\Te
         ];
     }
 
-    public function testCreateFromPaymentLineItemIfNoProduct()
+    public function testCreateFromPaymentLineItemIfNoProduct(): void
     {
         $this->mockPaymentLineItem(null, self::LINE_ITEM_SKU);
 
@@ -148,10 +151,15 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit\Framework\Te
         $this->apruveLineItemBuilder->expects(self::never())
             ->method('setViewProductUrl');
 
+        $apruveLineItem = new ApruveLineItem([]);
         $this->apruveLineItemBuilder->expects(self::once())
-            ->method('getResult');
+            ->method('getResult')
+            ->willReturn($apruveLineItem);
 
-        $this->factory->createFromPaymentLineItem($this->paymentLineItem);
+        self::assertSame(
+            $apruveLineItem,
+            $this->factory->createFromPaymentLineItem($this->paymentLineItem)
+        );
     }
 
     private function getProduct(): Product
@@ -177,7 +185,7 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit\Framework\Te
         return $product;
     }
 
-    private function mockRouter()
+    private function mockRouter(): void
     {
         $this->router->expects(self::any())
             ->method('generate')
@@ -189,7 +197,7 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends \PHPUnit\Framework\Te
             ->willReturn(self::VIEW_PRODUCT_URL);
     }
 
-    private function mockPaymentLineItem(?Product $product, ?string $lineItemSku)
+    private function mockPaymentLineItem(?Product $product, ?string $lineItemSku): void
     {
         $price = $this->createMock(Price::class);
         $price->expects(self::any())
