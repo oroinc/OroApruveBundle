@@ -64,7 +64,7 @@ Feature: Apruve Guest Checkout Integration
     When I click "Add to Shopping List"
     Then I should see "Product has been added to" flash message and I close it
     When I open shopping list widget
-    And I click "View List"
+    And I click "Open List"
     Then I should see "testname"
 
   Scenario: Successful order payment with Apruve
