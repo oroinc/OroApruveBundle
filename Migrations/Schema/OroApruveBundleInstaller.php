@@ -11,7 +11,7 @@ class OroApruveBundleInstaller implements Installation
     /**
      * {@inheritDoc}
      */
-    public function getMigrationVersion()
+    public function getMigrationVersion(): string
     {
         return 'v1_0';
     }
@@ -19,7 +19,7 @@ class OroApruveBundleInstaller implements Installation
     /**
      * {@inheritDoc}
      */
-    public function up(Schema $schema, QueryBag $queries)
+    public function up(Schema $schema, QueryBag $queries): void
     {
         $this->updateOroIntegrationTransportTable($schema);
 
@@ -32,7 +32,7 @@ class OroApruveBundleInstaller implements Installation
         $this->addOroApruveTransLabelForeignKeys($schema);
     }
 
-    public function updateOroIntegrationTransportTable(Schema $schema)
+    private function updateOroIntegrationTransportTable(Schema $schema): void
     {
         $table = $schema->getTable('oro_integration_transport');
         $table->addColumn('apruve_test_mode', 'boolean', ['notnull' => false, 'default' => false]);
@@ -44,24 +44,24 @@ class OroApruveBundleInstaller implements Installation
     /**
      * Create oro_apruve_short_label table
      */
-    protected function createOroApruveShortLabelTable(Schema $schema)
+    private function createOroApruveShortLabelTable(Schema $schema): void
     {
         $table = $schema->createTable('oro_apruve_short_label');
-        $table->addColumn('transport_id', 'integer', []);
-        $table->addColumn('localized_value_id', 'integer', []);
+        $table->addColumn('transport_id', 'integer');
+        $table->addColumn('localized_value_id', 'integer');
         $table->setPrimaryKey(['transport_id', 'localized_value_id']);
         $table->addUniqueIndex(['localized_value_id'], 'UNIQ_1FAEF591EB576E89');
-        $table->addIndex(['transport_id'], 'IDX_1FAEF5919909C13F', []);
+        $table->addIndex(['transport_id'], 'IDX_1FAEF5919909C13F');
     }
 
     /**
      * Create oro_apruve_trans_label table
      */
-    protected function createOroApruveTransLabelTable(Schema $schema)
+    private function createOroApruveTransLabelTable(Schema $schema): void
     {
         $table = $schema->createTable('oro_apruve_trans_label');
-        $table->addColumn('transport_id', 'integer', []);
-        $table->addColumn('localized_value_id', 'integer', []);
+        $table->addColumn('transport_id', 'integer');
+        $table->addColumn('localized_value_id', 'integer');
         $table->setPrimaryKey(['transport_id', 'localized_value_id']);
         $table->addUniqueIndex(['localized_value_id'], 'UNIQ_2068304BEB576E89');
     }
@@ -69,7 +69,7 @@ class OroApruveBundleInstaller implements Installation
     /**
      * Add oro_apruve_short_label foreign keys.
      */
-    protected function addOroApruveShortLabelForeignKeys(Schema $schema)
+    private function addOroApruveShortLabelForeignKeys(Schema $schema): void
     {
         $table = $schema->getTable('oro_apruve_short_label');
         $table->addForeignKeyConstraint(
@@ -89,7 +89,7 @@ class OroApruveBundleInstaller implements Installation
     /**
      * Add oro_apruve_trans_label foreign keys.
      */
-    protected function addOroApruveTransLabelForeignKeys(Schema $schema)
+    private function addOroApruveTransLabelForeignKeys(Schema $schema): void
     {
         $table = $schema->getTable('oro_apruve_trans_label');
         $table->addForeignKeyConstraint(
