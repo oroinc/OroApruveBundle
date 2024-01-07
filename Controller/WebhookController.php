@@ -103,7 +103,7 @@ class WebhookController extends AbstractController
         $response = $this->createResponse();
 
         try {
-            $this->get(InvoiceClosedWebhookEventHandlerInterface::class)->handle($paymentMethod, $body);
+            $this->container->get(InvoiceClosedWebhookEventHandlerInterface::class)->handle($paymentMethod, $body);
         } catch (InvalidEventException $exception) {
             $logger->error($exception->getMessage());
             $response = $this->createResponse('Invalid event body.', Response::HTTP_BAD_REQUEST);
@@ -136,7 +136,7 @@ class WebhookController extends AbstractController
      */
     private function getApruveSettings($token)
     {
-        return $this->get(ApruveSettingsRepository::class)->findOneBy([
+        return $this->container->get(ApruveSettingsRepository::class)->findOneBy([
             'apruveWebhookToken' => $token,
         ]);
     }
@@ -148,7 +148,7 @@ class WebhookController extends AbstractController
      */
     private function createPaymentMethodIdentifier(ApruveSettings $apruveSettings)
     {
-        $identifierGenerator = $this->get('oro_apruve.method.generator.identifier');
+        $identifierGenerator = $this->container->get('oro_apruve.method.generator.identifier');
 
         return $identifierGenerator->generateIdentifier($apruveSettings->getChannel());
     }
@@ -160,7 +160,7 @@ class WebhookController extends AbstractController
      */
     private function getPaymentMethod($identifier)
     {
-        $apruveMethodProvider = $this->get('oro_apruve.method.apruve.provider');
+        $apruveMethodProvider = $this->container->get('oro_apruve.method.apruve.provider');
 
         return $apruveMethodProvider->getPaymentMethod($identifier);
     }
@@ -184,7 +184,7 @@ class WebhookController extends AbstractController
      */
     private function getLogger()
     {
-        return $this->get(LoggerInterface::class);
+        return $this->container->get(LoggerInterface::class);
     }
 
     /**

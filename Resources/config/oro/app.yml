@@ -1,6 +1,9 @@
 security:
     firewalls:
         appruve_webhook:
-            pattern:                        '^%web_backend_prefix%/apruve/webhook/*'
-            security:                       false
-            anonymous:                      true
+            pattern: '^%web_backend_prefix%/apruve/webhook/*'
+            security: false
+
+oro_security:
+    access_control:
+        - { path: ^%web_backend_prefix%/apruve/webhook/*, roles: PUBLIC_ACCESS }
