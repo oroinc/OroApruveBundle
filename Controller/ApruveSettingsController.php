@@ -30,7 +30,7 @@ class ApruveSettingsController extends AbstractController
      */
     public function generateTokenAction()
     {
-        $tokenGenerator = $this->get(RandomTokenGeneratorInterface::class);
+        $tokenGenerator = $this->container->get(RandomTokenGeneratorInterface::class);
 
         return new JsonResponse([
             'success' => true,
@@ -40,7 +40,7 @@ class ApruveSettingsController extends AbstractController
 
     /**
      * @Route("/validate-connection/{channelId}/", name="oro_apruve_validate_connection", methods={"POST"})
-     * @ParamConverter("channel", class="OroIntegrationBundle:Channel", options={"id" = "channelId"})
+     * @ParamConverter("channel", class="Oro\Bundle\IntegrationBundle\Entity\Channel", options={"id" = "channelId"})
      * @CsrfProtection()
      *
      * @param Request      $request
@@ -62,7 +62,8 @@ class ApruveSettingsController extends AbstractController
 
         /** @var ApruveSettings $transport */
         $transport = $channel->getTransport();
-        $result = $this->get(ApruveConnectionValidatorInterface::class)->validateConnectionByApruveSettings($transport);
+        $result = $this->container->get(ApruveConnectionValidatorInterface::class)
+            ->validateConnectionByApruveSettings($transport);
 
         if (!$result->getStatus()) {
             return new JsonResponse([
@@ -73,7 +74,7 @@ class ApruveSettingsController extends AbstractController
 
         return new JsonResponse([
             'success' => true,
-            'message' => $this->get(TranslatorInterface::class)
+            'message' => $this->container->get(TranslatorInterface::class)
                 ->trans('oro.apruve.check_connection.result.success.message'),
         ]);
     }
@@ -97,7 +98,7 @@ class ApruveSettingsController extends AbstractController
                 $message = 'oro.apruve.check_connection.result.merchant_not_found.message';
                 break;
         }
-        return $this->get(TranslatorInterface::class)->trans($message, $parameters);
+        return $this->container->get(TranslatorInterface::class)->trans($message, $parameters);
     }
 
     /**
