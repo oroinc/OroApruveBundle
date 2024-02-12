@@ -42,13 +42,13 @@ define(function(require) {
             this.options = _.defaults(options || {}, this.options);
 
             mediator.on('checkout:place-order:response', this.handleSubmit, this);
-            mediator.on('checkout:payment:method:changed', this.onPaymentMethodChanged, this);
 
             this.loadAppruveJsLibrary();
         },
 
         /**
          * @param {Object} eventData
+         * @deprecated
          */
         onPaymentMethodChanged: function(eventData) {
             if (eventData.paymentMethod === this.options.paymentMethod) {
