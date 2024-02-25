@@ -19,9 +19,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Provides webhook action for the apruve integration.
- *
- * @Route("/webhook")
  */
+#[Route(path: '/webhook')]
 class WebhookController extends AbstractController
 {
     const INVOICE_CLOSED_EVENT_NAME = 'invoice.closed';
@@ -30,13 +29,17 @@ class WebhookController extends AbstractController
     const ORDER_CANCELED_EVENT_NAME = 'order.canceled';
 
     /**
-     * @Route("/notify/{token}", name="oro_apruve_webhook_notify", options={"expose"=true}, methods={"POST"})
      *
      * @param string  $token
      * @param Request $request
-     *
      * @return Response
      */
+    #[Route(
+        path: '/notify/{token}',
+        name: 'oro_apruve_webhook_notify',
+        options: ['expose' => true],
+        methods: ['POST']
+    )]
     public function notifyAction($token, Request $request)
     {
         $logger = $this->getLogger();
