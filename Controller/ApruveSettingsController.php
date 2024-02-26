@@ -8,7 +8,7 @@ use Oro\Bundle\ApruveBundle\Connection\Validator\Result\Factory\Merchant;
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\IntegrationBundle\Entity\Channel;
 use Oro\Bundle\IntegrationBundle\Form\Type\ChannelType;
-use Oro\Bundle\SecurityBundle\Annotation\CsrfProtection;
+use Oro\Bundle\SecurityBundle\Attribute\CsrfProtection;
 use Oro\Bundle\SecurityBundle\Generator\RandomTokenGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,11 +23,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ApruveSettingsController extends AbstractController
 {
     /**
-     * @Route("/generate-token", name="oro_apruve_generate_token", options={"expose"=true}, methods={"POST"})
-     * @CsrfProtection()
-     *
      * @return JsonResponse
      */
+    #[Route(
+        path: '/generate-token',
+        name: 'oro_apruve_generate_token',
+        options: ['expose' => true],
+        methods: ['POST']
+    )]
+    #[CsrfProtection()]
     public function generateTokenAction()
     {
         $tokenGenerator = $this->container->get(RandomTokenGeneratorInterface::class);
@@ -39,15 +43,15 @@ class ApruveSettingsController extends AbstractController
     }
 
     /**
-     * @Route("/validate-connection/{channelId}/", name="oro_apruve_validate_connection", methods={"POST"})
-     * @ParamConverter("channel", class="Oro\Bundle\IntegrationBundle\Entity\Channel", options={"id" = "channelId"})
-     * @CsrfProtection()
      *
      * @param Request      $request
      * @param Channel|null $channel
      *
      * @return JsonResponse
      */
+    #[Route(path: '/validate-connection/{channelId}/', name: 'oro_apruve_validate_connection', methods: ['POST'])]
+    #[ParamConverter('channel', class: Channel::class, options: ['id' => 'channelId'])]
+    #[CsrfProtection()]
     public function validateConnectionAction(Request $request, Channel $channel = null)
     {
         if (!$channel) {

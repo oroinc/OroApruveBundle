@@ -4,14 +4,18 @@ namespace Oro\Bundle\ApruveBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Oro\Bundle\ApruveBundle\Entity\Repository\ApruveSettingsRepository;
 use Oro\Bundle\IntegrationBundle\Entity\Transport;
 use Oro\Bundle\LocaleBundle\Entity\LocalizedFallbackValue;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 /**
- * @ORM\Entity(repositoryClass="Oro\Bundle\ApruveBundle\Entity\Repository\ApruveSettingsRepository")
- */
+* Entity that represents Apruve Settings
+*
+*/
+#[ORM\Entity(repositoryClass: ApruveSettingsRepository::class)]
 class ApruveSettings extends Transport
 {
     /**
@@ -33,75 +37,38 @@ class ApruveSettings extends Transport
      */
     private $settings;
 
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="apruve_test_mode", type="boolean", options={"default"=false})
-     */
-    private $apruveTestMode = false;
+    #[ORM\Column(name: 'apruve_test_mode', type: Types::BOOLEAN, options: ['default' => false])]
+    private ?bool $apruveTestMode = false;
+
+    #[ORM\Column(name: 'apruve_merchant_id', type: Types::STRING, length: 255)]
+    private ?string $apruveMerchantId = null;
+
+    #[ORM\Column(name: 'apruve_api_key', type: Types::STRING, length: 255)]
+    private ?string $apruveApiKey = null;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="apruve_merchant_id", type="string", length=255)
-     */
-    private $apruveMerchantId;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="apruve_api_key", type="string", length=255)
-     */
-    private $apruveApiKey;
-
-    /**
-     * @var string
-     *
      * Used in webhook URL.
-     *
-     * @ORM\Column(name="apruve_webhook_token", type="string", length=255)
      */
-    private $apruveWebhookToken;
+    #[ORM\Column(name: 'apruve_webhook_token', type: Types::STRING, length: 255)]
+    private ?string $apruveWebhookToken = null;
 
     /**
-     * @var Collection|LocalizedFallbackValue[]
-     *
-     * @ORM\ManyToMany(
-     *      targetEntity="Oro\Bundle\LocaleBundle\Entity\LocalizedFallbackValue",
-     *      cascade={"ALL"},
-     *      orphanRemoval=true
-     * )
-     * @ORM\JoinTable(
-     *      name="oro_apruve_trans_label",
-     *      joinColumns={
-     *          @ORM\JoinColumn(name="transport_id", referencedColumnName="id", onDelete="CASCADE")
-     *      },
-     *      inverseJoinColumns={
-     *          @ORM\JoinColumn(name="localized_value_id", referencedColumnName="id", onDelete="CASCADE", unique=true)
-     *      }
-     * )
+     * @var Collection<int, LocalizedFallbackValue>
      */
-    private $labels;
+    #[ORM\ManyToMany(targetEntity: LocalizedFallbackValue::class, cascade: ['ALL'], orphanRemoval: true)]
+    #[ORM\JoinTable(name: 'oro_apruve_trans_label')]
+    #[ORM\JoinColumn(name: 'transport_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'localized_value_id', referencedColumnName: 'id', unique: true, onDelete: 'CASCADE')]
+    private ?Collection $labels = null;
 
     /**
-     * @var Collection|LocalizedFallbackValue[]
-     *
-     * @ORM\ManyToMany(
-     *      targetEntity="Oro\Bundle\LocaleBundle\Entity\LocalizedFallbackValue",
-     *      cascade={"ALL"},
-     *      orphanRemoval=true
-     * )
-     * @ORM\JoinTable(
-     *      name="oro_apruve_short_label",
-     *      joinColumns={
-     *          @ORM\JoinColumn(name="transport_id", referencedColumnName="id", onDelete="CASCADE")
-     *      },
-     *      inverseJoinColumns={
-     *          @ORM\JoinColumn(name="localized_value_id", referencedColumnName="id", onDelete="CASCADE", unique=true)
-     *      }
-     * )
+     * @var Collection<int, LocalizedFallbackValue>
      */
-    private $shortLabels;
+    #[ORM\ManyToMany(targetEntity: LocalizedFallbackValue::class, cascade: ['ALL'], orphanRemoval: true)]
+    #[ORM\JoinTable(name: 'oro_apruve_short_label')]
+    #[ORM\JoinColumn(name: 'transport_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
+    #[ORM\InverseJoinColumn(name: 'localized_value_id', referencedColumnName: 'id', unique: true, onDelete: 'CASCADE')]
+    private ?Collection $shortLabels = null;
 
     public function __construct()
     {
