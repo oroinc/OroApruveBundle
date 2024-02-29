@@ -4,7 +4,7 @@ The current file describes significant changes in the code that may affect the u
 
 ## Changes in the Apruve package versions
 
-- [6.0.0-BETA](#600-beta-2024-01-08)
+- [6.0.0-RC](#600-rc-2024-02-29)
 - [5.1.0](#510-2023-03-31)
 - [4.2.0](#420-2020-01-29)
 - [4.1.0](#410-2020-01-31)
@@ -15,8 +15,8 @@ The current file describes significant changes in the code that may affect the u
 - [1.3.0](#130-2017-07-28)
 - [1.2.2](#122-2017-06-26)
 
-## 6.0.0-BETA (2024-01-08)
-[Show detailed list of changes](incompatibilities-6-0-beta.md)
+## 6.0.0-RC (2024-02-29)
+[Show detailed list of changes](incompatibilities-6-0-rc.md)
 
 ### Changed
 * Changed `\Oro\Bundle\ApruveBundle\Apruve\Factory\LineItem\ApruveLineItemFromPaymentLineItemFactoryInterface::createFromPaymentLineItem` so it expects `\Oro\Bundle\PaymentBundle\Context\PaymentLineItem` argument instead of the removed `\Oro\Bundle\PaymentBundle\Context\PaymentLineItemInterface`.
