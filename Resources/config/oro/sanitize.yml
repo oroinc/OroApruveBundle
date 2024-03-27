@@ -1,0 +1,6 @@
+oro_sanitize:
+    entity:
+        oro_integration_transport:
+            fields:
+                apruve_merchant_id: md5
+                apruve_api_key: md5
