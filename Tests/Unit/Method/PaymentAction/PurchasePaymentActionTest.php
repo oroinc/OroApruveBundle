@@ -73,7 +73,7 @@ class PurchasePaymentActionTest extends \PHPUnit\Framework\TestCase
         $this->paymentContext = $this->createMock(PaymentContextInterface::class);
         $this->paymentContextFactory = $this->createMock(TransactionPaymentContextFactoryInterface::class);
         $this->apruveOrder = $this->createMock(ApruveOrder::class);
-        $this->apruveOrderFromPaymentContextFactory= $this->createMock(
+        $this->apruveOrderFromPaymentContextFactory = $this->createMock(
             ApruveOrderFromPaymentContextFactoryInterface::class
         );
         $this->orderSecureHashGenerator = $this->createMock(OrderSecureHashGeneratorInterface::class);
