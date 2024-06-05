@@ -43,7 +43,7 @@ class InvoicePaymentActionTest extends AbstractPaymentActionTest
         $this->paymentActionName = InvoicePaymentAction::NAME;
 
         $this->apruveInvoice = $this->createMock(ApruveInvoice::class);
-        $this->apruveEntityFromPaymentContextFactory= $this->createMock(
+        $this->apruveEntityFromPaymentContextFactory = $this->createMock(
             ApruveInvoiceFromPaymentContextFactoryInterface::class
         );
         $this->apruveInvoiceFromResponseFactory = $this->createMock(ApruveInvoiceFromResponseFactoryInterface::class);
