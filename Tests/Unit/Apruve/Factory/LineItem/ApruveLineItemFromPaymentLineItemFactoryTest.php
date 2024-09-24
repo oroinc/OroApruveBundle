@@ -41,6 +41,7 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends TestCase
 
     private ApruveLineItemFromPaymentLineItemFactory $factory;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->paymentLineItem = $this->createMock(PaymentLineItem::class);

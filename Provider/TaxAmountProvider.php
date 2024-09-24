@@ -26,9 +26,7 @@ class TaxAmountProvider implements TaxAmountProviderInterface, LoggerAwareInterf
         $this->taxAmountProvider = $taxAmountProvider;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getTaxAmount(PaymentContextInterface $paymentContext): ?float
     {
         try {

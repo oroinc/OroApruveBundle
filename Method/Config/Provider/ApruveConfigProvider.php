@@ -40,9 +40,7 @@ class ApruveConfigProvider implements ApruveConfigProviderInterface
         $this->configFactory = $configFactory;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getPaymentConfigs()
     {
         $settings = $this->getEnabledIntegrationSettings();
@@ -56,9 +54,7 @@ class ApruveConfigProvider implements ApruveConfigProviderInterface
         return $configs;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getPaymentConfig($identifier)
     {
         $paymentConfigs = $this->getPaymentConfigs();
@@ -70,9 +66,7 @@ class ApruveConfigProvider implements ApruveConfigProviderInterface
         return $paymentConfigs[$identifier];
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function hasPaymentConfig($identifier)
     {
         return null !== $this->getPaymentConfig($identifier);

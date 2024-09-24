@@ -148,9 +148,7 @@ class ApruveSettings extends Transport
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getSettingsBag()
     {
         if (null === $this->settings) {

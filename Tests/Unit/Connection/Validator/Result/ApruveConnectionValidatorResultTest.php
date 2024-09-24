@@ -9,6 +9,7 @@ class ApruveConnectionValidatorResultTest extends \PHPUnit\Framework\TestCase
     private array $parameters;
     private ApruveConnectionValidatorResult $connectionValidationResult;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->parameters = [

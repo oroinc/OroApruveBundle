@@ -30,6 +30,7 @@ class ApruveConfigProviderTest extends \PHPUnit\Framework\TestCase
     /** @var LoggerInterface|\PHPUnit\Framework\MockObject\MockObject */
     private $logger;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->settingsRepository = $this->createMock(ApruveSettingsRepository::class);

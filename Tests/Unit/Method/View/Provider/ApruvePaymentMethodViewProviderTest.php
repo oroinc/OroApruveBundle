@@ -16,6 +16,7 @@ class ApruvePaymentMethodViewProviderTest extends AbstractMethodViewProviderTest
     /** @var ApruveConfigProviderInterface|\PHPUnit\Framework\MockObject\MockObject */
     protected $configProvider;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->factory = $this->createMock(ApruvePaymentMethodViewFactoryInterface::class);

@@ -28,6 +28,7 @@ class ApruveLineItemBuilderTest extends \PHPUnit\Framework\TestCase
 
     private ApruveLineItemBuilder $builder;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->builder = new ApruveLineItemBuilder(

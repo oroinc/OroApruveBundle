@@ -19,9 +19,7 @@ class ApruveConfigRestClientFactory implements ApruveConfigRestClientFactoryInte
         $this->restClientFactory = $restClientFactory;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function create(ApruveConfigInterface $apruveConfig)
     {
         return $this->restClientFactory->create($apruveConfig->getApiKey(), $apruveConfig->isTestMode());

@@ -9,17 +9,13 @@ class SupportedCurrenciesProvider implements SupportedCurrenciesProviderInterfac
      */
     const USD = 'USD';
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getCurrencies()
     {
         return [self::USD];
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function isSupported($currency)
     {
         return in_array($currency, $this->getCurrencies(), true);

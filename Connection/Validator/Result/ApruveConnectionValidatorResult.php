@@ -10,25 +10,19 @@ class ApruveConnectionValidatorResult extends ParameterBag implements ApruveConn
     const ERROR_SEVERITY_KEY = 'error_severity';
     const ERROR_MESSAGE_KEY = 'error_message';
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getStatus()
     {
         return (bool)$this->get(self::STATUS_KEY);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getErrorSeverity()
     {
         return (string)$this->get(self::ERROR_SEVERITY_KEY);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getErrorMessage()
     {
         return $this->get(self::ERROR_MESSAGE_KEY);

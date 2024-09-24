@@ -19,6 +19,7 @@ class ApruveRestClientTest extends \PHPUnit\Framework\TestCase
     /** @var ApruveRestClient */
     private $client;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->restClient = $this->createMock(RestClientInterface::class);

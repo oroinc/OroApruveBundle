@@ -13,25 +13,19 @@ class ApruveConfig extends AbstractParameterBagPaymentConfig implements ApruveCo
     const API_KEY_KEY  = 'api_key';
     const MERCHANT_ID_KEY  = 'merchant_id';
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function isTestMode()
     {
         return (bool)$this->get(self::TEST_MODE_KEY);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getApiKey()
     {
         return (string)$this->get(self::API_KEY_KEY);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getMerchantId()
     {
         return (string)$this->get(self::MERCHANT_ID_KEY);

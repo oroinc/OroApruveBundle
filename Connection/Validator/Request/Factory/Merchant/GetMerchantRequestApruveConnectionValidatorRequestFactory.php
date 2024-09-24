@@ -28,9 +28,7 @@ class GetMerchantRequestApruveConnectionValidatorRequestFactory implements
         $this->symmetricCrypter = $symmetricCrypter;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function createBySettings(ApruveSettings $settings)
     {
         $merchantId = $this->symmetricCrypter->decryptData($settings->getApruveMerchantId());

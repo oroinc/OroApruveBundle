@@ -7,9 +7,7 @@ use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestResponseInterface;
 
 class ApruveShipmentFromResponseFactory implements ApruveShipmentFromResponseFactoryInterface
 {
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function createFromResponse(RestResponseInterface $restResponse)
     {
         return new ApruveShipment($restResponse->json());

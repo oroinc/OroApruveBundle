@@ -46,9 +46,7 @@ class ApruveInvoiceFromPaymentContextFactory extends AbstractApruveEntityWithLin
         $this->apruveInvoiceBuilderFactory = $apruveInvoiceBuilderFactory;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function createFromPaymentContext(PaymentContextInterface $paymentContext)
     {
         $apruveInvoiceBuilder = $this->apruveInvoiceBuilderFactory

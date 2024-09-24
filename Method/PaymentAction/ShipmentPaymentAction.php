@@ -64,17 +64,13 @@ class ShipmentPaymentAction extends AbstractPaymentAction implements LoggerAware
         $this->createShipmentRequestFactory = $createShipmentRequestFactory;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getName()
     {
         return static::NAME;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function execute(ApruveConfigInterface $apruveConfig, PaymentTransaction $paymentTransaction)
     {
         $paymentContext = $this->paymentContextFactory->create($paymentTransaction);

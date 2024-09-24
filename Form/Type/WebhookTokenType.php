@@ -21,9 +21,7 @@ class WebhookTokenType extends AbstractType
         $this->generator = $randomTokenGenerator;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
@@ -33,17 +31,13 @@ class WebhookTokenType extends AbstractType
         ]);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getBlockPrefix(): string
     {
         return self::BLOCK_PREFIX;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getParent(): ?string
     {
         return HiddenType::class;

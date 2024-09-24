@@ -25,6 +25,7 @@ class TaxAmountProviderTest extends \PHPUnit\Framework\TestCase
     /** @var BaseTaxAmountProvider|\PHPUnit\Framework\MockObject\MockObject */
     private $baseTaxAmountProvider;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->sourceEntity = $this->createMock(\stdClass::class);

@@ -15,30 +15,25 @@ class ApruveTransport implements TransportInterface
      */
     protected $settings;
 
+    #[\Override]
     public function init(Transport $transportEntity)
     {
         $this->settings = $transportEntity->getSettingsBag();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getSettingsFormType()
     {
         return ApruveSettingsType::class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getSettingsEntityFQCN()
     {
         return ApruveSettings::class;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getLabel()
     {
         return 'oro.apruve.settings.label';

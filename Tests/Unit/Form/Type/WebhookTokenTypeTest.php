@@ -18,6 +18,7 @@ class WebhookTokenTypeTest extends FormIntegrationTestCase
     /** @var WebhookTokenType */
     private $formType;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->tokenGenerator = $this->createMock(RandomTokenGeneratorInterface::class);
@@ -37,9 +38,7 @@ class WebhookTokenTypeTest extends FormIntegrationTestCase
         self::assertSame($this->tokenGenerator, ReflectionUtil::getPropertyValue($formType, 'generator'));
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     protected function getExtensions(): array
     {
         return [

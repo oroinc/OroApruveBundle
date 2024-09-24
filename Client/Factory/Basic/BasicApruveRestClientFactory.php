@@ -33,9 +33,7 @@ class BasicApruveRestClientFactory implements ApruveRestClientFactoryInterface
         $this->integrationRestClientFactory = $integrationRestClientFactory;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function create($apiKey, $isTestMode)
     {
         $baseUrl = $this->getBaseUrl($isTestMode);

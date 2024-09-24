@@ -7,9 +7,7 @@ use Oro\Bundle\ApruveBundle\Tests\Behat\Mock\Client\ApruveRestClientMock;
 
 class ApruveRestClientFactoryMock implements ApruveRestClientFactoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
+    #[\Override]
     public function create($apiKey, $isTestMode)
     {
         return new ApruveRestClientMock();

@@ -11,6 +11,7 @@ class ApruveTransportTest extends \PHPUnit\Framework\TestCase
 {
     private ApruveTransport $transport;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->transport = new ApruveTransport();

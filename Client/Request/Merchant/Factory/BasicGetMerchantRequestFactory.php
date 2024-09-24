@@ -12,9 +12,7 @@ class BasicGetMerchantRequestFactory implements GetMerchantRequestFactoryInterfa
      */
     const URL_PATTERN = '/merchants/%s';
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function createByMerchantId($merchantId)
     {
         return new ApruveRequest(ApruveRestClient::METHOD_GET, $this->getUri($merchantId));

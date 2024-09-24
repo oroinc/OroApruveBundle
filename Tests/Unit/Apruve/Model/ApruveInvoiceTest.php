@@ -14,6 +14,7 @@ class ApruveInvoiceTest extends \PHPUnit\Framework\TestCase
 
     private ApruveInvoice $apruveInvoice;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->apruveInvoice = new ApruveInvoice(self::DATA);

@@ -43,9 +43,7 @@ class ApruveConnectionValidator implements ApruveConnectionValidatorInterface
         $this->logger = $logger;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function validateConnectionByApruveSettings(ApruveSettings $settings)
     {
         $request = $this->requestFactory->createBySettings($settings);

@@ -28,9 +28,7 @@ class ApruveSettingsRestClientFactory implements ApruveSettingsRestClientFactory
         $this->symmetricCrypter = $symmetricCrypter;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function create(ApruveSettings $apruveSettings)
     {
         $apiKey = $this->symmetricCrypter->decryptData($apruveSettings->getApruveApiKey());

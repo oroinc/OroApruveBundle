@@ -16,9 +16,7 @@ class BasicApruveClientUrlProvider implements ApruveClientUrlProviderInterface
      */
     const BASE_URL_TEST = 'https://test.apruve.com/api/v4/';
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getApruveUrl($isTestMode)
     {
         if ($isTestMode) {

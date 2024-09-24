@@ -15,6 +15,7 @@ class ApruveConfigRestClientFactoryTest extends \PHPUnit\Framework\TestCase
     /** @var ApruveConfigRestClientFactory */
     private $factory;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->restClientFactory = $this->createMock(ApruveRestClientFactoryInterface::class);

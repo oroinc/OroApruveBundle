@@ -8,6 +8,7 @@ class BasicApruveClientUrlProviderTest extends \PHPUnit\Framework\TestCase
 {
     private BasicApruveClientUrlProvider $provider;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->provider = new BasicApruveClientUrlProvider();

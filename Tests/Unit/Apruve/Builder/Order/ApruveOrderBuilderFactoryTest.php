@@ -27,6 +27,7 @@ class ApruveOrderBuilderFactoryTest extends \PHPUnit\Framework\TestCase
 
     private ApruveOrderBuilderFactory $factory;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->factory = new ApruveOrderBuilderFactory();

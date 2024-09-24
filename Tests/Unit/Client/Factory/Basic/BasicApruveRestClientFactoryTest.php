@@ -22,6 +22,7 @@ class BasicApruveRestClientFactoryTest extends \PHPUnit\Framework\TestCase
     /** @var BasicApruveRestClientFactory */
     private $factory;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->urlProvider = $this->createMock(ApruveClientUrlProviderInterface::class);

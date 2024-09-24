@@ -20,6 +20,7 @@ class ApruvePaymentMethodFactoryTest extends \PHPUnit\Framework\TestCase
     /** @var ApruvePaymentMethodFactoryInterface */
     private $factory;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->supportedCurrenciesProvider = $this->createMock(SupportedCurrenciesProviderInterface::class);

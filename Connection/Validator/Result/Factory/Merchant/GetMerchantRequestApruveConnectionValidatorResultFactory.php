@@ -17,9 +17,7 @@ class GetMerchantRequestApruveConnectionValidatorResultFactory implements
     const MERCHANT_NOT_FOUND_SEVERITY = 'merchant';
     const SERVER_SEVERITY = 'server';
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function createResultByApruveClientResponse(RestResponseInterface $response)
     {
         $resultParams = [
@@ -31,9 +29,7 @@ class GetMerchantRequestApruveConnectionValidatorResultFactory implements
         return new ApruveConnectionValidatorResult($resultParams);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function createExceptionResult(RestException $exception)
     {
         $severity = self::SERVER_SEVERITY;

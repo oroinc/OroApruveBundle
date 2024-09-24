@@ -23,9 +23,7 @@ class ApruveRestClient implements ApruveRestClientInterface
         $this->restClient = $restClient;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function execute(ApruveRequestInterface $apruveRequest)
     {
         $classMethod = $this->getClientClassMethodByRequest($apruveRequest);

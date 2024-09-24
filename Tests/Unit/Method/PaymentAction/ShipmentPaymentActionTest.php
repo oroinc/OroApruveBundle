@@ -145,9 +145,6 @@ class ShipmentPaymentActionTest extends AbstractPaymentActionTest
         self::assertSame(self::RETURN_ERROR, $actual);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     protected function mockApruveRestClient(
         RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject $restResponse
     ): void {

@@ -13,9 +13,7 @@ class PaymentActionExecutor implements PaymentActionExecutorInterface
      */
     private $actions = [];
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function addPaymentAction(PaymentActionInterface $paymentAction)
     {
         $this->actions[$paymentAction->getName()] = $paymentAction;
@@ -23,9 +21,7 @@ class PaymentActionExecutor implements PaymentActionExecutorInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function execute($action, ApruveConfigInterface $apruveConfig, PaymentTransaction $paymentTransaction)
     {
         $paymentAction = $this->getPaymentAction($action);
@@ -33,9 +29,7 @@ class PaymentActionExecutor implements PaymentActionExecutorInterface
         return $paymentAction->execute($apruveConfig, $paymentTransaction);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function supports($name)
     {
         return array_key_exists($name, $this->actions);

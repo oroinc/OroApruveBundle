@@ -10,9 +10,7 @@ class BasicCreateShipmentRequestFactory implements CreateShipmentRequestFactoryI
     const METHOD = 'POST';
     const URI = '/invoices/%s/shipments';
 
-    /**
-     * {@inheritdoc}
-     */
+    #[\Override]
     public function create(ApruveShipment $apruveShipment, $apruveInvoiceId)
     {
         return new ApruveRequest(self::METHOD, $this->buildUri($apruveInvoiceId), $apruveShipment);
