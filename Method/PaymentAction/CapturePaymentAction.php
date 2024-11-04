@@ -10,9 +10,7 @@ class CapturePaymentAction extends AbstractPaymentAction
 {
     const NAME = PaymentMethodInterface::CAPTURE;
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function execute(ApruveConfigInterface $apruveConfig, PaymentTransaction $paymentTransaction)
     {
         $sourcePaymentTransaction = $paymentTransaction->getSourcePaymentTransaction();
@@ -31,9 +29,7 @@ class CapturePaymentAction extends AbstractPaymentAction
         return [];
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getName()
     {
         return static::NAME;

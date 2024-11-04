@@ -37,9 +37,7 @@ class ApruveSettingsType extends AbstractType
         $this->cryptedDataTransformerFactory = $cryptedDataTransformerFactory;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -90,17 +88,13 @@ class ApruveSettingsType extends AbstractType
         $this->enableEncryption($builder, 'apruveMerchantId');
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(['data_class' => $this->transport->getSettingsEntityFQCN()]);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getBlockPrefix(): string
     {
         return self::BLOCK_PREFIX;

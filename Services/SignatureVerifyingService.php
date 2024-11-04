@@ -24,9 +24,7 @@ class SignatureVerifyingService implements SignatureVerifyingServiceInterface
         $this->apruvePublicKeyProvider = $apruvePublicKeyProvider;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function verifyRequestSignature(Request $request)
     {
         $decodedSignuture = $request->headers->get(self::SIGNATURE_HEADER_NAME);

@@ -9,9 +9,7 @@ class CancelPaymentAction extends AbstractPaymentAction
 {
     const NAME = 'cancel';
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function execute(ApruveConfigInterface $apruveConfig, PaymentTransaction $paymentTransaction)
     {
         // Stub for cancel action.
@@ -21,9 +19,7 @@ class CancelPaymentAction extends AbstractPaymentAction
         return [];
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getName()
     {
         return static::NAME;

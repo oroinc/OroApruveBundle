@@ -33,9 +33,7 @@ class ApruveRequest implements ApruveRequestInterface
         $this->method = $method;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function toArray()
     {
         return [
@@ -45,25 +43,19 @@ class ApruveRequest implements ApruveRequestInterface
         ];
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getMethod()
     {
         return $this->method;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getUri()
     {
         return $this->uri;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getData()
     {
         if ($this->requestData) {

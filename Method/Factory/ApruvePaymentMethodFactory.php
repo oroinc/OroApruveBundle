@@ -27,9 +27,7 @@ class ApruvePaymentMethodFactory implements ApruvePaymentMethodFactoryInterface
         $this->supportedCurrenciesProvider = $supportedCurrenciesProvider;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function create(ApruveConfigInterface $config)
     {
         return new ApruvePaymentMethod($config, $this->supportedCurrenciesProvider, $this->paymentActionExecutor);

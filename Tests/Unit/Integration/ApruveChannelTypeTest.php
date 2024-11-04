@@ -8,6 +8,7 @@ class ApruveChannelTypeTest extends \PHPUnit\Framework\TestCase
 {
     private ApruveChannelType $channel;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->channel = new ApruveChannelType();

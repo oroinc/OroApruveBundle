@@ -13,6 +13,7 @@ class ApruveShipmentBuilderFactoryTest extends \PHPUnit\Framework\TestCase
 
     private ApruveShipmentBuilderFactory $factory;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->factory = new ApruveShipmentBuilderFactory();

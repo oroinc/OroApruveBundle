@@ -14,6 +14,7 @@ class ApruveShipmentTest extends \PHPUnit\Framework\TestCase
 
     private ApruveShipment $apruveShipment;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->apruveShipment = new ApruveShipment(self::DATA);

@@ -41,33 +41,27 @@ class ApruvePaymentMethod implements PaymentMethodInterface
     }
 
     /**
-     * {@inheritDoc}
      * @throws \InvalidArgumentException
      */
+    #[\Override]
     public function execute($action, PaymentTransaction $paymentTransaction)
     {
         return $this->paymentActionExecutor->execute($action, $this->config, $paymentTransaction);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getIdentifier()
     {
         return $this->config->getPaymentMethodIdentifier();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function isApplicable(PaymentContextInterface $context)
     {
         return $this->supportedCurrenciesProvider->isSupported($context->getCurrency());
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function supports($actionName)
     {
         return $this->paymentActionExecutor->supports($actionName);

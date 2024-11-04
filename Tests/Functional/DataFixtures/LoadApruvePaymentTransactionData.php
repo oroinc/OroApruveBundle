@@ -59,9 +59,7 @@ class LoadApruvePaymentTransactionData extends AbstractFixture implements
         ],
     ];
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getDependencies(): array
     {
         return [
@@ -70,17 +68,13 @@ class LoadApruvePaymentTransactionData extends AbstractFixture implements
         ];
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setContainer(ContainerInterface $container = null): void
     {
         $this->apruveIdentifierGenerator  = $container->get('oro_apruve.method.generator.identifier');
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function load(ObjectManager $manager): void
     {
         $propertyAccessor = PropertyAccess::createPropertyAccessor();

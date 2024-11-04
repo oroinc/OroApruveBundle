@@ -14,6 +14,7 @@ class ApruveOrderTest extends \PHPUnit\Framework\TestCase
 
     private ApruveOrder $apruveOrder;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->apruveOrder = new ApruveOrder(self::DATA);

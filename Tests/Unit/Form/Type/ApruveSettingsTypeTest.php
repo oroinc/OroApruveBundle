@@ -45,6 +45,7 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
     /** @var ApruveSettingsType */
     private $formType;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->dataTransformer = $this->createMock(DataTransformerInterface::class);
@@ -69,9 +70,7 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
         parent::setUp();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     protected function getExtensions(): array
     {
         return [

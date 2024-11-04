@@ -49,9 +49,7 @@ class ApruveShipmentFromPaymentContextFactory extends AbstractApruveEntityWithLi
         $this->shippingMethodProvider = $shippingMethodProvider;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function createFromPaymentContext(PaymentContextInterface $paymentContext)
     {
         $apruveShipmentBuilder = $this->apruveShipmentBuilderFactory

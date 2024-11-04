@@ -43,6 +43,7 @@ class ApruveConfigFactoryTest extends \PHPUnit\Framework\TestCase
     /** @var ApruveConfigFactoryInterface */
     private $factory;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->logger = $this->createMock(LoggerInterface::class);

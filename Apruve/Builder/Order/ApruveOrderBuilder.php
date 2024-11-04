@@ -45,9 +45,7 @@ class ApruveOrderBuilder implements ApruveOrderBuilderInterface
         $this->lineItems = $lineItems;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getResult()
     {
         $this->data += [
@@ -60,9 +58,7 @@ class ApruveOrderBuilder implements ApruveOrderBuilderInterface
         return new ApruveOrder($this->data);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setInvoiceOnCreate($bool)
     {
         $this->data[ApruveOrder::INVOICE_ON_CREATE] = (bool)$bool;
@@ -70,9 +66,7 @@ class ApruveOrderBuilder implements ApruveOrderBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setFinalizeOnCreate($bool)
     {
         $this->data[ApruveOrder::FINALIZE_ON_CREATE] = (bool)$bool;
@@ -80,9 +74,7 @@ class ApruveOrderBuilder implements ApruveOrderBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setShopperId($id)
     {
         $this->data[ApruveOrder::SHOPPER_ID] = (string)$id;
@@ -90,9 +82,7 @@ class ApruveOrderBuilder implements ApruveOrderBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setCorporateAccountId($id)
     {
         $this->data[ApruveOrder::PAYMENT_TERM_PARAMS][ApruveOrder::_CORPORATE_ACCOUNT_ID] = (string)$id;
@@ -100,9 +90,7 @@ class ApruveOrderBuilder implements ApruveOrderBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setExpireAt($expireAt)
     {
         $this->data[ApruveOrder::EXPIRE_AT] = (string)$expireAt;
@@ -110,9 +98,7 @@ class ApruveOrderBuilder implements ApruveOrderBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setAutoEscalate($bool)
     {
         $this->data[ApruveOrder::AUTO_ESCALATE] = (bool)$bool;
@@ -120,9 +106,7 @@ class ApruveOrderBuilder implements ApruveOrderBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setPoNumber($poNumber)
     {
         $this->data[ApruveOrder::PO_NUMBER] = (string)$poNumber;
@@ -130,9 +114,7 @@ class ApruveOrderBuilder implements ApruveOrderBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setMerchantOrderId($orderId)
     {
         $this->data[ApruveOrder::MERCHANT_ORDER_ID] = (string)$orderId;
@@ -140,9 +122,7 @@ class ApruveOrderBuilder implements ApruveOrderBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setShippingCents($amount)
     {
         $this->data[ApruveOrder::SHIPPING_CENTS] = (int)$amount;
@@ -150,9 +130,7 @@ class ApruveOrderBuilder implements ApruveOrderBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setTaxCents($amount)
     {
         $this->data[ApruveOrder::TAX_CENTS] = (int)$amount;

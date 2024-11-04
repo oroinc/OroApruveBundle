@@ -8,9 +8,7 @@ use Oro\Bundle\ApruveBundle\Tests\Behat\Mock\Method\View\ApruvePaymentMethodView
 
 class ApruvePaymentMethodViewFactoryMock implements ApruvePaymentMethodViewFactoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
+    #[\Override]
     public function create(ApruveConfigInterface $config)
     {
         return new ApruvePaymentMethodViewMock($config);

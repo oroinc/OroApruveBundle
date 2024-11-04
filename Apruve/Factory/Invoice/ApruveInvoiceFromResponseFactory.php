@@ -7,9 +7,7 @@ use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestResponseInterface;
 
 class ApruveInvoiceFromResponseFactory implements ApruveInvoiceFromResponseFactoryInterface
 {
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function createFromResponse(RestResponseInterface $restResponse)
     {
         return new ApruveInvoice($restResponse->json());

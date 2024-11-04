@@ -14,6 +14,7 @@ class ApruveLineItemBuilderFactoryTest extends \PHPUnit\Framework\TestCase
 
     private ApruveLineItemBuilderFactory $factory;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->factory = new ApruveLineItemBuilderFactory();

@@ -54,17 +54,13 @@ class LoadApruveSettingsData extends AbstractFixture implements FixtureInterface
      */
     private $container;
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function load(ObjectManager $manager)
     {
         foreach (self::TRANSPORTS as $data) {

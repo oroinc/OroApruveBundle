@@ -45,9 +45,7 @@ class ApruveOrderFromPaymentContextFactory extends AbstractApruveEntityWithLineI
         $this->apruveOrderBuilderFactory = $apruveOrderBuilderFactory;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function createFromPaymentContext(
         PaymentContextInterface $paymentContext,
         ApruveConfigInterface $apruveConfig

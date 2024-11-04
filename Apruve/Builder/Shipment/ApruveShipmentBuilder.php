@@ -38,9 +38,7 @@ class ApruveShipmentBuilder implements ApruveShipmentBuilderInterface
         $this->shippedAt = $shippedAt;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getResult()
     {
         $this->data += [
@@ -52,9 +50,7 @@ class ApruveShipmentBuilder implements ApruveShipmentBuilderInterface
         return new ApruveShipment($this->data);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setLineItems($lineItems)
     {
         $this->data[ApruveShipment::LINE_ITEMS] = (array)$lineItems;
@@ -62,9 +58,7 @@ class ApruveShipmentBuilder implements ApruveShipmentBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setMerchantShipmentId($shipmentId)
     {
         $this->data[ApruveShipment::MERCHANT_SHIPMENT_ID] = (string)$shipmentId;
@@ -72,9 +66,7 @@ class ApruveShipmentBuilder implements ApruveShipmentBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setShippingCents($amount)
     {
         $this->data[ApruveShipment::SHIPPING_CENTS] = (int)$amount;
@@ -82,9 +74,7 @@ class ApruveShipmentBuilder implements ApruveShipmentBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setTaxCents($amount)
     {
         $this->data[ApruveShipment::TAX_CENTS] = (int)$amount;
@@ -92,9 +82,7 @@ class ApruveShipmentBuilder implements ApruveShipmentBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setMerchantNotes($notes)
     {
         $this->data[ApruveShipment::MERCHANT_NOTES] = (string)$notes;
@@ -102,9 +90,7 @@ class ApruveShipmentBuilder implements ApruveShipmentBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setShipper($shipper)
     {
         $this->data[ApruveShipment::SHIPPER] = (string)$shipper;
@@ -112,9 +98,7 @@ class ApruveShipmentBuilder implements ApruveShipmentBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setTrackingNumber($trackingNumber)
     {
         $this->data[ApruveShipment::TRACKING_NUMBER] = (string)$trackingNumber;
@@ -122,9 +106,7 @@ class ApruveShipmentBuilder implements ApruveShipmentBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setDeliveredAt($deliveredAt)
     {
         $this->data[ApruveShipment::DELIVERED_AT] = (string)$deliveredAt;
@@ -132,9 +114,7 @@ class ApruveShipmentBuilder implements ApruveShipmentBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setStatus($status)
     {
         $this->data[ApruveShipment::STATUS] = (string)$status;

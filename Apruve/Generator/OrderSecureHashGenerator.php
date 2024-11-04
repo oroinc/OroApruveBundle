@@ -54,9 +54,7 @@ class OrderSecureHashGenerator implements OrderSecureHashGeneratorInterface
         ApruveLineItem::VIEW_PRODUCT_URL,
     ];
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function generate(ApruveOrder $apruveOrder, $apiKey)
     {
         $data = $apruveOrder->getData();

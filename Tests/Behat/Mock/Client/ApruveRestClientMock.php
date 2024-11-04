@@ -10,9 +10,7 @@ class ApruveRestClientMock implements ApruveRestClientInterface
 {
     const TEST_ID = 'test_id';
 
-    /**
-     * {@inheritdoc}
-     */
+    #[\Override]
     public function execute(ApruveRequestInterface $apruveRequest)
     {
         return new FakeRestResponse(200, [], json_encode(array_merge($apruveRequest->getData(), [

@@ -58,17 +58,13 @@ class InvoicePaymentAction extends AbstractPaymentAction implements LoggerAwareI
         $this->createInvoiceRequestFactory = $createInvoiceRequestFactory;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getName()
     {
         return static::NAME;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function execute(ApruveConfigInterface $apruveConfig, PaymentTransaction $paymentTransaction)
     {
         $paymentContext = $this->paymentContextFactory->create($paymentTransaction);

@@ -4,9 +4,7 @@ namespace Oro\Bundle\ApruveBundle\Apruve\Helper;
 
 class AmountNormalizer implements AmountNormalizerInterface
 {
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function normalize($amount)
     {
         $amountCents = ((float)$amount) * 100;

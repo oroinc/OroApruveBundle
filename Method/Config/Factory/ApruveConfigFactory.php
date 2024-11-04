@@ -44,9 +44,7 @@ class ApruveConfigFactory implements ApruveConfigFactoryInterface
         $this->logger = $logger;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function create(ApruveSettings $settings)
     {
         $params = [];

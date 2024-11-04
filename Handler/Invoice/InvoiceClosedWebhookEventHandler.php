@@ -35,9 +35,7 @@ class InvoiceClosedWebhookEventHandler implements InvoiceClosedWebhookEventHandl
         $this->paymentTransactionProvider = $paymentTransactionProvider;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function handle(PaymentMethodInterface $paymentMethod, array $eventBody)
     {
         $apruveInvoiceId = $this->getEntityIdFromEventBody($eventBody);

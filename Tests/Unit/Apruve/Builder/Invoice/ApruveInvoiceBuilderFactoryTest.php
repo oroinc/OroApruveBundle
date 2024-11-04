@@ -26,6 +26,7 @@ class ApruveInvoiceBuilderFactoryTest extends \PHPUnit\Framework\TestCase
 
     private ApruveInvoiceBuilderFactory $factory;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->factory = new ApruveInvoiceBuilderFactory();

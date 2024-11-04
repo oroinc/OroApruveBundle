@@ -35,17 +35,13 @@ class LoadApruveChannelData extends AbstractFixture implements DependentFixtureI
         ],
     ];
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getDependencies(): array
     {
         return [LoadApruveSettingsData::class, LoadOrganization::class, LoadUser::class];
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function load(ObjectManager $manager): void
     {
         foreach (self::CHANNEL_DATA as $data) {

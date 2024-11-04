@@ -10,9 +10,7 @@ class BasicCreateInvoiceRequestFactory implements CreateInvoiceRequestFactoryInt
     const METHOD = 'POST';
     const URI = '/orders/%s/invoices';
 
-    /**
-     * {@inheritdoc}
-     */
+    #[\Override]
     public function create(ApruveInvoice $apruveInvoice, $apruveOrderId)
     {
         return new ApruveRequest(self::METHOD, $this->buildUri($apruveOrderId), $apruveInvoice);

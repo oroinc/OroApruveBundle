@@ -7,9 +7,7 @@ use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 
 class ApruvePaymentMethodViewMock extends ApruvePaymentMethodView
 {
-    /**
-     * {@inheritdoc}
-     */
+    #[\Override]
     public function getOptions(PaymentContextInterface $context)
     {
         $options =  parent::getOptions($context);

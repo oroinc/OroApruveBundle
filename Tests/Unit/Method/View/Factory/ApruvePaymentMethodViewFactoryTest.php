@@ -10,6 +10,7 @@ class ApruvePaymentMethodViewFactoryTest extends \PHPUnit\Framework\TestCase
 {
     private ApruvePaymentMethodViewFactory $factory;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->factory = new ApruvePaymentMethodViewFactory();

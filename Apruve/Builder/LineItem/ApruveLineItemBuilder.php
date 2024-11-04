@@ -45,9 +45,7 @@ class ApruveLineItemBuilder implements ApruveLineItemBuilderInterface
         $this->currency = $currency;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getResult()
     {
         $this->data += [
@@ -61,9 +59,7 @@ class ApruveLineItemBuilder implements ApruveLineItemBuilderInterface
         return new ApruveLineItem($this->data);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setMerchantNotes($notes)
     {
         $this->data[ApruveLineItem::MERCHANT_NOTES] = (string)$notes;
@@ -71,9 +67,7 @@ class ApruveLineItemBuilder implements ApruveLineItemBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setVendor($vendor)
     {
         $this->data[ApruveLineItem::VENDOR] = (string)$vendor;
@@ -81,9 +75,7 @@ class ApruveLineItemBuilder implements ApruveLineItemBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setVariantInfo($info)
     {
         $this->data[ApruveLineItem::VARIANT_INFO] = (string)$info;
@@ -91,9 +83,7 @@ class ApruveLineItemBuilder implements ApruveLineItemBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setSku($sku)
     {
         $this->data[ApruveLineItem::SKU] = (string)$sku;
@@ -101,9 +91,7 @@ class ApruveLineItemBuilder implements ApruveLineItemBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setDescription($description)
     {
         $this->data[ApruveLineItem::DESCRIPTION] = (string)$description;
@@ -111,9 +99,7 @@ class ApruveLineItemBuilder implements ApruveLineItemBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setViewProductUrl($url)
     {
         $this->data[ApruveLineItem::VIEW_PRODUCT_URL] = (string)$url;
@@ -121,9 +107,7 @@ class ApruveLineItemBuilder implements ApruveLineItemBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setEaCents($amount)
     {
         $this->data[ApruveLineItem::PRICE_EA_CENTS] = (int)$amount;

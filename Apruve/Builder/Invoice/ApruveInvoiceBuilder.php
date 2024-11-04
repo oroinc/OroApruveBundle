@@ -38,9 +38,7 @@ class ApruveInvoiceBuilder implements ApruveInvoiceBuilderInterface
         $this->lineItems = $lineItems;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getResult()
     {
         $this->data += [
@@ -52,9 +50,7 @@ class ApruveInvoiceBuilder implements ApruveInvoiceBuilderInterface
         return new ApruveInvoice($this->data);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setIssueOnCreate($bool)
     {
         $this->data[ApruveInvoice::ISSUE_ON_CREATE] = (bool)$bool;
@@ -62,9 +58,7 @@ class ApruveInvoiceBuilder implements ApruveInvoiceBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setDueAt($dueAt)
     {
         $this->data[ApruveInvoice::DUE_AT] = (string)$dueAt;
@@ -72,9 +66,7 @@ class ApruveInvoiceBuilder implements ApruveInvoiceBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setMerchantInvoiceId($invoiceId)
     {
         $this->data[ApruveInvoice::MERCHANT_INVOICE_ID] = (string)$invoiceId;
@@ -82,9 +74,7 @@ class ApruveInvoiceBuilder implements ApruveInvoiceBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setShippingCents($amount)
     {
         $this->data[ApruveInvoice::SHIPPING_CENTS] = (int)$amount;
@@ -92,9 +82,7 @@ class ApruveInvoiceBuilder implements ApruveInvoiceBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setTaxCents($amount)
     {
         $this->data[ApruveInvoice::TAX_CENTS] = (int)$amount;
@@ -102,9 +90,7 @@ class ApruveInvoiceBuilder implements ApruveInvoiceBuilderInterface
         return $this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function setMerchantNotes($notes)
     {
         $this->data[ApruveInvoice::MERCHANT_NOTES] = (string)$notes;

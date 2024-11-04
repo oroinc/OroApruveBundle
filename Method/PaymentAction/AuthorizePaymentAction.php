@@ -11,9 +11,7 @@ class AuthorizePaymentAction extends AbstractPaymentAction
 {
     const NAME = PaymentMethodInterface::AUTHORIZE;
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function execute(ApruveConfigInterface $apruveConfig, PaymentTransaction $paymentTransaction)
     {
         $response = $paymentTransaction->getResponse();
@@ -31,9 +29,7 @@ class AuthorizePaymentAction extends AbstractPaymentAction
         return [];
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getName()
     {
         return static::NAME;

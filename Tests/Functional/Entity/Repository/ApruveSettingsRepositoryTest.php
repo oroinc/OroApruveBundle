@@ -11,6 +11,7 @@ class ApruveSettingsRepositoryTest extends WebTestCase
 {
     private ApruveSettingsRepository $repository;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->initClient([], self::generateBasicAuthHeader());

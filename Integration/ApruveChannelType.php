@@ -9,17 +9,13 @@ class ApruveChannelType implements ChannelInterface, IconAwareIntegrationInterfa
 {
     const TYPE = 'apruve';
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getLabel()
     {
         return 'oro.apruve.channel_type.label';
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getIcon()
     {
         return 'bundles/oroapruve/img/apruve-logo.png';

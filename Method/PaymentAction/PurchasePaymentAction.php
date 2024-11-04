@@ -39,9 +39,7 @@ class PurchasePaymentAction extends AbstractPaymentAction implements LoggerAware
         $this->apruveOrderFromPaymentContextFactory = $apruveOrderFromPaymentContextFactory;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function execute(ApruveConfigInterface $apruveConfig, PaymentTransaction $paymentTransaction)
     {
         $paymentContext = $this->paymentContextFactory->create($paymentTransaction);
@@ -86,9 +84,7 @@ class PurchasePaymentAction extends AbstractPaymentAction implements LoggerAware
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getName()
     {
         return static::NAME;

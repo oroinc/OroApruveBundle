@@ -17,9 +17,7 @@ class ShippingAmountProvider implements ShippingAmountProviderInterface
         $this->surchargeProvider = $surchargeProvider;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getShippingAmount(PaymentContextInterface $paymentContext)
     {
         $surcharge = $this->surchargeProvider->getSurcharges($paymentContext->getSourceEntity());

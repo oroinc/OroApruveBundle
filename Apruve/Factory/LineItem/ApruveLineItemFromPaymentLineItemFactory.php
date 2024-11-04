@@ -32,6 +32,7 @@ class ApruveLineItemFromPaymentLineItemFactory extends AbstractApruveEntityFacto
         $this->router = $router;
     }
 
+    #[\Override]
     public function createFromPaymentLineItem(PaymentLineItem $paymentLineItem): ApruveLineItem
     {
         $apruveLineItemBuilder = $this->apruveLineItemBuilderFactory

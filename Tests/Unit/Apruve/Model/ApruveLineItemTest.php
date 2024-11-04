@@ -14,6 +14,7 @@ class ApruveLineItemTest extends \PHPUnit\Framework\TestCase
 
     private ApruveLineItem $apruveLineItem;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->apruveLineItem = new ApruveLineItem(self::DATA);
