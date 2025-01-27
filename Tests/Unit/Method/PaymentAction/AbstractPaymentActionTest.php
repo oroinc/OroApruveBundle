@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Tests\Unit\PaymentAction;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Method\PaymentAction;
 
 use Oro\Bundle\ApruveBundle\Client\ApruveRestClientInterface;
 use Oro\Bundle\ApruveBundle\Client\Factory\Config\ApruveConfigRestClientFactoryInterface;

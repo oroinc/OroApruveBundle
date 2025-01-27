@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Tests\Unit\PaymentAction;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Method\PaymentAction;
 
 use Oro\Bundle\ApruveBundle\Apruve\Factory\Invoice\ApruveInvoiceFromPaymentContextFactoryInterface;
 use Oro\Bundle\ApruveBundle\Apruve\Factory\Invoice\ApruveInvoiceFromResponseFactoryInterface;
