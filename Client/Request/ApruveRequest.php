@@ -26,7 +26,7 @@ class ApruveRequest implements ApruveRequestInterface
      * @param string                     $uri
      * @param ApruveEntityInterface|null $requestData
      */
-    public function __construct($method, $uri, ApruveEntityInterface $requestData = null)
+    public function __construct($method, $uri, ?ApruveEntityInterface $requestData = null)
     {
         $this->uri = $uri;
         $this->requestData = $requestData;

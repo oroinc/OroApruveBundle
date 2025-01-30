@@ -69,7 +69,7 @@ class LoadApruvePaymentTransactionData extends AbstractFixture implements
     }
 
     #[\Override]
-    public function setContainer(ContainerInterface $container = null): void
+    public function setContainer(?ContainerInterface $container = null): void
     {
         $this->apruveIdentifierGenerator  = $container->get('oro_apruve.method.generator.identifier');
     }
