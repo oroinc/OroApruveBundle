@@ -49,7 +49,7 @@ operations:
                                     parameters: [$.shipmentTransactionSuccessful, true]
         preconditions:
             '@and':
-                - '@acl_granted': ['CHARGE_AUTHORIZED_PAYMENTS', $.order]
+                - '@acl_granted': ['CHARGE_AUTHORIZED_PAYMENTS', $.entity]
                 - '@equal': [$.data.entity_class, 'Oro\Bundle\OrderBundle\Entity\Order']
                 - '@equal': [$.data.action, 'authorize']
                 - '@not':
