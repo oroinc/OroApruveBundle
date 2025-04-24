@@ -4,6 +4,7 @@ The current file describes significant changes in the code that may affect the u
 
 ## Changes in the Apruve package versions
 
+- [6.1.0](#610-2025-03-31)
 - [6.0.0](#600-2024-03-30)
 - [5.1.0](#510-2023-03-31)
 - [4.2.0](#420-2020-01-29)
@@ -14,6 +15,9 @@ The current file describes significant changes in the code that may affect the u
 - [1.4.0](#140-2017-09-29)
 - [1.3.0](#130-2017-07-28)
 - [1.2.2](#122-2017-06-26)
+
+## 6.1.0 (2025-03-31)
+[Show detailed list of changes](incompatibilities-6-1.md)
 
 ## 6.0.0 (2024-03-30)
 [Show detailed list of changes](incompatibilities-6-0.md)

@@ -1,0 +1,5 @@
+ApruveBundle
+------------
+* The `ApruveSettingsController::validateConnectionAction(Request $request, Channel $channel = null)`<sup>[[?]](https://github.com/oroinc/OroApruveBundle/tree/6.0.0/Controller/ApruveSettingsController.php#L52 "Oro\Bundle\ApruveBundle\Controller\ApruveSettingsController")</sup> method was changed to `ApruveSettingsController::validateConnectionAction(Request $request, $channel = null)`<sup>[[?]](https://github.com/oroinc/OroApruveBundle/tree/6.1.0/Controller/ApruveSettingsController.php#L52 "Oro\Bundle\ApruveBundle\Controller\ApruveSettingsController")</sup>
+* The `ApruveRequest::__construct($method, $uri, ApruveEntityInterface $requestData = null)`<sup>[[?]](https://github.com/oroinc/OroApruveBundle/tree/6.0.0/Client/Request/ApruveRequest.php#L29 "Oro\Bundle\ApruveBundle\Client\Request\ApruveRequest")</sup> method was changed to `ApruveRequest::__construct($method, $uri, $requestData = null)`<sup>[[?]](https://github.com/oroinc/OroApruveBundle/tree/6.1.0/Client/Request/ApruveRequest.php#L29 "Oro\Bundle\ApruveBundle\Client\Request\ApruveRequest")</sup>
+
