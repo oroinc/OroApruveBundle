@@ -4,8 +4,9 @@ namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Builder\Invoice;
 
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Invoice\ApruveInvoiceBuilder;
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Invoice\ApruveInvoiceBuilderFactory;
+use PHPUnit\Framework\TestCase;
 
-class ApruveInvoiceBuilderFactoryTest extends \PHPUnit\Framework\TestCase
+class ApruveInvoiceBuilderFactoryTest extends TestCase
 {
     private const AMOUNT_CENTS = 11130;
     private const CURRENCY = 'USD';
@@ -32,7 +33,7 @@ class ApruveInvoiceBuilderFactoryTest extends \PHPUnit\Framework\TestCase
         $this->factory = new ApruveInvoiceBuilderFactory();
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $actual = $this->factory->create(
             self::AMOUNT_CENTS,

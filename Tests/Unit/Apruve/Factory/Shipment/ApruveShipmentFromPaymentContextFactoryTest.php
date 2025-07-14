@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Shipment;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Factory\Shipment;
 
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Shipment\ApruveShipmentBuilderFactoryInterface;
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Shipment\ApruveShipmentBuilderInterface;
@@ -45,18 +45,14 @@ class ApruveShipmentFromPaymentContextFactoryTest extends TestCase
         ],
     ];
 
-    private ShippingMethodProviderInterface|MockObject $shippingMethodProvider;
-
-    private ApruveShipmentBuilderInterface|MockObject $apruveShipmentBuilder;
-
-    private ApruveShipmentBuilderFactoryInterface|MockObject $apruveShipmentBuilderFactory;
-
-    private PaymentContextInterface|MockObject $paymentContext;
-
+    private ShippingMethodProviderInterface&MockObject $shippingMethodProvider;
+    private ApruveShipmentBuilderInterface&MockObject $apruveShipmentBuilder;
+    private ApruveShipmentBuilderFactoryInterface&MockObject $apruveShipmentBuilderFactory;
+    private PaymentContextInterface&MockObject $paymentContext;
+    private TotalProcessorProvider&MockObject $totalProcessorProvider;
     private ApruveShipmentFromPaymentContextFactory $factory;
 
-    private TotalProcessorProvider|MockObject $totalProcessorProvider;
-
+    #[\Override]
     protected function setUp(): void
     {
         $this->paymentContext = $this->createMock(PaymentContextInterface::class);

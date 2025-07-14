@@ -31,14 +31,10 @@ class ApruveLineItemFromPaymentLineItemFactoryTest extends TestCase
     private const PRODUCT_DESCR_SANITIZED = 'Sample description with line breaks and tags';
     private const VIEW_PRODUCT_URL = 'http://example.com/product/view/1';
 
-    private ApruveLineItemBuilderInterface|MockObject $apruveLineItemBuilder;
-
-    private ApruveLineItemBuilderFactoryInterface|MockObject $apruveLineItemBuilderFactory;
-
-    private PaymentLineItem|MockObject $paymentLineItem;
-
-    private RouterInterface|MockObject $router;
-
+    private ApruveLineItemBuilderInterface&MockObject $apruveLineItemBuilder;
+    private ApruveLineItemBuilderFactoryInterface&MockObject $apruveLineItemBuilderFactory;
+    private PaymentLineItem&MockObject $paymentLineItem;
+    private RouterInterface&MockObject $router;
     private ApruveLineItemFromPaymentLineItemFactory $factory;
 
     #[\Override]

@@ -1,19 +1,20 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Services;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Services;
 
 use Oro\Bundle\ApruveBundle\Provider\ApruvePublicKeyProviderInterface;
+use Oro\Bundle\ApruveBundle\Services\SignatureVerifyingService;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use Symfony\Component\HttpFoundation\Request;
 
-class SignatureVerifyingServiceTest extends \PHPUnit\Framework\TestCase
+class SignatureVerifyingServiceTest extends TestCase
 {
-    /** @var ApruvePublicKeyProviderInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $apruvePublicKeyProvider;
+    private ApruvePublicKeyProviderInterface&MockObject $apruvePublicKeyProvider;
+    private SignatureVerifyingService $signatureVerifyingService;
 
-    /** @var SignatureVerifyingService */
-    private $signatureVerifyingService;
-
+    #[\Override]
     protected function setUp(): void
     {
         $this->apruvePublicKeyProvider = $this->createMock(ApruvePublicKeyProviderInterface::class);
@@ -21,7 +22,7 @@ class SignatureVerifyingServiceTest extends \PHPUnit\Framework\TestCase
         $this->signatureVerifyingService = new SignatureVerifyingService($this->apruvePublicKeyProvider);
     }
 
-    public function testVerifyRequestSignature()
+    public function testVerifyRequestSignature(): void
     {
         $request = new Request([], [], [], [], [], [], $this->getContent());
         $request->headers = new HeaderBag(['X-Apruve-Signature' => $this->getCorrectSignature()]);
@@ -33,7 +34,7 @@ class SignatureVerifyingServiceTest extends \PHPUnit\Framework\TestCase
         self::assertTrue($this->signatureVerifyingService->verifyRequestSignature($request));
     }
 
-    public function testVerifyRequestSignatureFalse()
+    public function testVerifyRequestSignatureFalse(): void
     {
         $request = new Request([], [], [], [], [], [], $this->getContent());
         $request->headers = new HeaderBag(['X-Apruve-Signature' => 'd3Jvbmc=']);

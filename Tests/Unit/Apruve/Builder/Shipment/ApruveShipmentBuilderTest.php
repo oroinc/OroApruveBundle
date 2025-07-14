@@ -1,11 +1,12 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Shipment;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Builder\Shipment;
 
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Shipment\ApruveShipmentBuilder;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveShipment;
+use PHPUnit\Framework\TestCase;
 
-class ApruveShipmentBuilderTest extends \PHPUnit\Framework\TestCase
+class ApruveShipmentBuilderTest extends TestCase
 {
     /**
      * Mandatory
@@ -42,6 +43,7 @@ class ApruveShipmentBuilderTest extends \PHPUnit\Framework\TestCase
 
     private ApruveShipmentBuilder $builder;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->builder = new ApruveShipmentBuilder(
@@ -51,7 +53,7 @@ class ApruveShipmentBuilderTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetResult()
+    public function testGetResult(): void
     {
         $actual = $this->builder->getResult();
 
@@ -63,7 +65,7 @@ class ApruveShipmentBuilderTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($expected, $actual->getData());
     }
 
-    public function testGetResultWithOptionalParams()
+    public function testGetResultWithOptionalParams(): void
     {
         $this->builder->setLineItems(self::LINE_ITEMS);
         $this->builder->setTaxCents(self::TAX_AMOUNT_CENTS);

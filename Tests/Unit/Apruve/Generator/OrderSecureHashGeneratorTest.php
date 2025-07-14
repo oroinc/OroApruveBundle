@@ -1,22 +1,21 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Builder;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Generator;
 
 use Oro\Bundle\ApruveBundle\Apruve\Generator\OrderSecureHashGenerator;
-use Oro\Bundle\ApruveBundle\Apruve\Generator\OrderSecureHashGeneratorInterface;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveLineItem;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveOrder;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
-class OrderSecureHashGeneratorTest extends \PHPUnit\Framework\TestCase
+class OrderSecureHashGeneratorTest extends TestCase
 {
     private const API_KEY = 'sampleApiKey';
 
-    /** @var ApruveOrder|\PHPUnit\Framework\MockObject\MockObject */
-    private $apruveOrder;
+    private ApruveOrder&MockObject $apruveOrder;
+    private OrderSecureHashGenerator $generator;
 
-    /** @var OrderSecureHashGeneratorInterface */
-    private $generator;
-
+    #[\Override]
     protected function setUp(): void
     {
         $this->apruveOrder = $this->createMock(ApruveOrder::class);
@@ -26,7 +25,7 @@ class OrderSecureHashGeneratorTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider generateDataProvider
      */
-    public function testGenerate(array $data, string $expectedHash)
+    public function testGenerate(array $data, string $expectedHash): void
     {
         $this->apruveOrder->expects(self::once())
             ->method('getData')

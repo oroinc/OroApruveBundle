@@ -1,19 +1,21 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Helper;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Provider;
 
 use Oro\Bundle\ApruveBundle\Apruve\Provider\SupportedCurrenciesProvider;
+use PHPUnit\Framework\TestCase;
 
-class SupportedCurrenciesProviderTest extends \PHPUnit\Framework\TestCase
+class SupportedCurrenciesProviderTest extends TestCase
 {
     private SupportedCurrenciesProvider $provider;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->provider = new SupportedCurrenciesProvider();
     }
 
-    public function testGetCurrencies()
+    public function testGetCurrencies(): void
     {
         $actual = $this->provider->getCurrencies();
         self::assertSame(['USD'], $actual);
@@ -22,7 +24,7 @@ class SupportedCurrenciesProviderTest extends \PHPUnit\Framework\TestCase
     /**
      * @dataProvider currenciesDataProvider
      */
-    public function testIsSupported(string $currency, bool $expected)
+    public function testIsSupported(string $currency, bool $expected): void
     {
         self::assertSame($expected, $this->provider->isSupported($currency));
     }

@@ -1,11 +1,12 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Invoice;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Builder\Invoice;
 
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Invoice\ApruveInvoiceBuilder;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveInvoice;
+use PHPUnit\Framework\TestCase;
 
-class ApruveInvoiceBuilderTest extends \PHPUnit\Framework\TestCase
+class ApruveInvoiceBuilderTest extends TestCase
 {
     /**
      * Mandatory
@@ -39,6 +40,7 @@ class ApruveInvoiceBuilderTest extends \PHPUnit\Framework\TestCase
 
     private ApruveInvoiceBuilder $builder;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->builder = new ApruveInvoiceBuilder(
@@ -48,7 +50,7 @@ class ApruveInvoiceBuilderTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testGetResult()
+    public function testGetResult(): void
     {
         $actual = $this->builder->getResult();
 
@@ -60,7 +62,7 @@ class ApruveInvoiceBuilderTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($expected, $actual->getData());
     }
 
-    public function testGetResultWithOptionalParams()
+    public function testGetResultWithOptionalParams(): void
     {
         $this->builder->setIssueOnCreate(self::ISSUE_ON_CREATE);
         $this->builder->setDueAt(self::DUE_AT_STRING);

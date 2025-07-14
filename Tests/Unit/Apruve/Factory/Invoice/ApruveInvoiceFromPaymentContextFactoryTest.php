@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Invoice;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Factory\Invoice;
 
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Invoice\ApruveInvoiceBuilderFactoryInterface;
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Invoice\ApruveInvoiceBuilderInterface;
@@ -42,16 +42,13 @@ class ApruveInvoiceFromPaymentContextFactoryTest extends TestCase
         ],
     ];
 
-    private ApruveInvoiceBuilderInterface|MockObject $apruveInvoiceBuilder;
-
-    private ApruveInvoiceBuilderFactoryInterface|MockObject $apruveInvoiceBuilderFactory;
-
-    private PaymentContextInterface|MockObject $paymentContext;
-
+    private ApruveInvoiceBuilderInterface&MockObject $apruveInvoiceBuilder;
+    private ApruveInvoiceBuilderFactoryInterface&MockObject $apruveInvoiceBuilderFactory;
+    private PaymentContextInterface&MockObject $paymentContext;
+    private TotalProcessorProvider&MockObject $totalProcessorProvider;
     private ApruveInvoiceFromPaymentContextFactory $factory;
 
-    private TotalProcessorProvider|MockObject $totalProcessorProvider;
-
+    #[\Override]
     protected function setUp(): void
     {
         $this->paymentContext = $this->createMock(PaymentContextInterface::class);

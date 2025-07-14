@@ -1,30 +1,26 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Tests\Unit\PaymentAction;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Method\PaymentAction;
 
 use Oro\Bundle\ApruveBundle\Method\ApruvePaymentMethod;
 use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfigInterface;
 use Oro\Bundle\ApruveBundle\Method\PaymentAction\AuthorizePaymentAction;
 use Oro\Bundle\PaymentBundle\Context\Factory\TransactionPaymentContextFactoryInterface;
 use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
-class AuthorizePaymentActionTest extends \PHPUnit\Framework\TestCase
+class AuthorizePaymentActionTest extends TestCase
 {
     private const APRUVE_ORDER_ID = 'sampleApruveOrderId';
     private const RESPONSE = [ApruvePaymentMethod::PARAM_ORDER_ID => self::APRUVE_ORDER_ID];
 
-    /** @var AuthorizePaymentAction */
-    private $paymentAction;
+    private TransactionPaymentContextFactoryInterface&MockObject $paymentContextFactory;
+    private PaymentTransaction&MockObject $paymentTransaction;
+    private ApruveConfigInterface&MockObject $config;
+    private AuthorizePaymentAction $paymentAction;
 
-    /** @var TransactionPaymentContextFactoryInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $paymentContextFactory;
-
-    /** @var PaymentTransaction|\PHPUnit\Framework\MockObject\MockObject */
-    private $paymentTransaction;
-
-    /** @var ApruveConfigInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $config;
-
+    #[\Override]
     protected function setUp(): void
     {
         $this->paymentContextFactory = $this->createMock(TransactionPaymentContextFactoryInterface::class);
@@ -34,7 +30,7 @@ class AuthorizePaymentActionTest extends \PHPUnit\Framework\TestCase
         $this->paymentAction = new AuthorizePaymentAction($this->paymentContextFactory);
     }
 
-    public function testExecute()
+    public function testExecute(): void
     {
         $this->paymentTransaction->expects(self::once())
             ->method('getResponse')
@@ -61,7 +57,7 @@ class AuthorizePaymentActionTest extends \PHPUnit\Framework\TestCase
         self::assertSame([], $actual);
     }
 
-    public function testGetName()
+    public function testGetName(): void
     {
         $actual = $this->paymentAction->getName();
 

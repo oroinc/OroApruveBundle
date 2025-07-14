@@ -1,11 +1,13 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Invoice;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Factory\Invoice;
 
 use Oro\Bundle\ApruveBundle\Apruve\Factory\Invoice\ApruveInvoiceFromResponseFactory;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestResponseInterface;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
-class ApruveInvoiceFromResponseFactoryTest extends \PHPUnit\Framework\TestCase
+class ApruveInvoiceFromResponseFactoryTest extends TestCase
 {
     private const APRUVE_INVOICE = [
         'amount_cents' => 1000,
@@ -20,12 +22,10 @@ class ApruveInvoiceFromResponseFactoryTest extends \PHPUnit\Framework\TestCase
         ],
     ];
 
-    /** @var RestResponseInterface|\PHPUnit\Framework\MockObject\MockObject */
-    private $restResponse;
+    private RestResponseInterface&MockObject $restResponse;
+    private ApruveInvoiceFromResponseFactory $factory;
 
-    /** @var ApruveInvoiceFromResponseFactory */
-    private $factory;
-
+    #[\Override]
     protected function setUp(): void
     {
         $this->restResponse = $this->createMock(RestResponseInterface::class);
@@ -33,7 +33,7 @@ class ApruveInvoiceFromResponseFactoryTest extends \PHPUnit\Framework\TestCase
         $this->factory = new ApruveInvoiceFromResponseFactory();
     }
 
-    public function testCreateFromResponse()
+    public function testCreateFromResponse(): void
     {
         $this->restResponse->expects(self::once())
             ->method('json')

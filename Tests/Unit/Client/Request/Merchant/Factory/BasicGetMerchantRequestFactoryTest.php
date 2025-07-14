@@ -1,20 +1,22 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Tests\Unit\Client\Request\Invoice;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Client\Request\Merchant\Factory;
 
 use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequest;
 use Oro\Bundle\ApruveBundle\Client\Request\Merchant\Factory\BasicGetMerchantRequestFactory;
+use PHPUnit\Framework\TestCase;
 
-class BasicGetMerchantRequestFactoryTest extends \PHPUnit\Framework\TestCase
+class BasicGetMerchantRequestFactoryTest extends TestCase
 {
     private BasicGetMerchantRequestFactory $factory;
 
+    #[\Override]
     protected function setUp(): void
     {
         $this->factory = new BasicGetMerchantRequestFactory();
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $merchantId = '2124';
 
