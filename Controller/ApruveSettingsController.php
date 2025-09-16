@@ -10,7 +10,7 @@ use Oro\Bundle\IntegrationBundle\Entity\Channel;
 use Oro\Bundle\IntegrationBundle\Form\Type\ChannelType;
 use Oro\Bundle\SecurityBundle\Attribute\CsrfProtection;
 use Oro\Bundle\SecurityBundle\Generator\RandomTokenGeneratorInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,10 +50,12 @@ class ApruveSettingsController extends AbstractController
      * @return JsonResponse
      */
     #[Route(path: '/validate-connection/{channelId}/', name: 'oro_apruve_validate_connection', methods: ['POST'])]
-    #[ParamConverter('channel', class: Channel::class, options: ['id' => 'channelId'])]
     #[CsrfProtection()]
-    public function validateConnectionAction(Request $request, ?Channel $channel = null)
-    {
+    public function validateConnectionAction(
+        Request $request,
+        #[MapEntity(id: 'channelId')]
+        ?Channel $channel = null
+    ) {
         if (!$channel) {
             $channel = new Channel();
         }
