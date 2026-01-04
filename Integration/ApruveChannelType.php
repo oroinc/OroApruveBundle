@@ -7,7 +7,7 @@ use Oro\Bundle\IntegrationBundle\Provider\IconAwareIntegrationInterface;
 
 class ApruveChannelType implements ChannelInterface, IconAwareIntegrationInterface
 {
-    const TYPE = 'apruve';
+    public const TYPE = 'apruve';
 
     #[\Override]
     public function getLabel()

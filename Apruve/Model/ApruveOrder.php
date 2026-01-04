@@ -7,27 +7,27 @@ class ApruveOrder extends AbstractApruveEntity
     /**
      * Mandatory
      */
-    const MERCHANT_ID = 'merchant_id';
-    const AMOUNT_CENTS = 'amount_cents';
-    const CURRENCY = 'currency';
-    const LINE_ITEMS = 'order_items';
+    public const MERCHANT_ID = 'merchant_id';
+    public const AMOUNT_CENTS = 'amount_cents';
+    public const CURRENCY = 'currency';
+    public const LINE_ITEMS = 'order_items';
 
     /**
      * Optional
      */
-    const MERCHANT_ORDER_ID = 'merchant_order_id';
-    const TAX_CENTS = 'tax_cents';
-    const SHIPPING_CENTS = 'shipping_cents';
-    const EXPIRE_AT = 'expire_at';
-    const AUTO_ESCALATE = 'auto_escalate';
-    const PO_NUMBER = 'po_number';
-    const PAYMENT_TERM_PARAMS = 'payment_term_params';
-    const _CORPORATE_ACCOUNT_ID = 'corporate_account_id';
-    const FINALIZE_ON_CREATE = 'finalize_on_create';
-    const INVOICE_ON_CREATE = 'invoice_on_create';
+    public const MERCHANT_ORDER_ID = 'merchant_order_id';
+    public const TAX_CENTS = 'tax_cents';
+    public const SHIPPING_CENTS = 'shipping_cents';
+    public const EXPIRE_AT = 'expire_at';
+    public const AUTO_ESCALATE = 'auto_escalate';
+    public const PO_NUMBER = 'po_number';
+    public const PAYMENT_TERM_PARAMS = 'payment_term_params';
+    public const _CORPORATE_ACCOUNT_ID = 'corporate_account_id';
+    public const FINALIZE_ON_CREATE = 'finalize_on_create';
+    public const INVOICE_ON_CREATE = 'invoice_on_create';
 
     /**
      * Required for offline (created manually via Apruve API) orders only.
      */
-    const SHOPPER_ID = 'shopper_id';
+    public const SHOPPER_ID = 'shopper_id';
 }

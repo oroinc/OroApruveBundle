@@ -10,12 +10,12 @@ use Oro\Bundle\IntegrationBundle\Provider\Rest\Exception\RestException;
 class GetMerchantRequestApruveConnectionValidatorResultFactory implements
     ApruveConnectionValidatorResultFactoryInterface
 {
-    const HTTP_UNAUTHORIZED = 401;
-    const HTTP_NOT_FOUND = 404;
+    public const HTTP_UNAUTHORIZED = 401;
+    public const HTTP_NOT_FOUND = 404;
 
-    const INVALID_API_KEY_SEVERITY = 'authentication';
-    const MERCHANT_NOT_FOUND_SEVERITY = 'merchant';
-    const SERVER_SEVERITY = 'server';
+    public const INVALID_API_KEY_SEVERITY = 'authentication';
+    public const MERCHANT_NOT_FOUND_SEVERITY = 'merchant';
+    public const SERVER_SEVERITY = 'server';
 
     #[\Override]
     public function createResultByApruveClientResponse(RestResponseInterface $response)

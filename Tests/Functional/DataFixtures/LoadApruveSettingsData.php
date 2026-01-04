@@ -12,17 +12,17 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class LoadApruveSettingsData extends AbstractFixture implements FixtureInterface, ContainerAwareInterface
 {
-    const APRUVE_LABEL = 'Apruve';
-    const MERCHANT_ID = 'sampleMerchantId';
-    const API_KEY = 'sampleApiKey';
-    const WEBHOOK_TOKEN_1 = 'sampleToken_1';
-    const WEBHOOK_TOKEN_2 = 'sampleToken_2';
-    const WEBHOOK_TOKEN_3 = 'sampleToken_3';
+    public const APRUVE_LABEL = 'Apruve';
+    public const MERCHANT_ID = 'sampleMerchantId';
+    public const API_KEY = 'sampleApiKey';
+    public const WEBHOOK_TOKEN_1 = 'sampleToken_1';
+    public const WEBHOOK_TOKEN_2 = 'sampleToken_2';
+    public const WEBHOOK_TOKEN_3 = 'sampleToken_3';
 
     /**
      * @var array Transports configuration
      */
-    const TRANSPORTS = [
+    public const TRANSPORTS = [
         [
             'reference' => 'apruve:transport_1',
             'label' => self::APRUVE_LABEL,

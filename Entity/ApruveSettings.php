@@ -21,16 +21,16 @@ class ApruveSettings extends Transport
     /**
      * General keys.
      */
-    const LABELS_KEY = 'labels';
-    const SHORT_LABELS_KEY = 'short_labels';
+    public const LABELS_KEY = 'labels';
+    public const SHORT_LABELS_KEY = 'short_labels';
 
     /**
      * Apruve-specific keys.
      */
-    const MERCHANT_ID_KEY = 'metchant_id';
-    const API_KEY_KEY = 'api_key';
-    const WEBHOOK_TOKEN_KEY = 'webhook_token';
-    const TEST_MODE_KEY = 'test_mode';
+    public const MERCHANT_ID_KEY = 'metchant_id';
+    public const API_KEY_KEY = 'api_key';
+    public const WEBHOOK_TOKEN_KEY = 'webhook_token';
+    public const TEST_MODE_KEY = 'test_mode';
 
     /**
      * @var ParameterBag

@@ -23,10 +23,10 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route(path: '/webhook')]
 class WebhookController extends AbstractController
 {
-    const INVOICE_CLOSED_EVENT_NAME = 'invoice.closed';
-    const PAYMENT_TERM_ACCEPTED_EVENT_NAME = 'payment_term.accepted';
-    const ORDER_ACCEPTED_EVENT_NAME = 'order.accepted';
-    const ORDER_CANCELED_EVENT_NAME = 'order.canceled';
+    public const INVOICE_CLOSED_EVENT_NAME = 'invoice.closed';
+    public const PAYMENT_TERM_ACCEPTED_EVENT_NAME = 'payment_term.accepted';
+    public const ORDER_ACCEPTED_EVENT_NAME = 'order.accepted';
+    public const ORDER_CANCELED_EVENT_NAME = 'order.canceled';
 
     /**
      *

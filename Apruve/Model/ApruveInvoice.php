@@ -7,17 +7,17 @@ class ApruveInvoice extends AbstractApruveEntity
     /**
      * Mandatory
      */
-    const AMOUNT_CENTS = 'amount_cents';
-    const CURRENCY = 'currency';
-    const LINE_ITEMS = 'invoice_items';
+    public const AMOUNT_CENTS = 'amount_cents';
+    public const CURRENCY = 'currency';
+    public const LINE_ITEMS = 'invoice_items';
 
     /**
      * Optional
      */
-    const TAX_CENTS = 'tax_cents';
-    const SHIPPING_CENTS = 'shipping_cents';
-    const ISSUE_ON_CREATE = 'issue_on_create';
-    const DUE_AT = 'due_at';
-    const MERCHANT_INVOICE_ID = 'merchant_invoice_id';
-    const MERCHANT_NOTES = 'merchant_notes';
+    public const TAX_CENTS = 'tax_cents';
+    public const SHIPPING_CENTS = 'shipping_cents';
+    public const ISSUE_ON_CREATE = 'issue_on_create';
+    public const DUE_AT = 'due_at';
+    public const MERCHANT_INVOICE_ID = 'merchant_invoice_id';
+    public const MERCHANT_NOTES = 'merchant_notes';
 }

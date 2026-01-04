@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class ApruveSettingsType extends AbstractType
 {
-    const BLOCK_PREFIX = 'oro_apruve_settings';
+    public const BLOCK_PREFIX = 'oro_apruve_settings';
 
     /**
      * @var TransportInterface

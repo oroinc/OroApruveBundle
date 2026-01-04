@@ -13,7 +13,7 @@ class BasicApruveRestClientFactory implements ApruveRestClientFactoryInterface
     /**
      * @internal
      */
-    const HEADER_APRUVE_API_KEY = 'Apruve-Api-Key';
+    public const HEADER_APRUVE_API_KEY = 'Apruve-Api-Key';
 
     /**
      * @var ApruveClientUrlProviderInterface

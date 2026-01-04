@@ -7,12 +7,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SignatureVerifyingService implements SignatureVerifyingServiceInterface
 {
-    const SIGNATURE_HEADER_NAME = 'X-Apruve-Signature';
+    public const SIGNATURE_HEADER_NAME = 'X-Apruve-Signature';
 
     /**
      * @internal
      */
-    const SIGNATURE_ALGORITHM = OPENSSL_ALGO_SHA256;
+    public const SIGNATURE_ALGORITHM = OPENSSL_ALGO_SHA256;
 
     /**
      * @var ApruvePublicKeyProviderInterface

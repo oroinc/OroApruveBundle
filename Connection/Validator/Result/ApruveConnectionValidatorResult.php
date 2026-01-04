@@ -6,9 +6,9 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 
 class ApruveConnectionValidatorResult extends ParameterBag implements ApruveConnectionValidatorResultInterface
 {
-    const STATUS_KEY = 'status';
-    const ERROR_SEVERITY_KEY = 'error_severity';
-    const ERROR_MESSAGE_KEY = 'error_message';
+    public const STATUS_KEY = 'status';
+    public const ERROR_SEVERITY_KEY = 'error_severity';
+    public const ERROR_MESSAGE_KEY = 'error_message';
 
     #[\Override]
     public function getStatus()

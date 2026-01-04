@@ -7,20 +7,20 @@ class ApruveShipment extends AbstractApruveEntity
     /**
      * Mandatory
      */
-    const AMOUNT_CENTS = 'amount_cents';
-    const CURRENCY = 'currency';
-    const LINE_ITEMS = 'shipment_items';
+    public const AMOUNT_CENTS = 'amount_cents';
+    public const CURRENCY = 'currency';
+    public const LINE_ITEMS = 'shipment_items';
 
     /**
      * Optional
      */
-    const TAX_CENTS = 'tax_cents';
-    const SHIPPING_CENTS = 'shipping_cents';
-    const SHIPPER = 'shipper';
-    const TRACKING_NUMBER = 'tracking_number';
-    const SHIPPED_AT = 'shipped_at';
-    const DELIVERED_AT = 'delivered_at';
-    const STATUS = 'status';
-    const MERCHANT_SHIPMENT_ID = 'merchant_shipment_id';
-    const MERCHANT_NOTES = 'merchant_notes';
+    public const TAX_CENTS = 'tax_cents';
+    public const SHIPPING_CENTS = 'shipping_cents';
+    public const SHIPPER = 'shipper';
+    public const TRACKING_NUMBER = 'tracking_number';
+    public const SHIPPED_AT = 'shipped_at';
+    public const DELIVERED_AT = 'delivered_at';
+    public const STATUS = 'status';
+    public const MERCHANT_SHIPMENT_ID = 'merchant_shipment_id';
+    public const MERCHANT_NOTES = 'merchant_notes';
 }

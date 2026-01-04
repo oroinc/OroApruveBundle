@@ -22,12 +22,12 @@ class ShipmentPaymentAction extends AbstractPaymentAction implements LoggerAware
 {
     use LoggerAwareTrait;
 
-    const NAME = 'shipment';
+    public const NAME = 'shipment';
 
     /**
      * @internal
      */
-    const TRANSACTION_ACTIVE = false;
+    public const TRANSACTION_ACTIVE = false;
 
     /**
      * @var ApruveShipmentFromPaymentContextFactoryInterface

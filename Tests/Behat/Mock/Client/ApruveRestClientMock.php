@@ -8,7 +8,7 @@ use Oro\Bundle\IntegrationBundle\Test\FakeRestResponse;
 
 class ApruveRestClientMock implements ApruveRestClientInterface
 {
-    const TEST_ID = 'test_id';
+    public const TEST_ID = 'test_id';
 
     #[\Override]
     public function execute(ApruveRequestInterface $apruveRequest)

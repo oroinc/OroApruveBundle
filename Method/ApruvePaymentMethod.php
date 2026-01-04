@@ -11,9 +11,9 @@ use Oro\Bundle\PaymentBundle\Method\PaymentMethodInterface;
 
 class ApruvePaymentMethod implements PaymentMethodInterface
 {
-    const SHIPMENT = 'shipment';
+    public const SHIPMENT = 'shipment';
 
-    const PARAM_ORDER_ID = 'apruveOrderId';
+    public const PARAM_ORDER_ID = 'apruveOrderId';
 
     /**
      * @var ApruveConfigInterface

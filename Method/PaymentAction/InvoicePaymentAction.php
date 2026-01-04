@@ -21,7 +21,7 @@ class InvoicePaymentAction extends AbstractPaymentAction implements LoggerAwareI
 {
     use LoggerAwareTrait;
 
-    const NAME = PaymentMethodInterface::INVOICE;
+    public const NAME = PaymentMethodInterface::INVOICE;
 
     /**
      * @var ApruveInvoiceFromPaymentContextFactoryInterface

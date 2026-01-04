@@ -7,7 +7,7 @@ use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 
 class CancelPaymentAction extends AbstractPaymentAction
 {
-    const NAME = 'cancel';
+    public const NAME = 'cancel';
 
     #[\Override]
     public function execute(ApruveConfigInterface $apruveConfig, PaymentTransaction $paymentTransaction)

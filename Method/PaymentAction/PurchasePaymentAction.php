@@ -16,7 +16,7 @@ class PurchasePaymentAction extends AbstractPaymentAction implements LoggerAware
 {
     use LoggerAwareTrait;
 
-    const NAME = PaymentMethodInterface::PURCHASE;
+    public const NAME = PaymentMethodInterface::PURCHASE;
 
     /**
      * @var OrderSecureHashGeneratorInterface

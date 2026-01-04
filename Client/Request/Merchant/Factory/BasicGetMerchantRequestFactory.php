@@ -10,7 +10,7 @@ class BasicGetMerchantRequestFactory implements GetMerchantRequestFactoryInterfa
     /**
      * @internal
      */
-    const URL_PATTERN = '/merchants/%s';
+    public const URL_PATTERN = '/merchants/%s';
 
     #[\Override]
     public function createByMerchantId($merchantId)

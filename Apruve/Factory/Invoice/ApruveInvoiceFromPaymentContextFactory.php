@@ -20,7 +20,7 @@ class ApruveInvoiceFromPaymentContextFactory extends AbstractApruveEntityWithLin
     /**
      * @internal
      */
-    const ISSUE_ON_CREATE = true;
+    public const ISSUE_ON_CREATE = true;
 
     /**
      * @var ApruveInvoiceBuilderFactoryInterface

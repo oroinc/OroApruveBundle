@@ -7,8 +7,8 @@ use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequest;
 
 class BasicCreateShipmentRequestFactory implements CreateShipmentRequestFactoryInterface
 {
-    const METHOD = 'POST';
-    const URI = '/invoices/%s/shipments';
+    public const METHOD = 'POST';
+    public const URI = '/invoices/%s/shipments';
 
     #[\Override]
     public function create(ApruveShipment $apruveShipment, $apruveInvoiceId)

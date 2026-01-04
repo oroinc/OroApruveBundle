@@ -8,7 +8,7 @@ use Oro\Bundle\PaymentBundle\Method\PaymentMethodInterface;
 
 class CapturePaymentAction extends AbstractPaymentAction
 {
-    const NAME = PaymentMethodInterface::CAPTURE;
+    public const NAME = PaymentMethodInterface::CAPTURE;
 
     #[\Override]
     public function execute(ApruveConfigInterface $apruveConfig, PaymentTransaction $paymentTransaction)

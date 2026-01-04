@@ -15,7 +15,7 @@ class InvoiceClosedWebhookEventHandler implements InvoiceClosedWebhookEventHandl
     /**
      * @internal
      */
-    const TRANSACTION_ACTION = PaymentMethodInterface::CAPTURE;
+    public const TRANSACTION_ACTION = PaymentMethodInterface::CAPTURE;
 
     /**
      * @var PaymentTransactionRepository

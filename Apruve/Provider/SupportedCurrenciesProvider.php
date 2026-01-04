@@ -7,7 +7,7 @@ class SupportedCurrenciesProvider implements SupportedCurrenciesProviderInterfac
     /**
      * Apruve supports only USD for now.
      */
-    const USD = 'USD';
+    public const USD = 'USD';
 
     #[\Override]
     public function getCurrencies()

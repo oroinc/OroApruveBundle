@@ -14,7 +14,7 @@ use Symfony\Component\PropertyAccess\PropertyPathInterface;
  */
 class PaymentTransactionInvoiceAction extends AbstractPaymentMethodAction
 {
-    const OPTION_PAYMENT_TRANSACTION = 'paymentTransaction';
+    public const OPTION_PAYMENT_TRANSACTION = 'paymentTransaction';
 
     #[\Override]
     protected function configureOptionsResolver(OptionsResolver $resolver)

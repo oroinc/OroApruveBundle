@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class WebhookTokenType extends AbstractType
 {
-    const BLOCK_PREFIX = 'oro_apruve_webhook_token';
+    public const BLOCK_PREFIX = 'oro_apruve_webhook_token';
 
     /**
      * @var RandomTokenGeneratorInterface

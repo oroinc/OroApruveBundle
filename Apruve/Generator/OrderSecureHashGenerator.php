@@ -13,12 +13,12 @@ class OrderSecureHashGenerator implements OrderSecureHashGeneratorInterface
     /**
      * @internal
      */
-    const HASH_ALGORITHM = 'sha256';
+    public const HASH_ALGORITHM = 'sha256';
 
     /**
      * @internal
      */
-    const DELIMITER = '';
+    public const DELIMITER = '';
 
     /**
      * Order fields order.
@@ -26,7 +26,7 @@ class OrderSecureHashGenerator implements OrderSecureHashGeneratorInterface
      * Property "accepts_payment_terms" is missing as it is not used during
      * hash generation on Apruve side (approved by Apruve Support in request #370).
      */
-    const ORDER_FIELDS_ORDER = [
+    public const ORDER_FIELDS_ORDER = [
         ApruveOrder::MERCHANT_ID,
         ApruveOrder::MERCHANT_ORDER_ID,
         ApruveOrder::AMOUNT_CENTS,
@@ -41,7 +41,7 @@ class OrderSecureHashGenerator implements OrderSecureHashGeneratorInterface
     /**
      * Line Item fields order.
      */
-    const LINE_ITEM_FIELDS_ORDER = [
+    public const LINE_ITEM_FIELDS_ORDER = [
         ApruveLineItem::TITLE,
         ApruveLineItem::AMOUNT_CENTS,
         ApruveLineItem::PRICE_EA_CENTS,

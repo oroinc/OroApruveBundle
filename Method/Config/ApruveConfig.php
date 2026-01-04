@@ -9,9 +9,9 @@ class ApruveConfig extends AbstractParameterBagPaymentConfig implements ApruveCo
     /**
      * Apruve-specific parameters keys.
      */
-    const TEST_MODE_KEY  = 'test_mode';
-    const API_KEY_KEY  = 'api_key';
-    const MERCHANT_ID_KEY  = 'merchant_id';
+    public const TEST_MODE_KEY  = 'test_mode';
+    public const API_KEY_KEY  = 'api_key';
+    public const MERCHANT_ID_KEY  = 'merchant_id';
 
     #[\Override]
     public function isTestMode()
