@@ -5,6 +5,9 @@ namespace Oro\Bundle\ApruveBundle\Client\Request\Invoice\Factory;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveInvoice;
 use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequest;
 
+/**
+ * Creates Apruve invoice creation requests.
+ */
 class BasicCreateInvoiceRequestFactory implements CreateInvoiceRequestFactoryInterface
 {
     public const METHOD = 'POST';

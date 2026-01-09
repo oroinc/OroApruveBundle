@@ -8,6 +8,9 @@ use Oro\Bundle\ApruveBundle\Client\Url\Provider\ApruveClientUrlProviderInterface
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestClientFactoryInterface;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestClientInterface;
 
+/**
+ * Creates Apruve REST client instances with basic configuration.
+ */
 class BasicApruveRestClientFactory implements ApruveRestClientFactoryInterface
 {
     /**

@@ -9,6 +9,9 @@ use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Exception\RestException;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Validates Apruve connections by testing API credentials.
+ */
 class ApruveConnectionValidator implements ApruveConnectionValidatorInterface
 {
     /**

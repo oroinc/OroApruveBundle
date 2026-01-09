@@ -8,6 +8,9 @@ use Oro\Bundle\IntegrationBundle\Entity\Transport;
 use Oro\Bundle\IntegrationBundle\Provider\TransportInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
+/**
+ * Provides transport configuration for Apruve integration.
+ */
 class ApruveTransport implements TransportInterface
 {
     /**

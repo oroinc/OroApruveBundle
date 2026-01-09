@@ -5,6 +5,9 @@ namespace Oro\Bundle\ApruveBundle\Client\Request\Invoice\Factory;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveInvoice;
 use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequest;
 
+/**
+ * Defines the contract for creating invoice requests.
+ */
 interface CreateInvoiceRequestFactoryInterface
 {
     /**

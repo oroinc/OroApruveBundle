@@ -4,6 +4,9 @@ namespace Oro\Bundle\ApruveBundle\Method\Config\Provider;
 
 use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfigInterface;
 
+/**
+ * Defines the contract for providing Apruve configuration.
+ */
 interface ApruveConfigProviderInterface
 {
     /**

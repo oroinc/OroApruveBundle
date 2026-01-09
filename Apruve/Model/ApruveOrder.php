@@ -2,6 +2,9 @@
 
 namespace Oro\Bundle\ApruveBundle\Apruve\Model;
 
+/**
+ * Represents an order in the Apruve payment system, defining constants for mandatory and optional order properties.
+ */
 class ApruveOrder extends AbstractApruveEntity
 {
     /**

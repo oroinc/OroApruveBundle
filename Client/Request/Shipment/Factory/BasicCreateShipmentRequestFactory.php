@@ -5,6 +5,9 @@ namespace Oro\Bundle\ApruveBundle\Client\Request\Shipment\Factory;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveShipment;
 use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequest;
 
+/**
+ * Creates Apruve shipment creation requests.
+ */
 class BasicCreateShipmentRequestFactory implements CreateShipmentRequestFactoryInterface
 {
     public const METHOD = 'POST';

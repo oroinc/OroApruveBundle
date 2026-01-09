@@ -5,6 +5,9 @@ namespace Oro\Bundle\ApruveBundle\Provider;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PaymentBundle\Provider\SurchargeProvider;
 
+/**
+ * Provides shipping amount calculations for payment context.
+ */
 class ShippingAmountProvider implements ShippingAmountProviderInterface
 {
     /**

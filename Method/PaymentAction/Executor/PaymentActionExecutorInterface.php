@@ -6,6 +6,9 @@ use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfigInterface;
 use Oro\Bundle\ApruveBundle\Method\PaymentAction\PaymentActionInterface;
 use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 
+/**
+ * Defines the contract for executing payment actions.
+ */
 interface PaymentActionExecutorInterface
 {
     /**

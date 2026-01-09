@@ -2,6 +2,11 @@
 
 namespace Oro\Bundle\ApruveBundle\Apruve\Helper;
 
+/**
+ * Converts decimal amounts to integer cents for Apruve API.
+ *
+ * Normalizes monetary amounts by multiplying by 100 and rounding to the nearest integer.
+ */
 class AmountNormalizer implements AmountNormalizerInterface
 {
     #[\Override]

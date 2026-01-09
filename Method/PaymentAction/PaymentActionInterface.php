@@ -5,6 +5,9 @@ namespace Oro\Bundle\ApruveBundle\Method\PaymentAction;
 use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfigInterface;
 use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 
+/**
+ * Defines the contract for payment action implementations.
+ */
 interface PaymentActionInterface
 {
     /**

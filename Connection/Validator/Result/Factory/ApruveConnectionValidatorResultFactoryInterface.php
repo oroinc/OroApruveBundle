@@ -6,6 +6,9 @@ use Oro\Bundle\ApruveBundle\Connection\Validator\Result\ApruveConnectionValidato
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestResponseInterface;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Exception\RestException;
 
+/**
+ * Defines the contract for creating connection validator results.
+ */
 interface ApruveConnectionValidatorResultFactoryInterface
 {
     /**

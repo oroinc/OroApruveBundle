@@ -4,6 +4,10 @@ namespace Oro\Bundle\ApruveBundle\Apruve\Builder\Order;
 
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveOrder;
 
+/**
+ * Defines the contract for building {@see ApruveOrder} objects with fluent method calls
+ * to set optional order properties.
+ */
 interface ApruveOrderBuilderInterface
 {
     /**

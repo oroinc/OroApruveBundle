@@ -7,6 +7,9 @@ use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfigInterface;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PaymentBundle\Method\View\PaymentMethodViewInterface;
 
+/**
+ * Provides view configuration for Apruve payment method.
+ */
 class ApruvePaymentMethodView implements PaymentMethodViewInterface
 {
     /**

@@ -2,6 +2,9 @@
 
 namespace Oro\Bundle\ApruveBundle\Connection\Validator\Result;
 
+/**
+ * Defines the contract for connection validation results.
+ */
 interface ApruveConnectionValidatorResultInterface
 {
     /**

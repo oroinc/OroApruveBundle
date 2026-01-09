@@ -2,6 +2,10 @@
 
 namespace Oro\Bundle\ApruveBundle\Apruve\Builder\Shipment;
 
+/**
+ * Defines the contract for creating {@see ApruveShipmentBuilderInterface} instances
+ * with the required shipment parameters.
+ */
 interface ApruveShipmentBuilderFactoryInterface
 {
     /**

@@ -5,6 +5,9 @@ namespace Oro\Bundle\ApruveBundle\Apruve\Factory\Shipment;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveShipment;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestResponseInterface;
 
+/**
+ * Factory for creating {@see ApruveShipment} instances from API response ({@see RestResponseInterface}) data.
+ */
 interface ApruveShipmentFromResponseFactoryInterface
 {
     /**

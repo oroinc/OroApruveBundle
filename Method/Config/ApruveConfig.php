@@ -4,6 +4,9 @@ namespace Oro\Bundle\ApruveBundle\Method\Config;
 
 use Oro\Bundle\PaymentBundle\Method\Config\ParameterBag\AbstractParameterBagPaymentConfig;
 
+/**
+ * Provides configuration for Apruve payment method.
+ */
 class ApruveConfig extends AbstractParameterBagPaymentConfig implements ApruveConfigInterface
 {
     /**

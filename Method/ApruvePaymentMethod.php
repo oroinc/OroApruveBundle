@@ -9,6 +9,9 @@ use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;
 use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 use Oro\Bundle\PaymentBundle\Method\PaymentMethodInterface;
 
+/**
+ * Implements payment method interface for Apruve payment processing.
+ */
 class ApruvePaymentMethod implements PaymentMethodInterface
 {
     public const SHIPMENT = 'shipment';

@@ -4,6 +4,10 @@ namespace Oro\Bundle\ApruveBundle\Apruve\Builder\Shipment;
 
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveShipment;
 
+/**
+ * Builds {@see ApruveShipment} instances with fluent interface by accumulating optional properties
+ * through method chaining.
+ */
 class ApruveShipmentBuilder implements ApruveShipmentBuilderInterface
 {
     /**

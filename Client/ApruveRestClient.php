@@ -6,6 +6,9 @@ use Oro\Bundle\ApruveBundle\Client\Exception\UnsupportedMethodException;
 use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequestInterface;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestClientInterface;
 
+/**
+ * Implements REST client for making requests to the Apruve API.
+ */
 class ApruveRestClient implements ApruveRestClientInterface
 {
     public const METHOD_GET = 'GET';

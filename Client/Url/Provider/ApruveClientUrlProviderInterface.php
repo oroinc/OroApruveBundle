@@ -2,6 +2,9 @@
 
 namespace Oro\Bundle\ApruveBundle\Client\Url\Provider;
 
+/**
+ * Defines the contract for providing Apruve API URLs.
+ */
 interface ApruveClientUrlProviderInterface
 {
     /**

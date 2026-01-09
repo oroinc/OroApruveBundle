@@ -2,6 +2,9 @@
 
 namespace Oro\Bundle\ApruveBundle\Apruve\Model;
 
+/**
+ * Represents a shipment in the Apruve payment system; defines constants for mandatory and optional shipment properties.
+ */
 class ApruveShipment extends AbstractApruveEntity
 {
     /**

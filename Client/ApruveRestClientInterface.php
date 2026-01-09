@@ -7,6 +7,9 @@ use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequestInterface;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestResponseInterface;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Exception\RestException;
 
+/**
+ * Defines the contract for making REST requests to the Apruve API.
+ */
 interface ApruveRestClientInterface
 {
     /**

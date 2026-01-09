@@ -5,6 +5,9 @@ namespace Oro\Bundle\ApruveBundle\Client\Request\Merchant\Factory;
 use Oro\Bundle\ApruveBundle\Client\ApruveRestClient;
 use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequest;
 
+/**
+ * Creates Apruve merchant retrieval requests.
+ */
 class BasicGetMerchantRequestFactory implements GetMerchantRequestFactoryInterface
 {
     /**

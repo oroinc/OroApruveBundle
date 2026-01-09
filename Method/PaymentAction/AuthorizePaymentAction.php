@@ -7,6 +7,9 @@ use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfigInterface;
 use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 use Oro\Bundle\PaymentBundle\Method\PaymentMethodInterface;
 
+/**
+ * Handles payment authorization action for Apruve.
+ */
 class AuthorizePaymentAction extends AbstractPaymentAction
 {
     public const NAME = PaymentMethodInterface::AUTHORIZE;

@@ -2,6 +2,10 @@
 
 namespace Oro\Bundle\ApruveBundle\Apruve\Builder\Order;
 
+/**
+ * Defines the contract for creating {@see ApruveOrderBuilderInterface} instances
+ * with the required order parameters.
+ */
 interface ApruveOrderBuilderFactoryInterface
 {
     /**

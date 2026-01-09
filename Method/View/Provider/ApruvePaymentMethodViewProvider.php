@@ -7,6 +7,9 @@ use Oro\Bundle\ApruveBundle\Method\Config\Provider\ApruveConfigProviderInterface
 use Oro\Bundle\ApruveBundle\Method\View\Factory\ApruvePaymentMethodViewFactoryInterface;
 use Oro\Bundle\PaymentBundle\Method\View\AbstractPaymentMethodViewProvider;
 
+/**
+ * Provides Apruve payment method view instances.
+ */
 class ApruvePaymentMethodViewProvider extends AbstractPaymentMethodViewProvider
 {
     /**

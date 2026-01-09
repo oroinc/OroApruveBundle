@@ -7,6 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Provides form type for configuring Apruve webhook tokens.
+ */
 class WebhookTokenType extends AbstractType
 {
     public const BLOCK_PREFIX = 'oro_apruve_webhook_token';

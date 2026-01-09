@@ -2,6 +2,9 @@
 
 namespace Oro\Bundle\ApruveBundle\Client\Request;
 
+/**
+ * Defines the contract for Apruve API request objects.
+ */
 interface ApruveRequestInterface
 {
     /**

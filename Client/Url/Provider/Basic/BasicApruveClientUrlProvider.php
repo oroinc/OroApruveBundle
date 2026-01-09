@@ -4,6 +4,9 @@ namespace Oro\Bundle\ApruveBundle\Client\Url\Provider\Basic;
 
 use Oro\Bundle\ApruveBundle\Client\Url\Provider\ApruveClientUrlProviderInterface;
 
+/**
+ * Provides Apruve API URLs with basic configuration.
+ */
 class BasicApruveClientUrlProvider implements ApruveClientUrlProviderInterface
 {
     /**

@@ -5,6 +5,9 @@ namespace Oro\Bundle\ApruveBundle\Integration;
 use Oro\Bundle\IntegrationBundle\Provider\ChannelInterface;
 use Oro\Bundle\IntegrationBundle\Provider\IconAwareIntegrationInterface;
 
+/**
+ * Defines the channel type and configuration for Apruve integration.
+ */
 class ApruveChannelType implements ChannelInterface, IconAwareIntegrationInterface
 {
     public const TYPE = 'apruve';

@@ -4,6 +4,9 @@ namespace Oro\Bundle\ApruveBundle\Connection\Validator\Result;
 
 use Symfony\Component\HttpFoundation\ParameterBag;
 
+/**
+ * Represents the result of an Apruve connection validation.
+ */
 class ApruveConnectionValidatorResult extends ParameterBag implements ApruveConnectionValidatorResultInterface
 {
     public const STATUS_KEY = 'status';

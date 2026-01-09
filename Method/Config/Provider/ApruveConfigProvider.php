@@ -8,6 +8,9 @@ use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfigInterface;
 use Oro\Bundle\ApruveBundle\Method\Config\Factory\ApruveConfigFactoryInterface;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Provides Apruve configuration for payment methods.
+ */
 class ApruveConfigProvider implements ApruveConfigProviderInterface
 {
     /**

@@ -6,6 +6,9 @@ use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfigInterface;
 use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 use Oro\Bundle\PaymentBundle\Method\PaymentMethodInterface;
 
+/**
+ * Handles payment capture action for Apruve.
+ */
 class CapturePaymentAction extends AbstractPaymentAction
 {
     public const NAME = PaymentMethodInterface::CAPTURE;

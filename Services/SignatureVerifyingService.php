@@ -5,6 +5,9 @@ namespace Oro\Bundle\ApruveBundle\Services;
 use Oro\Bundle\ApruveBundle\Provider\ApruvePublicKeyProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Verifies the authenticity of Apruve webhook requests.
+ */
 class SignatureVerifyingService implements SignatureVerifyingServiceInterface
 {
     public const SIGNATURE_HEADER_NAME = 'X-Apruve-Signature';
