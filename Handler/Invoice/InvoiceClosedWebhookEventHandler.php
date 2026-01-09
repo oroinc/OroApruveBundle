@@ -78,7 +78,7 @@ class InvoiceClosedWebhookEventHandler implements InvoiceClosedWebhookEventHandl
             return $eventBody['entity']['id'];
         }
 
-        throw new InvalidEventException('Invoice id was not found in event body: '.json_encode($eventBody));
+        throw new InvalidEventException('Invoice id was not found in event body: ' . json_encode($eventBody));
     }
 
     /**
@@ -102,7 +102,7 @@ class InvoiceClosedWebhookEventHandler implements InvoiceClosedWebhookEventHandl
         }
 
         throw new SourceTransactionNotFoundException(
-            'Source transaction was not found for criteria: '.json_encode($criteria)
+            'Source transaction was not found for criteria: ' . json_encode($criteria)
         );
     }
 

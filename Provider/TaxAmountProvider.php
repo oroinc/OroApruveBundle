@@ -35,7 +35,7 @@ class TaxAmountProvider implements TaxAmountProviderInterface, LoggerAwareInterf
             // We can not return any tax information in this case
             // because even 0 means that taxes calculated with 0 value
             return null;
-        } catch (\InvalidArgumentException|UnmappableArgumentException $e) {
+        } catch (\InvalidArgumentException | UnmappableArgumentException $e) {
             if ($this->logger) {
                 $this->logger->error('Can not get tax amount for the required payment context', ['exception' => $e]);
             }
