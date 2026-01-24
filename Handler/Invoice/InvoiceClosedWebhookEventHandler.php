@@ -10,6 +10,9 @@ use Oro\Bundle\PaymentBundle\Entity\Repository\PaymentTransactionRepository;
 use Oro\Bundle\PaymentBundle\Method\PaymentMethodInterface;
 use Oro\Bundle\PaymentBundle\Provider\PaymentTransactionProvider;
 
+/**
+ * Handles invoice closed webhook events from Apruve.
+ */
 class InvoiceClosedWebhookEventHandler implements InvoiceClosedWebhookEventHandlerInterface
 {
     /**

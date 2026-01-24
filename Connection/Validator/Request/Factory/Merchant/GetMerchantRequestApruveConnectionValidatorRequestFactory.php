@@ -7,6 +7,9 @@ use Oro\Bundle\ApruveBundle\Connection\Validator\Request\Factory\ApruveConnectio
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\SecurityBundle\Encoder\SymmetricCrypterInterface;
 
+/**
+ * Creates connection validator requests using merchant request factory.
+ */
 class GetMerchantRequestApruveConnectionValidatorRequestFactory implements
     ApruveConnectionValidatorRequestFactoryInterface
 {

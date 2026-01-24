@@ -7,6 +7,9 @@ use Oro\Bundle\ApruveBundle\Handler\Exceptions\SourceTransactionNotFoundExceptio
 use Oro\Bundle\ApruveBundle\Handler\Exceptions\TransactionAlreadyExistsException;
 use Oro\Bundle\PaymentBundle\Method\PaymentMethodInterface;
 
+/**
+ * Defines the contract for handling invoice closed webhook events.
+ */
 interface InvoiceClosedWebhookEventHandlerInterface
 {
     /**

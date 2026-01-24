@@ -2,6 +2,10 @@
 
 namespace Oro\Bundle\ApruveBundle\Apruve\Builder\Invoice;
 
+/**
+ * Defines the contract for creating {@see ApruveInvoiceBuilderInterface} instances
+ * with the required invoice parameters.
+ */
 interface ApruveInvoiceBuilderFactoryInterface
 {
     /**

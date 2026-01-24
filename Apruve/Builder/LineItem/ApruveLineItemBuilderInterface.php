@@ -4,6 +4,10 @@ namespace Oro\Bundle\ApruveBundle\Apruve\Builder\LineItem;
 
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveLineItem;
 
+/**
+ * Builder interface for constructing {@see ApruveLineItem} objects with fluent method calls
+ * to set optional line item properties.
+ */
 interface ApruveLineItemBuilderInterface
 {
     /**

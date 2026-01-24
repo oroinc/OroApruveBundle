@@ -2,6 +2,9 @@
 
 namespace Oro\Bundle\ApruveBundle\Apruve\Model;
 
+/**
+ * Represents an invoice in the Apruve payment system, defining constants for mandatory and optional invoice properties.
+ */
 class ApruveInvoice extends AbstractApruveEntity
 {
     /**

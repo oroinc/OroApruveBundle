@@ -7,6 +7,9 @@ use Oro\Bundle\PaymentBundle\Event\AbstractCallbackEvent;
 use Oro\Bundle\PaymentBundle\Method\Provider\PaymentMethodProviderInterface;
 use Psr\Log\LoggerAwareTrait;
 
+/**
+ * Handles payment callback events from Apruve.
+ */
 class PaymentCallbackListener
 {
     use LoggerAwareTrait;

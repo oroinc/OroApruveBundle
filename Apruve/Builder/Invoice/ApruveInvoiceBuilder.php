@@ -4,6 +4,10 @@ namespace Oro\Bundle\ApruveBundle\Apruve\Builder\Invoice;
 
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveInvoice;
 
+/**
+ * Builds {@see ApruveInvoice} instances with fluent interface
+ * by accumulating optional properties through method chaining.
+ */
 class ApruveInvoiceBuilder implements ApruveInvoiceBuilderInterface
 {
     /**

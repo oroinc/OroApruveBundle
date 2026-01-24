@@ -18,6 +18,9 @@ use Oro\Bundle\PaymentBundle\Entity\PaymentTransaction;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 
+/**
+ * Handles payment shipment action for Apruve.
+ */
 class ShipmentPaymentAction extends AbstractPaymentAction implements LoggerAwareInterface
 {
     use LoggerAwareTrait;

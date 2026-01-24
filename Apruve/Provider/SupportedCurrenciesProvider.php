@@ -2,6 +2,9 @@
 
 namespace Oro\Bundle\ApruveBundle\Apruve\Provider;
 
+/**
+ * Defines and validates currencies supported by the Apruve payment integration (currently USD only).
+ */
 class SupportedCurrenciesProvider implements SupportedCurrenciesProviderInterface
 {
     /**

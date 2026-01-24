@@ -5,6 +5,9 @@ namespace Oro\Bundle\ApruveBundle\Client\Request\Shipment\Factory;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveShipment;
 use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequest;
 
+/**
+ * Defines the contract for creating shipment requests.
+ */
 interface CreateShipmentRequestFactoryInterface
 {
     /**

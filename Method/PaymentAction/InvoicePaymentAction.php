@@ -17,6 +17,9 @@ use Oro\Bundle\PaymentBundle\Method\PaymentMethodInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 
+/**
+ * Handles payment invoice action for Apruve.
+ */
 class InvoicePaymentAction extends AbstractPaymentAction implements LoggerAwareInterface
 {
     use LoggerAwareTrait;

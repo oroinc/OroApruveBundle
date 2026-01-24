@@ -2,6 +2,10 @@
 
 namespace Oro\Bundle\ApruveBundle\Apruve\Model;
 
+/**
+ * Represents a line item in Apruve invoices and orders,
+ * defining constants for mandatory and optional line item properties.
+ */
 class ApruveLineItem extends AbstractApruveEntity
 {
     /**

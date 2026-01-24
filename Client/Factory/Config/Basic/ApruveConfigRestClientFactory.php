@@ -7,6 +7,9 @@ use Oro\Bundle\ApruveBundle\Client\Factory\Config\ApruveConfigRestClientFactoryI
 use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfigInterface;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestClientFactoryInterface;
 
+/**
+ * Creates Apruve REST client instances with configuration-based setup.
+ */
 class ApruveConfigRestClientFactory implements ApruveConfigRestClientFactoryInterface
 {
     /**

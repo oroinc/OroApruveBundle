@@ -7,6 +7,9 @@ use Oro\Bundle\ApruveBundle\Connection\Validator\Result\Factory\ApruveConnection
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestResponseInterface;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Exception\RestException;
 
+/**
+ * Creates connection validator results from merchant request responses.
+ */
 class GetMerchantRequestApruveConnectionValidatorResultFactory implements
     ApruveConnectionValidatorResultFactoryInterface
 {

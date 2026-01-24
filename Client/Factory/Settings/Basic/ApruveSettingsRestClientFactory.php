@@ -8,6 +8,9 @@ use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\IntegrationBundle\Provider\Rest\Client\RestClientFactoryInterface;
 use Oro\Bundle\SecurityBundle\Encoder\SymmetricCrypterInterface;
 
+/**
+ * Creates Apruve REST client instances with settings-based configuration.
+ */
 class ApruveSettingsRestClientFactory implements ApruveSettingsRestClientFactoryInterface
 {
     /**

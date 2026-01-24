@@ -4,6 +4,9 @@ namespace Oro\Bundle\ApruveBundle\Method\Config;
 
 use Oro\Bundle\PaymentBundle\Method\Config\PaymentConfigInterface;
 
+/**
+ * Defines the contract for Apruve payment method configuration.
+ */
 interface ApruveConfigInterface extends PaymentConfigInterface
 {
     /**

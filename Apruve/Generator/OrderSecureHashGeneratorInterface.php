@@ -4,6 +4,10 @@ namespace Oro\Bundle\ApruveBundle\Apruve\Generator;
 
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveOrder;
 
+/**
+ * Defines the contract for generating secure hashes used to validate
+ * {@see ApruveOrder} data in Apruve API requests.
+ */
 interface OrderSecureHashGeneratorInterface
 {
     /**

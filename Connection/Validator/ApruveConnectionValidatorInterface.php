@@ -5,6 +5,9 @@ namespace Oro\Bundle\ApruveBundle\Connection\Validator;
 use Oro\Bundle\ApruveBundle\Connection\Validator\Result\ApruveConnectionValidatorResultInterface;
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 
+/**
+ * Defines the contract for validating Apruve connections.
+ */
 interface ApruveConnectionValidatorInterface
 {
     /**

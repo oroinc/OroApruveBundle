@@ -10,6 +10,9 @@ use Oro\Bundle\LocaleBundle\Helper\LocalizationHelper;
 use Oro\Bundle\SecurityBundle\Encoder\SymmetricCrypterInterface;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Creates Apruve configuration instances from payment method data.
+ */
 class ApruveConfigFactory implements ApruveConfigFactoryInterface
 {
     /**

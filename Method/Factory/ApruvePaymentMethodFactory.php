@@ -7,6 +7,9 @@ use Oro\Bundle\ApruveBundle\Method\ApruvePaymentMethod;
 use Oro\Bundle\ApruveBundle\Method\Config\ApruveConfigInterface;
 use Oro\Bundle\ApruveBundle\Method\PaymentAction\Executor\PaymentActionExecutor;
 
+/**
+ * Creates Apruve payment method instances from configuration.
+ */
 class ApruvePaymentMethodFactory implements ApruvePaymentMethodFactoryInterface
 {
     /**

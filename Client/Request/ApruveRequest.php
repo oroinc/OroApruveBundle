@@ -4,6 +4,9 @@ namespace Oro\Bundle\ApruveBundle\Client\Request;
 
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveEntityInterface;
 
+/**
+ * Represents an Apruve API request with method, URI, and body.
+ */
 class ApruveRequest implements ApruveRequestInterface
 {
     /**

@@ -6,7 +6,13 @@ use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveLineItem;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveOrder;
 
 /**
- * @see https://docs.apruve.com/guides/merchant-integration-tutorial#1b-creating-a-secure-hash
+ * Generates secure hashes for Apruve orders.
+ *
+ * This class implements the Apruve secure hash generation algorithm as documented in the Apruve integration guide.
+ * It creates SHA256 hashes from order and line item data in the specific order required by Apruve's API,
+ * ensuring secure communication between the merchant and Apruve payment gateway.
+ *
+ * @link https://docs.apruve.com/guides/merchant-integration-tutorial#1b-creating-a-secure-hash
  */
 class OrderSecureHashGenerator implements OrderSecureHashGeneratorInterface
 {
