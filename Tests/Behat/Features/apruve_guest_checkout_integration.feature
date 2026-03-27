@@ -83,6 +83,7 @@ Feature: Apruve Guest Checkout Integration
     And I click "Continue"
     And I check "Flat Rate" on the "Shipping Method" checkout step and press Continue
     And on the "Payment" checkout step I press Continue
+    And I click "Expand Checkout Footer"
     And I uncheck "Save my data and create an account" on the checkout page
     When I press "Submit Order"
     Then I see the "Thank You" page with "Thank You For Your Purchase!" title
