@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Tests\Unit;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Provider;
 
 use Oro\Bundle\ApruveBundle\Provider\ShippingAmountProvider;
 use Oro\Bundle\PaymentBundle\Context\PaymentContextInterface;

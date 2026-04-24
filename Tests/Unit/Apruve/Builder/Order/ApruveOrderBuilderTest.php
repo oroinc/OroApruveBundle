@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Order;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Apruve\Builder\Order;
 
 use Oro\Bundle\ApruveBundle\Apruve\Builder\Order\ApruveOrderBuilder;
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveOrder;
