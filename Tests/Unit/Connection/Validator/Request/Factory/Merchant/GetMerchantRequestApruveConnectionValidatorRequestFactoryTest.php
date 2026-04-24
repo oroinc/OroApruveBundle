@@ -1,11 +1,16 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Connection\Validator\Request\Factory\Merchant;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Connection\Validator\Request\Factory\Merchant;
+
+// phpcs:disable
 
 use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequestInterface;
 use Oro\Bundle\ApruveBundle\Client\Request\Merchant\Factory\GetMerchantRequestFactoryInterface;
+use Oro\Bundle\ApruveBundle\Connection\Validator\Request\Factory\Merchant\GetMerchantRequestApruveConnectionValidatorRequestFactory;
 use Oro\Bundle\ApruveBundle\Entity\ApruveSettings;
 use Oro\Bundle\SecurityBundle\Encoder\SymmetricCrypterInterface;
+
+// phpcs:enable
 
 class GetMerchantRequestApruveConnectionValidatorRequestFactoryTest extends \PHPUnit\Framework\TestCase
 {

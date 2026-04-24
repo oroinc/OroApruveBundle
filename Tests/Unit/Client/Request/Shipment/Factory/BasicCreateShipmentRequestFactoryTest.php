@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\ApruveBundle\Tests\Unit\Client\Request\Shipment;
+namespace Oro\Bundle\ApruveBundle\Tests\Unit\Client\Request\Shipment\Factory;
 
 use Oro\Bundle\ApruveBundle\Apruve\Model\ApruveShipment;
 use Oro\Bundle\ApruveBundle\Client\Request\ApruveRequest;
