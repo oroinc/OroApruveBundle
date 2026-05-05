@@ -2,5 +2,9 @@ Oro\Bundle\ApruveBundle\Entity\ApruveSettings:
     properties:
         apruveMerchantId:
             - NotBlank: ~
+            - Length:
+                max: 255
         apruveApiKey:
             - NotBlank: ~
+            - Length:
+                max: 255

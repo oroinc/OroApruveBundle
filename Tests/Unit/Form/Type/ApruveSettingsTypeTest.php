@@ -12,13 +12,11 @@ use Oro\Bundle\LocaleBundle\Form\Type\LocalizedFallbackValueCollectionType;
 use Oro\Bundle\LocaleBundle\Tests\Unit\Form\Type\Stub\LocalizedFallbackValueCollectionTypeStub;
 use Oro\Bundle\SecurityBundle\Form\DataTransformer\Factory\CryptedDataTransformerFactoryInterface;
 use Oro\Bundle\SecurityBundle\Generator\RandomTokenGeneratorInterface;
+use Oro\Component\Testing\Unit\FormIntegrationTestCase;
 use Oro\Component\Testing\Unit\PreloadedExtension;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Validator\ValidatorExtension;
-use Symfony\Component\Form\Test\FormIntegrationTestCase;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Validation;
 
 class ApruveSettingsTypeTest extends FormIntegrationTestCase
 {
@@ -70,6 +68,21 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
         parent::setUp();
     }
 
+    /**
+     * The parent implementation resolves the validation.yml path by searching for "Bundle" in the entity file path.
+     * Since ApruveBundle classes reside in "package/apruve/" (without "Bundle" in the directory structure),
+     * the automatic resolution fails. This override provides the correct path explicitly.
+     */
+    #[\Override]
+    protected function getConfigFile(string $class): ?string
+    {
+        if ($class === ApruveSettings::class) {
+            return dirname(__DIR__, 4) . '/Resources/config/validation.yml';
+        }
+
+        return parent::getConfigFile($class);
+    }
+
     #[\Override]
     protected function getExtensions(): array
     {
@@ -81,7 +94,7 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
             ], [
                 FormType::class => [new TooltipFormExtensionStub($this)],
             ]),
-            new ValidatorExtension(Validation::createValidator())
+            $this->getValidatorExtension(true)
         ];
     }
 
@@ -122,7 +135,7 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
             'empty form' => [
                 'defaultData' => new ApruveSettings(),
                 'submittedData' => [],
-                'isValid' => true,
+                'isValid' => false,
                 'expectedData' => (new ApruveSettings())
                     ->setApruveWebhookToken(self::WEBHOOK_TOKEN)
             ],
@@ -145,6 +158,39 @@ class ApruveSettingsTypeTest extends FormIntegrationTestCase
                     ->setApruveApiKey(self::ENCRYPTED_API_KEY)
                     ->setApruveWebhookToken(self::WEBHOOK_TOKEN)
             ]
+        ];
+    }
+
+    /**
+     * @dataProvider submitWithLongValuesProvider
+     */
+    public function testSubmitWithTooLongValues(array $override): void
+    {
+        $this->dataTransformer->expects(self::any())
+            ->method('reverseTransform')
+            ->willReturnArgument(0);
+
+        $submitData = array_replace_recursive([
+            'labels' => [['string' => 'label']],
+            'shortLabels' => [['string' => 'short']],
+            'apruveTestMode' => true,
+            'apruveMerchantId' => 'merchantId',
+            'apruveApiKey' => 'apiKey',
+            'apruveWebhookToken' => self::WEBHOOK_TOKEN,
+        ], $override);
+
+        $form = $this->factory->create(ApruveSettingsType::class, new ApruveSettings());
+        $form->submit($submitData);
+
+        self::assertTrue($form->isSynchronized());
+        self::assertFalse($form->isValid());
+    }
+
+    public function submitWithLongValuesProvider(): array
+    {
+        return [
+            'apruveMerchantId too long' => [['apruveMerchantId' => str_repeat('a', 256)]],
+            'apruveApiKey too long' => [['apruveApiKey' => str_repeat('a', 256)]],
         ];
     }
 
