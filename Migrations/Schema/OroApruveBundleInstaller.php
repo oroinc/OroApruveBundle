@@ -11,7 +11,7 @@ class OroApruveBundleInstaller implements Installation
     #[\Override]
     public function getMigrationVersion(): string
     {
-        return 'v1_0';
+        return 'v1_0_1';
     }
 
     #[\Override]
@@ -32,8 +32,8 @@ class OroApruveBundleInstaller implements Installation
     {
         $table = $schema->getTable('oro_integration_transport');
         $table->addColumn('apruve_test_mode', 'boolean', ['notnull' => false, 'default' => false]);
-        $table->addColumn('apruve_merchant_id', 'string', ['notnull' => false, 'length' => 255]);
-        $table->addColumn('apruve_api_key', 'string', ['notnull' => false, 'length' => 255]);
+        $table->addColumn('apruve_merchant_id', 'text', ['notnull' => false]);
+        $table->addColumn('apruve_api_key', 'text', ['notnull' => false]);
         $table->addColumn('apruve_webhook_token', 'string', ['notnull' => false, 'length' => 255]);
     }
 

@@ -40,10 +40,10 @@ class ApruveSettings extends Transport
     #[ORM\Column(name: 'apruve_test_mode', type: Types::BOOLEAN, options: ['default' => false])]
     private ?bool $apruveTestMode = false;
 
-    #[ORM\Column(name: 'apruve_merchant_id', type: Types::STRING, length: 255)]
+    #[ORM\Column(name: 'apruve_merchant_id', type: Types::TEXT)]
     private ?string $apruveMerchantId = null;
 
-    #[ORM\Column(name: 'apruve_api_key', type: Types::STRING, length: 255)]
+    #[ORM\Column(name: 'apruve_api_key', type: Types::TEXT)]
     private ?string $apruveApiKey = null;
 
     /**

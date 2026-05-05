@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
@@ -49,7 +50,7 @@ class ApruveSettingsType extends AbstractType
                     'tooltip' => 'oro.apruve.settings.labels.tooltip',
                     'tooltip_placement' => 'right',
                     'required' => true,
-                    'entry_options' => ['constraints' => [new NotBlank()]],
+                    'entry_options' => ['constraints' => [new NotBlank(), new Length(max: 255)]],
                 ]
             )
             ->add(
@@ -60,7 +61,7 @@ class ApruveSettingsType extends AbstractType
                     'tooltip' => 'oro.apruve.settings.short_labels.tooltip',
                     'tooltip_placement' => 'right',
                     'required' => true,
-                    'entry_options' => ['constraints' => [new NotBlank()]],
+                    'entry_options' => ['constraints' => [new NotBlank(), new Length(max: 255)]],
                 ]
             )
             ->add('apruveMerchantId', TextType::class, [
