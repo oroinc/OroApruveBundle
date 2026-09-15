@@ -1,3 +1,11 @@
+> [!WARNING]
+> **This package is obsolete and is no longer maintained.**
+>
+> It does not receive bug fixes, security updates, or compatibility updates. Known or undiscovered security vulnerabilities may exist and will not be addressed.
+>
+> **Do not use this package for new development or production deployments.**
+----
+
 # OroApruveBundle
 
 OroApruveBundle adds [integration](https://github.com/oroinc/platform/tree/master/src/Oro/Bundle/IntegrationBundle) with [Apruve](https://apruve.com/) B2B Credit Management and Automation Platform in Oro applications.
